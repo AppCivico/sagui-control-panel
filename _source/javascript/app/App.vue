@@ -1,16 +1,19 @@
 <template>
-  <div id="app">
-	<router-view></router-view>
-  </div>
+	<div id="app">
+		<div class="wrapper">
+			<c-header></c-header>
+			<router-view></router-view>
+		</div>
+	</div>
 </template>
 
 <script>
-import Hello from './components/Hello.vue';
+import cHeader from './components/cHeader.vue';
 
 export default {
 	name: 'app',
 	components: {
-		Hello,
+		cHeader,
 	},
 };
 </script>
