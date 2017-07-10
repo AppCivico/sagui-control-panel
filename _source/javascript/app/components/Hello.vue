@@ -11,10 +11,7 @@
 		</ul>
 		<h2>Ecosystem</h2>
 		<ul>
-			<li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-			<li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-			<li><a href="https://github.com/vuejs/vueify" target="_blank">vueify</a></li>
-			<li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
+			<li v-for="enterprise in enterprises">{{ enterprise.name }}</li>
 		</ul>
 	</div>
 </template>
@@ -26,6 +23,14 @@ export default {
 		return {
 			msg: 'Welcome to Your Vue.js App',
 		};
+	},
+	computed: {
+		enterprises() {
+			return this.$store.state.enterprises;
+		},
+	},
+	mounted() {
+		this.$store.dispatch('LOAD_ENTERPRISES_LIST');
 	},
 };
 </script>
