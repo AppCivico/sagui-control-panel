@@ -17,6 +17,8 @@ module.exports = {
   // add your custom rules here
   'rules': {
     // allow debugger during development
+    'no-tabs': 0,
+    'indent': ['error', 'tab'],
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }
 }

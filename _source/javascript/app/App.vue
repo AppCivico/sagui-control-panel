@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <hello></hello>
+	<hello></hello>
   </div>
 </template>
 
@@ -8,9 +8,9 @@
 import Hello from './components/Hello.vue';
 
 export default {
-  name: 'app',
-  components: {
-    Hello,
-  },
+	name: 'app',
+	components: {
+		Hello,
+	},
 };
 </script>
