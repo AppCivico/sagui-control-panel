@@ -2,11 +2,41 @@
   "enterprises": [
     {
     	"id": 1,
-    	"name": "Usina Hidrelétrica de Belo Monte"
+    	"name": "Usina Hidrelétrica de Belo Monte",
+        "descricao": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda quae, est a. Harum aliquam rerum ipsa suscipit doloribus in temporibus nihil magnam nesciunt debitis sed minus quod, assumenda, quia.",
+        "localizacao": {
+            "ltd": "-12.0879359",
+            "lgn": "-58.1263058"
+        },
+        "reponsavel": {
+            "nome": "Fulano de tal",
+            "email": "lais@eokoe.com"
+        },
+        "dados": {
+            "apontamentos": 45,
+            "causas": 21,
+            "contribuicoes": 300,
+            "enquetes": 119
+        }
     },
     {
     	"id": 2,
-    	"name": "Usina Hidrelétrica de Jirau"
+    	"name": "Usina Hidrelétrica de Jirau",
+        "descricao": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda quae, est a. Harum aliquam rerum ipsa suscipit doloribus in temporibus nihil magnam nesciunt debitis sed minus quod, assumenda, quia.",
+        "localizacao": {
+            "ltd": "-12.0879359",
+            "lgn": "-58.1263058"
+        },
+        "reponsavel": {
+            "nome": "Fulano de tal",
+            "email": "lais@eokoe.com"
+        },
+        "dados": {
+            "apontamentos": 45,
+            "causas": 21,
+            "contribuicoes": 300,
+            "enquetes": 119
+        }
     }
   ]
 }
