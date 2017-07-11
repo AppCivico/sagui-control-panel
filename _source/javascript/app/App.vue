@@ -10,7 +10,7 @@
 
 <script>
 import cHeader from './components/cHeader.vue';
-import cMenu from './components/Menu.vue';
+import cMenu from './components/cMenu.vue';
 
 export default {
 	name: 'app',
