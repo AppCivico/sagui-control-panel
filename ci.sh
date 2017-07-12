@@ -1,3 +1,3 @@
 #!/bin/bash
 
-npm install && npm build:prod
+npm install && npm run build:prod
