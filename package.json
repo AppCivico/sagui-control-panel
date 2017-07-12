@@ -10,7 +10,7 @@
     "build:img": "npm run imagemin && npm run icons",
     "build:sass": "npm run scss",
     "build:vue": "cross-env NODE_ENV=production browserify -g envify -p [ vueify/plugins/extract-css -o dist/css/build.css ] -e _source/javascript/app/application.js | uglifyjs -c warnings=false -m > dist/js/build.js",
-    "build:prod": "npm run build:vue && npm run autoprefixer && npm run nano && npm run imagemin",
+    "build:prod": "npm run build:vue && npm run build:sass && npm run autoprefixer && npm run nano && npm run imagemin",
     "dev": "npm-run-all --parallel watch:all serve api",
     "icons": "svgo -f _source/images/**/*.svg -o dist/img",
     "imagemin": "imagemin _source/images/**/*.{gif,jpg,png} --out-dir=dist/img",
