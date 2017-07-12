@@ -3,39 +3,33 @@
     {
     	"id": 1,
     	"name": "Usina Hidrelétrica de Belo Monte",
-        "descricao": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda quae, est a. Harum aliquam rerum ipsa suscipit doloribus in temporibus nihil magnam nesciunt debitis sed minus quod, assumenda, quia.",
-        "localizacao": {
-            "ltd": "-12.0879359",
-            "lgn": "-58.1263058"
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda quae, est a. Harum aliquam rerum ipsa suscipit doloribus in temporibus nihil magnam nesciunt debitis sed minus quod, assumenda, quia.",
+        "location": {
+        	"geo": [ -12.0879, -58.1263],
+        	"human_address": "whatever"
         },
-        "reponsavel": {
-            "nome": "Fulano de tal",
-            "email": "lais@eokoe.com"
-        },
-        "dados": {
-            "apontamentos": 45,
-            "causas": 21,
-            "contribuicoes": 300,
-            "enquetes": 119
+        "user": 1,
+        "data": {
+            "complaints": 45,
+            "cases": 21,
+            "actions": 300,
+            "surveys": 119
         }
     },
     {
     	"id": 2,
     	"name": "Usina Hidrelétrica de Jirau",
-        "descricao": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda quae, est a. Harum aliquam rerum ipsa suscipit doloribus in temporibus nihil magnam nesciunt debitis sed minus quod, assumenda, quia.",
-        "localizacao": {
-            "ltd": "-12.0879359",
-            "lgn": "-58.1263058"
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda quae, est a. Harum aliquam rerum ipsa suscipit doloribus in temporibus nihil magnam nesciunt debitis sed minus quod, assumenda, quia.",
+        "location": {
+        	"geo": [ -12.0879, -58.1263],
+        	"human_address": "whatever"
         },
-        "reponsavel": {
-            "nome": "Fulano de tal",
-            "email": "lais@eokoe.com"
-        },
-        "dados": {
-            "apontamentos": 45,
-            "causas": 21,
-            "contribuicoes": 300,
-            "enquetes": 119
+        "user": 1,
+        "data": {
+            "complaints": 45,
+            "cases": 21,
+            "actions": 300,
+            "surveys": 119
         }
     }
   ]
