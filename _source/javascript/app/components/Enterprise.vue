@@ -3,7 +3,7 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-			Empreendimento {{ enterprise.id }}
+			Empreendimento {{ enterprise.name }}
 		 	</h1>
 			<ol class="breadcrumb">
 				<li><router-link to="/"><i class="fa fa-dashboard"></i>Empreendimento</router-link></li>
@@ -21,13 +21,14 @@
 <script>
 export default {
 	name: 'Enterprise',
+	props: ['id'],
 	computed: {
 		enterprise() {
 			return this.$store.state.enterprise;
 		},
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_ENTERPRISE');
+		this.$store.dispatch('LOAD_ENTERPRISE', this.id);
 	},
 };
 </script>

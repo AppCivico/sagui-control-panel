@@ -18,6 +18,7 @@ export default new Router({
 			path: '/enterprises/:id',
 			name: 'Empreendimento',
 			component: Enterprise,
+			props: true,
 		},
 	],
 });

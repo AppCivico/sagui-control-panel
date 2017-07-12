@@ -18,10 +18,9 @@ const store = new Vuex.Store({
 				console.log(err);
 			});
 		},
-		LOAD_ENTERPRISE({ commit }) {
-			axios.get('http://localhost:3000/enterprises/1').then((response) => {
-				commit('SET_ENTERPRISES_LIST', { res: response.data });
-				console.log(response.data);
+		LOAD_ENTERPRISE({ commit }, id) {
+			axios.get(`http://localhost:3000/enterprises/${id}`).then((response) => {
+				commit('SET_ENTERPRISE', { res: response.data });
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
