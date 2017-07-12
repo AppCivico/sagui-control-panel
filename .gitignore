@@ -6,6 +6,11 @@ dist/img/*
 yarn-error.log
 npm-debug.log
 
+!dist/.gitignore
+!dist/js/.gitignore
+!dist/css/.gitignore
+!dist/img/.gitignore
+
 # Editor directories and files
 .vscode
 *.suo
