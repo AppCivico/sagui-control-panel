@@ -24,14 +24,6 @@ export default {
 			msg: 'Welcome to Your Vue.js App',
 		};
 	},
-	computed: {
-		enterprises() {
-			return this.$store.state.enterprises;
-		},
-	},
-	mounted() {
-		this.$store.dispatch('LOAD_ENTERPRISES_LIST');
-	},
 };
 </script>
 
