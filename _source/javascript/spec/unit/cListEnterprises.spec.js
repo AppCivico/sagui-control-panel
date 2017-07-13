@@ -14,7 +14,7 @@ describe('cListEnterprises.vue', () => {
 			translations,
 			render: h => h(cListEnterprises),
 		});
-		expect(vm.$el.querySelector('h1').textContent).to.equal('Empreendimentos');
+		expect(vm.$el.querySelector('h1').textContent).to.equal('Escolha o empreendimento');
 	});
 	it('should load store', () => {
 		const vm = new Vue({
