@@ -1,7 +1,7 @@
-/* eslint-disable */
+// Always use the following line so ESlintwon't complain about Chai import
+/* eslint-disable no-unused-vars */
 import Vue from 'vue';
-import chai from 'chai';
-import { expect } from 'chai';
+import { chai, expect } from 'chai';
 import Hello from '../../app/components/Hello.vue';
 
 describe('Hello.vue', () => {
