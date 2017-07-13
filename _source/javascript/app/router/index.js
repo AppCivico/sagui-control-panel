@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import ListEnterprises from '../components/ListEnterprises.vue';
-import Enterprise from '../components/Enterprise.vue';
+import cListEnterprises from '../components/cListEnterprises.vue';
+import cEnterprise from '../components/cEnterprise.vue';
 
 Vue.use(Router);
 
@@ -12,12 +12,12 @@ export default new Router({
 		{
 			path: '/',
 			name: 'Empreendimentos',
-			component: ListEnterprises,
+			component: cListEnterprises,
 		},
 		{
 			path: '/enterprises/:id',
 			name: 'Empreendimento',
-			component: Enterprise,
+			component: cEnterprise,
 			props: true,
 		},
 	],
