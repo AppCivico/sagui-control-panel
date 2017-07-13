@@ -5,8 +5,7 @@ import vuexI18n from 'vuex-i18n';
 
 // The translation file could also be loaded from a separate json file
 // I won't do this for now to prevent an extra ajax call
-// eslint-disable-next-line
-import ptBr from './ptBr';
+import ptBr from './ptBR';
 
 // initialize the vuex translations using the vuex module
 const translations = new Vuex.Store();
