@@ -3,7 +3,10 @@ module.exports = function (config) {
   config.set({
     browsers: ['PhantomJS'],
     frameworks: ['mocha', 'chai', 'browserify'],
-    files: ['_source/javascript/spec/unit/**/*.js'],
+    files: [
+    	'node_modules/babel-polyfill/dist/polyfill.js',
+    	'_source/javascript/spec/unit/**/*.js'
+    ],
     reporters: ['nyan'],
     preprocessors: {
       '_source/javascript/spec/unit/**/*.js': ['browserify']
