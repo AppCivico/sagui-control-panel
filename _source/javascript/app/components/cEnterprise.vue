@@ -7,7 +7,7 @@
 			<small>{{ enterprise.name }}</small>
 		 	</h1>
 			<ol class="breadcrumb">
-				<li><router-link to="/"><i class="fa fa-dashboard"></i>Empreendimento</router-link></li>
+				<li><router-link to="/"><i class="fa fa-dashboard"></i>{{ 'enterprises' | translate }}</router-link></li>
 				<li class="active">{{ enterprise.name }}</li>
 			</ol>
 		</section>
