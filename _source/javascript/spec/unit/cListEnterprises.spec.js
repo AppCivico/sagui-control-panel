@@ -6,8 +6,8 @@ import store from '../../app/store';
 import translations from '../../app/translations';
 import cListEnterprises from '../../app/components/cListEnterprises.vue';
 
-describe('Hello.vue', () => {
-	it('should translate correctly', () => {
+describe('cListEnterprises.vue', () => {
+	it('should translate content', () => {
 		const vm = new Vue({
 			el: document.createElement('div'),
 			store,
@@ -16,4 +16,15 @@ describe('Hello.vue', () => {
 		});
 		expect(vm.$el.querySelector('h1').textContent).to.equal('Empreendimentos');
 	});
+	it('should load store', () => {
+		const vm = new Vue({
+			el: document.createElement('div'),
+			store,
+			translations,
+			render: h => h(cListEnterprises),
+		});
+		expect(vm.$store.state.enterprises).to.be.an('array');
+	});
+
+	// Create test for the ajax call when real api is working
 });
