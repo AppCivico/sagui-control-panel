@@ -6,10 +6,12 @@ import Vue from 'vue';
 import App from './App.vue';
 import store from './store';
 import router from './router';
+import translations from './translations';
 
 new Vue({ // eslint-disable-line no-new
 	el: '#app',
 	store,
 	router,
+	translations,
 	render: h => h(App),
 });

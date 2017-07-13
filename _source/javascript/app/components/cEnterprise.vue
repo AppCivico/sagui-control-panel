@@ -3,7 +3,8 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-			Empreendimento {{ enterprise.name }}
+			{{ 'enterprise' | translate }}
+			<small>{{ enterprise.name }}</small>
 		 	</h1>
 			<ol class="breadcrumb">
 				<li><router-link to="/"><i class="fa fa-dashboard"></i>Empreendimento</router-link></li>
