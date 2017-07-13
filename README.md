@@ -12,10 +12,10 @@ npm install
 npm run dev
 
 # build for production with minification
-npm run build
+npm run build:prod
 
 # lint all *.js and *.vue files
-npm run lint
+npm run lint:all
 
 # run unit tests
 npm test
