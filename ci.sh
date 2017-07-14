@@ -1,3 +1,3 @@
 #!/bin/bash
 
-npm install && npm run build:prod
+npm install --no-progress && npm run build:prod
