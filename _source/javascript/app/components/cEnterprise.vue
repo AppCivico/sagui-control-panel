@@ -3,11 +3,11 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-			{{ 'enterprise' | translate }}
+			{{ 'enterprise' | translate | capitalize }}
 			<small>{{ enterprise.name }}</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><router-link to="/"><i class="fa fa-dashboard"></i>{{ 'enterprises' | translate }}</router-link></li>
+				<li><router-link to="/"><i class="fa fa-dashboard"></i>{{ 'enterprises' | translate | capitalize }}</router-link></li>
 				<li class="active">{{ enterprise.name }}</li>
 			</ol>
 		</section>
@@ -27,7 +27,7 @@
 				</div>
 				<div class="col-md-3 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+						<span class="info-box-icon bg-red"><i class="ion ion-ios-gear-outline"></i></span>
 
 						<div class="info-box-content">
 							<span class="info-box-text">{{ 'cases' | translate }}</span>
@@ -37,7 +37,7 @@
 				</div>
 				<div class="col-md-3 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+						<span class="info-box-icon bg-green"><i class="ion ion-ios-gear-outline"></i></span>
 
 						<div class="info-box-content">
 							<span class="info-box-text">{{ 'actions' | translate }}</span>
@@ -47,7 +47,7 @@
 				</div>
 				<div class="col-md-3 col-sm-6 col-xs-12">
 					<div class="info-box">
-						<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+						<span class="info-box-icon bg-yellow"><i class="ion ion-ios-gear-outline"></i></span>
 
 						<div class="info-box-content">
 							<span class="info-box-text">{{ 'surveys_completed' | translate }}</span>
@@ -61,25 +61,25 @@
 				<div class="col-md-6">
 					<div class="box box-solid">
 						<div class="box-header with-border">
-							<h3 class="box-title">CAUSAS SEM RESPOSTAS</h3>
+							<h3 class="box-title">{{ 'actions_unanswered' | translate | capitalize }}</h3>
 						</div>
 						<div class="box-body">
 							<ul class="list-unstyled">
 								<li class="clearfix">
 									<h4 class="pull-left">Lorem ipsum dolor</h4>
-									<small class="pull-right">37 contribuições</small>
+									<small class="pull-right">37 {{ 'contributions' | translate }}</small>
 								</li>
 								<li class="clearfix">
 									<h4 class="pull-left">Lorem ipsum dolor</h4>
-									<small class="pull-right">37 contribuições</small>
+									<small class="pull-right">37 {{ 'contributions' | translate }}</small>
 								</li>
 								<li class="clearfix">
 									<h4 class="pull-left">Lorem ipsum dolor</h4>
-									<small class="pull-right">37 contribuições</small>
+									<small class="pull-right">37 {{ 'contributions' | translate }}</small>
 								</li>
 								<li class="clearfix">
 									<h4 class="pull-left">Lorem ipsum dolor</h4>
-									<small class="pull-right">37 contribuições</small>
+									<small class="pull-right">37 {{ 'contributions' | translate }}</small>
 								</li>
 							</ul>
 						</div>
@@ -88,7 +88,7 @@
 				<div class="col-md-6">
 					<div class="box box-solid">
 						<div class="box-header with-border">
-							<h3 class="box-title">Progress bars</h3>
+							<h3 class="box-title">{{ 'ranking' | translate | capitalize }} {{ 'complaints' | translate }}</h3>
 						</div>
 						<div class="box-body">
 							<p>Text 1</p>
@@ -125,49 +125,49 @@
 				<div class="col-md-12">
 					<div class="box box-solid">
 						<div class="box-header with-border">
-							<h3 class="box-title">AGENTES</h3>
+							<h3 class="box-title">{{ 'agents' | translate | capitalize }}</h3>
 						</div>
 						<div class="box-body no-padding">
 							<ul class="users-list clearfix">
 								<li>
 									<div class="agent-code">LID01</div>
-									<a class="users-list-name" href="#">Alexander Pierce</a>
-									<span class="users-list-date">Today</span>
+									<a class="users-list-name" href="#">Tablet Samsung 02</a>
+									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
 								<li>
 									<div class="agent-code">LID02</div>
-									<a class="users-list-name" href="#">Norman</a>
-									<span class="users-list-date">Yesterday</span>
+									<a class="users-list-name" href="#">Tablet Samsung 02</a>
+									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
 								<li>
 									<div class="agent-code">LID03</div>
-									<a class="users-list-name" href="#">Jane</a>
-									<span class="users-list-date">12 Jan</span>
+									<a class="users-list-name" href="#">Tablet Samsung 02</a>
+									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
 								<li>
 									<div class="agent-code">LID04</div>
-									<a class="users-list-name" href="#">John</a>
-									<span class="users-list-date">12 Jan</span>
+									<a class="users-list-name" href="#">Tablet Samsung 02</a>
+									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
 								<li>
 									<div class="agent-code">LID05</div>
-									<a class="users-list-name" href="#">Alexander</a>
-									<span class="users-list-date">13 Jan</span>
+									<a class="users-list-name" href="#">Tablet Samsung 02</a>
+									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
 								<li>
 									<div class="agent-code">LID06</div>
-									<a class="users-list-name" href="#">Sarah</a>
-									<span class="users-list-date">14 Jan</span>
+									<a class="users-list-name" href="#">Tablet Samsung 02</a>
+									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
 								<li>
 									<div class="agent-code">LID07</div>
-									<a class="users-list-name" href="#">Nora</a>
-									<span class="users-list-date">15 Jan</span>
+									<a class="users-list-name" href="#">Tablet Samsung 02</a>
+									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
 								<li>
 									<div class="agent-code">LID08</div>
-									<a class="users-list-name" href="#">Nadia</a>
-									<span class="users-list-date">15 Jan</span>
+									<a class="users-list-name" href="#">Tablet Samsung 02</a>
+									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
 							</ul>
 						</div>
@@ -190,6 +190,12 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch('LOAD_ENTERPRISE', this.id);
+	},
+	filters: {
+		capitalize(value) {
+			if (!value) return '';
+			return value.toString().charAt(0).toUpperCase() + value.toString().slice(1);
+		},
 	},
 };
 </script>

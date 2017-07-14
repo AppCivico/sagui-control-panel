@@ -1,14 +1,21 @@
-/* eslint-disable */
-//I disabled it because it'll complain about the double quotes
+// I disabled eslint because it'll complain about the double quotes
+// I'll use double quotes because in the future we may use json files
+// instead of a object
+
+/* eslint-disable quotes, quote-props */
 const ptBr = {
-	"choose_enterprise": "Escolha o empreendimento",
-	"enterprise": "Empreendimento",
-	"enterprises": "Empreendimentos",
-	"complaints": "apontamentos",
+	"actions": "contribuições e confirmações",
+	"actions_unanswered": "causas sem respostas",
+	"agents": "agentes",
+	"answers": "respostas",
 	"cases": "ocorrências",
-	"actions": "contribuições / confirmações",
+	"choose_enterprise": "Escolha o empreendimento",
+	"complaints": "apontamentos",
+	"contributions": "contribuições",
 	"surveys": "enquetes",
-	"surveys_completed": "enquetes respondidas"
-}
-/* eslint-enable */
+	"enterprise": "empreendimento",
+	"enterprises": "empreendimentos",
+	"surveys_completed": "enquetes respondidas",
+	"ranking": "ranking",
+};
 export { ptBr as default };
