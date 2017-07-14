@@ -16,7 +16,7 @@
 							<span class="info-box-text">
 								<router-link :to="'/enterprises/'+enterprise.id">{{ enterprise.name }}</router-link>
 								<p>{{ enterprise.location.human_address }}</p>
-								<ul>
+								<ul class="list-unstyled">
 									<li>{{ enterprise.data.complaints }} {{ 'complaints' | translate }}</li>
 									<li>{{ enterprise.data.cases }} {{ 'cases' | translate }}</li>
 									<li>{{ enterprise.data.actions }} {{ 'actions' | translate }}</li>
