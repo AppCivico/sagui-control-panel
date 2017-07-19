@@ -1,3 +1,17 @@
+<script>
+export default {
+	name: 'clistEnterprises',
+	computed: {
+		enterprises() {
+			return this.$store.state.enterprises;
+		},
+	},
+	mounted() {
+		this.$store.dispatch('LOAD_ENTERPRISES_LIST');
+	},
+};
+</script>
+
 <template>
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
@@ -31,17 +45,3 @@
 		<!-- /.content -->
 	</div>
 </template>
-
-<script>
-export default {
-	name: 'clistEnterprises',
-	computed: {
-		enterprises() {
-			return this.$store.state.enterprises;
-		},
-	},
-	mounted() {
-		this.$store.dispatch('LOAD_ENTERPRISES_LIST');
-	},
-};
-</script>

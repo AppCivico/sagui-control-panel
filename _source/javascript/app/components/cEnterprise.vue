@@ -1,3 +1,24 @@
+<script>
+export default {
+	name: 'cEnterprise',
+	props: ['id'],
+	computed: {
+		enterprise() {
+			return this.$store.state.enterprise;
+		},
+	},
+	mounted() {
+		this.$store.dispatch('LOAD_ENTERPRISE', this.id);
+	},
+	filters: {
+		capitalize(value) {
+			if (!value) return '';
+			return value.toString().charAt(0).toUpperCase() + value.toString().slice(1);
+		},
+	},
+};
+</script>
+
 <template>
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
@@ -178,27 +199,6 @@
 		<!-- /.content -->
 	</div>
 </template>
-
-<script>
-export default {
-	name: 'cEnterprise',
-	props: ['id'],
-	computed: {
-		enterprise() {
-			return this.$store.state.enterprise;
-		},
-	},
-	mounted() {
-		this.$store.dispatch('LOAD_ENTERPRISE', this.id);
-	},
-	filters: {
-		capitalize(value) {
-			if (!value) return '';
-			return value.toString().charAt(0).toUpperCase() + value.toString().slice(1);
-		},
-	},
-};
-</script>
 
 <style scoped>
 	.info-box-number {

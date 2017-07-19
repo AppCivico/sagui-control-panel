@@ -1,3 +1,9 @@
+<script>
+export default {
+	name: 'cQuestion',
+};
+</script>
+
 <template>
 	<div class="modal fade in" id="modal-default">
 		<div class="modal-dialog">
@@ -20,9 +26,3 @@
 		<!-- /.modal-dialog -->
 	</div>
 </template>
-
-<script>
-export default {
-	name: 'cQuestion',
-};
-</script>
