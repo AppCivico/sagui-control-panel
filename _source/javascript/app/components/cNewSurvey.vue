@@ -109,7 +109,7 @@ export default{
 						<div class="box-body">
 							<div class="box-group" id="accordion">
 				                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-				                <div class="panel box box-warning" v-for="(question, index) in questions">
+				                <div class="panel box" v-for="(question, index) in questions">
 				                	<div class="box-header with-border">
 				                    	<h4 class="box-title">
 				                    		<a data-toggle="collapse" data-parent="#accordion" :href="'#collapse'+index" aria-expanded="false" class="collapsed">
