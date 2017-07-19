@@ -8,7 +8,6 @@ export default{
 	},
 	data() {
 		return {
-			oi: 'oi',
 			categories: ['Moradia', 'Alimentação', 'Locomoção'],
 			questions: [
 				{
@@ -75,7 +74,7 @@ export default{
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
-			<h1>{{ 'surveys_new' | translate }}</h1>
+			<h1>{{ 'new' | translate | capitalize }} {{ 'survey' | translate }}</h1>
 		</section>
 
 		<!-- Main content -->
@@ -88,23 +87,23 @@ export default{
 						</div>
 						<div class="box-body">
 							<div class="form-group">
-								<label>Text</label>
-								<input type="text" class="form-control" placeholder="Nome">
+								<label>{{ 'title' | translate | capitalize }}</label>
+								<input type="text" class="form-control" :placeholder="'title' | translate | capitalize">
 			                </div>
 							<div class="form-group">
-								<label>Categoria</label>
+								<label>{{ 'categoria' | translate | capitalize }}</label>
 								<select class="form-control">
 									<option v-for="categorie in categories">{{ categorie }}</option>
 								</select>
 			                </div>
-			                <button type="button" class="btn btn-block btn-success">Cadastrar enquete</button>
+			                <button type="button" class="btn btn-block btn-success">{{ 'register' | translate | capitalize }} {{ 'survey' | translate }}</button>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="box box-solid">
 						<div class="box-header with-border">
-							<h3 class="box-title">Perguntas</h3>
+							<h3 class="box-title">{{ 'questions' | translate | capitalize }}</h3>
 						</div>
 						<div class="box-body">
 							<div class="box-group" id="accordion">
@@ -121,7 +120,7 @@ export default{
 				                		<div class="box-body">
 						                    <div class="row">
 												<div class="col-md-12">
-													<h4>Opções de resposta</h4>
+													<h4>{{ 'answers' | translate | capitalize }}</h4>
 												</div>
 
 												<div class="col-md-4" v-for="answer in question.answers">
@@ -132,7 +131,7 @@ export default{
 				                	</div>
 				                </div>
 				            </div>
-							<button type="button" class="btn btn-block btn-warning" data-toggle="modal" data-target="#new-question">Adicionar pergunta</button>
+							<button type="button" class="btn btn-block btn-warning" data-toggle="modal" data-target="#new-question">{{ 'add' | translate | capitalize }} {{ 'question' | translate }}</button>
 						</div>
 					</div>
 				</div>
@@ -142,9 +141,3 @@ export default{
 		<!-- /.content -->
 	</div>
 </template>
-
-<style scoped>
-	.content-header {
-		text-transform: capitalize;
-	}
-</style>
