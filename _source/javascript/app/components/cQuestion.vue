@@ -5,7 +5,7 @@ export default {
 		return {
 			multiple: 1,
 			type: '',
-			types: ['farol', 'multiple', 'textarea'],
+			types: ['traffic_light', 'multiple', 'textarea'],
 		};
 	},
 	methods: {
@@ -34,22 +34,22 @@ export default {
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Cancelar" @click="cleanFields()">
 						<span aria-hidden="true">×</span></button>
-					<h4 class="modal-title">Nova pergunta</h4>
+					<h4 class="modal-title">{{ 'question' | translate  | capitalize }}</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label>Título</label>
+						<label>{{ 'title' | translate  | capitalize }}</label>
 						<input type="text" class="form-control" name="title" placeholder="Título">
 					</div>
 					<div class="form-group">
-						<label>Tipo</label>
+						<label>{{ 'type' | translate | capitalize }}</label>
 						<select class="form-control" v-model="type">
 							<option value="">Escolha um tipo de resposta</option>
-							<option v-for="option in types" :value="option">{{ option }}</option>
+							<option v-for="option in types" :value="option">{{ option | translate | capitalize }}</option>
 						</select>
 					</div>
 					<hr>
-					<div v-if="type == 'farol'">
+					<div v-if="type == 'traffic_light'">
 						<div class="form-group">
 							<label>Verde</label>
 							<input type="text" class="form-control" placeholder="Verde">
@@ -65,15 +65,15 @@ export default {
 					</div>
 					<div v-if="type == 'multiple'">
 						<div class="form-group">
-							<label>Opção 1</label>
-							<input type="text" class="form-control" placeholder="Digite aqui uma opção">
+							<label>{{ 'option' | translate | capitalize }} 1</label>
+							<input type="text" class="form-control" :placeholder="'insert_option' | translate | capitalize">
 						</div>
-						<button type="button" class="btn btn-primary" @click="addOption($event)">Adicionar opção</button>
+						<button type="button" class="btn btn-primary" @click="addOption($event)">{{ 'add' | translate | capitalize }} {{ 'option' | translate }}</button>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default pull-left" data-dismiss="modal" @click="cleanFields()">Cancelar</button>
-					<button type="button" class="btn btn-primary">Adicionar</button>
+					<button type="button" class="btn btn-default pull-left" data-dismiss="modal" @click="cleanFields()">{{ 'cancel' | translate | capitalize }}</button>
+					<button type="button" class="btn btn-primary">{{ 'add' | translate | capitalize }}</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
