@@ -12,10 +12,14 @@ const ptBr = {
 	"choose_enterprise": "Escolha o empreendimento",
 	"complaints": "apontamentos",
 	"contributions": "contribuições",
-	"surveys": "enquetes",
 	"enterprise": "empreendimento",
 	"enterprises": "empreendimentos",
-	"surveys_completed": "enquetes respondidas",
+	"question": "pergunta",
 	"ranking": "ranking",
+	"surveys": "enquetes",
+	"surveys_completed": "enquetes respondidas",
+	"title": "título",
+	"type": "tipo",
+	"traffic_light": "farol",
 };
 export { ptBr as default };
