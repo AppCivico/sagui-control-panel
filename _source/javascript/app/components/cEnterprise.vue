@@ -10,12 +10,6 @@ export default {
 	mounted() {
 		this.$store.dispatch('LOAD_ENTERPRISE', this.id);
 	},
-	filters: {
-		capitalize(value) {
-			if (!value) return '';
-			return value.toString().charAt(0).toUpperCase() + value.toString().slice(1);
-		},
-	},
 };
 </script>
 
