@@ -31,11 +31,11 @@ export default{
 				},
 				{
 					type: 'farol',
-					title: 'Esta satisfeito com a sua moradia?',
+					title: 'Esta satisfeito com a sua moradia2?',
 					answers: [
 						{
 							unit: 'red',
-							title: 'Não',
+							title: 'Não2',
 						},
 						{
 							unit: 'yellow',
@@ -49,11 +49,11 @@ export default{
 				},
 				{
 					type: 'farol',
-					title: 'Esta satisfeito com a sua moradia?',
+					title: 'Esta satisfeito com a sua moradia3?',
 					answers: [
 						{
 							unit: 'red',
-							title: 'Não',
+							title: 'Não3',
 						},
 						{
 							unit: 'yellow',
@@ -107,23 +107,32 @@ export default{
 							<h3 class="box-title">Perguntas</h3>
 						</div>
 						<div class="box-body">
-							<div class="box box-warning" v-for="question in questions">
-								<div class="box-header with-border">
-									<h3 class="box-title">{{ question.title }}</h3>
-								</div>
-								<div class="box-body">
-									<div class="row">
-										<div class="col-md-12">
-											<h4>Opções de resposta</h4>
-										</div>
+							<div class="box-group" id="accordion">
+				                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+				                <div class="panel box box-warning" v-for="(question, index) in questions">
+				                	<div class="box-header with-border">
+				                    	<h4 class="box-title">
+				                    		<a data-toggle="collapse" data-parent="#accordion" :href="'#collapse'+index" aria-expanded="false" class="collapsed">
+				                    			{{ question.title }}
+				                    		</a>
+				                    	</h4>
+				                	</div>
+				                	<div :id="'collapse'+index" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+				                		<div class="box-body">
+						                    <div class="row">
+												<div class="col-md-12">
+													<h4>Opções de resposta</h4>
+												</div>
 
-										<div class="col-md-4" v-for="answer in question.answers">
-											<h5>{{ answer.title }}</h5>
-										</div>
-									</div>
-								</div>
-							</div>
-							<button type="button" class="btn btn-block btn-warning" data-toggle="modal" data-target="#modal-default">Adicionar pergunta</button>
+												<div class="col-md-4" v-for="answer in question.answers">
+													<h5>{{ answer.title }}</h5>
+												</div>
+											</div>
+				                    	</div>
+				                	</div>
+				                </div>
+				            </div>
+							<button type="button" class="btn btn-block btn-warning" data-toggle="modal" data-target="#new-question">Adicionar pergunta</button>
 						</div>
 					</div>
 				</div>
