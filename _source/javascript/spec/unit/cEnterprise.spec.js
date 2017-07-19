@@ -10,6 +10,10 @@ import cEnterprise from '../../app/components/cEnterprise.vue';
 describe('cEnterprise.vue', () => {
 	it('should translate content', () => {
 		Vue.use(router);
+		Vue.filter('capitalize', function (value) { // eslint-disable-line prefer-arrow-callback, func-names
+			if (!value) return '';
+			return value.toString().charAt(0).toUpperCase() + value.toString().slice(1);
+		});
 		const vm = new Vue({
 			el: document.createElement('div'),
 			store,
