@@ -115,6 +115,7 @@ export default{
 				                    			{{ question.title }}
 				                    		</a>
 				                    	</h4>
+				                    	<button type="button" aria-label="Excluir" class="close"><span aria-hidden="true">×</span></button>
 				                	</div>
 				                	<div :id="'collapse'+index" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
 				                		<div class="box-body">
