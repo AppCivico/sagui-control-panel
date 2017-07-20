@@ -11,12 +11,14 @@ export default {
 	methods: {
 		addOption(event) {
 			const target = event.target;
-			const option = `<div class="form-group">
-								<label>Opção ${this.multiple + 1}</label>
-								<input type="text" class="form-control" placeholder="Digite aqui uma opção">
-							</div>`;
-			target.insertAdjacentHTML('beforebegin', option);
+			const option = target.previousElementSibling.cloneNode(true);
+			target.insertAdjacentElement('beforebegin', option);
 			this.multiple += 1;
+		},
+		removeOption(event) {
+			const target = event.target;
+			const parent = target.parentNode.parentNode;
+			parent.parentNode.removeChild(parent);
 		},
 		cleanFields() {
 			const title = document.querySelector('#new-question input[name="title"]');
@@ -65,6 +67,7 @@ export default {
 					</div>
 					<div v-if="type == 'multiple'">
 						<div class="form-group">
+							<button type="button" aria-label="Excluir" class="close" @click="removeOption($event)"><span aria-hidden="true">×</span></button>
 							<label>{{ 'option' | translate | capitalize }} 1</label>
 							<input type="text" class="form-control" :placeholder="'insert_option' | translate | capitalize">
 						</div>
