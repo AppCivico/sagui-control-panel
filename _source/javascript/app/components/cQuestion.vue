@@ -3,22 +3,21 @@ export default {
 	name: 'cQuestion',
 	data() {
 		return {
-			multiple: 1,
 			type: '',
 			types: ['traffic_light', 'multiple', 'textarea'],
+			options: [
+				{},
+			],
 		};
 	},
 	methods: {
-		addOption(event) {
-			const target = event.target;
-			const option = target.previousElementSibling.cloneNode(true);
-			target.insertAdjacentElement('beforebegin', option);
-			this.multiple += 1;
+		addOption() {
+			this.options.push({});
 		},
-		removeOption(event) {
-			const target = event.target;
-			const parent = target.parentNode.parentNode;
-			parent.parentNode.removeChild(parent);
+		removeOption(number) {
+			console.log(number);
+			this.options.splice(1, 1);
+			console.log(this.options);
 		},
 		cleanFields() {
 			const title = document.querySelector('#new-question input[name="title"]');
@@ -66,12 +65,12 @@ export default {
 						</div>
 					</div>
 					<div v-if="type == 'multiple'">
-						<div class="form-group">
-							<button type="button" aria-label="Excluir" class="close" @click="removeOption($event)"><span aria-hidden="true">×</span></button>
-							<label>{{ 'option' | translate | capitalize }} 1</label>
+						<div class="form-group" v-for="(option, index) in options">
+							<button type="button" aria-label="Excluir" class="close" @click="removeOption(index)"><span aria-hidden="true">×</span></button>
+							<label>{{ 'option' | translate | capitalize }} {{ index + 1 }}</label>
 							<input type="text" class="form-control" :placeholder="'insert_option' | translate | capitalize">
 						</div>
-						<button type="button" class="btn btn-primary" @click="addOption($event)">{{ 'add' | translate | capitalize }} {{ 'option' | translate }}</button>
+						<button type="button" class="btn btn-primary" @click="addOption()">{{ 'add' | translate | capitalize }} {{ 'option' | translate }}</button>
 					</div>
 				</div>
 				<div class="modal-footer">
