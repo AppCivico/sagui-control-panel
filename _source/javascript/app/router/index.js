@@ -4,6 +4,7 @@ import Router from 'vue-router';
 import cListEnterprises from '../components/cListEnterprises.vue';
 import cEnterprise from '../components/cEnterprise.vue';
 import cNewSurvey from '../components/cNewSurvey.vue';
+import cSurveys from '../components/cSurveys.vue';
 
 Vue.use(Router);
 
@@ -26,6 +27,11 @@ export default new Router({
 			name: 'Nova enquete',
 			component: cNewSurvey,
 			props: true,
+		},
+		{
+			path: '/surveys',
+			name: 'Enquetes',
+			component: cSurveys,
 		},
 	],
 });
