@@ -36,9 +36,3 @@ export default{
 	<!-- /.sidebar -->
 </aside>
 </template>
-
-<style scoped>
-	ul.sidebar-menu {
-		text-transform: capitalize;
-	}
-</style>
