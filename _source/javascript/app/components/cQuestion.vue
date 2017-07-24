@@ -57,20 +57,12 @@ export default {
 		removeError(event) {
 			methods.removeError(event);
 		},
-		cleanAllErros(form) {
-			const errors = Array.from(form.querySelectorAll('.has-error'));
-			errors.map((error) => { // eslint-disable-line array-callback-return
-				const helpBlock = error.querySelector('.help-block');
-				error.removeChild(helpBlock);
-				error.classList.remove('has-error');
-			});
-		},
 		validate() {
 			let valid = true;
 			const title = document.querySelector('#new-question input[name="title"]');
 			const type = document.querySelector('#new-question select');
 
-			this.cleanAllErros(document.querySelector('#new-question'));
+			methods.cleanAllErros(document.querySelector('#new-question'));
 
 			if (title.value === '') {
 				methods.addError(title.parentNode, 'Este campo é obrigatório');

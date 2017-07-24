@@ -28,6 +28,8 @@ export default{
 			const title = document.querySelector('.new-survey__title');
 			const category = document.querySelector('.new-survey__category');
 
+			methods.cleanAllErros(document.querySelector('#new-survey'));
+
 			if (title.value === '') {
 				methods.addError(title.parentNode, 'Este campo é obrigatório.');
 				valid = false;
