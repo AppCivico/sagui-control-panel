@@ -24,8 +24,34 @@ export default {
 			this.type = '';
 			this.options = [{}];
 		},
-		newQuestion() {
-			this.$emit('newQuestion');
+		newQuestion(modal) {
+			const result = { answers: [] };
+			result.title = modal.querySelector('input[name="title"]').value;
+			result.type = modal.querySelector('select').value;
+
+			if (result.type === 'traffic_light') {
+				const answers = Array.from(modal.querySelectorAll('#traffic_light input[type="text"]'));
+				console.log(answers);
+				answers.map((answer) => { // eslint-disable-line array-callback-return
+					const item = {
+						unit: answer.getAttribute('data-unit'),
+						title: answer.value,
+					};
+					result.answers.push(item);
+				});
+			}
+
+			if (result.type === 'multiple') {
+				const answers = Array.from(modal.querySelectorAll('#multiple input[type="text"]'));
+				answers.map((answer) => { // eslint-disable-line array-callback-return
+					const item = {
+						title: answer.value,
+					};
+					result.answers.push(item);
+				});
+			}
+
+			this.$emit('newQuestion', result);
 		},
 		addError(item, msg) {
 			item.classList.add('has-error');
@@ -85,6 +111,7 @@ export default {
 				});
 			}
 			if (valid) {
+				this.newQuestion(document.querySelector('#new-question'));
 				$('#new-question').modal('hide'); // eslint-disable-line no-undef
 				this.cleanFields();
 			}
@@ -118,15 +145,15 @@ export default {
 					<div id="traffic_light" v-if="type == 'traffic_light'">
 						<div class="form-group">
 							<label>Verde</label>
-							<input type="text" class="form-control" placeholder="Verde" @focus="removeError($event)">
+							<input type="text" class="form-control" data-unit="green" placeholder="Verde" @focus="removeError($event)">
 						</div>
 						<div class="form-group">
 							<label>Amarelo</label>
-							<input type="text" class="form-control" placeholder="Amarelo" @focus="removeError($event)">
+							<input type="text" class="form-control" data-unit="amarelo" placeholder="Amarelo" @focus="removeError($event)">
 						</div>
 						<div class="form-group">
 							<label>Vermelho</label>
-							<input type="text" class="form-control" placeholder="Vermelho" @focus="removeError($event)">
+							<input type="text" class="form-control" data-unit="vermelho" placeholder="Vermelho" @focus="removeError($event)">
 						</div>
 					</div>
 					<div id="multiple" v-if="type == 'multiple'">

@@ -9,63 +9,13 @@ export default{
 	data() {
 		return {
 			categories: ['Moradia', 'Alimentação', 'Locomoção'],
-			questions: [
-				{
-					type: 'farol',
-					title: 'Esta satisfeito com a sua moradia?',
-					answers: [
-						{
-							unit: 'red',
-							title: 'Não',
-						},
-						{
-							unit: 'yellow',
-							title: 'Médio',
-						},
-						{
-							unit: 'green',
-							title: 'Sim',
-						},
-					],
-				},
-				{
-					type: 'farol',
-					title: 'Esta satisfeito com a sua moradia2?',
-					answers: [
-						{
-							unit: 'red',
-							title: 'Não2',
-						},
-						{
-							unit: 'yellow',
-							title: 'Médio',
-						},
-						{
-							unit: 'green',
-							title: 'Sim',
-						},
-					],
-				},
-				{
-					type: 'farol',
-					title: 'Esta satisfeito com a sua moradia3?',
-					answers: [
-						{
-							unit: 'red',
-							title: 'Não3',
-						},
-						{
-							unit: 'yellow',
-							title: 'Médio',
-						},
-						{
-							unit: 'green',
-							title: 'Sim',
-						},
-					],
-				},
-			],
+			questions: [],
 		};
+	},
+	methods: {
+		addQuestion(result) {
+			this.questions.push(result);
+		},
 	},
 };
 </script>
@@ -120,12 +70,15 @@ export default{
 				                	<div :id="'collapse'+index" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
 				                		<div class="box-body">
 						                    <div class="row">
-												<div class="col-md-12">
+												<div class="col-md-12" v-if="question.type != 'textarea'">
 													<h4>{{ 'answers' | translate | capitalize }}</h4>
 												</div>
 
-												<div class="col-md-4" v-for="answer in question.answers">
+												<div class="col-md-4" v-for="answer in question.answers" v-if="question.type != 'textarea'">
 													<h5>{{ answer.title }}</h5>
+												</div>
+												<div class="col-md-12" v-if="question.type == 'textarea'">
+													<h5>{{ 'textarea' | translate | capitalize }}</h5>
 												</div>
 											</div>
 				                    	</div>
@@ -136,7 +89,7 @@ export default{
 						</div>
 					</div>
 				</div>
-				<c-question></c-question>
+				<c-question v-on:newQuestion="addQuestion"></c-question>
 			</div>
 		</section>
 		<!-- /.content -->
