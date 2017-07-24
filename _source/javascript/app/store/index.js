@@ -9,6 +9,8 @@ const store = new Vuex.Store({
 		alertMessage: 'nana',
 		enterprises: [],
 		enterprise: {},
+		surveys: [],
+		survey: {},
 	},
 	actions: {
 		LOAD_ENTERPRISES_LIST({ commit }) {
@@ -30,6 +32,22 @@ const store = new Vuex.Store({
 		CHANGE_ALERT_MESSAGE({ commit }, message) {
 			commit('SET_ALERT_MESSAGE', { res: message });
 		},
+		LOAD_SURVEYS_LIST({ commit }) {
+			axios.get('http://localhost:3000/surveys').then((response) => {
+				commit('SET_SURVEYS_LIST', { list: response.data });
+			}, (err) => {
+				// eslint-disable-next-line
+				console.log(err);
+			});
+		},
+		LOAD_SURVEY({ commit }, id) {
+			axios.get(`http://localhost:3000/surveys/${id}`).then((response) => {
+				commit('SET_SURVEY', { res: response.data });
+			}, (err) => {
+				// eslint-disable-next-line
+				console.log(err);
+			});
+		},
 	},
 	mutations: {
 		SET_ENTERPRISES_LIST(state, { list }) {
@@ -43,6 +61,14 @@ const store = new Vuex.Store({
 		SET_ALERT_MESSAGE(state, { res }) {
 			// eslint-disable-next-line
 			state.alertMessage = res;
+		},
+		SET_SURVEYS_LIST(state, { list }) {
+			// eslint-disable-next-line
+			state.surveys = list;
+		},
+		SET_SURVEY(state, { res }) {
+			// eslint-disable-next-line
+			state.survey = res;
 		},
 	},
 	getters: {
