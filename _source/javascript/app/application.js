@@ -13,10 +13,11 @@ Vue.filter('capitalize', function (value) { // eslint-disable-line prefer-arrow-
 	return value.toString().charAt(0).toUpperCase() + value.toString().slice(1);
 });
 
-new Vue({ // eslint-disable-line no-new
+new Vue({ // eslint-disable-line no-new, no-unused-vars
 	el: '#app',
 	store,
 	router,
 	translations,
 	render: h => h(App),
 });
+// export { vm as default };

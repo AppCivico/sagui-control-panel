@@ -1,4 +1,6 @@
 <script>
+import methods from '../methods';
+
 export default {
 	name: 'cQuestion',
 	data() {
@@ -31,7 +33,6 @@ export default {
 
 			if (result.type === 'traffic_light') {
 				const answers = Array.from(modal.querySelectorAll('#traffic_light input[type="text"]'));
-				console.log(answers);
 				answers.map((answer) => { // eslint-disable-line array-callback-return
 					const item = {
 						unit: answer.getAttribute('data-unit'),
@@ -53,17 +54,8 @@ export default {
 
 			this.$emit('newQuestion', result);
 		},
-		addError(item, msg) {
-			item.classList.add('has-error');
-			item.insertAdjacentHTML('beforeend', `<span class="help-block">${msg}</span>`);
-		},
 		removeError(event) {
-			const item = event.target.parentNode;
-			const erro = item.querySelector('.help-block');
-			if (erro) {
-				item.classList.remove('has-error');
-				item.removeChild(erro);
-			}
+			methods.removeError(event);
 		},
 		cleanAllErros(form) {
 			const errors = Array.from(form.querySelectorAll('.has-error'));
@@ -81,22 +73,22 @@ export default {
 			this.cleanAllErros(document.querySelector('#new-question'));
 
 			if (title.value === '') {
-				this.addError(title.parentNode, 'Este campo é obrigatório');
+				methods.addError(title.parentNode, 'Este campo é obrigatório');
 				valid = false;
 			}
 			if (type.value === '') {
-				this.addError(type.parentNode, 'É necessário selecionar o tipo da pergunta');
+				methods.addError(type.parentNode, 'É necessário selecionar o tipo da pergunta');
 				valid = false;
 			}
 			if (type.value === 'multiple' && this.options.length < 2) {
-				this.addError(document.querySelector('#multiple'), 'É necessário inserir mais que uma opção');
+				methods.addError(document.querySelector('#multiple'), 'É necessário inserir mais que uma opção');
 				valid = false;
 			}
 			if (type.value === 'multiple') {
 				const options = Array.from(document.querySelectorAll('#multiple input[type="text"]'));
 				options.map((option) => { // eslint-disable-line array-callback-return
 					if (option.value === '') {
-						this.addError(option.parentNode, 'Este campo é obrigatório');
+						methods.addError(option.parentNode, 'Este campo é obrigatório');
 						valid = false;
 					}
 				});
@@ -105,7 +97,7 @@ export default {
 				const options = Array.from(document.querySelectorAll('#traffic_light input[type="text"]'));
 				options.map((option) => { // eslint-disable-line array-callback-return
 					if (option.value === '') {
-						this.addError(option.parentNode, 'Este campo é obrigatório');
+						methods.addError(option.parentNode, 'Este campo é obrigatório');
 						valid = false;
 					}
 				});

@@ -6,6 +6,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
 	state: {
+		alertMessage: 'nana',
 		enterprises: [],
 		enterprise: {},
 	},
@@ -26,6 +27,9 @@ const store = new Vuex.Store({
 				console.log(err);
 			});
 		},
+		CHANGE_ALERT_MESSAGE({ commit }, message) {
+			commit('SET_ALERT_MESSAGE', { res: message });
+		},
 	},
 	mutations: {
 		SET_ENTERPRISES_LIST(state, { list }) {
@@ -35,6 +39,10 @@ const store = new Vuex.Store({
 		SET_ENTERPRISE(state, { res }) {
 			// eslint-disable-next-line
 			state.enterprise = res;
+		},
+		SET_ALERT_MESSAGE(state, { res }) {
+			// eslint-disable-next-line
+			state.alertMessage = res;
 		},
 	},
 	getters: {

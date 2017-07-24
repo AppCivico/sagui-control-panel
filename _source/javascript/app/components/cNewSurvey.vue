@@ -1,4 +1,5 @@
 <script>
+import methods from '../methods';
 import cQuestion from './cQuestion.vue';
 
 export default{
@@ -19,6 +20,32 @@ export default{
 		removeQuestion(number) {
 			this.questions.splice(number, 1);
 		},
+		removeError(event) {
+			methods.removeError(event);
+		},
+		validate() {
+			let valid = true;
+			const title = document.querySelector('.new-survey__title');
+			const category = document.querySelector('.new-survey__category');
+
+			if (title.value === '') {
+				methods.addError(title.parentNode, 'Este campo é obrigatório.');
+				valid = false;
+			}
+			if (category.value === '') {
+				methods.addError(category.parentNode, 'É necessário selecionar a categoria da enquete.');
+				valid = false;
+			}
+			if (this.questions.length < 1) {
+				this.$store.dispatch('CHANGE_ALERT_MESSAGE', 'É obrigatório inserir pelo menos uma pergunta.');
+				$('#alert').modal('show'); // eslint-disable-line no-undef
+				valid = false;
+			}
+
+			if (valid) {
+				// nada
+			}
+		},
 	},
 };
 </script>
@@ -31,7 +58,7 @@ export default{
 		</section>
 
 		<!-- Main content -->
-		<section class="content">
+		<section class="content" id="new-survey">
 			<div class="row">
 				<div class="col-md-6">
 					<div class="box box-solid">
@@ -41,15 +68,16 @@ export default{
 						<div class="box-body">
 							<div class="form-group">
 								<label>{{ 'title' | translate | capitalize }}</label>
-								<input type="text" class="form-control" :placeholder="'title' | translate | capitalize">
+								<input type="text" class="form-control new-survey__title" :placeholder="'title' | translate | capitalize" @focus="removeError($event)">
 			                </div>
 							<div class="form-group">
 								<label>{{ 'categoria' | translate | capitalize }}</label>
-								<select class="form-control">
+								<select class="form-control new-survey__category" @focus="removeError($event)">
+									<option value="">Selecione a categoria</option>
 									<option v-for="categorie in categories">{{ categorie }}</option>
 								</select>
 			                </div>
-			                <button type="button" class="btn btn-block btn-success">{{ 'register' | translate | capitalize }} {{ 'survey' | translate }}</button>
+			                <button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'survey' | translate }}</button>
 						</div>
 					</div>
 				</div>
