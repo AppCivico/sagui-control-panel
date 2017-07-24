@@ -16,6 +16,9 @@ export default{
 		addQuestion(result) {
 			this.questions.push(result);
 		},
+		removeQuestion(number) {
+			this.questions.splice(number, 1);
+		},
 	},
 };
 </script>
@@ -65,7 +68,7 @@ export default{
 				                    			{{ question.title }}
 				                    		</a>
 				                    	</h4>
-				                    	<button type="button" aria-label="Excluir" class="close"><span aria-hidden="true">×</span></button>
+				                    	<button type="button" aria-label="Excluir" class="close" @click="removeQuestion(index)"><span aria-hidden="true">×</span></button>
 				                	</div>
 				                	<div :id="'collapse'+index" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
 				                		<div class="box-body">
