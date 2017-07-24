@@ -18,9 +18,11 @@ export default {
 			this.options.splice(number, 1);
 		},
 		cleanFields() {
-			const title = document.querySelector('#new-question input[name="title"]');
-			title.value = '';
+			const inputs = Array.from(document.querySelectorAll('#new-question input'));
+			// eslint-disable-next-line
+			inputs.map(input => input.value = '');
 			this.type = '';
+			this.options = [{}];
 		},
 		newQuestion() {
 			this.$emit('newQuestion');
@@ -50,8 +52,6 @@ export default {
 			const title = document.querySelector('#new-question input[name="title"]');
 			const type = document.querySelector('#new-question select');
 
-			console.log(type.value);
-
 			this.cleanAllErros(document.querySelector('#new-question'));
 
 			if (title.value === '') {
@@ -66,6 +66,15 @@ export default {
 				this.addError(document.querySelector('#multiple'), 'É necessário inserir mais que uma opção');
 				valid = false;
 			}
+			if (type.value === 'multiple') {
+				const options = Array.from(document.querySelectorAll('#multiple input[type="text"]'));
+				options.map((option) => { // eslint-disable-line array-callback-return
+					if (option.value === '') {
+						this.addError(option.parentNode, 'Este campo é obrigatório');
+						valid = false;
+					}
+				});
+			}
 			if (type.value === 'traffic_light') {
 				const options = Array.from(document.querySelectorAll('#traffic_light input[type="text"]'));
 				options.map((option) => { // eslint-disable-line array-callback-return
@@ -77,6 +86,7 @@ export default {
 			}
 			if (valid) {
 				$('#new-question').modal('hide'); // eslint-disable-line no-undef
+				this.cleanFields();
 			}
 		},
 	},
