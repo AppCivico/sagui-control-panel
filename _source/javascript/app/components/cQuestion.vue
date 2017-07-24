@@ -15,14 +15,69 @@ export default {
 			this.options.push({});
 		},
 		removeOption(number) {
-			console.log(number);
-			this.options.splice(1, 1);
-			console.log(this.options);
+			this.options.splice(number, 1);
 		},
 		cleanFields() {
 			const title = document.querySelector('#new-question input[name="title"]');
 			title.value = '';
 			this.type = '';
+		},
+		newQuestion() {
+			this.$emit('newQuestion');
+		},
+		addError(item, msg) {
+			item.classList.add('has-error');
+			item.insertAdjacentHTML('beforeend', `<span class="help-block">${msg}</span>`);
+		},
+		removeError(event) {
+			const item = event.target.parentNode;
+			const erro = item.querySelector('.help-block');
+			if (erro) {
+				item.classList.remove('has-error');
+				item.removeChild(erro);
+			}
+		},
+		cleanAllErros(form) {
+			const errors = Array.from(form.querySelectorAll('.has-error'));
+			errors.map((error) => { // eslint-disable-line array-callback-return
+				const helpBlock = error.querySelector('.help-block');
+				error.removeChild(helpBlock);
+				error.classList.remove('has-error');
+			});
+		},
+		validate() {
+			let valid = true;
+			const title = document.querySelector('#new-question input[name="title"]');
+			const type = document.querySelector('#new-question select');
+
+			console.log(type.value);
+
+			this.cleanAllErros(document.querySelector('#new-question'));
+
+			if (title.value === '') {
+				this.addError(title.parentNode, 'Este campo é obrigatório');
+				valid = false;
+			}
+			if (type.value === '') {
+				this.addError(type.parentNode, 'É necessário selecionar o tipo da pergunta');
+				valid = false;
+			}
+			if (type.value === 'multiple' && this.options.length < 2) {
+				this.addError(document.querySelector('#multiple'), 'É necessário inserir mais que uma opção');
+				valid = false;
+			}
+			if (type.value === 'traffic_light') {
+				const options = Array.from(document.querySelectorAll('#traffic_light input[type="text"]'));
+				options.map((option) => { // eslint-disable-line array-callback-return
+					if (option.value === '') {
+						this.addError(option.parentNode, 'Este campo é obrigatório');
+						valid = false;
+					}
+				});
+			}
+			if (valid) {
+				$('#new-question').modal('hide'); // eslint-disable-line no-undef
+			}
 		},
 	},
 };
@@ -40,42 +95,42 @@ export default {
 				<div class="modal-body">
 					<div class="form-group">
 						<label>{{ 'title' | translate  | capitalize }}</label>
-						<input type="text" class="form-control" name="title" placeholder="Título">
+						<input type="text" class="form-control" name="title" placeholder="Título" @focus="removeError($event)">
 					</div>
 					<div class="form-group">
 						<label>{{ 'type' | translate | capitalize }}</label>
-						<select class="form-control" v-model="type">
+						<select class="form-control" v-model="type" @focus="removeError($event)">
 							<option value="">Escolha um tipo de resposta</option>
 							<option v-for="option in types" :value="option">{{ option | translate | capitalize }}</option>
 						</select>
 					</div>
 					<hr>
-					<div v-if="type == 'traffic_light'">
+					<div id="traffic_light" v-if="type == 'traffic_light'">
 						<div class="form-group">
 							<label>Verde</label>
-							<input type="text" class="form-control" placeholder="Verde">
+							<input type="text" class="form-control" placeholder="Verde" @focus="removeError($event)">
 						</div>
 						<div class="form-group">
 							<label>Amarelo</label>
-							<input type="text" class="form-control" placeholder="Amarelo">
+							<input type="text" class="form-control" placeholder="Amarelo" @focus="removeError($event)">
 						</div>
 						<div class="form-group">
 							<label>Vermelho</label>
-							<input type="text" class="form-control" placeholder="Vermelho">
+							<input type="text" class="form-control" placeholder="Vermelho" @focus="removeError($event)">
 						</div>
 					</div>
-					<div v-if="type == 'multiple'">
+					<div id="multiple" v-if="type == 'multiple'">
 						<div class="form-group" v-for="(option, index) in options">
 							<button type="button" aria-label="Excluir" class="close" @click="removeOption(index)"><span aria-hidden="true">×</span></button>
 							<label>{{ 'option' | translate | capitalize }} {{ index + 1 }}</label>
-							<input type="text" class="form-control" :placeholder="'insert_option' | translate | capitalize">
+							<input type="text" class="form-control" :placeholder="'insert_option' | translate | capitalize" @focus="removeError($event)">
 						</div>
-						<button type="button" class="btn btn-primary" @click="addOption()">{{ 'add' | translate | capitalize }} {{ 'option' | translate }}</button>
+						<button type="button" class="btn btn-primary" @click="addOption(); removeError($event)">{{ 'add' | translate | capitalize }} {{ 'option' | translate }}</button>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default pull-left" data-dismiss="modal" @click="cleanFields()">{{ 'cancel' | translate | capitalize }}</button>
-					<button type="button" class="btn btn-primary">{{ 'add' | translate | capitalize }}</button>
+					<button type="button" class="btn btn-primary" @click="validate()">{{ 'add' | translate | capitalize }}</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
