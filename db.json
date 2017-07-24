@@ -32,5 +32,22 @@
             "surveys": 80
         }
     }
+  ],
+  "surveys": [
+  	{
+  		"id": 1,
+  		"title": "Moradia",
+  		"categorie": "moradia"
+  	},
+  	{
+  		"id": 2,
+  		"title": "Moradia",
+  		"categorie": "alimentacao"
+  	},
+  	{
+  		"id": 3,
+  		"title": "Moradia",
+  		"categorie": "locomocao"
+  	}
   ]
 }
