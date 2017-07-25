@@ -22,7 +22,6 @@ export default {
 					<p>{{ message }}</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ 'cancel' | translate | capitalize }}</button>
 					<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
 				</div>
 			</div>
