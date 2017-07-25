@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import cListEnterprises from '../components/cListEnterprises.vue';
+import cCategories from '../components/cCategories.vue';
 import cEnterprise from '../components/cEnterprise.vue';
+import cListEnterprises from '../components/cListEnterprises.vue';
 import cNewSurvey from '../components/cNewSurvey.vue';
 import cSurveys from '../components/cSurveys.vue';
+import cSurvey from '../components/cSurvey.vue';
 
 Vue.use(Router);
 
@@ -26,12 +28,23 @@ export default new Router({
 			path: '/new-survey',
 			name: 'Nova enquete',
 			component: cNewSurvey,
+		},
+		{
+			path: '/surveys/categorie/:id',
+			name: 'Enquetes',
+			component: cSurveys,
 			props: true,
 		},
 		{
-			path: '/surveys',
-			name: 'Enquetes',
-			component: cSurveys,
+			path: '/surveys/:id',
+			name: 'Enquete',
+			component: cSurvey,
+			props: true,
+		},
+		{
+			path: '/categories',
+			name: 'Categorias',
+			component: cCategories,
 		},
 	],
 });
