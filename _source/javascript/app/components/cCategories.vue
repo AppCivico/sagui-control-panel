@@ -22,13 +22,13 @@ export default {
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-				<div class="col-md-12" v-for="categorie in categories">
+				<div class="col-md-12" v-for="category in categories">
 					<div class="info-box">
 						<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
 
 						<div class="info-box-content">
 							<span class="info-box-text">
-								<router-link :to="'/surveys/categorie/'+categorie.id">{{ categorie.title }}</router-link>
+								<router-link :to="'/surveys/category/'+category.id">{{ category.title }}</router-link>
 							</span>
 						</div>
 					</div>

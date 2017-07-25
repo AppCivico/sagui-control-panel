@@ -30,7 +30,7 @@ export default new Router({
 			component: cNewSurvey,
 		},
 		{
-			path: '/surveys/categorie/:id',
+			path: '/surveys/category/:id',
 			name: 'Enquetes',
 			component: cSurveys,
 			props: true,
