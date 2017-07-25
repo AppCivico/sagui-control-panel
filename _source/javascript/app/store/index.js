@@ -7,12 +7,24 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
 	state: {
 		alertMessage: 'nana',
+		categories: [],
 		enterprises: [],
 		enterprise: {},
 		surveys: [],
 		survey: {},
 	},
 	actions: {
+		LOAD_CATEGORIES_LIST({ commit }) {
+			axios.get('http://localhost:3000/categories').then((response) => {
+				commit('SET_CATEGORIES_LIST', { list: response.data });
+			}, (err) => {
+				// eslint-disable-next-line
+				console.log(err);
+			});
+		},
+		CHANGE_ALERT_MESSAGE({ commit }, message) {
+			commit('SET_ALERT_MESSAGE', { res: message });
+		},
 		LOAD_ENTERPRISES_LIST({ commit }) {
 			axios.get('http://localhost:3000/enterprises').then((response) => {
 				commit('SET_ENTERPRISES_LIST', { list: response.data });
@@ -29,11 +41,8 @@ const store = new Vuex.Store({
 				console.log(err);
 			});
 		},
-		CHANGE_ALERT_MESSAGE({ commit }, message) {
-			commit('SET_ALERT_MESSAGE', { res: message });
-		},
-		LOAD_SURVEYS_LIST({ commit }) {
-			axios.get('http://localhost:3000/surveys').then((response) => {
+		LOAD_SURVEYS_LIST({ commit }, id) {
+			axios.get(`http://localhost:3000/surveys?categorie=${id}`).then((response) => {
 				commit('SET_SURVEYS_LIST', { list: response.data });
 			}, (err) => {
 				// eslint-disable-next-line
@@ -50,6 +59,15 @@ const store = new Vuex.Store({
 		},
 	},
 	mutations: {
+
+		SET_ALERT_MESSAGE(state, { res }) {
+			// eslint-disable-next-line
+			state.alertMessage = res;
+		},
+		SET_CATEGORIES_LIST(state, { list }) {
+			// eslint-disable-next-line
+			state.categories = list;
+		},
 		SET_ENTERPRISES_LIST(state, { list }) {
 			// eslint-disable-next-line
 			state.enterprises = list;
@@ -57,10 +75,6 @@ const store = new Vuex.Store({
 		SET_ENTERPRISE(state, { res }) {
 			// eslint-disable-next-line
 			state.enterprise = res;
-		},
-		SET_ALERT_MESSAGE(state, { res }) {
-			// eslint-disable-next-line
-			state.alertMessage = res;
 		},
 		SET_SURVEYS_LIST(state, { list }) {
 			// eslint-disable-next-line
