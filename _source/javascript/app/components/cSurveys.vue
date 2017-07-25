@@ -1,13 +1,14 @@
 <script>
 export default {
 	name: 'cSurveys',
+	props: ['id'],
 	computed: {
 		surveys() {
 			return this.$store.state.surveys;
 		},
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_SURVEYS_LIST');
+		this.$store.dispatch('LOAD_SURVEYS_LIST', this.id);
 	},
 };
 </script>
