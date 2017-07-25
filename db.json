@@ -72,7 +72,7 @@
 		    ]
 		  },
 		  {
-		    "type": "mutiple",
+		    "type": "multiple",
 		    "title": "Esta satisfeito com a sua moradia 2?",
 		    "answers": [
 		      {
@@ -116,7 +116,7 @@
 		    ]
 		  },
 		  {
-		    "type": "mutiple",
+		    "type": "multiple",
 		    "title": "Esta satisfeito com a sua moradia 2 2?",
 		    "answers": [
 		      {
@@ -160,7 +160,7 @@
 		    ]
 		  },
 		  {
-		    "type": "mutiple",
+		    "type": "multiple",
 		    "title": "Esta satisfeito com a sua moradia 2?",
 		    "answers": [
 		      {
