@@ -8,6 +8,11 @@ export default{
 	components: {
 		cQuestion,
 	},
+	data() {
+		return {
+			edited: false,
+		};
+	},
 	computed: {
 		categories() {
 			return this.$store.state.categories;
@@ -31,7 +36,15 @@ export default{
 			this.questions.splice(number, 1);
 		},
 		removeError(event) {
+			this.edited = true;
 			methods.removeError(event);
+		},
+		createSurvey(title, category) {
+			return {
+				title,
+				category,
+				questions: this.questions,
+			};
 		},
 		validate() {
 			let valid = true;
@@ -50,12 +63,16 @@ export default{
 			}
 			if (this.questions.length < 1) {
 				this.$store.dispatch('CHANGE_ALERT_MESSAGE', 'É obrigatório inserir pelo menos uma pergunta.');
-				$('#alert').modal('show'); // eslint-disable-line no-undef
 				valid = false;
 			}
 
 			if (valid) {
-				// nada
+				if (this.edited) {
+					const edited = this.createSurvey(title.value, category.value);
+					this.$store.dispatch('EDIT_SURVEY', { id: this.survey.id, survey: edited });
+				} else {
+					this.$store.dispatch('CHANGE_ALERT_MESSAGE', 'Nenhuma alteração foi efetuada.');
+				}
 			}
 		},
 	},
@@ -84,9 +101,9 @@ export default{
 			                </div>
 							<div class="form-group">
 								<label>{{ 'categoria' | translate | capitalize }}</label>
-								<select class="form-control survey__category" @focus="removeError($event)" :value="categories[survey.categorie - 1].title">
+								<select class="form-control survey__category" @focus="removeError($event)" :value="survey.category">
 									<option value="">Selecione a categoria</option>
-									<option v-for="categorie in categories">{{ categorie.title }}</option>
+									<option v-for="(category, index) in categories" :value="index + 1">{{ category.title }}</option>
 								</select>
 			                </div>
 			                <button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'save' | translate | capitalize }} {{ 'edits' | translate }}</button>

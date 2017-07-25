@@ -73,12 +73,11 @@ const store = new Vuex.Store({
 				console.log(err);
 			});
 		},
-		EDIT_SURVEY({ commit }, id, data) {
-			console.log(data);
+		EDIT_SURVEY({ commit }, data) {
 			axios({
 				method: 'PUT',
-				url: `http://localhost:3000/surveys/${id}`,
-				data,
+				url: `http://localhost:3000/surveys/${data.id}`,
+				data: data.survey,
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.then((response) => {
