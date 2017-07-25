@@ -7,9 +7,16 @@ export default{
 	components: {
 		cQuestion,
 	},
+	computed: {
+		categories() {
+			return this.$store.state.categories;
+		},
+	},
+	mounted() {
+		this.$store.dispatch('LOAD_CATEGORIES_LIST');
+	},
 	data() {
 		return {
-			categories: ['Moradia', 'Alimentação', 'Locomoção'],
 			questions: [],
 		};
 	},
@@ -76,7 +83,7 @@ export default{
 								<label>{{ 'categoria' | translate | capitalize }}</label>
 								<select class="form-control new-survey__category" @focus="removeError($event)">
 									<option value="">Selecione a categoria</option>
-									<option v-for="categorie in categories">{{ categorie }}</option>
+									<option v-for="categorie in categories">{{ categorie.title }}</option>
 								</select>
 			                </div>
 			                <button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'survey' | translate }}</button>
