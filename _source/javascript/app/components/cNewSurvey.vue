@@ -30,6 +30,13 @@ export default{
 		removeError(event) {
 			methods.removeError(event);
 		},
+		createSurvey(title, category) {
+			return {
+				title,
+				category,
+				questions: this.questions,
+			};
+		},
 		validate() {
 			let valid = true;
 			const title = document.querySelector('.new-survey__title');
@@ -47,12 +54,12 @@ export default{
 			}
 			if (this.questions.length < 1) {
 				this.$store.dispatch('CHANGE_ALERT_MESSAGE', 'É obrigatório inserir pelo menos uma pergunta.');
-				$('#alert').modal('show'); // eslint-disable-line no-undef
 				valid = false;
 			}
 
 			if (valid) {
-				// nada
+				const newSurvey = this.createSurvey(title.value, category.value);
+				this.$store.dispatch('SAVE_SURVEY', newSurvey);
 			}
 		},
 	},
@@ -83,7 +90,7 @@ export default{
 								<label>{{ 'categoria' | translate | capitalize }}</label>
 								<select class="form-control new-survey__category" @focus="removeError($event)">
 									<option value="">Selecione a categoria</option>
-									<option v-for="categorie in categories">{{ categorie.title }}</option>
+									<option v-for="(category, index) in categories" :value="index + 1">{{ category.title }}</option>
 								</select>
 			                </div>
 			                <button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'survey' | translate }}</button>

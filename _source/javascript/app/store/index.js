@@ -42,7 +42,7 @@ const store = new Vuex.Store({
 			});
 		},
 		LOAD_SURVEYS_LIST({ commit }, id) {
-			axios.get(`http://localhost:3000/surveys?categorie=${id}`).then((response) => {
+			axios.get(`http://localhost:3000/surveys?category=${id}`).then((response) => {
 				commit('SET_SURVEYS_LIST', { list: response.data });
 			}, (err) => {
 				// eslint-disable-next-line
@@ -57,12 +57,45 @@ const store = new Vuex.Store({
 				console.log(err);
 			});
 		},
+		SAVE_SURVEY({ commit }, data) {
+			axios({
+				method: 'POST',
+				url: 'http://localhost:3000/surveys',
+				data,
+				headers: { 'Content-Type': 'application/json' },
+			})
+			.then((response) => {
+				if (response.statusText === 'Created') {
+					commit('SET_ALERT_MESSAGE', { res: 'Enquete salva' });
+				}
+			}, (err) => {
+				// eslint-disable-next-line
+				console.log(err);
+			});
+		},
+		EDIT_SURVEY({ commit }, id, data) {
+			console.log(data);
+			axios({
+				method: 'PUT',
+				url: `http://localhost:3000/surveys/${id}`,
+				data,
+				headers: { 'Content-Type': 'application/json' },
+			})
+			.then((response) => {
+				if (response.statusText === 'Created') {
+					commit('SET_ALERT_MESSAGE', { res: 'Alterações salvas' });
+				}
+			}, (err) => {
+				// eslint-disable-next-line
+				console.log(err);
+			});
+		},
 	},
 	mutations: {
-
 		SET_ALERT_MESSAGE(state, { res }) {
 			// eslint-disable-next-line
 			state.alertMessage = res;
+			$('#alert').modal('show'); // eslint-disable-line no-undef
 		},
 		SET_CATEGORIES_LIST(state, { list }) {
 			// eslint-disable-next-line
