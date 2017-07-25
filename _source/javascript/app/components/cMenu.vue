@@ -28,7 +28,7 @@ export default{
 					</span>
 				</a>
 				<ul class="treeview-menu">
-					<li><router-link to="/surveys"><i class="fa fa-circle-o"></i> Enquetes</router-link></li>
+					<li><router-link to="/categories"><i class="fa fa-circle-o"></i> Enquetes</router-link></li>
 					<li><router-link to="/new-survey"><i class="fa fa-circle-o"></i> Nova enquete</router-link></li>
 				</ul>
 			</li>
