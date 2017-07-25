@@ -20,6 +20,7 @@ const store = new Vuex.Store({
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
+				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
 			});
 		},
 		CHANGE_ALERT_MESSAGE({ commit }, message) {
@@ -31,6 +32,7 @@ const store = new Vuex.Store({
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
+				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
 			});
 		},
 		LOAD_ENTERPRISE({ commit }, id) {
@@ -39,6 +41,7 @@ const store = new Vuex.Store({
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
+				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
 			});
 		},
 		LOAD_SURVEYS_LIST({ commit }, id) {
@@ -47,6 +50,7 @@ const store = new Vuex.Store({
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
+				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
 			});
 		},
 		LOAD_SURVEY({ commit }, id) {
@@ -55,6 +59,7 @@ const store = new Vuex.Store({
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
+				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
 			});
 		},
 		SAVE_SURVEY({ commit }, data) {
@@ -71,6 +76,7 @@ const store = new Vuex.Store({
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
+				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
 			});
 		},
 		EDIT_SURVEY({ commit }, data) {
@@ -87,6 +93,7 @@ const store = new Vuex.Store({
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
+				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
 			});
 		},
 	},
