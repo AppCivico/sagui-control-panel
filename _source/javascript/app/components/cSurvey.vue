@@ -11,6 +11,8 @@ export default{
 	data() {
 		return {
 			edited: false,
+			question: {},
+			isNew: true,
 		};
 	},
 	computed: {
@@ -32,6 +34,14 @@ export default{
 		addQuestion(result) {
 			this.edited = true;
 			this.questions.push(result);
+		},
+		changeIsNew(boolean) {
+			this.isNew = boolean;
+			console.log(this.isNew);
+		},
+		editQuestion(index) {
+			this.changeIsNew(false);
+			this.question = this.questions[index];
 		},
 		removeQuestion(number) {
 			this.questions.splice(number, 1);
@@ -127,6 +137,7 @@ export default{
 				                    		</a>
 				                    	</h4>
 				                    	<button type="button" aria-label="Excluir" class="close" @click="removeQuestion(index)"><span aria-hidden="true">×</span></button>
+				                    	<button type="button" aria-label="Editar" data-toggle="modal" data-target="#new-question" class="edit-question" @click="editQuestion(index)"><i class="fa fa-edit"></i></button>
 				                	</div>
 				                	<div :id="'collapse'+index" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
 				                		<div class="box-body">
@@ -146,13 +157,30 @@ export default{
 				                	</div>
 				                </div>
 				            </div>
-							<button type="button" class="btn btn-block btn-warning" data-toggle="modal" data-target="#new-question">{{ 'add' | translate | capitalize }} {{ 'question' | translate }}</button>
+							<button type="button" class="btn btn-block btn-warning" data-toggle="modal" data-target="#new-question" @click="changeIsNew(true)">{{ 'add' | translate | capitalize }} {{ 'question' | translate }}</button>
 						</div>
 					</div>
 				</div>
-				<c-question v-on:newQuestion="addQuestion"></c-question>
+				<c-question v-on:newQuestion="addQuestion" :question="this.question" :new="this.isNew"></c-question>
 			</div>
 		</section>
 		<!-- /.content -->
 	</div>
 </template>
+
+<style scoped>
+	.edit-question {
+		padding: 0;
+	    cursor: pointer;
+	    background: transparent;
+	    border: 0;
+	    -webkit-appearance: none;
+		float: right;
+	    font-size: 21px;
+	    font-weight: 700;
+	    line-height: 1;
+	    color: #f39c12;
+	    text-shadow: 0 1px 0 #fff;
+	    margin-right: 1%;
+	}
+</style>

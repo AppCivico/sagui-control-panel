@@ -3,6 +3,10 @@ import methods from '../methods';
 
 export default {
 	name: 'cQuestion',
+	props: {
+		question: Object,
+		edit: Boolean,
+	},
 	data() {
 		return {
 			type: '',
@@ -112,15 +116,16 @@ export default {
 					<button type="button" class="close" data-dismiss="modal" aria-label="Cancelar" @click="cleanFields()">
 						<span aria-hidden="true">×</span></button>
 					<h4 class="modal-title">{{ 'question' | translate  | capitalize }}</h4>
+					<h3 v-if="this.edit == false">editando</h3>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
 						<label>{{ 'title' | translate  | capitalize }}</label>
-						<input type="text" class="form-control" name="title" placeholder="Título" @focus="removeError($event)">
+						<input type="text" class="form-control" name="title" placeholder="Título" @focus="removeError($event)" :value="this.question.title">
 					</div>
 					<div class="form-group">
 						<label>{{ 'type' | translate | capitalize }}</label>
-						<select class="form-control" v-model="type" @focus="removeError($event)">
+						<select class="form-control" v-model="type" @focus="removeError($event)" :value="this.question.type">
 							<option value="">Escolha um tipo de resposta</option>
 							<option v-for="option in types" :value="option">{{ option | translate | capitalize }}</option>
 						</select>
