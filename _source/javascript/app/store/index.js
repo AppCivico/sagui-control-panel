@@ -96,6 +96,22 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
 			});
 		},
+		DELETE_SURVEY({ commit }, id) {
+			axios({
+				method: 'DELETE',
+				url: `http://localhost:3000/surveys/${id}`,
+				headers: { 'Content-Type': 'application/json' },
+			})
+			.then((response) => {
+				if (response.statusText === 'OK') {
+					commit('SET_ALERT_MESSAGE', { res: 'Enquete excluída' });
+				}
+			}, (err) => {
+				// eslint-disable-next-line
+				console.log(err);
+				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
+			});
+		},
 	},
 	mutations: {
 		SET_ALERT_MESSAGE(state, { res }) {

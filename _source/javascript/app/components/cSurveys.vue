@@ -12,7 +12,7 @@ export default {
 	},
 	methods: {
 		removeSurvey(id) {
-			console.log(id);
+			this.$store.dispatch('DELETE_SURVEY', id);
 		},
 	},
 };
@@ -28,7 +28,10 @@ export default {
 		<!-- Main content -->
 		<section class="content">
 			<div class="box box-solid">
-				<div class="box-body no-padding">
+				<div v-if="surveys.length < 1" class="alert alert-info">
+					Nenhuma enquete cadastrada nesta categoria.
+				</div>
+				<div class="box-body no-padding" v-if="surveys.length >= 1">
 					<ul class="nav nav-pills nav-stacked">
 						<li v-for="survey in surveys">
 							<router-link :to="'/surveys/'+survey.id">
