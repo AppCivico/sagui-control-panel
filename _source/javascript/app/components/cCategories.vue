@@ -21,17 +21,13 @@ export default {
 
 		<!-- Main content -->
 		<section class="content">
-			<div class="row">
-				<div class="col-md-12" v-for="category in categories">
-					<div class="info-box">
-						<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">
-								<router-link :to="'/surveys/category/'+category.id">{{ category.title }}</router-link>
-							</span>
-						</div>
-					</div>
+			<div class="box box-solid">
+				<div class="box-body no-padding">
+					<ul class="nav nav-pills nav-stacked">
+						<li v-for="category in categories">
+							<router-link :to="'/surveys/category/'+category.id"><i class="fa fa-list"></i> {{ category.title }}</router-link>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</section>

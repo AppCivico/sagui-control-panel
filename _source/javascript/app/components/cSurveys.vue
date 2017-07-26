@@ -10,6 +10,11 @@ export default {
 	mounted() {
 		this.$store.dispatch('LOAD_SURVEYS_LIST', this.id);
 	},
+	methods: {
+		removeSurvey(id) {
+			console.log(id);
+		},
+	},
 };
 </script>
 
@@ -22,17 +27,16 @@ export default {
 
 		<!-- Main content -->
 		<section class="content">
-			<div class="row">
-				<div class="col-md-12" v-for="survey in surveys">
-					<div class="info-box">
-						<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
-
-						<div class="info-box-content">
-							<span class="info-box-text">
-								<router-link :to="'/surveys/'+survey.id">{{ survey.title }}</router-link>
-							</span>
-						</div>
-					</div>
+			<div class="box box-solid">
+				<div class="box-body no-padding">
+					<ul class="nav nav-pills nav-stacked">
+						<li v-for="survey in surveys">
+							<router-link :to="'/surveys/'+survey.id">
+								<i class="fa fa-file-text-o"></i> {{ survey.title }}
+								<button type="button" aria-label="Excluir" class="close" @click.stop.prevent="removeSurvey(survey.id)"><span aria-hidden="true">×</span></button>
+							</router-link>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</section>
