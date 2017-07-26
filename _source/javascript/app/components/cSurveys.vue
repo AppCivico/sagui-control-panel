@@ -17,10 +17,6 @@ export default {
 			setTimeout(() => {
 				this.$store.dispatch('LOAD_SURVEYS_LIST', this.id);
 			}, 100);
-				/* .then((data) => {
-					console.log(data);
-					this.$store.dispatch('LOAD_SURVEYS_LIST', this.id);
-				});*/
 		},
 	},
 };
