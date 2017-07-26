@@ -12,6 +12,7 @@ const ptBr = {
 	"cancel": "cancelar",
 	"cases": "ocorrências",
 	"categorie": "categoria",
+	"categories": "categorias",
 	"choose_enterprise": "Escolha o empreendimento",
 	"complaints": "apontamentos",
 	"contributions": "contribuições",
