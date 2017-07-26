@@ -4,6 +4,8 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
+const api = 'http://localhost:3000';
+
 const store = new Vuex.Store({
 	state: {
 		alertMessage: '',
@@ -19,7 +21,7 @@ const store = new Vuex.Store({
 	},
 	actions: {
 		LOAD_CATEGORIES_LIST({ commit }) {
-			axios.get('http://localhost:3000/categories').then((response) => {
+			axios.get(`${api}/categories`).then((response) => {
 				commit('SET_CATEGORIES_LIST', { list: response.data });
 			}, (err) => {
 				// eslint-disable-next-line
@@ -31,7 +33,7 @@ const store = new Vuex.Store({
 			commit('SET_ALERT_MESSAGE', { res: { message } });
 		},
 		LOAD_ENTERPRISES_LIST({ commit }) {
-			axios.get('http://localhost:3000/enterprises').then((response) => {
+			axios.get(`${api}/enterprises`).then((response) => {
 				commit('SET_ENTERPRISES_LIST', { list: response.data });
 			}, (err) => {
 				// eslint-disable-next-line
@@ -40,7 +42,7 @@ const store = new Vuex.Store({
 			});
 		},
 		LOAD_ENTERPRISE({ commit }, id) {
-			axios.get(`http://localhost:3000/enterprises/${id}`).then((response) => {
+			axios.get(`${api}/enterprises/${id}`).then((response) => {
 				commit('SET_ENTERPRISE', { res: response.data });
 			}, (err) => {
 				// eslint-disable-next-line
@@ -49,7 +51,7 @@ const store = new Vuex.Store({
 			});
 		},
 		LOAD_SURVEYS_LIST({ commit }, id) {
-			axios.get(`http://localhost:3000/surveys?category=${id}`).then((response) => {
+			axios.get(`${api}/surveys?category=${id}`).then((response) => {
 				commit('SET_SURVEYS_LIST', { list: response.data });
 			}, (err) => {
 				// eslint-disable-next-line
@@ -58,7 +60,7 @@ const store = new Vuex.Store({
 			});
 		},
 		LOAD_SURVEY({ commit }, id) {
-			axios.get(`http://localhost:3000/surveys/${id}`).then((response) => {
+			axios.get(`${api}/surveys/${id}`).then((response) => {
 				commit('SET_SURVEY', { res: response.data });
 			}, (err) => {
 				// eslint-disable-next-line
@@ -69,7 +71,7 @@ const store = new Vuex.Store({
 		SAVE_SURVEY({ commit }, data) {
 			axios({
 				method: 'POST',
-				url: 'http://localhost:3000/surveys',
+				url: `${api}/surveys`,
 				data,
 				headers: { 'Content-Type': 'application/json' },
 			})
@@ -86,7 +88,7 @@ const store = new Vuex.Store({
 		EDIT_SURVEY({ commit }, data) {
 			axios({
 				method: 'PUT',
-				url: `http://localhost:3000/surveys/${data.id}`,
+				url: `${api}/surveys/${data.id}`,
 				data: data.survey,
 				headers: { 'Content-Type': 'application/json' },
 			})
@@ -103,7 +105,7 @@ const store = new Vuex.Store({
 		DELETE_SURVEY({ commit }, id) {
 			axios({
 				method: 'DELETE',
-				url: `http://localhost:3000/surveys/${id}`,
+				url: `${api}/surveys/${id}`,
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.then((response) => {

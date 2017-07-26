@@ -12,7 +12,7 @@
     "build:vendor": "browserify _source/javascript/app/vendor.js | uglifyjs -c warnings=false -m > dist/js/vendor.js",
     "build:vue": "cross-env NODE_ENV=production browserify -g envify -p [ vueify/plugins/extract-css -o dist/css/build.css ] -e _source/javascript/app/application.js | uglifyjs -c warnings=false -m > dist/js/build.js",
     "build:prod": "npm run build:vue && npm run build:vendor && npm run build:sass && npm run autoprefixer && npm run nano && npm run imagemin",
-    "dev": "npm-run-all --parallel watch:all serve api",
+    "dev": "npm-run-all --parallel watch:all serve",
     "icons": "svgo -f _source/images/**/*.svg -o dist/img",
     "imagemin": "imagemin _source/images/**/*.{gif,jpg,png} --out-dir=dist/img",
     "lint:es": "eslint --ext .js,.vue _source/javascript/app",
