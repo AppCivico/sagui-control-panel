@@ -116,6 +116,9 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
+		RESET_REDIRECT({ commit }) {
+			commit('SET_REDIRECT_STATE');
+		},
 	},
 	mutations: {
 		SET_ALERT_MESSAGE(state, { res }) {
@@ -140,6 +143,10 @@ const store = new Vuex.Store({
 		SET_ENTERPRISE(state, { res }) {
 			// eslint-disable-next-line
 			state.enterprise = res;
+		},
+		SET_REDIRECT_STATE(state) {
+			// eslint-disable-next-line
+			state.redirect.state = false;
 		},
 		SET_SURVEYS_LIST(state, { list }) {
 			// eslint-disable-next-line
