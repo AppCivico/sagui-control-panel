@@ -11,8 +11,16 @@ export default {
 		this.$store.dispatch('LOAD_SURVEYS_LIST', this.id);
 	},
 	methods: {
-		removeSurvey(id) {
-			this.$store.dispatch('DELETE_SURVEY', id);
+		removeSurvey(survey) {
+			this.$store.dispatch('DELETE_SURVEY', survey);
+			// Using timeout because there's no real API and I need to simulate it
+			setTimeout(() => {
+				this.$store.dispatch('LOAD_SURVEYS_LIST', this.id);
+			}, 100);
+				/* .then((data) => {
+					console.log(data);
+					this.$store.dispatch('LOAD_SURVEYS_LIST', this.id);
+				});*/
 		},
 	},
 };
