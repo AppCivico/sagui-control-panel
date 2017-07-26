@@ -30,6 +30,7 @@ export default{
 	},
 	methods: {
 		addQuestion(result) {
+			this.edited = true;
 			this.questions.push(result);
 		},
 		removeQuestion(number) {
