@@ -37,7 +37,6 @@ export default{
 		},
 		changeIsNew(boolean) {
 			this.isNew = boolean;
-			console.log(this.isNew);
 		},
 		editQuestion(index) {
 			this.changeIsNew(false);
