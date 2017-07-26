@@ -6,10 +6,14 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
 	state: {
-		alertMessage: 'nana',
+		alertMessage: '',
 		categories: [],
 		enterprises: [],
 		enterprise: {},
+		redirect: {
+			state: false,
+			path: '',
+		},
 		surveys: [],
 		survey: {},
 	},
@@ -20,11 +24,11 @@ const store = new Vuex.Store({
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
-				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
 		CHANGE_ALERT_MESSAGE({ commit }, message) {
-			commit('SET_ALERT_MESSAGE', { res: message });
+			commit('SET_ALERT_MESSAGE', { res: { message } });
 		},
 		LOAD_ENTERPRISES_LIST({ commit }) {
 			axios.get('http://localhost:3000/enterprises').then((response) => {
@@ -32,7 +36,7 @@ const store = new Vuex.Store({
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
-				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
 		LOAD_ENTERPRISE({ commit }, id) {
@@ -41,7 +45,7 @@ const store = new Vuex.Store({
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
-				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
 		LOAD_SURVEYS_LIST({ commit }, id) {
@@ -50,7 +54,7 @@ const store = new Vuex.Store({
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
-				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
 		LOAD_SURVEY({ commit }, id) {
@@ -59,7 +63,7 @@ const store = new Vuex.Store({
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
-				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
 		SAVE_SURVEY({ commit }, data) {
@@ -71,12 +75,12 @@ const store = new Vuex.Store({
 			})
 			.then((response) => {
 				if (response.statusText === 'Created') {
-					commit('SET_ALERT_MESSAGE', { res: 'Enquete salva' });
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete salva', redirect: { state: true, path: '-1' } } });
 				}
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
-				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
 		EDIT_SURVEY({ commit }, data) {
@@ -87,13 +91,13 @@ const store = new Vuex.Store({
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.then((response) => {
-				if (response.statusText === 'Created') {
-					commit('SET_ALERT_MESSAGE', { res: 'Alterações salvas' });
+				if (response.statusText === 'OK') {
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Alterações salvas', redirect: { state: true, path: '-1' } } });
 				}
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
-				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
 		DELETE_SURVEY({ commit }, id) {
@@ -104,19 +108,25 @@ const store = new Vuex.Store({
 			})
 			.then((response) => {
 				if (response.statusText === 'OK') {
-					commit('SET_ALERT_MESSAGE', { res: 'Enquete excluída' });
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete excluída' } });
 				}
 			}, (err) => {
 				// eslint-disable-next-line
 				console.log(err);
-				commit('SET_ALERT_MESSAGE', { res: 'Ocorreu um erro. Tente novamente.' });
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
 	},
 	mutations: {
 		SET_ALERT_MESSAGE(state, { res }) {
+			if (res.redirect) {
+				// eslint-disable-next-line
+				state.redirect.state = res.redirect.state;
+				// eslint-disable-next-line
+				state.redirect.path = res.redirect.path;
+			}
 			// eslint-disable-next-line
-			state.alertMessage = res;
+			state.alertMessage = res.message;
 			$('#alert').modal('show'); // eslint-disable-line no-undef
 		},
 		SET_CATEGORIES_LIST(state, { list }) {

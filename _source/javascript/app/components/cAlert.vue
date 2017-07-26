@@ -1,9 +1,21 @@
 <script>
+import router from '../router';
+
 export default {
 	name: 'cAlert',
 	computed: {
 		message() {
 			return this.$store.state.alertMessage;
+		},
+		redirect() {
+			return this.$store.state.redirect;
+		},
+	},
+	methods: {
+		ifRedirect() {
+			if (this.redirect.state === true) {
+				router.go(this.redirect.path);
+			}
 		},
 	},
 };
@@ -22,7 +34,7 @@ export default {
 					<p>{{ message }}</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" @click="ifRedirect()">Ok</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->

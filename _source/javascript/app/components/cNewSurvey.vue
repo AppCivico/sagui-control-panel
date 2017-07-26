@@ -53,7 +53,7 @@ export default{
 				valid = false;
 			}
 			if (this.questions.length < 1) {
-				this.$store.dispatch('CHANGE_ALERT_MESSAGE', 'É obrigatório inserir pelo menos uma pergunta.');
+				this.$store.dispatch('CHANGE_ALERT_MESSAGE', { message: 'É obrigatório inserir pelo menos uma pergunta.' });
 				valid = false;
 			}
 
