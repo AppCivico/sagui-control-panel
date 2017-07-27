@@ -5,7 +5,7 @@ import axios from 'axios';
 Vue.use(Vuex);
 
 // const api = 'http://localhost:3000';
-const api = 'http://fakeapi.eokoe.com';
+const api = 'https://fakeapi.eokoe.com';
 
 /* eslint-disable arrow-body-style */
 axios.interceptors.request.use((config) => {
