@@ -96,23 +96,3 @@ export default {
 		<!-- /.content -->
 	</div>
 </template>
-
-<style scoped>
-	.edit-button {
-		padding: 0;
-		cursor: pointer;
-		background: transparent;
-		border: 0;
-		-webkit-appearance: none;
-		float: right;
-		font-size: 21px;
-		font-weight: 700;
-		line-height: 1;
-		color: #f39c12;
-		text-shadow: 0 1px 0 #fff;
-		margin-right: 1%;
-	}
-	.edit-button:hover {
-		color: #000;
-	}
-</style>

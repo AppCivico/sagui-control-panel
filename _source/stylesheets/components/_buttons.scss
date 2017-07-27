@@ -1,0 +1,19 @@
+// sass-lint:disable border-zero no-color-literals, no-color-hex, property-units
+.edit-button {
+	float: right;
+	padding: 0;
+	margin-right: 1%;
+	font-weight: 700;
+	font-size: 21px;
+	line-height: 1;
+	text-shadow: 0 1px 0 #fff;
+	cursor: pointer;
+	color: #f39c12;
+	background: transparent;
+	border: 0;
+	appearance: none;
+
+	&:hover {
+		color: #000;
+	}
+}
