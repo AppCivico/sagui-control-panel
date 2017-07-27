@@ -1,36 +1,67 @@
 <script>
 import cCategorie from './cCategorie.vue';
+import cConfirm from './cConfirm.vue';
 
 export default {
 	name: 'cCategories',
 	components: {
 		cCategorie,
+		cConfirm,
 	},
 	data() {
 		return {
 			isEditing: true,
 			editingCategory: {},
+			selected: -1,
 		};
 	},
 	computed: {
 		categories() {
 			return this.$store.state.categories;
 		},
+		confirm() {
+			return this.$store.state.confirm.state;
+		},
+		surveys() {
+			return this.$store.state.surveys;
+		},
+	},
+	watch: {
+		confirm(newValue) {
+			if (newValue === true) {
+				this.deleteCategory(this.selected);
+			}
+		},
 	},
 	mounted() {
 		this.$store.dispatch('LOAD_CATEGORIES_LIST');
 	},
 	methods: {
-		removeCategory(category) {
-			this.$store.dispatch('DELETE_CATEGORY', category);
-			// Using timeout because there's no real API and I need to simulate it
-			setTimeout(() => {
-				this.$store.dispatch('LOAD_CATEGORIES_LIST', this.id);
-			}, 100);
+		removeSurvey(id) {
+			this.$store.dispatch('DELETE_SURVEY', id);
+		},
+		removeCategory(category) { // eslint-disable-line no-unused-vars
+			this.$store.dispatch('CHANGE_CONFIRM_MESSAGE', { message: 'As enquetes cadastradas nesta categoria também serão excluídas, tem certeza que deseja deleter esta categoria?' });
+			this.selected = category;
 		},
 		editCategorie(category) {
 			this.editingCategory = category;
 			$('#new-category').modal('show'); // eslint-disable-line no-undef
+		},
+		deleteCategory(id) {
+			this.$store.dispatch('LOAD_SURVEYS_LIST', id);
+			setTimeout(() => {
+				if (this.surveys.length > 0) {
+					this.surveys.map((survey) => { // eslint-disable-line array-callback-return
+						this.removeSurvey(survey.id);
+					});
+				}
+				this.$store.dispatch('DELETE_CATEGORY', id);
+				setTimeout(() => {
+					this.$store.dispatch('EDIT_CONFIRM_STATE', false);
+					this.$store.dispatch('LOAD_CATEGORIES_LIST', this.id);
+				}, 100);
+			}, 100);
 		},
 	},
 };
@@ -61,6 +92,7 @@ export default {
 			</div>
 		</section>
 		<c-categorie :category="this.editingCategory" :isEditing="this.isEditing"></c-categorie>
+		<c-confirm></c-confirm>
 		<!-- /.content -->
 	</div>
 </template>

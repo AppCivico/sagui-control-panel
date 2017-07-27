@@ -4,12 +4,17 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
-const api = 'http://localhost:3000';
+// const api = 'http://localhost:3000';
+const api = 'http://fakeapi.eokoe.com';
 
 const store = new Vuex.Store({
 	state: {
 		alertMessage: '',
 		categories: [],
+		confirm: {
+			message: '',
+			state: false,
+		},
 		enterprises: [],
 		enterprise: {},
 		redirect: {
@@ -118,8 +123,14 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
-		RESET_REDIRECT({ commit }) {
-			commit('SET_REDIRECT_STATE');
+		CHANGE_REDIRECT({ commit }, data) {
+			commit('SET_REDIRECT', { data });
+		},
+		CHANGE_CONFIRM_MESSAGE({ commit }, data) {
+			commit('SET_CONFIRM_MESSAGE', { data });
+		},
+		EDIT_CONFIRM_STATE({ commit }, confirm) {
+			commit('SET_CONFIRM_STATE', { res: confirm });
 		},
 		ADD_CATEGORY({ commit }, data) {
 			axios({
@@ -200,9 +211,24 @@ const store = new Vuex.Store({
 			// eslint-disable-next-line
 			state.enterprise = res;
 		},
-		SET_REDIRECT_STATE(state) {
+		SET_REDIRECT(state, { data }) {
 			// eslint-disable-next-line
-			state.redirect.state = false;
+			state.redirect.state = data.state;
+			// eslint-disable-next-line
+			state.redirect.path = data.path;
+		},
+		SET_CONFIRM_MESSAGE(state, { data }) {
+			if (data.redirect) {
+				// eslint-disable-next-line
+				store.dispatch('CHANGE_REDIRECT', data.redirect);
+			}
+			// eslint-disable-next-line
+			state.confirm.message = data.message;
+			$('#confirm').modal('show'); // eslint-disable-line no-undef
+		},
+		SET_CONFIRM_STATE(state, { res }) {
+			// eslint-disable-next-line
+			state.confirm.state = res;
 		},
 		SET_SURVEYS_LIST(state, { list }) {
 			// eslint-disable-next-line
