@@ -59,8 +59,8 @@ export default {
 				this.$store.dispatch('DELETE_CATEGORY', id);
 				setTimeout(() => {
 					this.$store.dispatch('EDIT_CONFIRM_STATE', false);
-					this.$store.dispatch('LOAD_CATEGORIES_LIST', this.id);
-				}, 100);
+					this.$store.dispatch('LOAD_CATEGORIES_LIST');
+				}, 1000);
 			}, 100);
 		},
 	},
