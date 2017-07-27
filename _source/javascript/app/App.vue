@@ -16,6 +16,9 @@ export default {
 
 <template>
 	<div id="app">
+		<div class="loading">
+			<i class="fa fa-refresh fa-spin"></i>
+		</div>
 		<div class="wrapper">
 			<c-header></c-header>
 			<c-menu></c-menu>

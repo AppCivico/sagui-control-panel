@@ -7,6 +7,27 @@ Vue.use(Vuex);
 // const api = 'http://localhost:3000';
 const api = 'http://fakeapi.eokoe.com';
 
+/* eslint-disable arrow-body-style */
+axios.interceptors.request.use((config) => {
+	document.querySelector('.loading').classList.remove('close');
+	return config;
+}, (error) => {
+	// Do something with request error
+	return Promise.reject(error);
+});
+
+
+// Add a response interceptor
+axios.interceptors.response.use((response) => {
+	document.querySelector('.loading').classList.add('close');
+	return response;
+}, (error) => {
+	// Do something with response error
+	return Promise.reject(error);
+});
+
+/* eslint-enable */
+
 const store = new Vuex.Store({
 	state: {
 		alertMessage: '',
