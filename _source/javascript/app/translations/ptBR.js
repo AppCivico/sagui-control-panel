@@ -18,6 +18,7 @@ const ptBr = {
 	"contributions": "contribuições",
 	"enterprise": "empreendimento",
 	"enterprises": "empreendimentos",
+	"edit": "editar",
 	"edits": "alterações",
 	"insert_option": "Digite aqui uma opção",
 	"multiple": "multipla escolha",

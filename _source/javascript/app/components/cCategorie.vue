@@ -3,6 +3,10 @@ import methods from '../methods';
 
 export default {
 	name: 'cCategorie',
+	props: {
+		category: Object,
+		isEditing: Boolean,
+	},
 	methods: {
 		cleanFields() {
 			const inputs = Array.from(document.querySelectorAll('#new-category input'));
@@ -25,10 +29,15 @@ export default {
 				valid = false;
 			}
 			if (valid) {
-				this.$store.dispatch('ADD_CATEGORY', { title: title.value });
-				/* this.newQuestion(document.querySelector('#new-category'));
-				$('#new-category').modal('hide'); // eslint-disable-line no-undef
-				this.cleanFields(); */
+				if (this.isEditing) {
+					const category = {
+						title: title.value,
+						id: this.category.id,
+					};
+					this.$store.dispatch('EDIT_CATEGORY', category);
+				} else {
+					this.$store.dispatch('ADD_CATEGORY', { title: title.value });
+				}
 			}
 		},
 	},
@@ -41,18 +50,22 @@ export default {
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Cancelar" @click="cleanFields()">
-						<span aria-hidden="true">×</span></button>
-					<h4 class="modal-title">{{ 'new' | translate  | capitalize }} {{ 'categorie' | translate }}</h4>
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 v-if="this.isEditing" class="modal-title">{{ 'edit' | translate  | capitalize }} {{ 'categorie' | translate }}</h4>
+					<h4 v-if="!this.isEditing" class="modal-title">{{ 'new' | translate  | capitalize }} {{ 'categorie' | translate }}</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
 						<label>{{ 'title' | translate  | capitalize }}</label>
-						<input type="text" class="form-control" name="title" placeholder="Título" @focus="removeError($event)">
+						<input v-if="this.isEditing" type="text" class="form-control" name="title" placeholder="Título" @focus="removeError($event)" :value="this.category.title">
+						<input v-if="!this.isEditing" type="text" class="form-control" name="title" placeholder="Título" @focus="removeError($event)">
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default pull-left" data-dismiss="modal" @click="cleanFields()">{{ 'cancel' | translate | capitalize }}</button>
-					<button type="button" class="btn btn-primary" @click="validate()">{{ 'add' | translate | capitalize }}</button>
+					<button v-if="this.isEditing" type="button" class="btn btn-primary" @click="validate()">{{ 'edit' | translate | capitalize }}</button>
+					<button v-if="!this.isEditing" type="button" class="btn btn-primary" @click="validate()">{{ 'add' | translate | capitalize }}</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->

@@ -140,6 +140,41 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
+		DELETE_CATEGORY({ commit }, id) {
+			axios({
+				method: 'DELETE',
+				url: `${api}/categories/${id}`,
+				headers: { 'Content-Type': 'application/json' },
+			})
+			.then((response) => {
+				if (response.statusText === 'OK') {
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Categoria excluída' } });
+				}
+			}, (err) => {
+				// eslint-disable-next-line
+				console.log(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			});
+		},
+		EDIT_CATEGORY({ commit }, data) {
+			axios({
+				method: 'PUT',
+				url: `${api}/categories/${data.id}`,
+				data,
+				headers: { 'Content-Type': 'application/json' },
+			})
+			.then((response) => {
+				if (response.statusText === 'OK') {
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Categoria alterada' } });
+					store.dispatch('LOAD_CATEGORIES_LIST');
+					$('#new-category').modal('hide'); // eslint-disable-line no-undef
+				}
+			}, (err) => {
+				// eslint-disable-next-line
+				console.log(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			});
+		},
 	},
 	mutations: {
 		SET_ALERT_MESSAGE(state, { res }) {
