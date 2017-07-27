@@ -121,6 +121,25 @@ const store = new Vuex.Store({
 		RESET_REDIRECT({ commit }) {
 			commit('SET_REDIRECT_STATE');
 		},
+		ADD_CATEGORY({ commit }, data) {
+			axios({
+				method: 'POST',
+				url: `${api}/categories`,
+				data,
+				headers: { 'Content-Type': 'application/json' },
+			})
+			.then((response) => {
+				if (response.statusText === 'Created') {
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Nova categoria salva' } });
+					store.dispatch('LOAD_CATEGORIES_LIST');
+					$('#new-category').modal('hide'); // eslint-disable-line no-undef
+				}
+			}, (err) => {
+				// eslint-disable-next-line
+				console.log(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			});
+		},
 	},
 	mutations: {
 		SET_ALERT_MESSAGE(state, { res }) {

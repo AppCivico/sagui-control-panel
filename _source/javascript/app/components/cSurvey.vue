@@ -1,12 +1,14 @@
 <script>
 import methods from '../methods';
 import cQuestion from './cQuestion.vue';
+import cCategorie from './cCategorie.vue';
 
 export default{
 	name: 'cSurvey',
 	props: ['id'],
 	components: {
 		cQuestion,
+		cCategorie,
 	},
 	data() {
 		return {
@@ -76,6 +78,11 @@ export default{
 				}
 			}
 		},
+		checkCategorie(event) {
+			if (event.target.value === 'new-category') {
+				$('#new-category').modal('show'); // eslint-disable-line no-undef
+			}
+		},
 	},
 };
 </script>
@@ -102,9 +109,10 @@ export default{
 			                </div>
 							<div class="form-group">
 								<label>{{ 'categoria' | translate | capitalize }}</label>
-								<select class="form-control survey__category" @focus="removeError($event)" :value="survey.category">
+								<select class="form-control survey__category" @focus="removeError($event)" :value="survey.category" @change="checkCategorie($event)">
 									<option value="">Selecione a categoria</option>
 									<option v-for="(category, index) in categories" :value="index + 1">{{ category.title }}</option>
+									<option value="new-category">Inserir nova categoria</option>
 								</select>
 			                </div>
 			                <button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'save' | translate | capitalize }} {{ 'edits' | translate }}</button>
@@ -151,6 +159,7 @@ export default{
 					</div>
 				</div>
 				<c-question v-on:newQuestion="addQuestion"></c-question>
+				<c-categorie></c-categorie>
 			</div>
 		</section>
 		<!-- /.content -->
