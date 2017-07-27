@@ -20,6 +20,7 @@ const ptBr = {
 	"enterprises": "empreendimentos",
 	"edit": "editar",
 	"edits": "alterações",
+	"green": "verde",
 	"insert_option": "Digite aqui uma opção",
 	"multiple": "multipla escolha",
 	"new": "nova",
@@ -27,6 +28,7 @@ const ptBr = {
 	"question": "pergunta",
 	"questions": "perguntas",
 	"ranking": "ranking",
+	"red": "vermelho",
 	"register": "cadastrar",
 	"save": "salvar",
 	"survey": "enquete",
@@ -36,5 +38,6 @@ const ptBr = {
 	"textarea": "texto livre",
 	"type": "tipo",
 	"traffic_light": "farol",
+	"yellow": "amarelo",
 };
 export { ptBr as default };

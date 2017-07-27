@@ -1,6 +1,7 @@
 <script>
 import methods from '../methods';
 import cQuestion from './cQuestion.vue';
+import cEditQuestion from './cEditQuestion.vue';
 import cCategorie from './cCategorie.vue';
 
 export default{
@@ -8,6 +9,7 @@ export default{
 	components: {
 		cQuestion,
 		cCategorie,
+		cEditQuestion,
 	},
 	computed: {
 		categories() {
@@ -20,11 +22,21 @@ export default{
 	data() {
 		return {
 			questions: [],
+			question: {},
+			questionIndex: 0,
 		};
 	},
 	methods: {
 		addQuestion(result) {
 			this.questions.push(result);
+		},
+		editQuestion(result) {
+			this.edited = true;
+			this.questions.splice(this.questionIndex, 1, result);
+		},
+		setEditingQuestion(question, index) {
+			this.question = question;
+			this.questionIndex = index;
 		},
 		removeQuestion(number) {
 			this.questions.splice(number, 1);
@@ -121,6 +133,7 @@ export default{
 				                    		</a>
 				                    	</h4>
 				                    	<button type="button" aria-label="Excluir" class="close" @click="removeQuestion(index)"><span aria-hidden="true">×</span></button>
+				                    	<button type="button" aria-label="Editar" data-toggle="modal" data-target="#edit-question" class="edit-button" @click="setEditingQuestion(question, index)"><i class="fa fa-edit"></i></button>
 				                	</div>
 				                	<div :id="'collapse'+index" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
 				                		<div class="box-body">
@@ -145,6 +158,7 @@ export default{
 					</div>
 				</div>
 				<c-question v-on:newQuestion="addQuestion"></c-question>
+				<c-edit-question v-on:editQuestion="editQuestion" :question="this.question"></c-edit-question>
 				<c-categorie></c-categorie>
 			</div>
 		</section>
