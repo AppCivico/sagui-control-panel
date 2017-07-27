@@ -23,7 +23,7 @@ export default {
 </script>
 
 <template>
-	<div class="content-wrapper">
+	<div>
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>{{ 'surveys' | translate | capitalize }}</h1>

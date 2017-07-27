@@ -22,7 +22,9 @@ export default {
 		<div class="wrapper">
 			<c-header></c-header>
 			<c-menu></c-menu>
-			<router-view></router-view>
+			<div class="content-wrapper">
+				<router-view></router-view>
+			</div>
 		</div>
 		<c-alert></c-alert>
 	</div>
