@@ -45,6 +45,7 @@ export default {
 			this.selected = category;
 		},
 		editCategorie(category) {
+			this.isEditing = true;
 			this.editingCategory = category;
 			$('#new-category').modal('show'); // eslint-disable-line no-undef
 		},
