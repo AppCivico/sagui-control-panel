@@ -48,6 +48,10 @@ export default {
 			this.editingCategory = category;
 			$('#new-category').modal('show'); // eslint-disable-line no-undef
 		},
+		addCategorie() {
+			this.isEditing = false;
+			$('#new-category').modal('show'); // eslint-disable-line no-undef
+		},
 		deleteCategory(id) {
 			this.$store.dispatch('LOAD_SURVEYS_LIST', id);
 			setTimeout(() => {
@@ -71,7 +75,11 @@ export default {
 	<div>
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
-			<h1>{{ 'categories' | translate | capitalize }}</h1>
+			<h1>{{ 'categories' | translate | capitalize }}
+				<button type="button" class="btn btn-primary btn-sm pull-right" @click="addCategorie()">
+					{{ 'add' | translate | capitalize }} {{ 'categorie' | translate }}
+				</button>
+			</h1>
 		</section>
 
 		<!-- Main content -->
