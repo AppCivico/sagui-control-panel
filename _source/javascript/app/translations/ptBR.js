@@ -30,6 +30,7 @@ const ptBr = {
 	"ranking": "ranking",
 	"red": "vermelho",
 	"register": "cadastrar",
+	"results": "resultados",
 	"save": "salvar",
 	"survey": "enquete",
 	"surveys": "enquetes",
