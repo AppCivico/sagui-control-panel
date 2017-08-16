@@ -11,9 +11,9 @@
     "build:sass": "npm run scss",
     "build:vendor": "browserify _source/javascript/app/vendor.js | uglifyjs -c warnings=false -m > dist/js/vendor.js",
     "build:vue": "cross-env NODE_ENV=production browserify -g envify -p [ vueify/plugins/extract-css -o dist/css/build.css ] -e _source/javascript/app/application.js | uglifyjs -c warnings=false -m > dist/js/build.js",
-    "build:prod": "npm run build:vue && npm run build:vendor && npm run build:sass && npm run autoprefixer && npm run nano && npm run imagemin",
+    "build:prod": "npm run build:vue && npm run build:vendor && npm run build:sass && npm run autoprefixer && npm run nano && npm run imagemin && npm run cachebust && npm run inject:prod",
     "cachebust": "hashmark -l 8 dist/**/*.{js,css} public/{dir}/{name}-{hash}{ext} | replaceinfiles -s 'dist/*.css' -d '{dir}/{base}'",
-    "dev": "npm-run-all --parallel watch:all serve",
+    "dev": "npm run inject:dev && npm-run-all --parallel watch:all serve",
     "icons": "svgo -f _source/images/**/*.svg -o dist/img",
     "imagemin": "imagemin _source/images/**/*.{gif,jpg,png} --out-dir=dist/img",
     "lint:es": "eslint --ext .js,.vue _source/javascript/app",
@@ -22,14 +22,16 @@
     "nano": "postcss --use cssnano --safe -r dist/css/**/*.css",
     "prebuild:prod": "npm run lint:all && npm run test:prod",
     "scss": "node-sass _source/stylesheets --output-style compressed --output dist/css --source-map true",
-    "serve": "http-server -o -c 1 -a localhost",
+    "serve": "http-server public -o -c 1 -a localhost",
     "test": "karma start karma.conf.js",
     "test:prod": "karma start karma.conf.js --single-run",
     "version": "version-changelog CHANGELOG.md && changelog-verify CHANGELOG.md && git add CHANGELOG.md",
     "watch:sass": "onchange '_source/stylesheets/**/*.scss' -- npm run build:sass",
     "watch:vue": "watchify -vd -p browserify-hmr -e _source/javascript/app/application.js -o dist/js/build.js",
-    "watch:all": "npm run watch:sass & npm run watch:vue",
-    "inject": "cat index.html | injectassets -o public/index.html -d 'public/dist/**/' -g '*.{css,js}'"
+    "watch:html": "onchange '_source/markup/index.html' -- npm run build:html",
+    "watch:all": "npm run watch:sass & npm run watch:vue & npm run watch:html",
+    "inject:dev": "cat _source/markup/index.html | injectassets -o index.html -g 'dist/**/*.{css,js}' -p './{dir}/{base}'",
+    "inject:prod": "cat _source/markup/index.html | injectassets -o public/index.html -g 'dist/**/*.{css,js}' -p './{dir}/{base}'"
   },
   "browserify": {
     "transform": [

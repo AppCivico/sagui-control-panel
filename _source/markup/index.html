@@ -5,12 +5,14 @@
 		<meta http-equiv="x-ua-compatible" content="IE=Edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Projeto Sagui</title>
-	    <link href="./public/dist/css/build-10b2fc89.css" rel="stylesheet" type="text/css">
-	    <link href="./public/dist/css/index-fd2adcfd.css" rel="stylesheet" type="text/css">
+		{{#css}}
+	    <link href="{{{.}}}" rel="stylesheet" type="text/css">
+	    {{/css}}
 	</head>
 	<body class="hold-transition skin-yellow sidebar-mini">
 		<div id="app"></div>
-	    <script src="./public/dist/js/build-634c0d2d.js"></script>
-	    <script src="./public/dist/js/vendor-e0879c37.js"></script>
+		{{#js}}
+	    <script src="{{{.}}}"></script>
+	    {{/js}}
 	</body>
 </html>
