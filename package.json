@@ -13,7 +13,7 @@
     "build:vue": "cross-env NODE_ENV=production browserify -g envify -p [ vueify/plugins/extract-css -o dist/css/build.css ] -e _source/javascript/app/application.js | uglifyjs -c warnings=false -m > dist/js/build.js",
     "build:prod": "npm run build:vue && npm run build:vendor && npm run build:sass && npm run autoprefixer && npm run nano && npm run imagemin && npm run cachebust && npm run inject:prod",
     "cachebust": "hashmark -l 8 dist/**/*.{js,css} public/{dir}/{name}-{hash}{ext} | replaceinfiles -s 'dist/*.css' -d '{dir}/{base}'",
-    "dev": "npm run inject:dev && npm-run-all --parallel watch:all serve",
+    "dev": "npm-run-all --parallel watch:all serve",
     "icons": "svgo -f _source/images/**/*.svg -o dist/img",
     "imagemin": "imagemin _source/images/**/*.{gif,jpg,png} --out-dir=dist/img",
     "lint:es": "eslint --ext .js,.vue _source/javascript/app",
@@ -28,8 +28,7 @@
     "version": "version-changelog CHANGELOG.md && changelog-verify CHANGELOG.md && git add CHANGELOG.md",
     "watch:sass": "onchange '_source/stylesheets/**/*.scss' -- npm run build:sass",
     "watch:vue": "watchify -vd -p browserify-hmr -e _source/javascript/app/application.js -o dist/js/build.js",
-    "watch:html": "onchange '_source/markup/index.html' -- npm run build:html",
-    "watch:all": "npm run watch:sass & npm run watch:vue & npm run watch:html",
+    "watch:all": "npm run watch:sass & npm run watch:vue",
     "inject:dev": "cat _source/markup/index.html | injectassets -o index.html -g 'dist/**/*.{css,js}' -p './{dir}/{base}'",
     "inject:prod": "cat _source/markup/index.html | injectassets -o public/index.html -g 'dist/**/*.{css,js}' -p './{dir}/{base}'"
   },
