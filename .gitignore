@@ -5,6 +5,7 @@ dist/css/*
 dist/img/*
 yarn-error.log
 npm-debug.log
+public
 
 !dist/.gitignore
 !dist/js/.gitignore
