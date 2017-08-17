@@ -11,7 +11,7 @@
     "build:sass": "npm run scss",
     "build:vendor": "browserify _source/javascript/app/vendor.js | uglifyjs -c warnings=false -m > dist/js/vendor.js",
     "build:vue": "cross-env NODE_ENV=production browserify -g envify -p [ vueify/plugins/extract-css -o dist/css/build.css ] -e _source/javascript/app/application.js | uglifyjs -c warnings=false -m > dist/js/build.js",
-    "build:prod": "npm run build:vue && npm run build:vendor && npm run build:sass && npm run autoprefixer && npm run nano && npm run imagemin && npm run cachebust && npm run inject:prod",
+    "build:prod": "npm run build:vue && npm run build:vendor && npm run build:sass && npm run autoprefixer && npm run nano && npm run imagemin",
     "cachebust": "hashmark -l 8 dist/**/*.{js,css} public_html/{dir}/{name}-{hash}{ext} | replaceinfiles -s 'dist/*.css' -d '{dir}/{base}'",
     "dev": "npm-run-all --parallel watch:all serve",
     "icons": "svgo -f _source/images/**/*.svg -o dist/img",
