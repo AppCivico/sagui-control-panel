@@ -9,6 +9,7 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch('LOAD_ENTERPRISE', this.id);
+		this.$store.dispatch('CHANGE_SELECTED_ENTERPRISE', this.id);
 	},
 };
 </script>
@@ -18,8 +19,8 @@ export default {
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-			{{ 'enterprise' | translate | capitalize }}
-			<small>{{ enterprise.name }}</small>
+				{{ 'enterprise' | translate | capitalize }}
+				<small>{{ enterprise.name }}</small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><router-link to="/"><i class="fa fa-dashboard"></i>{{ 'enterprises' | translate | capitalize }}</router-link></li>

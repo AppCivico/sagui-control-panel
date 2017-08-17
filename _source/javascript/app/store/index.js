@@ -30,6 +30,7 @@ axios.interceptors.response.use((response) => {
 
 const store = new Vuex.Store({
 	state: {
+		selectedEnterprise: '',
 		alertMessage: '',
 		categories: [],
 		confirm: {
@@ -207,6 +208,9 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
+		CHANGE_SELECTED_ENTERPRISE({ commit }, id) {
+			commit('SET_SELECTED_ENTERPRISE', { id });
+		},
 	},
 	mutations: {
 		SET_ALERT_MESSAGE(state, { res }) {
@@ -258,6 +262,10 @@ const store = new Vuex.Store({
 		SET_SURVEY(state, { res }) {
 			// eslint-disable-next-line
 			state.survey = res;
+		},
+		SET_SELECTED_ENTERPRISE(state, { id }) {
+			// eslint-disable-next-line
+			state.selectedEnterprise = id;
 		},
 	},
 	getters: {

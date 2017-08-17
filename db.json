@@ -36,15 +36,18 @@
   "categories": [
   	{
   		"id": 1,
-  		"title": "Moradia"
+  		"title": "Moradia",
+  		"enterprise": 1
   	},
   	{
   		"id": 2,
-  		"title": "Alimentação"
+  		"title": "Alimentação",
+  		"enterprise": 2
   	},
   	{
   		"id": 3,
-  		"title": "Locomoção"
+  		"title": "Locomoção",
+  		"enterprise": 2
   	}
   ],
   "surveys": [
