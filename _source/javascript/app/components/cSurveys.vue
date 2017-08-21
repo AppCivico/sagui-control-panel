@@ -45,8 +45,16 @@ export default {
 						</li>
 					</ul>
 				</div>
+
+				<router-link :to="`/new-survey/category/${this.id}`" class="btn btn-primary pull-right">{{ 'new' | translate | capitalize }} {{ 'survey' | translate | capitalize }}</router-link>
 			</div>
 		</section>
 		<!-- /.content -->
 	</div>
 </template>
+
+<style scoped>
+	.btn-primary {
+		margin-top: 20px;
+	}
+</style>

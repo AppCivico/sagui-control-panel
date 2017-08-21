@@ -7,6 +7,7 @@ import cCategorie from './cCategorie.vue';
 
 export default{
 	name: 'cNewSurvey',
+	props: ['surveyCategory'],
 	components: {
 		cQuestion,
 		cCategorie,
@@ -90,6 +91,7 @@ export default{
 	<div>
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
+			cat {{this.surveyCategory}}
 			<h1>{{ 'new' | translate | capitalize }} {{ 'survey' | translate }}</h1>
 		</section>
 
@@ -108,7 +110,7 @@ export default{
 			                </div>
 							<div class="form-group">
 								<label>{{ 'categoria' | translate | capitalize }}</label>
-								<select class="form-control new-survey__category" @focus="removeError($event)" @change="checkCategorie($event)">
+								<select class="form-control new-survey__category" :value="this.surveyCategory" @focus="removeError($event)" @change="checkCategorie($event)">
 									<option value="">Selecione a categoria</option>
 									<option v-for="(category, index) in categories" :value="index + 1">{{ category.title }}</option>
 									<option value="new-category">Inserir nova categoria</option>

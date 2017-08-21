@@ -31,9 +31,10 @@ export default new Router({
 			component: cNewEnterprise,
 		},
 		{
-			path: '/new-survey',
+			path: '/new-survey/category/:surveyCategory',
 			name: 'Nova enquete',
 			component: cNewSurvey,
+			props: true,
 		},
 		{
 			path: '/surveys/category/:id',

@@ -20,7 +20,6 @@ export default{
 				</a>
 				<ul class="treeview-menu">
 					<li><router-link to="/categories"><i class="fa fa-circle-o"></i> {{ 'categories' | translate | capitalize }}</router-link></li>
-					<li><router-link to="/new-survey"><i class="fa fa-circle-o"></i> {{ 'new' | translate | capitalize }} {{ 'survey' | translate | capitalize }}</router-link></li>
 					<li><router-link to=""><i class="fa fa-circle-o"></i> {{ 'results' | translate | capitalize }}</router-link></li>
 				</ul>
 			</li>
