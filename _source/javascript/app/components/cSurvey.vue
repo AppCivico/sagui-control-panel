@@ -1,4 +1,5 @@
 <script>
+import Vue from 'vue';
 import methods from '../methods';
 import cQuestion from './cQuestion.vue';
 import cEditQuestion from './cEditQuestion.vue';
@@ -69,15 +70,15 @@ export default{
 			methods.cleanAllErros(document.querySelector('#survey'));
 
 			if (title.value === '') {
-				methods.addError(title.parentNode, 'Este campo é obrigatório.');
+				methods.addError(title.parentNode, Vue.i18n.translate('required-field'));
 				valid = false;
 			}
 			if (category.value === '') {
-				methods.addError(category.parentNode, 'É necessário selecionar a categoria da enquete.');
+				methods.addError(category.parentNode, Vue.i18n.translate('required-category'));
 				valid = false;
 			}
 			if (this.questions.length < 1) {
-				this.$store.dispatch('CHANGE_ALERT_MESSAGE', 'É obrigatório inserir pelo menos uma pergunta.');
+				this.$store.dispatch('CHANGE_ALERT_MESSAGE', Vue.i18n.translate('minimum-question'));
 				valid = false;
 			}
 

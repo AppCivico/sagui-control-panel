@@ -1,4 +1,5 @@
 <script>
+import Vue from 'vue';
 import methods from '../methods';
 
 export default {
@@ -65,15 +66,15 @@ export default {
 			methods.cleanAllErros(document.querySelector('#new-question'));
 
 			if (title.value === '') {
-				methods.addError(title.parentNode, 'Este campo é obrigatório');
+				methods.addError(title.parentNode, Vue.i18n.translate('required-field'));
 				valid = false;
 			}
 			if (type.value === '') {
-				methods.addError(type.parentNode, 'É necessário selecionar o tipo da pergunta');
+				methods.addError(type.parentNode, Vue.i18n.translate('required-type'));
 				valid = false;
 			}
 			if (type.value === 'multiple' && this.options.length < 2) {
-				methods.addError(document.querySelector('#multiple'), 'É necessário inserir mais que uma opção');
+				methods.addError(document.querySelector('#multiple'), Vue.i18n.translate('required-option'));
 				valid = false;
 			}
 			if (type.value === 'multiple') {
@@ -89,7 +90,7 @@ export default {
 				const options = Array.from(document.querySelectorAll('#traffic_light input[type="text"]'));
 				options.map((option) => { // eslint-disable-line array-callback-return
 					if (option.value === '') {
-						methods.addError(option.parentNode, 'Este campo é obrigatório');
+						methods.addError(option.parentNode, Vue.i18n.translate('required-field'));
 						valid = false;
 					}
 				});

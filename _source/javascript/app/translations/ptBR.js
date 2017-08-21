@@ -53,5 +53,13 @@ const ptBr = {
 	"type": "tipo",
 	"traffic_light": "farol",
 	"yellow": "amarelo",
+
+	// form validation
+	"required-field": "Este campo é obrigatório.",
+	"required-category": "É necessário selecionar a categoria da enquete.",
+	"required-option": "É necessário inserir mais que uma opção.",
+	"required-type": "É necessário selecionar o tipo da pergunta",
+	"password-match": "Os campo de senha não coincidem.",
+	"mininum-question": "É obrigatório inserir pelo menos uma pergunta.",
 };
 export { ptBr as default };

@@ -1,4 +1,5 @@
 <script>
+import Vue from 'vue';
 import methods from '../methods';
 
 export default {
@@ -18,12 +19,12 @@ export default {
 			inputs.map((input) => { // eslint-disable-line
 				// check for empty fields
 				if (input.value === '' && input.type !== 'file') {
-					methods.addError(input.parentNode, 'Este campo é obrigatório.');
+					methods.addError(input.parentNode, Vue.i18n.translate('required-field'));
 					valid = false;
 				}
 				// check for password fields equivalence
 				if (input.name === 'repeat-password' && input.value !== form.querySelector('input[name="password"]').value) {
-					methods.addError(input.parentNode, 'Senha não confere.');
+					methods.addError(input.parentNode, Vue.i18n.translate('password-match'));
 					valid = false;
 				}
 			});

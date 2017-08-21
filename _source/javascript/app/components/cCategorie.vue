@@ -1,4 +1,5 @@
 <script>
+import Vue from 'vue';
 import methods from '../methods';
 
 export default {
@@ -25,7 +26,7 @@ export default {
 			methods.cleanAllErros(document.querySelector('#new-category'));
 
 			if (title.value === '') {
-				methods.addError(title.parentNode, 'Este campo é obrigatório');
+				methods.addError(title.parentNode, Vue.i18n.translate('required-field'));
 				valid = false;
 			}
 			if (valid) {
