@@ -4,6 +4,9 @@ import methods from '../methods';
 
 export default {
 	name: 'cNewEnterprise',
+	mounted() {
+		this.initAutocomplete();
+	},
 	methods: {
 		removeError(event) {
 			this.edited = true;
@@ -35,6 +38,17 @@ export default {
 				console.error('not valid');
 			}
 		},
+		initAutocomplete() {
+			const options = {
+				types: ['geocode'],
+				componentRestrictions: { country: 'br' },
+			};
+			// eslint-disable-next-line
+			const autocomplete = new google.maps.places.Autocomplete(
+				(document.getElementById('autocomplete')),
+				options,
+            );
+		},
 	},
 };
 </script>
@@ -65,7 +79,7 @@ export default {
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'location' | translate | capitalize }}</label>
-								<input type="text" class="form-control" name="location" @focus="removeError($event)">
+								<input type="text" class="form-control" id="autocomplete" name="location" @focus="removeError($event)" :placeholder="'insert-address' | translate">
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'photos' | translate | capitalize }}</label>

@@ -61,5 +61,6 @@ const ptBr = {
 	"required-type": "É necessário selecionar o tipo da pergunta",
 	"password-match": "Os campo de senha não coincidem.",
 	"mininum-question": "É obrigatório inserir pelo menos uma pergunta.",
+	"insert-address": "Insira aqui um endereço inicial.",
 };
 export { ptBr as default };
