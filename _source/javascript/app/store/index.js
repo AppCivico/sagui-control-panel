@@ -52,7 +52,7 @@ const store = new Vuex.Store({
 				commit('SET_CATEGORIES_LIST', { list: response.data });
 			}, (err) => {
 				// eslint-disable-next-line
-				console.log(err);
+				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
@@ -64,7 +64,7 @@ const store = new Vuex.Store({
 				commit('SET_ENTERPRISES_LIST', { list: response.data });
 			}, (err) => {
 				// eslint-disable-next-line
-				console.log(err);
+				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
@@ -73,7 +73,7 @@ const store = new Vuex.Store({
 				commit('SET_ENTERPRISE', { res: response.data });
 			}, (err) => {
 				// eslint-disable-next-line
-				console.log(err);
+				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
@@ -82,7 +82,7 @@ const store = new Vuex.Store({
 				commit('SET_SURVEYS_LIST', { list: response.data });
 			}, (err) => {
 				// eslint-disable-next-line
-				console.log(err);
+				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
@@ -91,7 +91,7 @@ const store = new Vuex.Store({
 				commit('SET_SURVEY', { res: response.data });
 			}, (err) => {
 				// eslint-disable-next-line
-				console.log(err);
+				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
@@ -108,7 +108,7 @@ const store = new Vuex.Store({
 				}
 			}, (err) => {
 				// eslint-disable-next-line
-				console.log(err);
+				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
@@ -125,7 +125,7 @@ const store = new Vuex.Store({
 				}
 			}, (err) => {
 				// eslint-disable-next-line
-				console.log(err);
+				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
@@ -141,7 +141,7 @@ const store = new Vuex.Store({
 				}
 			}, (err) => {
 				// eslint-disable-next-line
-				console.log(err);
+				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
@@ -169,7 +169,7 @@ const store = new Vuex.Store({
 				}
 			}, (err) => {
 				// eslint-disable-next-line
-				console.log(err);
+				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
@@ -185,7 +185,7 @@ const store = new Vuex.Store({
 				}
 			}, (err) => {
 				// eslint-disable-next-line
-				console.log(err);
+				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
@@ -204,7 +204,7 @@ const store = new Vuex.Store({
 				}
 			}, (err) => {
 				// eslint-disable-next-line
-				console.log(err);
+				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
