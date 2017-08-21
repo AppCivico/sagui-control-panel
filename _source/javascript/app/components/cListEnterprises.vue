@@ -16,7 +16,8 @@ export default {
 	<div>
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
-			<h1>{{ 'choose_enterprise' | translate }}</h1>
+			<h1 class="pull-left">{{ 'choose_enterprise' | translate }}</h1>
+			<router-link to="/new-enterprise" class="btn btn-success pull-right">{{ 'new-m' | translate | capitalize }} {{ 'enterprise' | translate }}</router-link>
 		</section>
 
 		<!-- Main content -->
@@ -45,3 +46,10 @@ export default {
 		<!-- /.content -->
 	</div>
 </template>
+
+<style scoped>
+	.content-header {
+		display: table;
+		width: 100%;
+	}
+</style>
