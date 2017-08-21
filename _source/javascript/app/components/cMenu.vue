@@ -11,11 +11,10 @@ export default{
 		<!-- sidebar menu: : style can be found in sidebar.less -->
 		<ul class="sidebar-menu">
 			<li class="treeview">
-				<a href="#">
-					<router-link to="/"><i class="fa fa-file-text-o"></i>
-						<span>{{ 'enterprises' | translate | capitalize }}</span>
-					</router-link>
-				</a>
+				<router-link to="/">
+					<i class="fa fa-file-text-o"></i>
+					<span>{{ 'enterprises' | translate | capitalize }}</span>
+				</router-link>
 			</li>
 			<li class="treeview">
 				<a href="#">
