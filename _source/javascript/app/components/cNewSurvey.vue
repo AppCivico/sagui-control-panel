@@ -113,7 +113,6 @@ export default{
 									<option value="new-category">Inserir nova categoria</option>
 								</select>
 			                </div>
-			                <button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'survey' | translate }}</button>
 						</div>
 					</div>
 				</div>
@@ -157,6 +156,10 @@ export default{
 						</div>
 					</div>
 				</div>
+				<div class="col-md-12">
+					<button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'survey' | translate }}</button>
+				</div>
+
 				<c-question v-on:newQuestion="addQuestion"></c-question>
 				<c-edit-question v-on:editQuestion="editQuestion" :question="this.question"></c-edit-question>
 				<c-categorie></c-categorie>
