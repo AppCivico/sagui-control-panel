@@ -12,6 +12,13 @@ export default{
 		<ul class="sidebar-menu">
 			<li class="treeview">
 				<a href="#">
+					<router-link to="/"><i class="fa fa-file-text-o"></i>
+						<span>{{ 'enterprises' | translate | capitalize }}</span>
+					</router-link>
+				</a>
+			</li>
+			<li class="treeview">
+				<a href="#">
 					<i class="fa fa-pie-chart"></i>
 					<span>{{ 'surveys' | translate | capitalize }}</span>
 					<span class="pull-right-container">
