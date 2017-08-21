@@ -24,6 +24,7 @@ const ptBr = {
 	"insert_option": "Digite aqui uma opção",
 	"multiple": "multipla escolha",
 	"new": "nova",
+	"new-m": "novo",
 	"option": "opção",
 	"question": "pergunta",
 	"questions": "perguntas",

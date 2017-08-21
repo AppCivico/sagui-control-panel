@@ -1,8 +1,6 @@
 <script>
 export default {
 	name: 'cNewEnterprise',
-	methods: {
-	},
 };
 </script>
 
@@ -10,7 +8,7 @@ export default {
 	<div>
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
-			<h1>{{ 'new' | translate | capitalize }} {{ 'enterprise' | translate | capitalize }}</h1>
+			<h1>{{ 'new-m' | translate | capitalize }} {{ 'enterprise' | translate }}</h1>
 		</section>
 
 		<!-- Main content -->
