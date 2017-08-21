@@ -92,7 +92,6 @@ export default {
 							<router-link :to="'/surveys/category/'+category.id">
 								<i class="fa fa-list"></i> {{ category.title }}
 
-								<button type="button" aria-label="Excluir" class="close" @click.stop.prevent="removeCategory(category.id)"><span aria-hidden="true">×</span></button>
 								<button type="button" aria-label="Editar" data-toggle="modal" data-target="#new-category" class="edit-button" @click.stop.prevent="editCategorie(category)"><i class="fa fa-edit"></i></button>
 							</router-link>
 						</li>
