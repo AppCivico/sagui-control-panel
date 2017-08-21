@@ -77,7 +77,7 @@ export default {
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>{{ 'categories' | translate | capitalize }}
-				<button type="button" class="btn btn-primary btn-sm pull-right" @click="addCategorie()">
+				<button type="button" class="btn btn-primary pull-right" @click="addCategorie()">
 					{{ 'add' | translate | capitalize }} {{ 'categorie' | translate }}
 				</button>
 			</h1>
