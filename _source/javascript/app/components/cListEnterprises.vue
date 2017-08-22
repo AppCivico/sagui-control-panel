@@ -1,6 +1,6 @@
 <script>
 export default {
-	name: 'clistEnterprises',
+	name: 'cListEnterprises',
 	computed: {
 		enterprises() {
 			return this.$store.state.enterprises;

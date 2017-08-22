@@ -1,9 +1,19 @@
 <script>
 import Vue from 'vue';
 import methods from '../methods';
+import cEnterpriseLocation from './cEnterpriseLocation.vue';
 
 export default {
 	name: 'cNewEnterprise',
+	components: {
+		cEnterpriseLocation,
+	},
+	data() {
+		return {
+			autocomplete: '',
+			placeId: '',
+		};
+	},
 	mounted() {
 		this.initAutocomplete();
 	},
@@ -42,12 +52,22 @@ export default {
 			const options = {
 				types: ['geocode'],
 				componentRestrictions: { country: 'br' },
+				placeIdOnly: true,
 			};
 			// eslint-disable-next-line
-			const autocomplete = new google.maps.places.Autocomplete(
+			this.autocomplete = new google.maps.places.Autocomplete(
 				(document.getElementById('autocomplete')),
 				options,
-            );
+			);
+		},
+		setMap(event) {
+			if (event.target.value !== '') {
+				const result = this.autocomplete.getPlace();
+				if (result) {
+					this.placeId = result.place_id;
+				}
+				$('#enterprise-location').modal('show'); // eslint-disable-line no-undef
+			}
 		},
 	},
 };
@@ -79,7 +99,7 @@ export default {
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'location' | translate | capitalize }}</label>
-								<input type="text" class="form-control" id="autocomplete" name="location" @focus="removeError($event)" :placeholder="'insert-address' | translate">
+								<input type="text" class="form-control" id="autocomplete" name="location" @change="setMap($event)" @focus="removeError($event)" :placeholder="'insert-address' | translate">
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'photos' | translate | capitalize }}</label>
@@ -117,5 +137,6 @@ export default {
 			</div>
 		</section>
 		<!-- /.content -->
+		<c-enterprise-location :placeId="this.placeId"></c-enterprise-location>
 	</div>
 </template>
