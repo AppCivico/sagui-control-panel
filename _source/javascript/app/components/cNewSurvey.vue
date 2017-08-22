@@ -91,7 +91,6 @@ export default{
 	<div>
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
-			cat {{this.surveyCategory}}
 			<h1>{{ 'new' | translate | capitalize }} {{ 'survey' | translate }}</h1>
 		</section>
 
