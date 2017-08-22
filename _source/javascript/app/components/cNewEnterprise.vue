@@ -61,12 +61,15 @@ export default {
 			);
 		},
 		setMap(event) {
+			let result;
 			if (event.target.value !== '') {
-				const result = this.autocomplete.getPlace();
+				result = this.autocomplete.getPlace();
 				if (result) {
 					this.placeId = result.place_id;
+					$('#enterprise-location').modal('show'); // eslint-disable-line no-undef
+				} else {
+					methods.addError(event.target.parentNode, Vue.i18n.translate('invalid-location'));
 				}
-				$('#enterprise-location').modal('show'); // eslint-disable-line no-undef
 			}
 		},
 	},

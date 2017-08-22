@@ -62,5 +62,6 @@ const ptBr = {
 	"password-match": "Os campo de senha não coincidem.",
 	"mininum-question": "É obrigatório inserir pelo menos uma pergunta.",
 	"insert-address": "Insira aqui um endereço inicial.",
+	"invalid-location": "Localização não encontrada,tente novamente.",
 };
 export { ptBr as default };
