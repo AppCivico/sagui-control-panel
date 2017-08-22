@@ -60,7 +60,7 @@ const ptBr = {
 	"required-option": "É necessário inserir mais que uma opção.",
 	"required-type": "É necessário selecionar o tipo da pergunta",
 	"password-match": "Os campo de senha não coincidem.",
-	"mininum-question": "É obrigatório inserir pelo menos uma pergunta.",
+	"minimum-question": "É obrigatório inserir pelo menos uma pergunta.",
 	"insert-address": "Insira aqui um endereço inicial.",
 	"invalid-location": "Localização não encontrada,tente novamente.",
 };
