@@ -34,6 +34,7 @@ export default{
 	mounted() {
 		this.$store.dispatch('LOAD_CATEGORIES_LIST');
 		this.$store.dispatch('LOAD_SURVEY', this.id);
+		this.$store.dispatch('CHANGE_SELECTED_ENTERPRISE', this.id);
 	},
 	methods: {
 		addQuestion(result) {
