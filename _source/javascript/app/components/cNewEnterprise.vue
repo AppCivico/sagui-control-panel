@@ -65,8 +65,10 @@ export default {
 			if (event.target.value !== '') {
 				result = this.autocomplete.getPlace();
 				if (result) {
-					this.placeId = result.place_id;
-					$('#enterprise-location').modal('show'); // eslint-disable-line no-undef
+					if (result.place_id) {
+						this.placeId = result.place_id;
+						$('#enterprise-location').modal('show'); // eslint-disable-line no-undef
+					}
 				} else {
 					methods.addError(event.target.parentNode, Vue.i18n.translate('invalid-location'));
 				}
