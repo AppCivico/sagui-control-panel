@@ -25,18 +25,23 @@ export default {
 		<!-- Main content -->
 		<section class="content">
 			<div class="box box-solid">
-				<div class="box-body no-padding">
-					<ul class="nav nav-pills nav-stacked">
-						<li v-for="notification in notifications">
-							<router-link :to="notification.link">
-								<i class="fa fa-list"></i> {{ notification.title }}
-							</router-link>
-							<p>{{ notification.description }}</p>
-						</li>
-					</ul>
+				<div class="box-body">
+					<h4>{{ 'not-read' | translate }}</h4>
+					<template v-for="notification in notifications">
+						<div :class="'callout callout-'+ notification.level">
+							<h4><router-link :to="notification.link">{{ notification.title }}</router-link></h4>
+							<p><router-link :to="notification.link">{{ notification.description }}</router-link></p>
+						</div>
+					</template>
 				</div>
 			</div>
 		</section>
 		<!-- /.content -->
 	</div>
 </template>
+
+<style scoped>
+	h4 {
+		text-transform: uppercase;
+	}
+</style>
