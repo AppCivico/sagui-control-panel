@@ -12,6 +12,7 @@ export default {
 		return {
 			autocomplete: '',
 			placeId: '',
+			polygon: '',
 		};
 	},
 	mounted() {
@@ -21,32 +22,6 @@ export default {
 		removeError(event) {
 			this.edited = true;
 			methods.removeError(event);
-		},
-		validate() {
-			let valid = true;
-			const form = document.querySelector('#new-enterprise');
-			const inputs = Array.from(form.querySelectorAll('input'));
-
-			methods.cleanAllErros(form);
-
-			inputs.map((input) => { // eslint-disable-line
-				// check for empty fields
-				if (input.value === '' && input.type !== 'file') {
-					methods.addError(input.parentNode, Vue.i18n.translate('required-field'));
-					valid = false;
-				}
-				// check for password fields equivalence
-				if (input.name === 'repeat-password' && input.value !== form.querySelector('input[name="password"]').value) {
-					methods.addError(input.parentNode, Vue.i18n.translate('password-match'));
-					valid = false;
-				}
-			});
-
-			if (valid) {
-				console.log('valid');
-			} else {
-				console.error('not valid');
-			}
 		},
 		initAutocomplete() {
 			const options = {
@@ -75,7 +50,42 @@ export default {
 			}
 		},
 		addPath(path) {
-			console.log(path)
+			this.polygon = path;
+		},
+		createEnterprise(form) {
+			const valuesArray = Array.from(form.querySelectorAll('input'));
+			const values = {};
+			valuesArray.map((el) => { // eslint-disable-line array-callback-return
+				values[el.name] = el.value;
+			});
+
+			values.addressPath = this.polygon;
+
+			console.log(values);
+		},
+		validate() {
+			let valid = true;
+			const form = document.querySelector('#new-enterprise');
+			const inputs = Array.from(form.querySelectorAll('input'));
+
+			methods.cleanAllErros(form);
+
+			inputs.map((input) => { // eslint-disable-line
+				// check for empty fields
+				if (input.value === '' && input.type !== 'file') {
+					methods.addError(input.parentNode, Vue.i18n.translate('required-field'));
+					valid = false;
+				}
+				// check for password fields equivalence
+				if (input.name === 'repeat-password' && input.value !== form.querySelector('input[name="password"]').value) {
+					methods.addError(input.parentNode, Vue.i18n.translate('password-match'));
+					valid = false;
+				}
+			});
+
+			if (valid) {
+				this.createEnterprise(form);
+			}
 		},
 	},
 };
