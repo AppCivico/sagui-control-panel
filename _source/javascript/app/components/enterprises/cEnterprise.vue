@@ -143,45 +143,45 @@ export default {
 						<div class="box-header with-border">
 							<h3 class="box-title">{{ 'agents' | translate | capitalize }}</h3>
 						</div>
-						<div class="box-body no-padding">
+						<div class="box-body no-padding agents">
 							<ul class="users-list clearfix">
 								<li>
-									<div class="agent-code">LID01</div>
+									<div class="agents__code">LID01</div>
 									<a class="users-list-name" href="#">Tablet Samsung 02</a>
 									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
 								<li>
-									<div class="agent-code">LID02</div>
+									<div class="agents__code">LID02</div>
 									<a class="users-list-name" href="#">Tablet Samsung 02</a>
 									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
 								<li>
-									<div class="agent-code">LID03</div>
+									<div class="agents__code">LID03</div>
 									<a class="users-list-name" href="#">Tablet Samsung 02</a>
 									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
 								<li>
-									<div class="agent-code">LID04</div>
+									<div class="agents__code">LID04</div>
 									<a class="users-list-name" href="#">Tablet Samsung 02</a>
 									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
 								<li>
-									<div class="agent-code">LID05</div>
+									<div class="agents__code">LID05</div>
 									<a class="users-list-name" href="#">Tablet Samsung 02</a>
 									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
 								<li>
-									<div class="agent-code">LID06</div>
+									<div class="agents__code">LID06</div>
 									<a class="users-list-name" href="#">Tablet Samsung 02</a>
 									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
 								<li>
-									<div class="agent-code">LID07</div>
+									<div class="agents__code">LID07</div>
 									<a class="users-list-name" href="#">Tablet Samsung 02</a>
 									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
 								<li>
-									<div class="agent-code">LID08</div>
+									<div class="agents__code">LID08</div>
 									<a class="users-list-name" href="#">Tablet Samsung 02</a>
 									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
 								</li>
@@ -198,14 +198,5 @@ export default {
 <style scoped>
 	.info-box-number {
 		font-size: 40px;
-	}
-	.agent-code {
-		border-radius: 50%;
-	    max-width: 100%;
-	    width: 100px;
-	    height: 100px;
-	    background: #ccc;
-	    text-align: center;
-	    margin: 0 auto;
 	}
 </style>
