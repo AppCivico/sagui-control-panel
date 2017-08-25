@@ -1,6 +1,6 @@
 <script>
 import Vue from 'vue';
-import methods from '../methods';
+import methods from '../../methods';
 import cEnterpriseLocation from './cEnterpriseLocation.vue';
 
 export default {

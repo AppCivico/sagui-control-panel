@@ -5,7 +5,7 @@ import { chai, expect } from 'chai';
 import store from '../../app/store';
 import translations from '../../app/translations';
 import router from '../../app/router';
-import cListEnterprises from '../../app/components/cListEnterprises.vue';
+import cListEnterprises from '../../app/components/enterprises/cListEnterprises.vue';
 
 describe('cListEnterprises.vue', () => {
 	it('should translate content', () => {

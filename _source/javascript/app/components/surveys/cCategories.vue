@@ -1,6 +1,6 @@
 <script>
 import cCategorie from './cCategorie.vue';
-import cConfirm from './cConfirm.vue';
+import cConfirm from '../utilities/cConfirm.vue';
 
 export default {
 	name: 'cCategories',

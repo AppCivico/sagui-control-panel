@@ -1,22 +1,17 @@
 <script>
 import Vue from 'vue';
-import methods from '../methods';
+import methods from '../../methods';
 
 export default {
-	name: 'cEditQuestion',
-	props: ['question'],
+	name: 'cQuestion',
 	data() {
 		return {
+			type: '',
 			types: ['traffic_light', 'multiple', 'textarea'],
+			options: [
+				{},
+			],
 		};
-	},
-	computed: {
-		selected() {
-			return this.question.type;
-		},
-		options() {
-			return this.question.answers;
-		},
 	},
 	methods: {
 		addOption() {
@@ -26,13 +21,13 @@ export default {
 			this.options.splice(number, 1);
 		},
 		cleanFields() {
-			const inputs = Array.from(document.querySelectorAll('#edit-question input'));
+			const inputs = Array.from(document.querySelectorAll('#new-question input'));
 			// eslint-disable-next-line
 			inputs.map(input => input.value = '');
 			this.type = '';
 			this.options = [{}];
 		},
-		editQuestion(modal) {
+		newQuestion(modal) {
 			const result = { answers: [] };
 			result.title = modal.querySelector('input[name="title"]').value;
 			result.type = modal.querySelector('select').value;
@@ -58,17 +53,17 @@ export default {
 				});
 			}
 
-			this.$emit('editQuestion', result);
+			this.$emit('newQuestion', result);
 		},
 		removeError(event) {
 			methods.removeError(event);
 		},
 		validate() {
 			let valid = true;
-			const title = document.querySelector('#edit-question input[name="title"]');
-			const type = document.querySelector('#edit-question select');
+			const title = document.querySelector('#new-question input[name="title"]');
+			const type = document.querySelector('#new-question select');
 
-			methods.cleanAllErros(document.querySelector('#edit-question'));
+			methods.cleanAllErros(document.querySelector('#new-question'));
 
 			if (title.value === '') {
 				methods.addError(title.parentNode, Vue.i18n.translate('required-field'));
@@ -86,7 +81,7 @@ export default {
 				const options = Array.from(document.querySelectorAll('#multiple input[type="text"]'));
 				options.map((option) => { // eslint-disable-line array-callback-return
 					if (option.value === '') {
-						methods.addError(option.parentNode, Vue.i18n.translate('required-field'));
+						methods.addError(option.parentNode, 'Este campo é obrigatório');
 						valid = false;
 					}
 				});
@@ -101,8 +96,8 @@ export default {
 				});
 			}
 			if (valid) {
-				this.editQuestion(document.querySelector('#edit-question'));
-				$('#edit-question').modal('hide'); // eslint-disable-line no-undef
+				this.newQuestion(document.querySelector('#new-question'));
+				$('#new-question').modal('hide'); // eslint-disable-line no-undef
 				this.cleanFields();
 			}
 		},
@@ -111,7 +106,7 @@ export default {
 </script>
 
 <template>
-	<div class="modal fade in" id="edit-question">
+	<div class="modal fade in" id="new-question">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -122,34 +117,42 @@ export default {
 				<div class="modal-body">
 					<div class="form-group">
 						<label>{{ 'title' | translate  | capitalize }}</label>
-						<input type="text" class="form-control" name="title" placeholder="Título" @focus="removeError($event)" :value="this.question.title">
+						<input type="text" class="form-control" name="title" placeholder="Título" @focus="removeError($event)">
 					</div>
 					<div class="form-group">
 						<label>{{ 'type' | translate | capitalize }}</label>
-						<select class="form-control" v-model="selected" @focus="removeError($event)" :value="selected">
+						<select class="form-control" v-model="type" @focus="removeError($event)">
 							<option value="">Escolha um tipo de resposta</option>
 							<option v-for="option in types" :value="option">{{ option | translate | capitalize }}</option>
 						</select>
 					</div>
 					<hr>
-					<div id="traffic_light" v-if="selected == 'traffic_light'">
-						<div class="form-group" v-for="answer in this.question.answers">
-							<label>{{ answer.unit | translate | capitalize }}</label>
-							<input type="text" class="form-control" :data-unit="answer.unit" :placeholder="answer.unit" @focus="removeError($event)" :value="answer.title">
+					<div id="traffic_light" v-if="type == 'traffic_light'">
+						<div class="form-group">
+							<label>Verde</label>
+							<input type="text" class="form-control" data-unit="green" placeholder="Verde" @focus="removeError($event)">
+						</div>
+						<div class="form-group">
+							<label>Amarelo</label>
+							<input type="text" class="form-control" data-unit="amarelo" placeholder="Amarelo" @focus="removeError($event)">
+						</div>
+						<div class="form-group">
+							<label>Vermelho</label>
+							<input type="text" class="form-control" data-unit="vermelho" placeholder="Vermelho" @focus="removeError($event)">
 						</div>
 					</div>
-					<div id="multiple" v-if="selected == 'multiple'">
-						<div class="form-group" v-for="(option, index) in this.options">
+					<div id="multiple" v-if="type == 'multiple'">
+						<div class="form-group" v-for="(option, index) in options">
 							<button type="button" aria-label="Excluir" class="close" @click="removeOption(index)"><span aria-hidden="true">×</span></button>
 							<label>{{ 'option' | translate | capitalize }} {{ index + 1 }}</label>
-							<input type="text" class="form-control" :placeholder="'insert_option' | translate | capitalize" @focus="removeError($event)" :value="option.title">
+							<input type="text" class="form-control" :placeholder="'insert_option' | translate | capitalize" @focus="removeError($event)">
 						</div>
 						<button type="button" class="btn btn-primary" @click="addOption(); removeError($event)">{{ 'add' | translate | capitalize }} {{ 'option' | translate }}</button>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default pull-left" data-dismiss="modal" @click="cleanFields()">{{ 'cancel' | translate | capitalize }}</button>
-					<button type="button" class="btn btn-primary" @click="validate()">{{ 'edit' | translate | capitalize }}</button>
+					<button type="button" class="btn btn-primary" @click="validate()">{{ 'add' | translate | capitalize }}</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->

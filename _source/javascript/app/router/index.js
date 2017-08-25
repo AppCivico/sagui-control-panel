@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import cCategories from '../components/cCategories.vue';
-import cEnterprise from '../components/cEnterprise.vue';
-import cListEnterprises from '../components/cListEnterprises.vue';
-import cNewEnterprise from '../components/cNewEnterprise.vue';
-import cNewSurvey from '../components/cNewSurvey.vue';
-import cSurveys from '../components/cSurveys.vue';
-import cSurvey from '../components/cSurvey.vue';
+import cCategories from '../components/surveys/cCategories.vue';
+import cNewSurvey from '../components/surveys/cNewSurvey.vue';
+import cSurveys from '../components/surveys/cSurveys.vue';
+import cSurvey from '../components/surveys/cSurvey.vue';
+import cEnterprise from '../components/enterprises/cEnterprise.vue';
+import cListEnterprises from '../components/enterprises/cListEnterprises.vue';
+import cNewEnterprise from '../components/enterprises/cNewEnterprise.vue';
 
 Vue.use(Router);
 

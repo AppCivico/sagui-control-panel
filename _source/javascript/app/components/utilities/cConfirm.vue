@@ -1,18 +1,22 @@
 <script>
-import router from '../router';
+import router from '../../router';
 
 export default {
-	name: 'cAlert',
+	name: 'cConfirm',
 	computed: {
-		message() {
-			return this.$store.state.alertMessage;
+		confirm() {
+			return this.$store.state.confirm;
 		},
 		redirect() {
 			return this.$store.state.redirect;
 		},
 	},
 	methods: {
-		ifRedirect() {
+		changeState(choice) {
+			this.$store.dispatch('EDIT_CONFIRM_STATE', choice);
+		},
+		positive() {
+			this.changeState(true);
 			if (this.redirect.state === true) {
 				const path = this.redirect.path;
 				this.$store.dispatch('CHANGE_REDIRECT', { state: false, path: '' });
@@ -24,7 +28,7 @@ export default {
 </script>
 
 <template>
-	<div class="modal fade in" id="alert">
+	<div class="modal fade in" id="confirm">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -33,10 +37,11 @@ export default {
 					<h4 class="modal-title">Alerta</h4>
 				</div>
 				<div class="modal-body">
-					<p>{{ message }}</p>
+					<p>{{ this.confirm.message }}</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" @click="ifRedirect()">Ok</button>
+					<button type="button" class="btn btn-default pull-left" data-dismiss="modal" @click="changeState(false)">{{ 'cancel' | translate | capitalize }}</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" @click="positive()">Ok</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->

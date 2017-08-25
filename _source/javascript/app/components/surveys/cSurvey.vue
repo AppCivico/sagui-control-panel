@@ -1,35 +1,44 @@
 <script>
 import Vue from 'vue';
-import methods from '../methods';
+import methods from '../../methods';
 import cQuestion from './cQuestion.vue';
 import cEditQuestion from './cEditQuestion.vue';
 import cCategorie from './cCategorie.vue';
 
 export default{
-	name: 'cNewSurvey',
-	props: ['surveyCategory'],
+	name: 'cSurvey',
+	props: ['id'],
 	components: {
 		cQuestion,
 		cCategorie,
 		cEditQuestion,
 	},
-	computed: {
-		categories() {
-			return this.$store.state.categories;
-		},
-	},
-	mounted() {
-		this.$store.dispatch('LOAD_CATEGORIES_LIST');
-	},
 	data() {
 		return {
-			questions: [],
+			edited: false,
 			question: {},
 			questionIndex: 0,
 		};
 	},
+	computed: {
+		categories() {
+			return this.$store.state.categories;
+		},
+		survey() {
+			return this.$store.state.survey;
+		},
+		questions() {
+			return this.$store.state.survey.questions;
+		},
+	},
+	mounted() {
+		this.$store.dispatch('LOAD_CATEGORIES_LIST');
+		this.$store.dispatch('LOAD_SURVEY', this.id);
+		this.$store.dispatch('CHANGE_SELECTED_ENTERPRISE', this.id);
+	},
 	methods: {
 		addQuestion(result) {
+			this.edited = true;
 			this.questions.push(result);
 		},
 		editQuestion(result) {
@@ -44,6 +53,7 @@ export default{
 			this.questions.splice(number, 1);
 		},
 		removeError(event) {
+			this.edited = true;
 			methods.removeError(event);
 		},
 		createSurvey(title, category) {
@@ -55,10 +65,10 @@ export default{
 		},
 		validate() {
 			let valid = true;
-			const title = document.querySelector('.new-survey__title');
-			const category = document.querySelector('.new-survey__category');
+			const title = document.querySelector('.survey__title');
+			const category = document.querySelector('.survey__category');
 
-			methods.cleanAllErros(document.querySelector('#new-survey'));
+			methods.cleanAllErros(document.querySelector('#survey'));
 
 			if (title.value === '') {
 				methods.addError(title.parentNode, Vue.i18n.translate('required-field'));
@@ -74,8 +84,12 @@ export default{
 			}
 
 			if (valid) {
-				const newSurvey = this.createSurvey(title.value, category.value);
-				this.$store.dispatch('SAVE_SURVEY', newSurvey);
+				if (this.edited) {
+					const edited = this.createSurvey(title.value, category.value);
+					this.$store.dispatch('EDIT_SURVEY', { id: this.survey.id, survey: edited });
+				} else {
+					this.$store.dispatch('CHANGE_ALERT_MESSAGE', 'Nenhuma alteração foi efetuada.');
+				}
 			}
 		},
 		checkCategorie(event) {
@@ -95,7 +109,7 @@ export default{
 		</section>
 
 		<!-- Main content -->
-		<section class="content" id="new-survey">
+		<section class="content" id="survey">
 			<div class="row">
 				<div class="col-md-6">
 					<div class="box box-solid">
@@ -105,11 +119,11 @@ export default{
 						<div class="box-body">
 							<div class="form-group">
 								<label>{{ 'title' | translate | capitalize }}</label>
-								<input type="text" class="form-control new-survey__title" :placeholder="'title' | translate | capitalize" @focus="removeError($event)">
+								<input type="text" class="form-control survey__title" :placeholder="'title' | translate | capitalize" @focus="removeError($event)" :value="survey.title">
 			                </div>
 							<div class="form-group">
 								<label>{{ 'categoria' | translate | capitalize }}</label>
-								<select class="form-control new-survey__category" :value="this.surveyCategory" @focus="removeError($event)" @change="checkCategorie($event)">
+								<select class="form-control survey__category" @focus="removeError($event)" :value="survey.category" @change="checkCategorie($event)">
 									<option value="">Selecione a categoria</option>
 									<option v-for="(category, index) in categories" :value="index + 1">{{ category.title }}</option>
 									<option value="new-category">Inserir nova categoria</option>

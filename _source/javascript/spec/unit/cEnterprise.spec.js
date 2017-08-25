@@ -5,7 +5,7 @@ import { chai, expect } from 'chai';
 import store from '../../app/store';
 import router from '../../app/router';
 import translations from '../../app/translations';
-import cEnterprise from '../../app/components/cEnterprise.vue';
+import cEnterprise from '../../app/components/enterprises/cEnterprise.vue';
 
 describe('cEnterprise.vue', () => {
 	it('should translate content', () => {

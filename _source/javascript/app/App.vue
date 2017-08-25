@@ -1,7 +1,7 @@
 <script>
-import cHeader from './components/cHeader.vue';
-import cMenu from './components/cMenu.vue';
-import cAlert from './components/cAlert.vue';
+import cHeader from './components/layout/cHeader.vue';
+import cMenu from './components/layout/cMenu.vue';
+import cAlert from './components/utilities/cAlert.vue';
 
 
 export default {
