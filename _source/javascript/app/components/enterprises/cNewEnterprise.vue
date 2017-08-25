@@ -117,7 +117,7 @@ export default {
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'location' | translate | capitalize }}</label>
-								<input type="text" class="form-control" id="autocomplete" name="location" @change="setMap($event)" @focus="removeError($event)" :placeholder="'insert-address' | translate">
+								<input type="text" class="form-control" id="autocomplete" name="location" @blur="setMap($event)" @focus="removeError($event)" :placeholder="'insert-address' | translate">
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'photos' | translate | capitalize }}</label>
