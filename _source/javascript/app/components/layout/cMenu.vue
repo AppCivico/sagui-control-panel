@@ -29,6 +29,12 @@ export default{
 					<li><router-link to=""><i class="fa fa-circle-o"></i> {{ 'results' | translate | capitalize }}</router-link></li>
 				</ul>
 			</li>
+			<li class="treeview">
+				<router-link to="/notifications">
+					<i class="fa fa-bell"></i>
+					<span>{{ 'notifications' | translate | capitalize }}</span>
+				</router-link>
+			</li>
 		</ul>
 	</section>
 	<!-- /.sidebar -->

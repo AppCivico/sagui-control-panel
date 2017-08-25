@@ -8,6 +8,7 @@ import cSurvey from '../components/surveys/cSurvey.vue';
 import cEnterprise from '../components/enterprises/cEnterprise.vue';
 import cListEnterprises from '../components/enterprises/cListEnterprises.vue';
 import cNewEnterprise from '../components/enterprises/cNewEnterprise.vue';
+import cNotifications from '../components/notifications/cNotifications.vue';
 
 Vue.use(Router);
 
@@ -52,6 +53,11 @@ export default new Router({
 			path: '/categories',
 			name: 'Categorias',
 			component: cCategories,
+		},
+		{
+			path: '/notifications',
+			name: 'Notifications',
+			component: cNotifications,
 		},
 	],
 });
