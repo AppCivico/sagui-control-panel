@@ -33,6 +33,32 @@
         }
     }
   ],
+  "notifications": [
+  	{
+  		"id": 1,
+  		"title": "Lorem ipsum 1",
+  		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet",
+  		"link": "new-enterprise"
+  	},
+  	{
+  		"id": 2,
+  		"title": "Lorem ipsum 1",
+  		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet",
+  		"link": "new-enterprise"
+  	},
+  	{
+  		"id": 3,
+  		"title": "Lorem ipsum 1",
+  		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet",
+  		"link": "new-enterprise"
+  	},
+  	{
+  		"id": 4,
+  		"title": "Lorem ipsum 1",
+  		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet",
+  		"link": "new-enterprise"
+  	}
+  ],
   "categories": [
   	{
   		"id": 1,
