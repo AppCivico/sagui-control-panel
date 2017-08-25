@@ -7,6 +7,7 @@ export default {
 		return {
 			map: '',
 			polygon: '',
+			encodedPath: '',
 		};
 	},
 	computed: {
@@ -69,14 +70,10 @@ export default {
 			this.map = new google.maps.Map(document.getElementById('enterprise-location__map'));
 			this.centerMap();
 		},
-		getPolygonCoords() {
-			const len = this.polygon.getPath().getLength();
-			let htmlStr = '';
-			for (let i = 0; i < len; i++) { // eslint-disable-line
-				htmlStr += `new google.maps.LatLng("${this.polygon.getPath().getAt(i).toUrlValue(5)}"), `;
-			}
-			console.log(htmlStr);
-			// document.getElementById('info').innerHTML = htmlStr;
+		savePolygon() {
+			const finalPath = this.polygon.getPath();
+			this.encodedPath = google.maps.geometry.encoding.encodePath(finalPath);
+			console.log(this.encodedPath);
 		},
 	},
 };
@@ -95,7 +92,7 @@ export default {
 					<div id="enterprise-location__map"></div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+					<button type="button" class="btn btn-primary" @click="savePolygon()">Salvar</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->
