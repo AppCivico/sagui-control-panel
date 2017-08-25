@@ -63,6 +63,43 @@
   		"level": "success"
   	}
   ],
+  "agents": [
+  	{
+  		"id": 1,
+  		"number": "LID01",
+  		"gadget": "Tablet Samsung 01",
+  		"name": "Fulano de tal e tal",
+  		"surveys": 37
+  	},
+  	{
+  		"id": 2,
+  		"number": "LID02",
+  		"gadget": "Tablet Samsung 02",
+  		"name": "Fulano de tal e tal",
+  		"surveys": 15
+  	},
+  	{
+  		"id": 3,
+  		"number": "LID03",
+  		"gadget": "Tablet Samsung 01",
+  		"name": "Fulano de tal e tal",
+  		"surveys": 10
+  	},
+  	{
+  		"id": 4,
+  		"number": "LID04",
+  		"gadget": "Tablet Samsung 02",
+  		"name": "Fulano de tal e tal",
+  		"surveys": 223
+  	},
+  	{
+  		"id": 5,
+  		"number": "LID05",
+  		"gadget": "Tablet Samsung 01",
+  		"name": "Fulano de tal e tal",
+  		"surveys": 45
+  	}
+  ],
   "categories": [
   	{
   		"id": 1,
