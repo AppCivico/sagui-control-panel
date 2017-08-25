@@ -74,6 +74,9 @@ export default {
 				}
 			}
 		},
+		addPath(path) {
+			console.log(path)
+		},
 	},
 };
 </script>
@@ -142,6 +145,6 @@ export default {
 			</div>
 		</section>
 		<!-- /.content -->
-		<c-enterprise-location :placeId="this.placeId"></c-enterprise-location>
+		<c-enterprise-location v-on:finalPath="addPath" :placeId="this.placeId"></c-enterprise-location>
 	</div>
 </template>

@@ -7,7 +7,6 @@ export default {
 		return {
 			map: '',
 			polygon: '',
-			encodedPath: '',
 		};
 	},
 	computed: {
@@ -72,8 +71,10 @@ export default {
 		},
 		savePolygon() {
 			const finalPath = this.polygon.getPath();
-			this.encodedPath = google.maps.geometry.encoding.encodePath(finalPath);
-			console.log(this.encodedPath);
+			const encodedPath = google.maps.geometry.encoding.encodePath(finalPath);
+			this.$emit('finalPath', encodedPath);
+
+			$('#enterprise-location').modal('hide');
 		},
 	},
 };
