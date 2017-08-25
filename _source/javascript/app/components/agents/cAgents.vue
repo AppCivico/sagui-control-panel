@@ -1,4 +1,6 @@
 <script>
+import methods from '../../methods';
+
 export default {
 	name: 'cCategories',
 	computed: {
@@ -10,6 +12,13 @@ export default {
 		this.$store.dispatch('LOAD_AGENTS_LIST');
 	},
 	methods: {
+		removeError(event) {
+			this.edited = true;
+			methods.removeError(event);
+		},
+		validate() {
+
+		},
 	},
 };
 </script>
@@ -25,12 +34,35 @@ export default {
 		<!-- Main content -->
 		<section class="content">
 			<div class="box box-solid">
-				<div class="box-body">
-					<template v-for="agent in agents">
-						<div :class="'callout callout-info'">
-							<h4>{{ agent.name }}</h4>
+				<div class="box-body no-padding agents">
+					<ul class="users-list clearfix">
+						<li v-for="agent in agents">
+							<div class="agents__code">{{ agent.number }}</div>
+							<a class="users-list-name" href="#">{{ agent.gadget }}</a>
+							<span class="users-list-date">{{ agent.surveys }} {{ 'answers' | translate }}</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6">
+					<div class="box box-solid">
+						<div class="box-header with-border">
+							<h3 class="box-title">{{ 'register' | translate | capitalize }} {{ 'agent' | translate }}</h3>
 						</div>
-					</template>
+						<div class="box-body">
+							<div class="form-group">
+								<label>{{ 'name' | translate | capitalize }}</label>
+								<input type="text" class="form-control" name="name" @focus="removeError($event)">
+					        </div>
+					        <div class="form-group">
+								<label>{{ 'gadget' | translate | capitalize }}</label>
+								<input type="text" class="form-control" name="gadget" @focus="removeError($event)">
+					        </div>
+					        <button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'agent' | translate }}</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
