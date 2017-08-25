@@ -38,25 +38,29 @@
   		"id": 1,
   		"title": "Lorem ipsum 1",
   		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet",
-  		"link": "new-enterprise"
+  		"link": "new-enterprise",
+  		"level": "info"
   	},
   	{
   		"id": 2,
   		"title": "Lorem ipsum 1",
   		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet",
-  		"link": "new-enterprise"
+  		"link": "new-enterprise",
+  		"level": "danger"
   	},
   	{
   		"id": 3,
   		"title": "Lorem ipsum 1",
   		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet",
-  		"link": "new-enterprise"
+  		"link": "new-enterprise",
+  		"level": "warning"
   	},
   	{
   		"id": 4,
   		"title": "Lorem ipsum 1",
   		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet",
-  		"link": "new-enterprise"
+  		"link": "new-enterprise",
+  		"level": "success"
   	}
   ],
   "categories": [
