@@ -30,6 +30,7 @@ const ptBr = {
 	"name": "nome",
 	"new": "nova",
 	"new-m": "novo",
+	"notifications": "notificações",
 	"option": "opção",
 	"of": "da",
 	"of-m": "do",
@@ -63,5 +64,8 @@ const ptBr = {
 	"minimum-question": "É obrigatório inserir pelo menos uma pergunta.",
 	"insert-address": "Insira aqui um endereço inicial.",
 	"invalid-location": "Localização não encontrada,tente novamente.",
+
+	// notifications
+	"not-read": "não lidos",
 };
 export { ptBr as default };
