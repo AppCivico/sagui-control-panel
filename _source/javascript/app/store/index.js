@@ -6,8 +6,8 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
-const api = 'http://localhost:3000';
-// const api = 'https://fakeapi.eokoe.com';
+// const api = 'http://localhost:3000';
+const api = 'https://fakeapi.eokoe.com';
 
 axios.interceptors.request.use((config) => {
 	document.querySelector('.loading').classList.remove('close');
