@@ -1,13 +1,14 @@
+/* eslint-disable no-undef, arrow-body-style, no-param-reassign */
+
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 
 Vue.use(Vuex);
 
-// const api = 'http://localhost:3000';
-const api = 'https://fakeapi.eokoe.com';
+const api = 'http://localhost:3000';
+// const api = 'https://fakeapi.eokoe.com';
 
-/* eslint-disable arrow-body-style */
 axios.interceptors.request.use((config) => {
 	document.querySelector('.loading').classList.remove('close');
 	return config;
@@ -26,8 +27,6 @@ axios.interceptors.response.use((response) => {
 	return Promise.reject(error);
 });
 
-/* eslint-enable */
-
 const store = new Vuex.Store({
 	state: {
 		selectedEnterprise: '',
@@ -39,6 +38,7 @@ const store = new Vuex.Store({
 		},
 		enterprises: [],
 		enterprise: {},
+		notifications: [],
 		redirect: {
 			state: false,
 			path: '',
@@ -51,7 +51,6 @@ const store = new Vuex.Store({
 			axios.get(`${api}/categories`).then((response) => {
 				commit('SET_CATEGORIES_LIST', { list: response.data });
 			}, (err) => {
-				// eslint-disable-next-line
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
@@ -63,7 +62,6 @@ const store = new Vuex.Store({
 			axios.get(`${api}/enterprises`).then((response) => {
 				commit('SET_ENTERPRISES_LIST', { list: response.data });
 			}, (err) => {
-				// eslint-disable-next-line
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
@@ -72,7 +70,6 @@ const store = new Vuex.Store({
 			axios.get(`${api}/enterprises/${id}`).then((response) => {
 				commit('SET_ENTERPRISE', { res: response.data });
 			}, (err) => {
-				// eslint-disable-next-line
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
@@ -81,7 +78,6 @@ const store = new Vuex.Store({
 			axios.get(`${api}/surveys?category=${id}`).then((response) => {
 				commit('SET_SURVEYS_LIST', { list: response.data });
 			}, (err) => {
-				// eslint-disable-next-line
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
@@ -90,7 +86,6 @@ const store = new Vuex.Store({
 			axios.get(`${api}/surveys/${id}`).then((response) => {
 				commit('SET_SURVEY', { res: response.data });
 			}, (err) => {
-				// eslint-disable-next-line
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
@@ -107,7 +102,6 @@ const store = new Vuex.Store({
 					commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete salva', redirect: { state: true, path: '-1' } } });
 				}
 			}, (err) => {
-				// eslint-disable-next-line
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
@@ -124,7 +118,6 @@ const store = new Vuex.Store({
 					commit('SET_ALERT_MESSAGE', { res: { message: 'Alterações salvas', redirect: { state: true, path: '-1' } } });
 				}
 			}, (err) => {
-				// eslint-disable-next-line
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
@@ -140,7 +133,6 @@ const store = new Vuex.Store({
 					commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete excluída' } });
 				}
 			}, (err) => {
-				// eslint-disable-next-line
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
@@ -165,10 +157,9 @@ const store = new Vuex.Store({
 				if (response.statusText === 'Created') {
 					commit('SET_ALERT_MESSAGE', { res: { message: 'Nova categoria salva' } });
 					store.dispatch('LOAD_CATEGORIES_LIST');
-					$('#new-category').modal('hide'); // eslint-disable-line no-undef
+					$('#new-category').modal('hide');
 				}
 			}, (err) => {
-				// eslint-disable-next-line
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
@@ -184,7 +175,6 @@ const store = new Vuex.Store({
 					commit('SET_ALERT_MESSAGE', { res: { message: 'Categoria excluída' } });
 				}
 			}, (err) => {
-				// eslint-disable-next-line
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
@@ -200,10 +190,9 @@ const store = new Vuex.Store({
 				if (response.statusText === 'OK') {
 					commit('SET_ALERT_MESSAGE', { res: { message: 'Categoria alterada' } });
 					store.dispatch('LOAD_CATEGORIES_LIST');
-					$('#new-category').modal('hide'); // eslint-disable-line no-undef
+					$('#new-category').modal('hide');
 				}
 			}, (err) => {
-				// eslint-disable-next-line
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
@@ -211,61 +200,59 @@ const store = new Vuex.Store({
 		CHANGE_SELECTED_ENTERPRISE({ commit }, id) {
 			commit('SET_SELECTED_ENTERPRISE', { id });
 		},
+		LOAD_NOTIFICATIONS_LIST({ commit }, id) { // eslint-disable-line no-unused-vars
+			axios.get(`${api}/notifications`).then((response) => {
+				commit('SET_NOTIFICATIONS_LIST', { list: response.data });
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			});
+		},
 	},
 	mutations: {
 		SET_ALERT_MESSAGE(state, { res }) {
 			if (res.redirect) {
-				// eslint-disable-next-line
 				state.redirect.state = res.redirect.state;
-				// eslint-disable-next-line
+
 				state.redirect.path = res.redirect.path;
 			}
-			// eslint-disable-next-line
 			state.alertMessage = res.message;
-			$('#alert').modal('show'); // eslint-disable-line no-undef
+			$('#alert').modal('show');
 		},
 		SET_CATEGORIES_LIST(state, { list }) {
-			// eslint-disable-next-line
 			state.categories = list;
 		},
 		SET_ENTERPRISES_LIST(state, { list }) {
-			// eslint-disable-next-line
 			state.enterprises = list;
 		},
 		SET_ENTERPRISE(state, { res }) {
-			// eslint-disable-next-line
 			state.enterprise = res;
 		},
 		SET_REDIRECT(state, { data }) {
-			// eslint-disable-next-line
 			state.redirect.state = data.state;
-			// eslint-disable-next-line
 			state.redirect.path = data.path;
 		},
 		SET_CONFIRM_MESSAGE(state, { data }) {
 			if (data.redirect) {
-				// eslint-disable-next-line
 				store.dispatch('CHANGE_REDIRECT', data.redirect);
 			}
-			// eslint-disable-next-line
 			state.confirm.message = data.message;
-			$('#confirm').modal('show'); // eslint-disable-line no-undef
+			$('#confirm').modal('show');
 		},
 		SET_CONFIRM_STATE(state, { res }) {
-			// eslint-disable-next-line
 			state.confirm.state = res;
 		},
 		SET_SURVEYS_LIST(state, { list }) {
-			// eslint-disable-next-line
 			state.surveys = list;
 		},
 		SET_SURVEY(state, { res }) {
-			// eslint-disable-next-line
 			state.survey = res;
 		},
 		SET_SELECTED_ENTERPRISE(state, { id }) {
-			// eslint-disable-next-line
 			state.selectedEnterprise = id;
+		},
+		SET_NOTIFICATIONS_LIST(state, { list }) {
+			state.notifications = list;
 		},
 	},
 	getters: {
