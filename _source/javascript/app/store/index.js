@@ -29,7 +29,7 @@ axios.interceptors.response.use((response) => {
 
 const store = new Vuex.Store({
 	state: {
-		selectedEnterprise: '',
+		agents: [],
 		alertMessage: '',
 		categories: [],
 		confirm: {
@@ -43,6 +43,7 @@ const store = new Vuex.Store({
 			state: false,
 			path: '',
 		},
+		selectedEnterprise: '',
 		surveys: [],
 		survey: {},
 	},
@@ -208,6 +209,14 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
+		LOAD_AGENTS_LIST({ commit }, id) { // eslint-disable-line no-unused-vars
+			axios.get(`${api}/agents`).then((response) => {
+				commit('SET_AGENTS_LIST', { list: response.data });
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			});
+		},
 	},
 	mutations: {
 		SET_ALERT_MESSAGE(state, { res }) {
@@ -253,6 +262,9 @@ const store = new Vuex.Store({
 		},
 		SET_NOTIFICATIONS_LIST(state, { list }) {
 			state.notifications = list;
+		},
+		SET_AGENTS_LIST(state, { list }) {
+			state.agents = list;
 		},
 	},
 	getters: {
