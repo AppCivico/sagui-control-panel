@@ -13,7 +13,17 @@ export default {
 			return this.$store.state.selectedEnterprise;
 		},
 	},
+	mounted() {
+		this.AddRemoveError();
+	},
 	methods: {
+		AddRemoveError() {
+			const inputs = Array.from(document.querySelectorAll('#new-category input'));
+
+			inputs.map((input) => {
+				input.addEventListener('focus', this.removeError);
+			});
+		},
 		cleanFields() {
 			const inputs = Array.from(document.querySelectorAll('#new-category input'));
 			// eslint-disable-next-line
@@ -66,8 +76,8 @@ export default {
 				<div class="modal-body">
 					<div class="form-group">
 						<label>{{ 'title' | translate  | capitalize }}</label>
-						<input v-if="this.isEditing" type="text" class="form-control" name="title" placeholder="Título" @focus="removeError($event)" :value="this.category.title">
-						<input v-if="!this.isEditing" type="text" class="form-control" name="title" placeholder="Título" @focus="removeError($event)">
+						<input v-if="this.isEditing" type="text" class="form-control" name="title" placeholder="Título" :value="this.category.title">
+						<input v-if="!this.isEditing" type="text" class="form-control" name="title" placeholder="Título">
 					</div>
 				</div>
 				<div class="modal-footer">

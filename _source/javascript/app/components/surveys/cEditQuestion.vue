@@ -18,6 +18,9 @@ export default {
 			return this.question.answers;
 		},
 	},
+	mounted() {
+		this.AddRemoveError();
+	},
 	methods: {
 		addOption() {
 			this.options.push({});
@@ -59,6 +62,13 @@ export default {
 			}
 
 			this.$emit('editQuestion', result);
+		},
+		AddRemoveError() {
+			const inputs = Array.from(document.querySelectorAll('#edit-question input'));
+
+			inputs.map((input) => {
+				input.addEventListener('focus', this.removeError);
+			});
 		},
 		removeError(event) {
 			methods.removeError(event);
@@ -122,11 +132,11 @@ export default {
 				<div class="modal-body">
 					<div class="form-group">
 						<label>{{ 'title' | translate  | capitalize }}</label>
-						<input type="text" class="form-control" name="title" placeholder="Título" @focus="removeError($event)" :value="this.question.title">
+						<input type="text" class="form-control" name="title" placeholder="Título" :value="this.question.title">
 					</div>
 					<div class="form-group">
 						<label>{{ 'type' | translate | capitalize }}</label>
-						<select class="form-control" v-model="selected" @focus="removeError($event)" :value="selected">
+						<select class="form-control" v-model="selected" :value="selected" @focus="removeError($event)">
 							<option value="">Escolha um tipo de resposta</option>
 							<option v-for="option in types" :value="option">{{ option | translate | capitalize }}</option>
 						</select>
@@ -135,14 +145,14 @@ export default {
 					<div id="traffic_light" v-if="selected == 'traffic_light'">
 						<div class="form-group" v-for="answer in this.question.answers">
 							<label>{{ answer.unit | translate | capitalize }}</label>
-							<input type="text" class="form-control" :data-unit="answer.unit" :placeholder="answer.unit" @focus="removeError($event)" :value="answer.title">
+							<input type="text" class="form-control" :data-unit="answer.unit" :placeholder="answer.unit" :value="answer.title">
 						</div>
 					</div>
 					<div id="multiple" v-if="selected == 'multiple'">
 						<div class="form-group" v-for="(option, index) in this.options">
 							<button type="button" aria-label="Excluir" class="close" @click="removeOption(index)"><span aria-hidden="true">×</span></button>
 							<label>{{ 'option' | translate | capitalize }} {{ index + 1 }}</label>
-							<input type="text" class="form-control" :placeholder="'insert_option' | translate | capitalize" @focus="removeError($event)" :value="option.title">
+							<input type="text" class="form-control" :placeholder="'insert_option' | translate | capitalize" :value="option.title">
 						</div>
 						<button type="button" class="btn btn-primary" @click="addOption(); removeError($event)">{{ 'add' | translate | capitalize }} {{ 'option' | translate }}</button>
 					</div>

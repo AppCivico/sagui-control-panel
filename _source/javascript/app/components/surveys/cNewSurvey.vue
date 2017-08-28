@@ -23,6 +23,7 @@ export default{
 	},
 	mounted() {
 		this.$store.dispatch('LOAD_CATEGORIES_LIST', this.selectedEnterprise);
+		this.AddRemoveError();
 	},
 	data() {
 		return {
@@ -45,6 +46,13 @@ export default{
 		},
 		removeQuestion(number) {
 			this.questions.splice(number, 1);
+		},
+		AddRemoveError() {
+			const inputs = Array.from(document.querySelectorAll('#new-survey input'));
+
+			inputs.map((input) => {
+				input.addEventListener('focus', this.removeError);
+			});
 		},
 		removeError(event) {
 			methods.removeError(event);
@@ -108,11 +116,11 @@ export default{
 						<div class="box-body">
 							<div class="form-group">
 								<label>{{ 'title' | translate | capitalize }}</label>
-								<input type="text" class="form-control new-survey__title" :placeholder="'title' | translate | capitalize" @focus="removeError($event)">
+								<input type="text" class="form-control new-survey__title" :placeholder="'title' | translate | capitalize">
 			                </div>
 							<div class="form-group">
 								<label>{{ 'categoria' | translate | capitalize }}</label>
-								<select class="form-control new-survey__category" :value="this.surveyCategory" @focus="removeError($event)" @change="checkCategorie($event)">
+								<select class="form-control new-survey__category" :value="this.surveyCategory" @change="checkCategorie($event)"  @focus="removeError($event)">
 									<option value="">Selecione a categoria</option>
 									<option v-for="(category, index) in categories" :value="index + 1">{{ category.title }}</option>
 									<option value="new-category">Inserir nova categoria</option>

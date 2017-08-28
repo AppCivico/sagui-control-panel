@@ -17,8 +17,16 @@ export default {
 	},
 	mounted() {
 		this.initAutocomplete();
+		this.AddRemoveError();
 	},
 	methods: {
+		AddRemoveError() {
+			const inputs = Array.from(document.querySelectorAll('#new-enterprise input'));
+
+			inputs.map((input) => {
+				input.addEventListener('focus', this.removeError);
+			});
+		},
 		removeError(event) {
 			this.edited = true;
 			methods.removeError(event);
@@ -109,15 +117,15 @@ export default {
 						<div class="box-body">
 							<div class="form-group">
 								<label>{{ 'name' | translate | capitalize }}</label>
-								<input type="text" class="form-control" name="name" @focus="removeError($event)">
+								<input type="text" class="form-control" name="name">
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'short' | translate | capitalize }} {{ 'description' | translate }}</label>
-								<input type="text" class="form-control" name="description" @focus="removeError($event)">
+								<input type="text" class="form-control" name="description">
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'location' | translate | capitalize }}</label>
-								<input type="text" class="form-control" id="autocomplete" name="location" @blur="setMap($event)" @focus="removeError($event)" :placeholder="'insert-address' | translate">
+								<input type="text" class="form-control" id="autocomplete" name="location" @blur="setMap($event)" :placeholder="'insert-address' | translate">
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'photos' | translate | capitalize }}</label>
@@ -133,19 +141,19 @@ export default {
 						<div class="box-body">
 							<div class="form-group">
 								<label>{{ 'name' | translate | capitalize }}</label>
-								<input type="text" class="form-control" name="responsable" @focus="removeError($event)">
+								<input type="text" class="form-control" name="responsable">
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'email' | translate | capitalize }}</label>
-								<input type="email" class="form-control" name="email" @focus="removeError($event)">
+								<input type="email" class="form-control" name="email">
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'password' | translate | capitalize }}</label>
-								<input type="password" class="form-control" name="password" @focus="removeError($event)">
+								<input type="password" class="form-control" name="password">
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'repeat' | translate | capitalize }} {{ 'password' | translate }}</label>
-								<input type="password" class="form-control" name="repeat-password" @focus="removeError($event)">
+								<input type="password" class="form-control" name="repeat-password">
 			                </div>
 						</div>
 					</div>

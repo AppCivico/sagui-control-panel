@@ -38,6 +38,7 @@ export default{
 		this.$store.dispatch('LOAD_CATEGORIES_LIST', this.selectedEnterprise);
 		this.$store.dispatch('LOAD_SURVEY', this.id);
 		this.$store.dispatch('CHANGE_SELECTED_ENTERPRISE', this.id);
+		this.AddRemoveError();
 	},
 	methods: {
 		addQuestion(result) {
@@ -54,6 +55,13 @@ export default{
 		},
 		removeQuestion(number) {
 			this.questions.splice(number, 1);
+		},
+		AddRemoveError() {
+			const inputs = Array.from(document.querySelectorAll('#survey input'));
+
+			inputs.map((input) => {
+				input.addEventListener('focus', this.removeError);
+			});
 		},
 		removeError(event) {
 			this.edited = true;
@@ -122,7 +130,7 @@ export default{
 						<div class="box-body">
 							<div class="form-group">
 								<label>{{ 'title' | translate | capitalize }}</label>
-								<input type="text" class="form-control survey__title" :placeholder="'title' | translate | capitalize" @focus="removeError($event)" :value="survey.title">
+								<input type="text" class="form-control survey__title" :placeholder="'title' | translate | capitalize" :value="survey.title">
 			                </div>
 							<div class="form-group">
 								<label>{{ 'categoria' | translate | capitalize }}</label>

@@ -13,6 +13,9 @@ export default {
 			],
 		};
 	},
+	mounted() {
+		this.AddRemoveError();
+	},
 	methods: {
 		addOption() {
 			this.options.push({});
@@ -54,6 +57,13 @@ export default {
 			}
 
 			this.$emit('newQuestion', result);
+		},
+		AddRemoveError() {
+			const inputs = Array.from(document.querySelectorAll('#new-question input'));
+
+			inputs.map((input) => {
+				input.addEventListener('focus', this.removeError);
+			});
 		},
 		removeError(event) {
 			methods.removeError(event);
@@ -117,7 +127,7 @@ export default {
 				<div class="modal-body">
 					<div class="form-group">
 						<label>{{ 'title' | translate  | capitalize }}</label>
-						<input type="text" class="form-control" name="title" placeholder="Título" @focus="removeError($event)">
+						<input type="text" class="form-control" name="title" placeholder="Título">
 					</div>
 					<div class="form-group">
 						<label>{{ 'type' | translate | capitalize }}</label>
@@ -130,22 +140,22 @@ export default {
 					<div id="traffic_light" v-if="type == 'traffic_light'">
 						<div class="form-group">
 							<label>Verde</label>
-							<input type="text" class="form-control" data-unit="green" placeholder="Verde" @focus="removeError($event)">
+							<input type="text" class="form-control" data-unit="green" placeholder="Verde">
 						</div>
 						<div class="form-group">
 							<label>Amarelo</label>
-							<input type="text" class="form-control" data-unit="amarelo" placeholder="Amarelo" @focus="removeError($event)">
+							<input type="text" class="form-control" data-unit="amarelo" placeholder="Amarelo">
 						</div>
 						<div class="form-group">
 							<label>Vermelho</label>
-							<input type="text" class="form-control" data-unit="vermelho" placeholder="Vermelho" @focus="removeError($event)">
+							<input type="text" class="form-control" data-unit="vermelho" placeholder="Vermelho">
 						</div>
 					</div>
 					<div id="multiple" v-if="type == 'multiple'">
 						<div class="form-group" v-for="(option, index) in options">
 							<button type="button" aria-label="Excluir" class="close" @click="removeOption(index)"><span aria-hidden="true">×</span></button>
 							<label>{{ 'option' | translate | capitalize }} {{ index + 1 }}</label>
-							<input type="text" class="form-control" :placeholder="'insert_option' | translate | capitalize" @focus="removeError($event)">
+							<input type="text" class="form-control" :placeholder="'insert_option' | translate | capitalize">
 						</div>
 						<button type="button" class="btn btn-primary" @click="addOption(); removeError($event)">{{ 'add' | translate | capitalize }} {{ 'option' | translate }}</button>
 					</div>
