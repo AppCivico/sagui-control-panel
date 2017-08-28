@@ -1,4 +1,4 @@
-/* eslint-disable no-undef, arrow-body-style, no-param-reassign */
+/* eslint-disable no-undef, arrow-body-style, no-param-reassign, no-console */
 
 import Vue from 'vue';
 import Vuex from 'vuex';
@@ -6,8 +6,8 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
-// const api = 'http://localhost:3000';
-const api = 'https://fakeapi.eokoe.com';
+const api = 'http://localhost:3000';
+// const api = 'https://fakeapi.eokoe.com';
 
 axios.interceptors.request.use((config) => {
 	document.querySelector('.loading').classList.remove('close');
@@ -210,7 +210,7 @@ const store = new Vuex.Store({
 			});
 		},
 		LOAD_AGENTS_LIST({ commit }, id) { // eslint-disable-line no-unused-vars
-			axios.get(`${api}/agents`).then((response) => {
+			axios.get(`${api}/agents?enterprise=${id}`).then((response) => {
 				commit('SET_AGENTS_LIST', { list: response.data });
 			}, (err) => {
 				console.error(err);
