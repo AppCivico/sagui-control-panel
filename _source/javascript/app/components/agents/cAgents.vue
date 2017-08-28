@@ -14,15 +14,22 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch('LOAD_AGENTS_LIST', this.selectedEnterprise);
+		this.AddRemoveError();
 	},
 	methods: {
+		AddRemoveError() {
+			const inputs = Array.from(document.querySelectorAll('#new-agent input'));
+
+			inputs.map((input) => {
+				input.addEventListener('focus', this.removeError);
+			});
+		},
 		removeError(event) {
-			this.edited = true;
 			methods.removeError(event);
 		},
-		validate(event) {
+		validate() {
 			let valid = true;
-			const inputs = Array.from(event.target.parentNode.querySelector('input'));
+			const inputs = Array.from(document.querySelectorAll('#new-agent input'));
 
 			inputs.map((input) => {
 				if (input.value === '') {
@@ -30,6 +37,14 @@ export default {
 					valid = false;
 				}
 			});
+
+			if (valid) {
+				const agent = {};
+				inputs.map((input) => {
+					agent[input.getAttribute('name')] = input.value;
+				});
+				// insert here function to save the new agent, then dispatch load agents again
+			}
 		},
 	},
 };
@@ -63,16 +78,16 @@ export default {
 						<div class="box-header with-border">
 							<h3 class="box-title">{{ 'register' | translate | capitalize }} {{ 'agent' | translate }}</h3>
 						</div>
-						<div class="box-body">
+						<div class="box-body" id="new-agent">
 							<div class="form-group">
 								<label>{{ 'name' | translate | capitalize }}</label>
-								<input type="text" class="form-control" name="name" @focus="removeError($event)">
+								<input type="text" class="form-control" name="name">
 					        </div>
 					        <div class="form-group">
 								<label>{{ 'gadget' | translate | capitalize }}</label>
-								<input type="text" class="form-control" name="gadget" @focus="removeError($event)">
+								<input type="text" class="form-control" name="gadget">
 					        </div>
-					        <button type="button" class="btn btn-block btn-success" @click="validate($event)">{{ 'register' | translate | capitalize }} {{ 'agent' | translate }}</button>
+					        <button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'agent' | translate }}</button>
 						</div>
 					</div>
 				</div>
