@@ -69,35 +69,40 @@
   		"number": "LID01",
   		"gadget": "Tablet Samsung 01",
   		"name": "Fulano de tal e tal",
-  		"surveys": 37
+  		"surveys": 37,
+  		"enterprise": 1
   	},
   	{
   		"id": 2,
   		"number": "LID02",
   		"gadget": "Tablet Samsung 02",
   		"name": "Fulano de tal e tal",
-  		"surveys": 15
+  		"surveys": 15,
+  		"enterprise": 1
   	},
   	{
   		"id": 3,
   		"number": "LID03",
   		"gadget": "Tablet Samsung 01",
   		"name": "Fulano de tal e tal",
-  		"surveys": 10
+  		"surveys": 10,
+  		"enterprise": 1
   	},
   	{
   		"id": 4,
   		"number": "LID04",
   		"gadget": "Tablet Samsung 02",
   		"name": "Fulano de tal e tal",
-  		"surveys": 223
+  		"surveys": 223,
+  		"enterprise": 2
   	},
   	{
   		"id": 5,
   		"number": "LID05",
   		"gadget": "Tablet Samsung 01",
   		"name": "Fulano de tal e tal",
-  		"surveys": 45
+  		"surveys": 45,
+  		"enterprise": 2
   	}
   ],
   "categories": [
