@@ -157,7 +157,7 @@ const store = new Vuex.Store({
 			.then((response) => {
 				if (response.statusText === 'Created') {
 					commit('SET_ALERT_MESSAGE', { res: { message: 'Nova categoria salva' } });
-					store.dispatch('LOAD_CATEGORIES_LIST');
+					store.dispatch('LOAD_CATEGORIES_LIST', data.enterprise);
 					$('#new-category').modal('hide');
 				}
 			}, (err) => {
@@ -190,7 +190,7 @@ const store = new Vuex.Store({
 			.then((response) => {
 				if (response.statusText === 'OK') {
 					commit('SET_ALERT_MESSAGE', { res: { message: 'Categoria alterada' } });
-					store.dispatch('LOAD_CATEGORIES_LIST');
+					store.dispatch('LOAD_CATEGORIES_LIST', data.enterprise);
 					$('#new-category').modal('hide');
 				}
 			}, (err) => {
