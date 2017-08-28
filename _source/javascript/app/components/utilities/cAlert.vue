@@ -15,7 +15,7 @@ export default {
 		ifRedirect() {
 			if (this.redirect.state === true) {
 				const path = this.redirect.path;
-				this.$store.dispatch('CHANGE_REDIRECT', { state: false, path: '' });
+				this.$store.dispatch('CHANGE_REDIRECT', { state: false, path });
 				router.go(path);
 			}
 		},
