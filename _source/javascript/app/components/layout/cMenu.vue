@@ -1,6 +1,21 @@
 <script>
 export default{
 	name: 'cMenu',
+	data() {
+		return {
+			selected: false,
+		};
+	},
+	computed: {
+		selectedEnterprise() {
+			return this.$store.state.selectedEnterprise;
+		},
+	},
+	watch: {
+		selectedEnterprise() {
+			this.selected = true;
+		},
+	},
 };
 </script>
 
@@ -16,31 +31,33 @@ export default{
 					<span>{{ 'enterprises' | translate | capitalize }}</span>
 				</router-link>
 			</li>
-			<li class="treeview">
-				<a href="#">
-					<i class="fa fa-pie-chart"></i>
-					<span>{{ 'surveys' | translate | capitalize }}</span>
-					<span class="pull-right-container">
-						<i class="fa fa-angle-left pull-right"></i>
-					</span>
-				</a>
-				<ul class="treeview-menu">
-					<li><router-link to="/categories"><i class="fa fa-circle-o"></i> {{ 'categories' | translate | capitalize }}</router-link></li>
-					<li><router-link to=""><i class="fa fa-circle-o"></i> {{ 'results' | translate | capitalize }}</router-link></li>
-				</ul>
-			</li>
-			<li class="treeview">
-				<router-link to="/agents">
-					<i class="fa fa-users"></i>
-					<span>{{ 'agents' | translate | capitalize }}</span>
-				</router-link>
-			</li>
-			<li class="treeview">
-				<router-link to="/notifications">
-					<i class="fa fa-bell"></i>
-					<span>{{ 'notifications' | translate | capitalize }}</span>
-				</router-link>
-			</li>
+			<template v-if="selected">
+				<li class="treeview">
+					<a href="#">
+						<i class="fa fa-pie-chart"></i>
+						<span>{{ 'surveys' | translate | capitalize }}</span>
+						<span class="pull-right-container">
+							<i class="fa fa-angle-left pull-right"></i>
+						</span>
+					</a>
+					<ul class="treeview-menu">
+						<li><router-link to="/categories"><i class="fa fa-circle-o"></i> {{ 'categories' | translate | capitalize }}</router-link></li>
+						<li><router-link to=""><i class="fa fa-circle-o"></i> {{ 'results' | translate | capitalize }}</router-link></li>
+					</ul>
+				</li>
+				<li class="treeview">
+					<router-link to="/agents">
+						<i class="fa fa-users"></i>
+						<span>{{ 'agents' | translate | capitalize }}</span>
+					</router-link>
+				</li>
+				<li class="treeview">
+					<router-link to="/notifications">
+						<i class="fa fa-bell"></i>
+						<span>{{ 'notifications' | translate | capitalize }}</span>
+					</router-link>
+				</li>
+			</template>
 		</ul>
 	</section>
 	<!-- /.sidebar -->
