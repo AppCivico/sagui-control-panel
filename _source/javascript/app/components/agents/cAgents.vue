@@ -2,14 +2,17 @@
 import methods from '../../methods';
 
 export default {
-	name: 'cCategories',
+	name: 'cAgents',
 	computed: {
 		agents() {
 			return this.$store.state.agents;
 		},
+		selectedEnterprise() {
+			return this.$store.state.selectedEnterprise;
+		},
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_AGENTS_LIST');
+		this.$store.dispatch('LOAD_AGENTS_LIST', this.selectedEnterprise);
 	},
 	methods: {
 		removeError(event) {
