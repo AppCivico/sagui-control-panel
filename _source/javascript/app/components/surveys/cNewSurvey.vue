@@ -17,9 +17,12 @@ export default{
 		categories() {
 			return this.$store.state.categories;
 		},
+		selectedEnterprise() {
+			return this.$store.state.selectedEnterprise;
+		},
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_CATEGORIES_LIST');
+		this.$store.dispatch('LOAD_CATEGORIES_LIST', this.selectedEnterprise);
 	},
 	data() {
 		return {

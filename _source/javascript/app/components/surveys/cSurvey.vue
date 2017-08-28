@@ -30,9 +30,12 @@ export default{
 		questions() {
 			return this.$store.state.survey.questions;
 		},
+		selectedEnterprise() {
+			return this.$store.state.selectedEnterprise;
+		},
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_CATEGORIES_LIST');
+		this.$store.dispatch('LOAD_CATEGORIES_LIST', this.selectedEnterprise);
 		this.$store.dispatch('LOAD_SURVEY', this.id);
 		this.$store.dispatch('CHANGE_SELECTED_ENTERPRISE', this.id);
 	},
