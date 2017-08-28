@@ -1,4 +1,5 @@
 <script>
+import Vue from 'vue';
 import methods from '../../methods';
 
 export default {
@@ -19,8 +20,16 @@ export default {
 			this.edited = true;
 			methods.removeError(event);
 		},
-		validate() {
+		validate(event) {
+			let valid = true;
+			const inputs = Array.from(event.target.parentNode.querySelector('input'));
 
+			inputs.map((input) => {
+				if (input.value === '') {
+					methods.addError(input.parentNode, Vue.i18n.translate('required-field'));
+					valid = false;
+				}
+			});
 		},
 	},
 };
@@ -63,7 +72,7 @@ export default {
 								<label>{{ 'gadget' | translate | capitalize }}</label>
 								<input type="text" class="form-control" name="gadget" @focus="removeError($event)">
 					        </div>
-					        <button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'agent' | translate }}</button>
+					        <button type="button" class="btn btn-block btn-success" @click="validate($event)">{{ 'register' | translate | capitalize }} {{ 'agent' | translate }}</button>
 						</div>
 					</div>
 				</div>

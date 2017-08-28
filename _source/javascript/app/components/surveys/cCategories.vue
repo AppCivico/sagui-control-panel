@@ -60,7 +60,7 @@ export default {
 			this.$store.dispatch('LOAD_SURVEYS_LIST', id);
 			setTimeout(() => {
 				if (this.surveys.length > 0) {
-					this.surveys.map((survey) => { // eslint-disable-line array-callback-return
+					this.surveys.map((survey) => {
 						this.removeSurvey(survey.id);
 					});
 				}

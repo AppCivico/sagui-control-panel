@@ -55,7 +55,7 @@ export default {
 		createEnterprise(form) {
 			const valuesArray = Array.from(form.querySelectorAll('input'));
 			const values = {};
-			valuesArray.map((el) => { // eslint-disable-line array-callback-return
+			valuesArray.map((el) => {
 				values[el.name] = el.value;
 			});
 

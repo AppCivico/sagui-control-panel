@@ -13,7 +13,7 @@ const methods = {
 	},
 	cleanAllErros(form) {
 		const errors = Array.from(form.querySelectorAll('.has-error'));
-		errors.map((error) => { // eslint-disable-line array-callback-return
+		errors.map((error) => {
 			const helpBlock = error.querySelector('.help-block');
 			error.removeChild(helpBlock);
 			error.classList.remove('has-error');

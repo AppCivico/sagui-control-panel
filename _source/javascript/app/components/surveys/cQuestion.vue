@@ -34,7 +34,7 @@ export default {
 
 			if (result.type === 'traffic_light') {
 				const answers = Array.from(modal.querySelectorAll('#traffic_light input[type="text"]'));
-				answers.map((answer) => { // eslint-disable-line array-callback-return
+				answers.map((answer) => {
 					const item = {
 						unit: answer.getAttribute('data-unit'),
 						title: answer.value,
@@ -45,7 +45,7 @@ export default {
 
 			if (result.type === 'multiple') {
 				const answers = Array.from(modal.querySelectorAll('#multiple input[type="text"]'));
-				answers.map((answer) => { // eslint-disable-line array-callback-return
+				answers.map((answer) => {
 					const item = {
 						title: answer.value,
 					};
@@ -79,7 +79,7 @@ export default {
 			}
 			if (type.value === 'multiple') {
 				const options = Array.from(document.querySelectorAll('#multiple input[type="text"]'));
-				options.map((option) => { // eslint-disable-line array-callback-return
+				options.map((option) => {
 					if (option.value === '') {
 						methods.addError(option.parentNode, 'Este campo é obrigatório');
 						valid = false;
@@ -88,7 +88,7 @@ export default {
 			}
 			if (type.value === 'traffic_light') {
 				const options = Array.from(document.querySelectorAll('#traffic_light input[type="text"]'));
-				options.map((option) => { // eslint-disable-line array-callback-return
+				options.map((option) => {
 					if (option.value === '') {
 						methods.addError(option.parentNode, Vue.i18n.translate('required-field'));
 						valid = false;
