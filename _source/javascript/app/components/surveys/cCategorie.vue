@@ -8,6 +8,11 @@ export default {
 		category: Object,
 		isEditing: Boolean,
 	},
+	computed: {
+		selectedEnterprise() {
+			return this.$store.state.selectedEnterprise;
+		},
+	},
 	methods: {
 		cleanFields() {
 			const inputs = Array.from(document.querySelectorAll('#new-category input'));
@@ -34,6 +39,7 @@ export default {
 					const category = {
 						title: title.value,
 						id: this.category.id,
+						enteprise: this.selectedEnterprise,
 					};
 					this.$store.dispatch('EDIT_CATEGORY', category);
 				} else {

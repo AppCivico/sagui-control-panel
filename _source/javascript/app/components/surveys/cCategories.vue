@@ -25,6 +25,9 @@ export default {
 		surveys() {
 			return this.$store.state.surveys;
 		},
+		selectedEnterprise() {
+			return this.$store.state.selectedEnterprise;
+		},
 	},
 	watch: {
 		confirm(newValue) {
@@ -34,7 +37,7 @@ export default {
 		},
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_CATEGORIES_LIST');
+		this.$store.dispatch('LOAD_CATEGORIES_LIST', this.selectedEnterprise);
 	},
 	methods: {
 		removeSurvey(id) {
@@ -64,7 +67,7 @@ export default {
 				this.$store.dispatch('DELETE_CATEGORY', id);
 				setTimeout(() => {
 					this.$store.dispatch('EDIT_CONFIRM_STATE', false);
-					this.$store.dispatch('LOAD_CATEGORIES_LIST');
+					this.$store.dispatch('LOAD_CATEGORIES_LIST', this.selectedEnterprise);
 				}, 1000);
 			}, 100);
 		},

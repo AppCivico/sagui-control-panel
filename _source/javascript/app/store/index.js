@@ -48,8 +48,8 @@ const store = new Vuex.Store({
 		survey: {},
 	},
 	actions: {
-		LOAD_CATEGORIES_LIST({ commit }) {
-			axios.get(`${api}/categories`).then((response) => {
+		LOAD_CATEGORIES_LIST({ commit }, id) {
+			axios.get(`${api}/categories?enterprise=${id}`).then((response) => {
 				commit('SET_CATEGORIES_LIST', { list: response.data });
 			}, (err) => {
 				console.error(err);
