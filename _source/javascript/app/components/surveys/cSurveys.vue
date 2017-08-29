@@ -33,7 +33,7 @@ export default {
 		<section class="content">
 			<div class="box box-solid">
 				<div v-if="surveys.length < 1" class="alert alert-info">
-					Nenhuma enquete cadastrada nesta categoria.
+					{{ 'no-survey' | translate }}
 				</div>
 				<div class="box-body no-padding" v-if="surveys.length >= 1">
 					<ul class="nav nav-pills nav-stacked">

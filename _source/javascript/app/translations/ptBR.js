@@ -9,6 +9,7 @@ const ptBr = {
 	"add": "adicionar",
 	"agent": "agente",
 	"agents": "agentes",
+	"answer": "resposta",
 	"answers": "respostas",
 	"cancel": "cancelar",
 	"cases": "ocorrências",
@@ -69,5 +70,9 @@ const ptBr = {
 
 	// notifications
 	"not-read": "não lidos",
+
+	// empty page
+	"no-complaints": "Nenhum apontamento cadastrado nesse empreendimento.",
+	"no-survey": "Nenhuma enquete cadastrada nesta categoria.",
 };
 export { ptBr as default };

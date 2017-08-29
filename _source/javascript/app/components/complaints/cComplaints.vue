@@ -52,7 +52,7 @@ export default {
 		<!-- Main content -->
 		<section class="content">
 			<div v-if="complaints.length < 1" class="alert alert-info">
-				Nenhum apontamento cadastrado nesse empreendimento.
+				{{ 'no-complaints' | translate }}
 			</div>
 			<div class="row">
 				<div class="col-md-6" v-for="complaint in complaints">
