@@ -56,10 +56,23 @@ export default {
 			</div>
 			<div class="row">
 				<div class="col-md-6" v-for="complaint in complaints">
-					<h4><router-link to="/">{{ complaint.title }}</router-link> <span v-if="remainingActions(complaint.actions)">Faltam: {{ remainingActions(complaint.actions) }} confirmações</span></h4>
-					<span>{{ complaint.address }}</span><br>
-					<span><strong>Categoria:</strong> {{ categoryName(complaint.category) }}</span>
-					<p>{{ complaint.description }}</p>
+					<div class="box box-solid">
+						<div class="box-header with-border">
+							<h3 class="box-title"><router-link to="/">{{ complaint.title }}</router-link> <span v-if="remainingActions(complaint.actions)">Faltam: {{ remainingActions(complaint.actions) }} confirmações</span></h3>
+						</div>
+						<div class="box-body">
+							<span>{{ complaint.address }}</span><br>
+							<span><strong>Categoria:</strong> {{ categoryName(complaint.category) }}</span><br><br>
+							<p>{{ complaint.description }}</p>
+
+							<template v-if="status === 'case'">
+								<h4>Respostas:</h4>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ultrices ante nec tristique placerat. Mauris lacus elit, sagittis sit amet neque vel, malesuada ultrices elit. Praesent hendrerit viverra elit sit amet accumsan.</p>
+								<button type="button" class="btn btn-info">{{ 'new' | translate | capitalize }} {{ 'answer' | translate }}</button>
+							</template>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</section>
