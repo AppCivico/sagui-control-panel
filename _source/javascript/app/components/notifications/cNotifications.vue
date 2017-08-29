@@ -1,6 +1,6 @@
 <script>
 export default {
-	name: 'cCategories',
+	name: 'cNotifications',
 	computed: {
 		notifications() {
 			return this.$store.state.notifications;
