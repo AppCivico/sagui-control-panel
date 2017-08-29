@@ -10,6 +10,12 @@ export default {
 			return this.$store.state.selectedEnterprise;
 		},
 	},
+	watch: {
+		status() {
+			console.log('mudou');
+			this.$store.dispatch('LOAD_COMPLAINTS_LIST', { enterprise: this.selectedEnterprise, status: this.status });
+		},
+	},
 	mounted() {
 		this.$store.dispatch('LOAD_COMPLAINTS_LIST', { enterprise: this.selectedEnterprise, status: this.status });
 	},
