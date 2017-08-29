@@ -46,6 +46,12 @@ export default{
 					</ul>
 				</li>
 				<li class="treeview">
+					<router-link to="/complaints">
+						<i class="fa fa-hand-o-right"></i>
+						<span>{{ 'complaints' | translate | capitalize }}</span>
+					</router-link>
+				</li>
+				<li class="treeview">
 					<router-link to="/agents">
 						<i class="fa fa-users"></i>
 						<span>{{ 'agents' | translate | capitalize }}</span>
