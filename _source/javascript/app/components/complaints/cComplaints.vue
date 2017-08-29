@@ -1,6 +1,7 @@
 <script>
 export default {
 	name: 'cComplaints',
+	props: ['status'],
 	computed: {
 		complaints() {
 			return this.$store.state.complaints;
@@ -10,7 +11,7 @@ export default {
 		},
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_COMPLAINTS_LIST', { enterprise: this.selectedEnterprise, status: 'complaint' });
+		this.$store.dispatch('LOAD_COMPLAINTS_LIST', { enterprise: this.selectedEnterprise, status: this.status });
 	},
 	methods: {
 	},

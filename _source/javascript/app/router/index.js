@@ -67,9 +67,10 @@ export default new Router({
 			component: cAgents,
 		},
 		{
-			path: '/complaints',
+			path: '/complaints/:status',
 			name: 'Complaints',
 			component: cComplaints,
+			props: true,
 		},
 	],
 });

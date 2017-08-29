@@ -46,7 +46,7 @@ export default{
 					</ul>
 				</li>
 				<li class="treeview">
-					<router-link to="/complaints">
+					<router-link to="/complaints/complaint">
 						<i class="fa fa-hand-o-right"></i>
 						<span>{{ 'complaints' | translate | capitalize }}</span>
 					</router-link>
