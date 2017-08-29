@@ -6,8 +6,8 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
-// const api = 'http://localhost:3000';
-const api = 'https://fakeapi.eokoe.com';
+const api = 'http://localhost:3000';
+// const api = 'https://fakeapi.eokoe.com';
 
 axios.interceptors.request.use((config) => {
 	document.querySelector('.loading').classList.remove('close');
@@ -32,6 +32,7 @@ const store = new Vuex.Store({
 		agents: [],
 		alertMessage: '',
 		categories: [],
+		complaints: [],
 		confirm: {
 			message: '',
 			state: false,
@@ -217,6 +218,14 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
+		LOAD_COMPLAINTS_LIST({ commit }, options) { // eslint-disable-line no-unused-vars
+			axios.get(`${api}/agents?status=${option.status}&enteprise=${option.enterprise}`).then((response) => {
+				commit('SET_COMPLAINTS_LIST', { list: response.data });
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			});
+		},
 	},
 	mutations: {
 		SET_ALERT_MESSAGE(state, { res }) {
@@ -265,6 +274,9 @@ const store = new Vuex.Store({
 		},
 		SET_AGENTS_LIST(state, { list }) {
 			state.agents = list;
+		},
+		SET_COMPLAINTS_LIST(state, { list }) {
+			state.complaints = list;
 		},
 	},
 	getters: {
