@@ -43,7 +43,9 @@ export default {
 	<div>
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
-			<h1>{{ 'complaints' | translate | capitalize }}
+			<h1 v-if="status === 'complaint'">{{ 'complaints' | translate | capitalize }}
+			</h1>
+			<h1 v-if="status === 'case'">{{ 'cases' | translate | capitalize }}
 			</h1>
 		</section>
 
