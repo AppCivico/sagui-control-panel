@@ -286,12 +286,12 @@
   	{
   		"id": 3,
   		"category": 2,
-  		"enterprise": 2,
-  		"status": "complaint",
+  		"enterprise": 1,
+  		"status": "cases",
   		"title": "Água suja 3",
   		"address": "Rio Xingu, Pará Brasil",
   		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ultrices ante nec",
-  		"actions": 15
+  		"actions": 31
   	},
   	{
   		"id": 4,
@@ -306,7 +306,7 @@
   	{
   		"id": 5,
   		"category": 3,
-  		"enterprise": 1,
+  		"enterprise": 2,
   		"status": "complaint",
   		"title": "Água suja 5",
   		"address": "Rio Xingu, Pará Brasil",

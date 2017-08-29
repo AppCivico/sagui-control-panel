@@ -2,7 +2,7 @@
 export default {
 	name: 'cComplaints',
 	computed: {
-		notifications() {
+		complaints() {
 			return this.$store.state.complaints;
 		},
 		selectedEnterprise() {
@@ -29,12 +29,12 @@ export default {
 		<section class="content">
 			<div class="box box-solid">
 				<div class="box-body">
-					<!--<template v-for="notification in notifications">
-						<div :class="'callout callout-'+ notification.level">
-							<h4><router-link :to="notification.link">{{ notification.title }}</router-link></h4>
-							<p><router-link :to="notification.link">{{ notification.description }}</router-link></p>
+					<template v-for="complaint in complaints">
+						<div>
+							<h4><router-link to="/">{{ complaint.title }}</router-link></h4>
+							<p>{{ complaint.description }}</p>
 						</div>
-					</template>-->
+					</template>
 				</div>
 			</div>
 		</section>

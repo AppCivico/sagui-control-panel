@@ -219,7 +219,7 @@ const store = new Vuex.Store({
 			});
 		},
 		LOAD_COMPLAINTS_LIST({ commit }, options) { // eslint-disable-line no-unused-vars
-			axios.get(`${api}/agents?status=${option.status}&enteprise=${option.enterprise}`).then((response) => {
+			axios.get(`${api}/complaints?status=${options.status}&enterprise=${options.enterprise}`).then((response) => {
 				commit('SET_COMPLAINTS_LIST', { list: response.data });
 			}, (err) => {
 				console.error(err);
