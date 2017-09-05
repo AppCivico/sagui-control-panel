@@ -45,7 +45,7 @@ export default {
 		<section class="content-header">
 			<h1 v-if="status === 'complaint'">{{ 'complaints' | translate | capitalize }}
 			</h1>
-			<h1 v-if="status === 'case'">{{ 'cases' | translate | capitalize }}
+			<h1 v-else>{{ 'cases' | translate | capitalize }}
 			</h1>
 		</section>
 
@@ -53,7 +53,7 @@ export default {
 		<section class="content">
 			<div v-if="complaints.length < 1" class="alert alert-info">
 				<template v-if="status === 'complaint'">{{ 'no-complaints' | translate }}</template>
-				<template v-if="status === 'case'">{{ 'no-cases' | translate }}</template>
+				<template v-else>{{ 'no-cases' | translate }}</template>
 			</div>
 			<div class="row">
 				<div class="col-md-6" v-for="complaint in complaints">

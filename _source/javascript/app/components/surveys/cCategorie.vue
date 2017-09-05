@@ -71,19 +71,19 @@ export default {
 						<span aria-hidden="true">×</span>
 					</button>
 					<h4 v-if="this.isEditing" class="modal-title">{{ 'edit' | translate  | capitalize }} {{ 'categorie' | translate }}</h4>
-					<h4 v-if="!this.isEditing" class="modal-title">{{ 'new' | translate  | capitalize }} {{ 'categorie' | translate }}</h4>
+					<h4 v-else class="modal-title">{{ 'new' | translate  | capitalize }} {{ 'categorie' | translate }}</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
 						<label>{{ 'title' | translate  | capitalize }}</label>
 						<input v-if="this.isEditing" type="text" class="form-control" name="title" placeholder="Título" :value="this.category.title">
-						<input v-if="!this.isEditing" type="text" class="form-control" name="title" placeholder="Título">
+						<input v-else type="text" class="form-control" name="title" placeholder="Título">
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default pull-left" data-dismiss="modal" @click="cleanFields()">{{ 'cancel' | translate | capitalize }}</button>
 					<button v-if="this.isEditing" type="button" class="btn btn-primary" @click="validate()">{{ 'edit' | translate | capitalize }}</button>
-					<button v-if="!this.isEditing" type="button" class="btn btn-primary" @click="validate()">{{ 'add' | translate | capitalize }}</button>
+					<button v-else type="button" class="btn btn-primary" @click="validate()">{{ 'add' | translate | capitalize }}</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->

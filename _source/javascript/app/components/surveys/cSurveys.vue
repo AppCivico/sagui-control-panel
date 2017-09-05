@@ -35,7 +35,7 @@ export default {
 				<div v-if="surveys.length < 1" class="alert alert-info">
 					{{ 'no-survey' | translate }}
 				</div>
-				<div class="box-body no-padding" v-if="surveys.length >= 1">
+				<div class="box-body no-padding" v-else>
 					<ul class="nav nav-pills nav-stacked">
 						<li v-for="survey in surveys">
 							<router-link :to="'/surveys/'+survey.id">
