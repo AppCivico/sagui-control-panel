@@ -52,7 +52,8 @@ export default {
 		<!-- Main content -->
 		<section class="content">
 			<div v-if="complaints.length < 1" class="alert alert-info">
-				{{ 'no-complaints' | translate }}
+				<template v-if="status === 'complaint'">{{ 'no-complaints' | translate }}</template>
+				<template v-if="status === 'case'">{{ 'no-cases' | translate }}</template>
 			</div>
 			<div class="row">
 				<div class="col-md-6" v-for="complaint in complaints">
