@@ -6,21 +6,27 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
-// const api = 'http://localhost:3000';
-const api = 'https://fakeapi.eokoe.com';
+const api = 'http://localhost:3000';
+const devapi = 'http://dev-sagui-api.eokoe.com/v1';
+// const api = 'https://fakeapi.eokoe.com';
 
 axios.interceptors.request.use((config) => {
-	document.querySelector('.loading').classList.remove('close');
+	const loading = document.querySelector('.loading');
+	if (loading) {
+		loading.classList.remove('close');
+	}
 	return config;
 }, (error) => {
 	// Do something with request error
 	return Promise.reject(error);
 });
 
-
 // Add a response interceptor
 axios.interceptors.response.use((response) => {
-	document.querySelector('.loading').classList.add('close');
+	const loading = document.querySelector('.loading');
+	if (loading) {
+		loading.classList.add('close');
+	}
 	return response;
 }, (error) => {
 	// Do something with response error
@@ -29,6 +35,7 @@ axios.interceptors.response.use((response) => {
 
 const store = new Vuex.Store({
 	state: {
+		api_key: '',
 		agents: [],
 		alertMessage: '',
 		categories: [],
@@ -47,8 +54,25 @@ const store = new Vuex.Store({
 		selectedEnterprise: '',
 		surveys: [],
 		survey: {},
+		user: {},
 	},
 	actions: {
+		AUTHENTICATION({ commit }, user) {
+			const data = JSON.stringify(user);
+			console.log(data);
+			axios({
+				method: 'POST',
+				url: `${devapi}/auth/signin`,
+				data: user,
+				headers: { 'Content-Type': 'application/json' },
+			})
+			.then((response) => {
+				console.log(response);
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			});
+		},
 		LOAD_CATEGORIES_LIST({ commit }, id) {
 			axios.get(`${api}/categories?enterprise=${id}`).then((response) => {
 				commit('SET_CATEGORIES_LIST', { list: response.data });
