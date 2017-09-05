@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+import cLogin from '../components/login/cLogin.vue';
 import cCategories from '../components/surveys/cCategories.vue';
 import cNewSurvey from '../components/surveys/cNewSurvey.vue';
 import cSurveys from '../components/surveys/cSurveys.vue';
@@ -17,7 +18,12 @@ export default new Router({
 	mode: 'history',
 	routes: [
 		{
-			path: '/',
+			path: '',
+			name: 'Login',
+			component: cLogin,
+		},
+		{
+			path: '/enterprises',
 			name: 'Empreendimentos',
 			component: cListEnterprises,
 		},
