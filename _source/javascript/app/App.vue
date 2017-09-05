@@ -16,16 +16,21 @@ export default {
 
 <template>
 	<div id="app">
-		<div class="loading">
-			<i class="fa fa-refresh fa-spin"></i>
-		</div>
-		<div class="wrapper">
-			<c-header></c-header>
-			<c-menu></c-menu>
-			<div class="content-wrapper">
-				<router-view></router-view>
+		<template v-if="$route.path !== '/'">
+			<div class="loading">
+				<i class="fa fa-refresh fa-spin"></i>
 			</div>
-		</div>
+			<div class="wrapper">
+				<c-header ></c-header>
+				<c-menu></c-menu>
+				<div class="content-wrapper">
+					<router-view></router-view>
+				</div>
+			</div>
+		</template>
+		<template v-else>
+			<router-view></router-view>
+		</template>
 		<c-alert></c-alert>
 	</div>
 </template>
