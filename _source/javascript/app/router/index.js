@@ -9,7 +9,6 @@ import cEnterprise from '../components/enterprises/cEnterprise.vue';
 import cListEnterprises from '../components/enterprises/cListEnterprises.vue';
 import cNewEnterprise from '../components/enterprises/cNewEnterprise.vue';
 import cNotifications from '../components/notifications/cNotifications.vue';
-import cAgents from '../components/agents/cAgents.vue';
 import cComplaints from '../components/complaints/cComplaints.vue';
 
 Vue.use(Router);
@@ -60,11 +59,6 @@ export default new Router({
 			path: '/notifications',
 			name: 'Notifications',
 			component: cNotifications,
-		},
-		{
-			path: '/agents',
-			name: 'Agents',
-			component: cAgents,
 		},
 		{
 			path: '/complaints/:status',
