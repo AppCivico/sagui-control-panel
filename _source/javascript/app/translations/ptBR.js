@@ -73,6 +73,7 @@ const ptBr = {
 
 	// empty page
 	"no-complaints": "Nenhum apontamento cadastrado nesse empreendimento.",
+	"no-cases": "Nenhuma ocorrência registrada nesse empreendimento.",
 	"no-survey": "Nenhuma enquete cadastrada nesta categoria.",
 };
 export { ptBr as default };
