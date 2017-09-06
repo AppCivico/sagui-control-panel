@@ -35,7 +35,6 @@ axios.interceptors.response.use((response) => {
 
 const store = new Vuex.Store({
 	state: {
-		api_key: '',
 		agents: [],
 		alertMessage: '',
 		categories: [],
@@ -58,19 +57,17 @@ const store = new Vuex.Store({
 	},
 	actions: {
 		AUTHENTICATION({ commit }, user) {
-			const data = JSON.stringify(user);
-			console.log(data);
 			axios({
 				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
 				url: `${devapi}/auth/signin`,
 				data: user,
-				headers: { 'Content-Type': 'application/json' },
 			})
 			.then((response) => {
-				console.log(response);
+				commit('SET_USER', { user: response.data });
 			}, (err) => {
 				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Dados incorretos. Tente novamente.' } });
 			});
 		},
 		LOAD_CATEGORIES_LIST({ commit }, id) {
@@ -252,6 +249,9 @@ const store = new Vuex.Store({
 		},
 	},
 	mutations: {
+		SET_USER(state, { user }) {
+			state.user = user;
+		},
 		SET_ALERT_MESSAGE(state, { res }) {
 			if (res.redirect) {
 				state.redirect.state = res.redirect.state;
