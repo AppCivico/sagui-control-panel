@@ -74,6 +74,9 @@ const store = new Vuex.Store({
 		SIGNOUT({ commit }) {
 			commit('CLEAR_USER');
 		},
+		EDIT_APIKEY({ commit }, apiKey) {
+			commit('SET_APIKEY', { apiKey });
+		},
 		LOAD_USER({ commit }, apiKey) {
 			axios.get(`${devapi}/user-profile?api_key=${apiKey}`).then((response) => {
 				commit('SET_USER', { user: response.data });
@@ -94,8 +97,7 @@ const store = new Vuex.Store({
 			commit('SET_ALERT_MESSAGE', { res: { message } });
 		},
 		LOAD_ENTERPRISES_LIST({ commit, state }) {
-			console.log('enterprise: ', state.apiKey);
-			axios.get(`${api}/enterprises`).then((response) => {
+			axios.get(`${devapi}/enterprises?api_key=${state.apiKey}`).then((response) => {
 				commit('SET_ENTERPRISES_LIST', { list: response.data });
 			}, (err) => {
 				console.error(err);
@@ -274,6 +276,9 @@ const store = new Vuex.Store({
 			if (user.api_key) {
 				state.apiKey = user.api_key;
 			}
+		},
+		SET_APIKEY(state, { apiKey }) {
+			state.apiKey = apiKey;
 		},
 		CLEAR_USER(state) {
 			state.user = {};
