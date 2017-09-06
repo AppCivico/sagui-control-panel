@@ -35,6 +35,7 @@ axios.interceptors.response.use((response) => {
 
 const store = new Vuex.Store({
 	state: {
+		apiKey: '',
 		agents: [],
 		alertMessage: '',
 		categories: [],
@@ -74,15 +75,7 @@ const store = new Vuex.Store({
 			commit('CLEAR_USER');
 		},
 		LOAD_USER({ commit }, apiKey) {
-			axios({
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					'X-API-KEY': apiKey,
-				},
-				url: `${devapi}/user-profile`,
-			})
-			.then((response) => {
+			axios.get(`${devapi}/user-profile?api_key=${apiKey}`).then((response) => {
 				commit('SET_USER', { user: response.data });
 			}, (err) => {
 				console.error(err);
@@ -100,7 +93,8 @@ const store = new Vuex.Store({
 		CHANGE_ALERT_MESSAGE({ commit }, message) {
 			commit('SET_ALERT_MESSAGE', { res: { message } });
 		},
-		LOAD_ENTERPRISES_LIST({ commit }) {
+		LOAD_ENTERPRISES_LIST({ commit, state }) {
+			console.log('enterprise: ', state.apiKey);
 			axios.get(`${api}/enterprises`).then((response) => {
 				commit('SET_ENTERPRISES_LIST', { list: response.data });
 			}, (err) => {
@@ -274,6 +268,11 @@ const store = new Vuex.Store({
 
 			if (!apiKey) {
 				sessionStorage.setItem('api-key', user.api_key);
+			} else {
+				state.apiKey = apiKey;
+			}
+			if (user.api_key) {
+				state.apiKey = user.api_key;
 			}
 		},
 		CLEAR_USER(state) {
