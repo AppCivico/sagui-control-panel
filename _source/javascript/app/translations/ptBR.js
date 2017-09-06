@@ -48,6 +48,7 @@ const ptBr = {
 	"responsable": "responsável",
 	"results": "resultados",
 	"save": "salvar",
+	"sign-out": "sair",
 	"short": "breve",
 	"survey": "enquete",
 	"surveys": "enquetes",
@@ -70,10 +71,12 @@ const ptBr = {
 
 	// notifications
 	"not-read": "não lidos",
+	"view-all": "visualizar todas",
 
 	// empty page
 	"no-complaints": "Nenhum apontamento cadastrado nesse empreendimento.",
 	"no-cases": "Nenhuma ocorrência registrada nesse empreendimento.",
 	"no-survey": "Nenhuma enquete cadastrada nesta categoria.",
+	"no-categories": "Nenhuma categoria registrada nesse empreendimento.",
 };
 export { ptBr as default };
