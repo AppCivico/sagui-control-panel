@@ -85,9 +85,60 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
-		LOAD_CATEGORIES_LIST({ commit }, id) {
-			axios.get(`${api}/categories?enterprise=${id}`).then((response) => {
+		LOAD_CATEGORIES_LIST({ commit, state }) {
+			axios.get(`${devapi}/enterprises/${state.selectedEnterprise}/axis?api_key=${state.apiKey}`).then((response) => {
 				commit('SET_CATEGORIES_LIST', { list: response.data });
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			});
+		},
+		ADD_CATEGORY({ commit, state }, data) {
+			axios({
+				method: 'POST',
+				url: `${devapi}/enterprises/${state.selectedEnterprise}/axis?api_key=${state.apiKey}`,
+				data,
+				headers: { 'Content-Type': 'application/json' },
+			})
+			.then((response) => {
+				if (response.statusText === 'Created') {
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Nova categoria salva' } });
+					store.dispatch('LOAD_CATEGORIES_LIST');
+					$('#new-category').modal('hide');
+				}
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			});
+		},
+		DELETE_CATEGORY({ commit, state }, id) {
+			axios({
+				method: 'DELETE',
+				url: `${devapi}/enterprises/${state.selectedEnterprise}/axis/${id}?api_key=${state.apiKey}`,
+				headers: { 'Content-Type': 'application/json' },
+			})
+			.then((response) => {
+				if (response.statusText === 'OK') {
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Categoria excluída' } });
+				}
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			});
+		},
+		EDIT_CATEGORY({ commit, state }, data) {
+			axios({
+				method: 'PUT',
+				url: `${devapi}/enterprises/${state.selectedEnterprise}/axis/${data.id}?api_key=${state.apiKey}`,
+				data: { name: data.name },
+				headers: { 'Content-Type': 'application/json' },
+			})
+			.then((response) => {
+				if (response.statusText === 'OK') {
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Categoria alterada' } });
+					store.dispatch('LOAD_CATEGORIES_LIST');
+					$('#new-category').modal('hide');
+				}
 			}, (err) => {
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
@@ -183,57 +234,6 @@ const store = new Vuex.Store({
 		},
 		EDIT_CONFIRM_STATE({ commit }, confirm) {
 			commit('SET_CONFIRM_STATE', { res: confirm });
-		},
-		ADD_CATEGORY({ commit }, data) {
-			axios({
-				method: 'POST',
-				url: `${api}/categories`,
-				data,
-				headers: { 'Content-Type': 'application/json' },
-			})
-			.then((response) => {
-				if (response.statusText === 'Created') {
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Nova categoria salva' } });
-					store.dispatch('LOAD_CATEGORIES_LIST', data.enterprise);
-					$('#new-category').modal('hide');
-				}
-			}, (err) => {
-				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
-			});
-		},
-		DELETE_CATEGORY({ commit }, id) {
-			axios({
-				method: 'DELETE',
-				url: `${api}/categories/${id}`,
-				headers: { 'Content-Type': 'application/json' },
-			})
-			.then((response) => {
-				if (response.statusText === 'OK') {
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Categoria excluída' } });
-				}
-			}, (err) => {
-				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
-			});
-		},
-		EDIT_CATEGORY({ commit }, data) {
-			axios({
-				method: 'PUT',
-				url: `${api}/categories/${data.id}`,
-				data,
-				headers: { 'Content-Type': 'application/json' },
-			})
-			.then((response) => {
-				if (response.statusText === 'OK') {
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Categoria alterada' } });
-					store.dispatch('LOAD_CATEGORIES_LIST', data.enterprise);
-					$('#new-category').modal('hide');
-				}
-			}, (err) => {
-				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
-			});
 		},
 		CHANGE_SELECTED_ENTERPRISE({ commit }, id) {
 			commit('SET_SELECTED_ENTERPRISE', { id });

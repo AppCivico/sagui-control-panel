@@ -25,9 +25,6 @@ export default {
 		surveys() {
 			return this.$store.state.surveys;
 		},
-		selectedEnterprise() {
-			return this.$store.state.selectedEnterprise;
-		},
 	},
 	watch: {
 		confirm(newValue) {
@@ -37,7 +34,7 @@ export default {
 		},
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_CATEGORIES_LIST', this.selectedEnterprise);
+		this.$store.dispatch('LOAD_CATEGORIES_LIST');
 	},
 	methods: {
 		removeSurvey(id) {
@@ -67,7 +64,7 @@ export default {
 				this.$store.dispatch('DELETE_CATEGORY', id);
 				setTimeout(() => {
 					this.$store.dispatch('EDIT_CONFIRM_STATE', false);
-					this.$store.dispatch('LOAD_CATEGORIES_LIST', this.selectedEnterprise);
+					this.$store.dispatch('LOAD_CATEGORIES_LIST');
 				}, 1000);
 			}, 100);
 		},
@@ -89,11 +86,14 @@ export default {
 		<!-- Main content -->
 		<section class="content">
 			<div class="box box-solid">
-				<div class="box-body no-padding">
+				<div v-if="categories.length < 1" class="alert alert-info">
+					{{ 'no-categories' | translate }}
+				</div>
+				<div class="box-body no-padding" v-else>
 					<ul class="nav nav-pills nav-stacked">
 						<li v-for="category in categories">
 							<router-link :to="'/surveys/category/'+category.id">
-								<i class="fa fa-list"></i> {{ category.title }}
+								<i class="fa fa-list"></i> {{ category.name }}
 
 								<button type="button" aria-label="Editar" data-toggle="modal" data-target="#new-category" class="edit-button" @click.stop.prevent="editCategorie(category)"><i class="fa fa-edit"></i></button>
 							</router-link>

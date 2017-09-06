@@ -45,16 +45,18 @@ export default {
 				valid = false;
 			}
 			if (valid) {
-				const enterpriseId = parseFloat(this.selectedEnterprise, 10);
 				if (this.isEditing) {
 					const category = {
-						title: title.value,
+						name: title.value,
 						id: this.category.id,
-						enterprise: enterpriseId,
 					};
 					this.$store.dispatch('EDIT_CATEGORY', category);
 				} else {
-					this.$store.dispatch('ADD_CATEGORY', { title: title.value, enterprise: enterpriseId });
+					const category = {
+						name: title.value,
+						dimension: 'category',
+					};
+					this.$store.dispatch('ADD_CATEGORY', category);
 				}
 			}
 		},
