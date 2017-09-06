@@ -104,8 +104,8 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
-		LOAD_ENTERPRISE({ commit }, id) {
-			axios.get(`${api}/enterprises/${id}`).then((response) => {
+		LOAD_ENTERPRISE({ commit, state }, id) {
+			axios.get(`${devapi}/enterprises/${id}?api_key=${state.apiKey}`).then((response) => {
 				commit('SET_ENTERPRISE', { res: response.data });
 			}, (err) => {
 				console.error(err);

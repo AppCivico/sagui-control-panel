@@ -136,60 +136,6 @@ export default {
 					</div>
 				</div>
 			</div>
-
-			<div class="row">
-				<div class="col-md-12">
-					<div class="box box-solid">
-						<div class="box-header with-border">
-							<h3 class="box-title">{{ 'agents' | translate | capitalize }}</h3>
-						</div>
-						<div class="box-body no-padding agents">
-							<ul class="users-list clearfix">
-								<li>
-									<div class="agents__code">LID01</div>
-									<a class="users-list-name" href="#">Tablet Samsung 02</a>
-									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
-								</li>
-								<li>
-									<div class="agents__code">LID02</div>
-									<a class="users-list-name" href="#">Tablet Samsung 02</a>
-									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
-								</li>
-								<li>
-									<div class="agents__code">LID03</div>
-									<a class="users-list-name" href="#">Tablet Samsung 02</a>
-									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
-								</li>
-								<li>
-									<div class="agents__code">LID04</div>
-									<a class="users-list-name" href="#">Tablet Samsung 02</a>
-									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
-								</li>
-								<li>
-									<div class="agents__code">LID05</div>
-									<a class="users-list-name" href="#">Tablet Samsung 02</a>
-									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
-								</li>
-								<li>
-									<div class="agents__code">LID06</div>
-									<a class="users-list-name" href="#">Tablet Samsung 02</a>
-									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
-								</li>
-								<li>
-									<div class="agents__code">LID07</div>
-									<a class="users-list-name" href="#">Tablet Samsung 02</a>
-									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
-								</li>
-								<li>
-									<div class="agents__code">LID08</div>
-									<a class="users-list-name" href="#">Tablet Samsung 02</a>
-									<span class="users-list-date">37 {{ 'answers' | translate }}</span>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
 		</section>
 		<!-- /.content -->
 	</div>
