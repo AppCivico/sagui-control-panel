@@ -73,6 +73,22 @@ const store = new Vuex.Store({
 		SIGNOUT({ commit }) {
 			commit('CLEAR_USER');
 		},
+		LOAD_USER({ commit }, apiKey) {
+			axios({
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-API-KEY': apiKey,
+				},
+				url: `${devapi}/user-profile`,
+			})
+			.then((response) => {
+				commit('SET_USER', { user: response.data });
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			});
+		},
 		LOAD_CATEGORIES_LIST({ commit }, id) {
 			axios.get(`${api}/categories?enterprise=${id}`).then((response) => {
 				commit('SET_CATEGORIES_LIST', { list: response.data });
