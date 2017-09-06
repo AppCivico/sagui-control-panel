@@ -70,6 +70,9 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Dados incorretos. Tente novamente.' } });
 			});
 		},
+		SIGNOUT({ commit }) {
+			commit('CLEAR_USER');
+		},
 		LOAD_CATEGORIES_LIST({ commit }, id) {
 			axios.get(`${api}/categories?enterprise=${id}`).then((response) => {
 				commit('SET_CATEGORIES_LIST', { list: response.data });
@@ -256,6 +259,9 @@ const store = new Vuex.Store({
 			if (!apiKey) {
 				sessionStorage.setItem('api-key', user.api_key);
 			}
+		},
+		CLEAR_USER(state) {
+			state.user = {};
 		},
 		SET_ALERT_MESSAGE(state, { res }) {
 			if (res.redirect) {
