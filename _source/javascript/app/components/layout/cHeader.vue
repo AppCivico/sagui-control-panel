@@ -12,6 +12,13 @@ export default {
 	mounted() {
 		this.$store.dispatch('LOAD_NOTIFICATIONS_LIST');
 	},
+	methods: {
+		logout() {
+			sessionStorage.removeItem('api-key');
+			this.$store.dispatch('SIGNOUT');
+			this.$router.push('/');
+		},
+	},
 };
 </script>
 
@@ -62,7 +69,7 @@ export default {
 							<!-- Menu Footer-->
 							<li class="user-footer">
 								<div class="pull-right">
-									<a href="#" class="btn btn-default btn-flat">{{ 'sign-out' | translate | capitalize }}</a>
+									<a href="#" class="btn btn-default btn-flat" @click.prevent="logout()">{{ 'sign-out' | translate | capitalize }}</a>
 								</div>
 							</li>
 						</ul>
