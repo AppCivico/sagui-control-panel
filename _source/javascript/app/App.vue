@@ -11,6 +11,29 @@ export default {
 		cMenu,
 		cAlert,
 	},
+	computed: {
+		user() {
+			return this.$store.state.user;
+		},
+	},
+	beforeCreate() {
+		// check if api-key exists, if negative, send user to login page
+		const apiKey = sessionStorage.getItem('api-key');
+		if (!apiKey) {
+			this.$router.push('/');
+		}
+	},
+	mounted() {
+		// check if api-key exists, if yes, load user data
+		if (Object.keys(this.user).length === 0 && sessionStorage.getItem('api-key')) {
+			this.getUser(sessionStorage.getItem('api-key'));
+		}
+	},
+	methods: {
+		getUser(apiKey) {
+			this.$store.dispatch('LOAD_USER', apiKey);
+		},
+	},
 };
 </script>
 
