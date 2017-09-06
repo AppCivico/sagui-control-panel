@@ -9,14 +9,29 @@ export default {
 			return this.$store.state.notifications;
 		},
 	},
+	beforeCreate() {
+		// check if api-key exists, if negative, send user to login page
+		const apiKey = sessionStorage.getItem('api-key');
+		if (!apiKey) {
+			this.$router.push('/');
+		}
+	},
 	mounted() {
 		this.$store.dispatch('LOAD_NOTIFICATIONS_LIST');
+
+		// check if api-key exists, if yes, load user data
+		if (Object.keys(this.user).length === 0 && sessionStorage.getItem('api-key')) {
+			this.getUser(sessionStorage.getItem('api-key'));
+		}
 	},
 	methods: {
 		logout() {
 			sessionStorage.removeItem('api-key');
 			this.$store.dispatch('SIGNOUT');
 			this.$router.push('/');
+		},
+		getUser(apiKey) {
+			this.$store.dispatch('LOAD_USER', apiKey);
 		},
 	},
 };
