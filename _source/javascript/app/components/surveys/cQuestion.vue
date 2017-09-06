@@ -144,11 +144,11 @@ export default {
 						</div>
 						<div class="form-group">
 							<label>Amarelo</label>
-							<input type="text" class="form-control" data-unit="amarelo" placeholder="Amarelo">
+							<input type="text" class="form-control" data-unit="yellow" placeholder="Amarelo">
 						</div>
 						<div class="form-group">
 							<label>Vermelho</label>
-							<input type="text" class="form-control" data-unit="vermelho" placeholder="Vermelho">
+							<input type="text" class="form-control" data-unit="red" placeholder="Vermelho">
 						</div>
 					</div>
 					<div id="multiple" v-if="type == 'multiple'">
