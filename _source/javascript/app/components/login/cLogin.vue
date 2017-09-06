@@ -1,6 +1,12 @@
 <script>
 export default {
 	name: 'cLogin',
+	beforeCreate() {
+		const apiKey = sessionStorage.getItem('api-key');
+		if (apiKey) {
+			this.$router.push('enterprises');
+		}
+	},
 	computed: {
 		user() {
 			return this.$store.state.user;
