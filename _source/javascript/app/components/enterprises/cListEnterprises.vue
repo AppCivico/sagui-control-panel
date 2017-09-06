@@ -30,7 +30,7 @@ export default {
 						<div class="info-box-content">
 							<span class="info-box-text">
 								<router-link :to="'/enterprises/'+enterprise.id">{{ enterprise.name }}</router-link>
-								<p>{{ enterprise.location.human_address }}</p>
+								<p>{{ enterprise.human_address }}</p>
 								<ul class="list-unstyled">
 									<li>{{ enterprise.data.complaints }} {{ 'complaints' | translate }}</li>
 									<li>{{ enterprise.data.cases }} {{ 'cases' | translate }}</li>
