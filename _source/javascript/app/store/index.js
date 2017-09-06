@@ -6,9 +6,9 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
-const api = 'http://localhost:3000';
+// const api = 'http://localhost:3000';
 const devapi = 'http://dev-sagui-api.eokoe.com/v1';
-// const api = 'https://fakeapi.eokoe.com';
+const api = 'https://fakeapi.eokoe.com';
 
 axios.interceptors.request.use((config) => {
 	const loading = document.querySelector('.loading');
