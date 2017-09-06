@@ -2,6 +2,9 @@
 export default {
 	name: 'cHeader',
 	computed: {
+		apiKey() {
+			return this.$store.state.apiKey;
+		},
 		user() {
 			return this.$store.state.user;
 		},
@@ -11,6 +14,11 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch('LOAD_NOTIFICATIONS_LIST');
+
+		// check if api-key exists, if yes, load user data
+		if (Object.keys(this.user).length === 0 && this.apiKey) {
+			this.$store.dispatch('LOAD_USER');
+		}
 	},
 	methods: {
 		logout() {

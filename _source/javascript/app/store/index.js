@@ -77,8 +77,8 @@ const store = new Vuex.Store({
 		EDIT_APIKEY({ commit }, apiKey) {
 			commit('SET_APIKEY', { apiKey });
 		},
-		LOAD_USER({ commit }, apiKey) {
-			axios.get(`${devapi}/user-profile?api_key=${apiKey}`).then((response) => {
+		LOAD_USER({ commit, state }) {
+			axios.get(`${devapi}/user-profile?api_key=${state.apiKey}`).then((response) => {
 				commit('SET_USER', { user: response.data });
 			}, (err) => {
 				console.error(err);
