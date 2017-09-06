@@ -82,6 +82,9 @@ export default {
 						</a>
 						<ul class="dropdown-menu">
 							<!-- Menu Footer-->
+							<li class="user-body">
+								{{ user.email }}
+							</li>
 							<li class="user-footer">
 								<div class="pull-right">
 									<a href="#" class="btn btn-default btn-flat" @click.prevent="logout()">{{ 'sign-out' | translate | capitalize }}</a>
