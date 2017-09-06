@@ -250,7 +250,12 @@ const store = new Vuex.Store({
 	},
 	mutations: {
 		SET_USER(state, { user }) {
+			const apiKey = sessionStorage.getItem('api-key');
 			state.user = user;
+
+			if (!apiKey) {
+				sessionStorage.setItem('api-key', user.api_key);
+			}
 		},
 		SET_ALERT_MESSAGE(state, { res }) {
 			if (res.redirect) {
