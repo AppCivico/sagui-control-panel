@@ -9,8 +9,6 @@ export default {
 	mounted() {
 		this.$store.dispatch('LOAD_NOTIFICATIONS_LIST');
 	},
-	methods: {
-	},
 };
 </script>
 
