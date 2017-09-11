@@ -54,6 +54,7 @@ const store = new Vuex.Store({
 		selectedEnterprise: '',
 		surveys: [],
 		survey: {},
+		currentSurvey: '',
 		user: {},
 	},
 	actions: {
@@ -188,8 +189,23 @@ const store = new Vuex.Store({
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.then((response) => {
+				commit('SET_CURRENT_SURVEY', { res: response.data });
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete salva.' } });
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			});
+		},
+		SAVE_QUESTION({ commit, state }, data) {
+			axios({
+				method: 'POST',
+				url: `${devapi}/surveys/${data.survey_id}/questions?api_key=${state.apiKey}`,
+				data,
+				headers: { 'Content-Type': 'application/json' },
+			})
+			.then((response) => {
 				console.log(response);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete salva', redirect: { state: true, path: '-1' } } });
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Questão salva' } });
 			}, (err) => {
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
@@ -320,6 +336,9 @@ const store = new Vuex.Store({
 		},
 		SET_SURVEY(state, { res }) {
 			state.survey = res;
+		},
+		SET_CURRENT_SURVEY(state, { res }) {
+			state.currentSurvey = res.id;
 		},
 		SET_SELECTED_ENTERPRISE(state, { id }) {
 			state.selectedEnterprise = id;

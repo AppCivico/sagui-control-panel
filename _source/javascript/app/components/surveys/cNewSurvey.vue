@@ -25,6 +25,9 @@ export default{
 				.findIndex(category => category.id === this.surveyCategory);
 			return this.categories[selectedIndex].id;
 		},
+		currentSurvey() {
+			return this.$store.state.currentSurvey;
+		},
 	},
 	mounted() {
 		this.$store.dispatch('LOAD_CATEGORIES_LIST');
@@ -67,6 +70,7 @@ export default{
 				axis_id: category,
 				enterprise_id: this.enterpriseId,
 				name: title,
+				description: title,
 			};
 		},
 		validate() {
@@ -131,7 +135,7 @@ export default{
 						<button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'survey' | translate }}</button>
 					</div>
 				</div>
-				<div class="col-md-6" v-if="questions.length > 0">
+				<div class="col-md-6" v-if="currentSurvey != ''">
 					<div class="box box-solid">
 						<div class="box-header with-border">
 							<h3 class="box-title">{{ 'questions' | translate | capitalize }}</h3>

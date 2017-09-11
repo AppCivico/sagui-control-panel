@@ -32,7 +32,7 @@ export default {
 		},
 		newQuestion(modal) {
 			const result = { answers: [] };
-			result.title = modal.querySelector('input[name="title"]').value;
+			result.name = modal.querySelector('input[name="title"]').value;
 			result.type = modal.querySelector('select').value;
 
 			if (result.type === 'traffic_light') {
@@ -56,6 +56,7 @@ export default {
 				});
 			}
 
+			this.$store.dispatch('SAVE_QUESTION', result);
 			this.$emit('newQuestion', result);
 		},
 		AddRemoveError() {
