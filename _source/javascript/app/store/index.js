@@ -179,17 +179,17 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
-		SAVE_SURVEY({ commit }, data) {
+		SAVE_SURVEY({ commit, state }, data) {
+			console.log(data);
 			axios({
 				method: 'POST',
-				url: `${api}/surveys`,
+				url: `${devapi}/surveys?api_key=${state.apiKey}`,
 				data,
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.then((response) => {
-				if (response.statusText === 'Created') {
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete salva', redirect: { state: true, path: '-1' } } });
-				}
+				console.log(response);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete salva', redirect: { state: true, path: '-1' } } });
 			}, (err) => {
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });

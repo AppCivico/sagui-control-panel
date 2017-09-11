@@ -17,6 +17,9 @@ export default{
 		categories() {
 			return this.$store.state.categories;
 		},
+		enterpriseId() {
+			return this.$store.state.selectedEnterprise;
+		},
 		selectedCategory() {
 			const selectedIndex = this.categories
 				.findIndex(category => category.id === this.surveyCategory);
@@ -61,9 +64,9 @@ export default{
 		},
 		createSurvey(title, category) {
 			return {
-				title,
-				category,
-				questions: this.questions,
+				axis_id: category,
+				enterprise_id: this.enterpriseId,
+				name: title,
 			};
 		},
 		validate() {
@@ -79,10 +82,6 @@ export default{
 			}
 			if (category.value === '') {
 				methods.addError(category.parentNode, Vue.i18n.translate('required-category'));
-				valid = false;
-			}
-			if (this.questions.length < 1) {
-				this.$store.dispatch('CHANGE_ALERT_MESSAGE', Vue.i18n.translate('minimum-question'));
 				valid = false;
 			}
 
@@ -129,9 +128,10 @@ export default{
 								</select>
 			                </div>
 						</div>
+						<button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'survey' | translate }}</button>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6" v-if="questions.length > 0">
 					<div class="box box-solid">
 						<div class="box-header with-border">
 							<h3 class="box-title">{{ 'questions' | translate | capitalize }}</h3>
@@ -170,9 +170,6 @@ export default{
 							<button type="button" class="btn btn-block btn-warning" data-toggle="modal" data-target="#new-question">{{ 'add' | translate | capitalize }} {{ 'question' | translate }}</button>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-12">
-					<button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'survey' | translate }}</button>
 				</div>
 
 				<c-question v-on:newQuestion="addQuestion"></c-question>
