@@ -16,6 +16,11 @@ export default {
 	mounted() {
 		this.AddRemoveError();
 	},
+	computed: {
+		currentSurvey() {
+			return this.$store.state.currentSurvey;
+		},
+	},
 	methods: {
 		addOption() {
 			this.options.push({});
@@ -32,7 +37,9 @@ export default {
 		},
 		newQuestion(modal) {
 			const result = { answers: [] };
+			result.survey_id = this.currentSurvey;
 			result.name = modal.querySelector('input[name="title"]').value;
+			result.description = modal.querySelector('input[name="title"]').value;
 			result.type = modal.querySelector('select').value;
 
 			if (result.type === 'traffic_light') {

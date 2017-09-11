@@ -181,7 +181,6 @@ const store = new Vuex.Store({
 			});
 		},
 		SAVE_SURVEY({ commit, state }, data) {
-			console.log(data);
 			axios({
 				method: 'POST',
 				url: `${devapi}/surveys?api_key=${state.apiKey}`,
@@ -197,6 +196,7 @@ const store = new Vuex.Store({
 			});
 		},
 		SAVE_QUESTION({ commit, state }, data) {
+			console.log(data);
 			axios({
 				method: 'POST',
 				url: `${devapi}/surveys/${data.survey_id}/questions?api_key=${state.apiKey}`,
