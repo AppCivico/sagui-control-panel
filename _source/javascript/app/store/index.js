@@ -164,7 +164,7 @@ const store = new Vuex.Store({
 			});
 		},
 		LOAD_SURVEYS_LIST({ commit, state }, id) {
-			axios.get(`${devapi}/surveys?axis_id=${id}?api_key=${state.apiKey}`).then((response) => {
+			axios.get(`${devapi}/surveys?axis_id=${id}&api_key=${state.apiKey}`).then((response) => {
 				commit('SET_SURVEYS_LIST', { list: response.data });
 			}, (err) => {
 				console.error(err);
