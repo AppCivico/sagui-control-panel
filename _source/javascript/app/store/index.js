@@ -44,6 +44,8 @@ const store = new Vuex.Store({
 			message: '',
 			state: false,
 		},
+		currentSurvey: '',
+		currentQuestion: '',
 		enterprises: [],
 		enterprise: {},
 		notifications: [],
@@ -54,7 +56,6 @@ const store = new Vuex.Store({
 		selectedEnterprise: '',
 		surveys: [],
 		survey: {},
-		currentSurvey: '',
 		user: {},
 	},
 	actions: {
@@ -204,7 +205,7 @@ const store = new Vuex.Store({
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.then((response) => {
-				console.log(response);
+				commit('SET_CURRENT_QUESTION', { res: response.data });
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Questão salva' } });
 			}, (err) => {
 				console.error(err);
@@ -339,6 +340,9 @@ const store = new Vuex.Store({
 		},
 		SET_CURRENT_SURVEY(state, { res }) {
 			state.currentSurvey = res.id;
+		},
+		SET_CURRENT_QUESTION(state, { res }) {
+			state.currentQuestion = res.id;
 		},
 		SET_SELECTED_ENTERPRISE(state, { id }) {
 			state.selectedEnterprise = id;

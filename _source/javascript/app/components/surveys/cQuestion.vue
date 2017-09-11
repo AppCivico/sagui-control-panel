@@ -11,6 +11,7 @@ export default {
 			options: [
 				{},
 			],
+			result: { answers: [] },
 		};
 	},
 	mounted() {
@@ -19,6 +20,16 @@ export default {
 	computed: {
 		currentSurvey() {
 			return this.$store.state.currentSurvey;
+		},
+		currentQuestion() {
+			return this.$store.state.currentQuestion;
+		},
+	},
+	watch: {
+		currentQuestion() {
+			this.$emit('newQuestion', this.result);
+			$('#new-question').modal('hide'); // eslint-disable-line no-undef
+			this.cleanFields();
 		},
 	},
 	methods: {
@@ -36,35 +47,33 @@ export default {
 			this.options = [{}];
 		},
 		newQuestion(modal) {
-			const result = { answers: [] };
-			result.survey_id = this.currentSurvey;
-			result.name = modal.querySelector('input[name="title"]').value;
-			result.description = modal.querySelector('input[name="title"]').value;
-			result.type = modal.querySelector('select').value;
+			this.result.survey_id = this.currentSurvey;
+			this.result.name = modal.querySelector('input[name="title"]').value;
+			this.result.description = modal.querySelector('input[name="title"]').value;
+			this.result.type = modal.querySelector('select').value;
 
-			if (result.type === 'traffic_light') {
+			if (this.result.type === 'traffic_light') {
 				const answers = Array.from(modal.querySelectorAll('#traffic_light input[type="text"]'));
 				answers.map((answer) => {
 					const item = {
 						unit: answer.getAttribute('data-unit'),
 						title: answer.value,
 					};
-					result.answers.push(item);
+					this.result.answers.push(item);
 				});
 			}
 
-			if (result.type === 'multiple') {
+			if (this.result.type === 'multiple') {
 				const answers = Array.from(modal.querySelectorAll('#multiple input[type="text"]'));
 				answers.map((answer) => {
 					const item = {
 						title: answer.value,
 					};
-					result.answers.push(item);
+					this.result.answers.push(item);
 				});
 			}
 
-			this.$store.dispatch('SAVE_QUESTION', result);
-			this.$emit('newQuestion', result);
+			this.$store.dispatch('SAVE_QUESTION', this.result);
 		},
 		AddRemoveError() {
 			const inputs = Array.from(document.querySelectorAll('#new-question input'));
@@ -115,8 +124,6 @@ export default {
 			}
 			if (valid) {
 				this.newQuestion(document.querySelector('#new-question'));
-				$('#new-question').modal('hide'); // eslint-disable-line no-undef
-				this.cleanFields();
 			}
 		},
 	},
