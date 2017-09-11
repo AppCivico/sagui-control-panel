@@ -17,12 +17,14 @@ export default{
 		categories() {
 			return this.$store.state.categories;
 		},
-		selectedEnterprise() {
-			return this.$store.state.selectedEnterprise;
+		selectedCategory() {
+			const selectedIndex = this.categories
+				.findIndex(category => category.id === this.surveyCategory);
+			return this.categories[selectedIndex].id;
 		},
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_CATEGORIES_LIST', this.selectedEnterprise);
+		this.$store.dispatch('LOAD_CATEGORIES_LIST');
 		this.AddRemoveError();
 	},
 	data() {
@@ -122,7 +124,7 @@ export default{
 								<label>{{ 'categoria' | translate | capitalize }}</label>
 								<select class="form-control new-survey__category" :value="this.surveyCategory" @change="checkCategorie($event)"  @focus="removeError($event)">
 									<option value="">Selecione a categoria</option>
-									<option v-for="(category, index) in categories" :value="index + 1">{{ category.title }}</option>
+									<option v-for="(category, index) in categories" :value="category.id">{{ category.name }}</option>
 									<option value="new-category">Inserir nova categoria</option>
 								</select>
 			                </div>
