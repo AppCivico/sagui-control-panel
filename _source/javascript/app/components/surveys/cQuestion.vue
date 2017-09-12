@@ -136,40 +136,42 @@ export default {
 					<h4 class="modal-title">{{ 'question' | translate  | capitalize }}</h4>
 				</div>
 				<div class="modal-body">
-					<div class="form-group">
-						<label>{{ 'title' | translate  | capitalize }}</label>
-						<input type="text" class="form-control" name="title" placeholder="Título">
-					</div>
-					<div class="form-group">
-						<label>{{ 'type' | translate | capitalize }}</label>
-						<select class="form-control" v-model="type" @focus="removeError($event)">
-							<option value="">Escolha um tipo de resposta</option>
-							<option v-for="option in types" :value="option">{{ option | translate | capitalize }}</option>
-						</select>
-					</div>
-					<hr>
-					<div id="traffic_light" v-if="type == 'traffic_light'">
+					<form>
 						<div class="form-group">
-							<label>Verde</label>
-							<input type="text" class="form-control" data-unit="green" placeholder="Verde">
+							<label>{{ 'title' | translate  | capitalize }}</label>
+							<input type="text" class="form-control" name="title" placeholder="Título">
 						</div>
 						<div class="form-group">
-							<label>Amarelo</label>
-							<input type="text" class="form-control" data-unit="yellow" placeholder="Amarelo">
+							<label>{{ 'type' | translate | capitalize }}</label>
+							<select class="form-control" v-model="type" @focus="removeError($event)">
+								<option value="">Escolha um tipo de resposta</option>
+								<option v-for="option in types" :value="option">{{ option | translate | capitalize }}</option>
+							</select>
 						</div>
-						<div class="form-group">
-							<label>Vermelho</label>
-							<input type="text" class="form-control" data-unit="red" placeholder="Vermelho">
+						<hr>
+						<div id="traffic_light" v-if="type == 'traffic_light'">
+							<div class="form-group">
+								<label>Verde</label>
+								<input type="text" class="form-control" data-unit="green" placeholder="Verde">
+							</div>
+							<div class="form-group">
+								<label>Amarelo</label>
+								<input type="text" class="form-control" data-unit="yellow" placeholder="Amarelo">
+							</div>
+							<div class="form-group">
+								<label>Vermelho</label>
+								<input type="text" class="form-control" data-unit="red" placeholder="Vermelho">
+							</div>
 						</div>
-					</div>
-					<div id="multiple" v-if="type == 'multiple'">
-						<div class="form-group" v-for="(option, index) in options">
-							<button type="button" aria-label="Excluir" class="close" @click="removeOption(index)"><span aria-hidden="true">×</span></button>
-							<label>{{ 'option' | translate | capitalize }} {{ index + 1 }}</label>
-							<input type="text" class="form-control" :placeholder="'insert_option' | translate | capitalize">
+						<div id="multiple" v-if="type == 'multiple'">
+							<div class="form-group" v-for="(option, index) in options">
+								<button type="button" aria-label="Excluir" class="close" @click="removeOption(index)"><span aria-hidden="true">×</span></button>
+								<label>{{ 'option' | translate | capitalize }} {{ index + 1 }}</label>
+								<input type="text" class="form-control" :placeholder="'insert_option' | translate | capitalize">
+							</div>
+							<button type="button" class="btn btn-primary" @click="addOption(); removeError($event)">{{ 'add' | translate | capitalize }} {{ 'option' | translate }}</button>
 						</div>
-						<button type="button" class="btn btn-primary" @click="addOption(); removeError($event)">{{ 'add' | translate | capitalize }} {{ 'option' | translate }}</button>
-					</div>
+					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default pull-left" data-dismiss="modal" @click="cleanFields()">{{ 'cancel' | translate | capitalize }}</button>
