@@ -30,6 +30,7 @@ export default{
 		},
 	},
 	mounted() {
+		this.$store.dispatch('CHANGE_CURRENT_SURVEY', { id: '' });
 		this.$store.dispatch('LOAD_CATEGORIES_LIST');
 		this.AddRemoveError();
 	},
