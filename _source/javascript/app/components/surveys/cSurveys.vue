@@ -39,7 +39,7 @@ export default {
 					<ul class="nav nav-pills nav-stacked">
 						<li v-for="survey in surveys">
 							<router-link :to="'/surveys/'+survey.id">
-								<i class="fa fa-file-text-o"></i> {{ survey.title }}
+								<i class="fa fa-file-text-o"></i> {{ survey.name }}
 								<button type="button" aria-label="Excluir" class="close" @click.stop.prevent="removeSurvey(survey.id)"><span aria-hidden="true">×</span></button>
 							</router-link>
 						</li>
