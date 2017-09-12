@@ -56,7 +56,8 @@ export default{
 			this.$store.dispatch('CHANGE_CURRENT_QUESTION', { id: question.id });
 			this.questionIndex = index;
 		},
-		removeQuestion(number) {
+		removeQuestion(question, number) {
+			this.$store.dispatch('DELETE_QUESTION', question.id);
 			this.questions.splice(number, 1);
 		},
 		AddRemoveError() {
@@ -151,7 +152,7 @@ export default{
 				                    			{{ question.name }}
 				                    		</a>
 				                    	</h4>
-				                    	<button type="button" aria-label="Excluir" class="close" @click="removeQuestion(index)"><span aria-hidden="true">×</span></button>
+				                    	<button type="button" aria-label="Excluir" class="close" @click="removeQuestion(question, index)"><span aria-hidden="true">×</span></button>
 				                    	<button type="button" aria-label="Editar" data-toggle="modal" data-target="#edit-question" class="edit-button" @click="setEditingQuestion(question, index)"><i class="fa fa-edit"></i></button>
 				                	</div>
 				                	<div :id="'collapse'+index" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
