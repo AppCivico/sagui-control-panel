@@ -30,14 +30,11 @@ export default{
 		questions() {
 			return this.$store.state.survey.questions;
 		},
-		selectedEnterprise() {
-			return this.$store.state.selectedEnterprise;
-		},
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_CATEGORIES_LIST', this.selectedEnterprise);
+		this.$store.dispatch('LOAD_CATEGORIES_LIST');
 		this.$store.dispatch('LOAD_SURVEY', this.id);
-		this.$store.dispatch('CHANGE_SELECTED_ENTERPRISE', this.id);
+		// this.$store.dispatch('CHANGE_SELECTED_ENTERPRISE', this.id);
 		this.AddRemoveError();
 	},
 	methods: {
@@ -130,13 +127,14 @@ export default{
 						<div class="box-body">
 							<div class="form-group">
 								<label>{{ 'title' | translate | capitalize }}</label>
-								<input type="text" class="form-control survey__title" :placeholder="'title' | translate | capitalize" :value="survey.title">
+								<input type="text" class="form-control survey__title" :placeholder="'title' | translate | capitalize" :value="survey.name">
 			                </div>
 							<div class="form-group">
 								<label>{{ 'categoria' | translate | capitalize }}</label>
-								<select class="form-control survey__category" @focus="removeError($event)" :value="survey.category" @change="checkCategorie($event)">
+								<!-- change value to axis_id -->
+								<select class="form-control survey__category" @focus="removeError($event)" :value="survey.id" @change="checkCategorie($event)">
 									<option value="">Selecione a categoria</option>
-									<option v-for="(category, index) in categories" :value="index + 1">{{ category.title }}</option>
+									<option v-for="(category, index) in categories" :value="category.id">{{ category.name }}</option>
 									<option value="new-category">Inserir nova categoria</option>
 								</select>
 			                </div>
@@ -184,7 +182,7 @@ export default{
 					</div>
 				</div>
 				<div class="col-md-12">
-					<button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'survey' | translate }}</button>
+					<button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'edit' | translate | capitalize }} {{ 'survey' | translate }}</button>
 				</div>
 
 				<c-question v-on:newQuestion="addQuestion"></c-question>

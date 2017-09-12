@@ -173,8 +173,8 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
-		LOAD_SURVEY({ commit }, id) {
-			axios.get(`${api}/surveys/${id}`).then((response) => {
+		LOAD_SURVEY({ commit, state }, id) {
+			axios.get(`${devapi}/surveys/${id}?api_key=${state.apiKey}`).then((response) => {
 				commit('SET_SURVEY', { res: response.data });
 			}, (err) => {
 				console.error(err);
