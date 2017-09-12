@@ -34,7 +34,7 @@ export default{
 	mounted() {
 		this.$store.dispatch('LOAD_CATEGORIES_LIST');
 		this.$store.dispatch('LOAD_SURVEY', this.id);
-		this.$store.dispatch('CHANGE_CURRENT_SURVEY', this.id);
+		this.$store.dispatch('CHANGE_CURRENT_SURVEY', { id: this.id });
 		this.AddRemoveError();
 	},
 	methods: {
@@ -48,6 +48,7 @@ export default{
 		},
 		setEditingQuestion(question, index) {
 			this.question = question;
+			this.$store.dispatch('CHANGE_CURRENT_QUESTION', { id: question.id });
 			this.questionIndex = index;
 		},
 		removeQuestion(number) {
@@ -137,6 +138,7 @@ export default{
 									<option value="new-category">Inserir nova categoria</option>
 								</select>
 			                </div>
+			                <button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'edit' | translate | capitalize }} {{ 'survey' | translate }}</button>
 						</div>
 					</div>
 				</div>
@@ -179,9 +181,6 @@ export default{
 							<button type="button" class="btn btn-block btn-warning" data-toggle="modal" data-target="#new-question">{{ 'add' | translate | capitalize }} {{ 'question' | translate }}</button>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-12">
-					<button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'edit' | translate | capitalize }} {{ 'survey' | translate }}</button>
 				</div>
 
 				<c-question v-on:newQuestion="addQuestion"></c-question>

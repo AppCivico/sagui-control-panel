@@ -50,6 +50,7 @@ export default{
 		},
 		setEditingQuestion(question, index) {
 			this.question = question;
+			this.$store.dispatch('CHANGE_CURRENT_QUESTION', { id: question.id });
 			this.questionIndex = index;
 		},
 		removeQuestion(number) {
@@ -131,8 +132,8 @@ export default{
 									<option value="new-category">Inserir nova categoria</option>
 								</select>
 			                </div>
+							<button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'survey' | translate }}</button>
 						</div>
-						<button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'survey' | translate }}</button>
 					</div>
 				</div>
 				<div class="col-md-6" v-if="currentSurvey != ''">
