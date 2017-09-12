@@ -147,7 +147,7 @@ export default{
 				                	<div class="box-header with-border">
 				                    	<h4 class="box-title">
 				                    		<a data-toggle="collapse" data-parent="#accordion" :href="'#collapse'+index" aria-expanded="false" class="collapsed">
-				                    			{{ question.title }}
+				                    			{{ question.name }}
 				                    		</a>
 				                    	</h4>
 				                    	<button type="button" aria-label="Excluir" class="close" @click="removeQuestion(index)"><span aria-hidden="true">×</span></button>
