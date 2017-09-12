@@ -202,11 +202,12 @@ const store = new Vuex.Store({
 		SAVE_QUESTION({ commit, state }, data) {
 			axios({
 				method: 'POST',
-				url: `${devapi}/surveys/${data.survey_id}/questions?api_key=${state.apiKey}`,
+				url: `${devapi}/surveys/${state.currentSurvey}/questions?api_key=${state.apiKey}`,
 				data,
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.then((response) => {
+				console.log(response);
 				commit('SET_CURRENT_QUESTION', { res: response.data });
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Questão salva' } });
 			}, (err) => {
@@ -219,15 +220,13 @@ const store = new Vuex.Store({
 			});
 		},
 		EDIT_QUESTION({ commit, state }, data) {
-			console.log(data);
 			axios({
-				method: 'POST',
-				url: `${devapi}/surveys/${state.currentSurvey}/questions/${data.id}?api_key=${state.apiKey}`,
+				method: 'PUT',
+				url: `${devapi}/surveys/${state.currentSurvey}/questions/${state.currentQuestion}?api_key=${state.apiKey}`,
 				data: data.question,
 				headers: { 'Content-Type': 'application/json' },
 			})
-			.then((response) => {
-				console.log(response);
+			.then(() => {
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Questão salva' } });
 			}, (err) => {
 				console.error(err);
@@ -237,6 +236,9 @@ const store = new Vuex.Store({
 					loading.classList.add('close');
 				}
 			});
+		},
+		CHANGE_CURRENT_QUESTION({ commit }, data) {
+			commit('SET_CURRENT_QUESTION', { res: data });
 		},
 		EDIT_SURVEY({ commit }, data) {
 			axios({
@@ -364,11 +366,12 @@ const store = new Vuex.Store({
 			state.survey = res;
 		},
 		SET_CURRENT_SURVEY(state, { res }) {
-			console.log(res);
-			state.currentSurvey = res;
+			state.currentSurvey = res.id;
+			console.log('curent survey:', res.id);
 		},
 		SET_CURRENT_QUESTION(state, { res }) {
 			state.currentQuestion = res.id;
+			console.log('curent question:', res.id);
 		},
 		SET_SELECTED_ENTERPRISE(state, { id }) {
 			state.selectedEnterprise = id;
