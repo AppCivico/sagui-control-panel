@@ -25,13 +25,6 @@ export default {
 			return this.$store.state.currentQuestion;
 		},
 	},
-	watch: {
-		currentQuestion() {
-			this.$emit('newQuestion', this.result);
-			$('#new-question').modal('hide'); // eslint-disable-line no-undef
-			this.cleanFields();
-		},
-	},
 	methods: {
 		addOption() {
 			this.options.push({});
@@ -74,6 +67,9 @@ export default {
 			}
 
 			this.$store.dispatch('SAVE_QUESTION', this.result);
+			this.$emit('newQuestion', this.result);
+			$('#new-question').modal('hide'); // eslint-disable-line no-undef
+			this.cleanFields();
 		},
 		AddRemoveError() {
 			const inputs = Array.from(document.querySelectorAll('#new-question input'));
