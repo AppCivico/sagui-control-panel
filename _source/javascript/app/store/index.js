@@ -210,6 +210,10 @@ const store = new Vuex.Store({
 			}, (err) => {
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				const loading = document.querySelector('.loading');
+				if (loading) {
+					loading.classList.add('close');
+				}
 			});
 		},
 		EDIT_SURVEY({ commit }, data) {
