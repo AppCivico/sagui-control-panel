@@ -37,7 +37,7 @@ export default {
 		},
 		editQuestion(modal) {
 			const result = { answers: [] };
-			result.title = modal.querySelector('input[name="title"]').value;
+			result.name = modal.querySelector('input[name="title"]').value;
 			result.type = modal.querySelector('select').value;
 
 			if (result.type === 'traffic_light') {
@@ -61,7 +61,8 @@ export default {
 				});
 			}
 
-			this.$emit('editQuestion', result);
+			// this.$emit('editQuestion', result);
+			this.$store.dispatch('EDIT_QUESTION', { question: result, id: this.question.id });
 		},
 		AddRemoveError() {
 			const inputs = Array.from(document.querySelectorAll('#edit-question input'));
@@ -132,7 +133,7 @@ export default {
 				<div class="modal-body">
 					<div class="form-group">
 						<label>{{ 'title' | translate  | capitalize }}</label>
-						<input type="text" class="form-control" name="title" placeholder="Título" :value="this.question.title">
+						<input type="text" class="form-control" name="title" placeholder="Título" :value="this.question.name">
 					</div>
 					<div class="form-group">
 						<label>{{ 'type' | translate | capitalize }}</label>

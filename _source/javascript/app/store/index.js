@@ -196,8 +196,10 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
+		CHANGE_CURRENT_SURVEY({ commit }, data) {
+			commit('SET_CURRENT_SURVEY', { res: data });
+		},
 		SAVE_QUESTION({ commit, state }, data) {
-			console.log(data);
 			axios({
 				method: 'POST',
 				url: `${devapi}/surveys/${data.survey_id}/questions?api_key=${state.apiKey}`,
@@ -206,6 +208,26 @@ const store = new Vuex.Store({
 			})
 			.then((response) => {
 				commit('SET_CURRENT_QUESTION', { res: response.data });
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Questão salva' } });
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				const loading = document.querySelector('.loading');
+				if (loading) {
+					loading.classList.add('close');
+				}
+			});
+		},
+		EDIT_QUESTION({ commit, state }, data) {
+			console.log(data);
+			axios({
+				method: 'POST',
+				url: `${devapi}/surveys/${state.currentSurvey}/questions/${data.id}?api_key=${state.apiKey}`,
+				data: data.question,
+				headers: { 'Content-Type': 'application/json' },
+			})
+			.then((response) => {
+				console.log(response);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Questão salva' } });
 			}, (err) => {
 				console.error(err);
@@ -342,7 +364,8 @@ const store = new Vuex.Store({
 			state.survey = res;
 		},
 		SET_CURRENT_SURVEY(state, { res }) {
-			state.currentSurvey = res.id;
+			console.log(res);
+			state.currentSurvey = res;
 		},
 		SET_CURRENT_QUESTION(state, { res }) {
 			state.currentQuestion = res.id;
