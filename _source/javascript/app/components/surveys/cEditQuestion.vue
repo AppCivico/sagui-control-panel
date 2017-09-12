@@ -61,8 +61,8 @@ export default {
 				});
 			}
 
-			// this.$emit('editQuestion', result);
 			this.$store.dispatch('EDIT_QUESTION', { question: result, id: this.question.id });
+			this.$emit('editQuestion', result);
 		},
 		AddRemoveError() {
 			const inputs = Array.from(document.querySelectorAll('#edit-question input'));
