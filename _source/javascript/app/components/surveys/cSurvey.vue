@@ -30,6 +30,11 @@ export default{
 		questions() {
 			return this.$store.state.survey.questions;
 		},
+		selectedCategory() {
+			const selectedIndex = this.categories
+				.findIndex(category => category.id === this.survey.axis[0]);
+			return this.categories[selectedIndex].name;
+		},
 	},
 	mounted() {
 		this.$store.dispatch('LOAD_CATEGORIES_LIST');
@@ -65,26 +70,19 @@ export default{
 			this.edited = true;
 			methods.removeError(event);
 		},
-		createSurvey(title, category) {
+		createSurvey(title) {
 			return {
-				title,
-				category,
-				questions: this.questions,
+				name: title,
 			};
 		},
 		validate() {
 			let valid = true;
 			const title = document.querySelector('.survey__title');
-			const category = document.querySelector('.survey__category');
 
 			methods.cleanAllErros(document.querySelector('#survey'));
 
 			if (title.value === '') {
 				methods.addError(title.parentNode, Vue.i18n.translate('required-field'));
-				valid = false;
-			}
-			if (category.value === '') {
-				methods.addError(category.parentNode, Vue.i18n.translate('required-category'));
 				valid = false;
 			}
 			if (this.questions.length < 1) {
@@ -94,7 +92,7 @@ export default{
 
 			if (valid) {
 				if (this.edited) {
-					const edited = this.createSurvey(title.value, category.value);
+					const edited = this.createSurvey(title.value);
 					this.$store.dispatch('EDIT_SURVEY', { id: this.survey.id, survey: edited });
 				} else {
 					this.$store.dispatch('CHANGE_ALERT_MESSAGE', 'Nenhuma alteração foi efetuada.');
@@ -128,15 +126,11 @@ export default{
 						<div class="box-body">
 							<div class="form-group">
 								<label>{{ 'title' | translate | capitalize }}</label>
-								<input type="text" class="form-control survey__title" :placeholder="'title' | translate | capitalize" :value="survey.name">
+								<input type="text" class="form-control survey__title" :placeholder="'title' | translate | capitalize" :value="survey.name" @change="this.edited == true">
 			                </div>
-							<div class="form-group">
+			                <div class="form-group">
 								<label>{{ 'categoria' | translate | capitalize }}</label>
-								<select class="form-control survey__category" @focus="removeError($event)" :value="survey.axis[0]" @change="checkCategorie($event)">
-									<option value="">Selecione a categoria</option>
-									<option v-for="(category, index) in categories" :value="category.id">{{ category.name }}</option>
-									<option value="new-category">Inserir nova categoria</option>
-								</select>
+								<input type="text" class="form-control survey__category" :value="selectedCategory" disabled>
 			                </div>
 			                <button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'edit' | translate | capitalize }} {{ 'survey' | translate }}</button>
 						</div>

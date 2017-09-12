@@ -240,10 +240,10 @@ const store = new Vuex.Store({
 		CHANGE_CURRENT_QUESTION({ commit }, data) {
 			commit('SET_CURRENT_QUESTION', { res: data });
 		},
-		EDIT_SURVEY({ commit }, data) {
+		EDIT_SURVEY({ commit, state }, data) {
 			axios({
 				method: 'PUT',
-				url: `${api}/surveys/${data.id}`,
+				url: `${devapi}/surveys/${data.id}?api_key=${state.apiKey}`,
 				data: data.survey,
 				headers: { 'Content-Type': 'application/json' },
 			})
