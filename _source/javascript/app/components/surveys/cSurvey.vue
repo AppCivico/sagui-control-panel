@@ -131,8 +131,7 @@ export default{
 			                </div>
 							<div class="form-group">
 								<label>{{ 'categoria' | translate | capitalize }}</label>
-								<!-- change value to axis_id -->
-								<select class="form-control survey__category" @focus="removeError($event)" :value="survey.id" @change="checkCategorie($event)">
+								<select class="form-control survey__category" @focus="removeError($event)" :value="survey.axis[0]" @change="checkCategorie($event)">
 									<option value="">Selecione a categoria</option>
 									<option v-for="(category, index) in categories" :value="category.id">{{ category.name }}</option>
 									<option value="new-category">Inserir nova categoria</option>
@@ -153,7 +152,7 @@ export default{
 				                	<div class="box-header with-border">
 				                    	<h4 class="box-title">
 				                    		<a data-toggle="collapse" data-parent="#accordion" :href="'#collapse'+index" aria-expanded="false" class="collapsed">
-				                    			{{ question.title }}
+				                    			{{ question.name }}
 				                    		</a>
 				                    	</h4>
 				                    	<button type="button" aria-label="Excluir" class="close" @click="removeQuestion(index)"><span aria-hidden="true">×</span></button>
