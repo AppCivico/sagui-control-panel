@@ -228,16 +228,15 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
-		DELETE_SURVEY({ commit }, id) {
+		DELETE_SURVEY({ commit, state }, id) {
 			axios({
 				method: 'DELETE',
-				url: `${api}/surveys/${id}`,
+				url: `${devapi}/surveys/${id}?api_key=${state.apiKey}`,
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.then((response) => {
-				if (response.statusText === 'OK') {
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete excluída' } });
-				}
+				console.log(response);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete excluída' } });
 			}, (err) => {
 				console.error(err);
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
