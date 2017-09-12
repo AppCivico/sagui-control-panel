@@ -18,6 +18,7 @@ export default{
 			edited: false,
 			question: {},
 			questionIndex: 0,
+			selectedCategory: '',
 		};
 	},
 	computed: {
@@ -30,26 +31,32 @@ export default{
 		questions() {
 			return this.$store.state.survey.questions;
 		},
-		selectedCategory() {
-			const selectedIndex = this.categories
-				.findIndex(category => category.id === this.survey.axis[0]);
-			return this.categories[selectedIndex].name;
-		},
 	},
 	mounted() {
 		this.$store.dispatch('LOAD_CATEGORIES_LIST');
 		this.$store.dispatch('LOAD_SURVEY', this.id);
 		this.$store.dispatch('CHANGE_CURRENT_SURVEY', { id: this.id });
 		this.AddRemoveError();
+
+		setTimeout(() => {
+			this.getSelectedCategory();
+		}, 1000);
 	},
 	methods: {
+		getSelectedCategory() {
+			const selectedIndex = this.categories
+				.findIndex(category => category.id === this.survey.axis[0]);
+			this.selectedCategory = this.categories[selectedIndex].name;
+		},
 		addQuestion(result) {
 			this.edited = true;
 			this.questions.push(result);
 		},
 		editQuestion(result) {
 			this.edited = true;
-			this.questions.splice(this.questionIndex, 1, result);
+			if (result) {
+				this.questions.splice(this.questionIndex, 1, result);
+			}
 		},
 		setEditingQuestion(question, index) {
 			this.question = question;
