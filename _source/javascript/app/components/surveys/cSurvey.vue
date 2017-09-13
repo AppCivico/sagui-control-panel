@@ -34,13 +34,11 @@ export default{
 	},
 	mounted() {
 		this.$store.dispatch('LOAD_CATEGORIES_LIST');
-		this.$store.dispatch('LOAD_SURVEY', this.id);
+		this.$store.dispatch('LOAD_SURVEY', this.id).then(() => {
+			this.getSelectedCategory();
+		});
 		this.$store.dispatch('CHANGE_CURRENT_SURVEY', { id: this.id });
 		this.AddRemoveError();
-
-		setTimeout(() => {
-			this.getSelectedCategory();
-		}, 1000);
 	},
 	methods: {
 		getSelectedCategory() {

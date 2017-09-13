@@ -88,11 +88,14 @@ const store = new Vuex.Store({
 			});
 		},
 		LOAD_CATEGORIES_LIST({ commit, state }) {
-			axios.get(`${devapi}/enterprises/${state.selectedEnterprise}/axis?api_key=${state.apiKey}`).then((response) => {
-				commit('SET_CATEGORIES_LIST', { list: response.data });
-			}, (err) => {
-				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			return new Promise((resolve) => {
+				axios.get(`${devapi}/enterprises/${state.selectedEnterprise}/axis?api_key=${state.apiKey}`).then((response) => {
+					commit('SET_CATEGORIES_LIST', { list: response.data });
+					resolve(response);
+				}, (err) => {
+					console.error(err);
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				});
 			});
 		},
 		ADD_CATEGORY({ commit, state }, data) {
@@ -114,18 +117,19 @@ const store = new Vuex.Store({
 			});
 		},
 		DELETE_CATEGORY({ commit, state }, id) {
-			axios({
-				method: 'DELETE',
-				url: `${devapi}/enterprises/${state.selectedEnterprise}/axis/${id}?api_key=${state.apiKey}`,
-				headers: { 'Content-Type': 'application/json' },
-			})
-			.then((response) => {
-				if (response.statusText === 'OK') {
+			return new Promise((resolve) => {
+				axios({
+					method: 'DELETE',
+					url: `${devapi}/enterprises/${state.selectedEnterprise}/axis/${id}?api_key=${state.apiKey}`,
+					headers: { 'Content-Type': 'application/json' },
+				})
+				.then((response) => {
 					commit('SET_ALERT_MESSAGE', { res: { message: 'Categoria excluída' } });
-				}
-			}, (err) => {
-				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+					resolve(response);
+				}, (err) => {
+					console.error(err);
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				});
 			});
 		},
 		EDIT_CATEGORY({ commit, state }, data) {
@@ -174,11 +178,14 @@ const store = new Vuex.Store({
 			});
 		},
 		LOAD_SURVEY({ commit, state }, id) {
-			axios.get(`${devapi}/surveys/${id}?api_key=${state.apiKey}`).then((response) => {
-				commit('SET_SURVEY', { res: response.data });
-			}, (err) => {
-				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			return new Promise((resolve) => {
+				axios.get(`${devapi}/surveys/${id}?api_key=${state.apiKey}`).then((response) => {
+					commit('SET_SURVEY', { res: response.data });
+					resolve(response);
+				}, (err) => {
+					console.error(err);
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				});
 			});
 		},
 		SAVE_SURVEY({ commit, state }, data) {
@@ -271,16 +278,19 @@ const store = new Vuex.Store({
 			});
 		},
 		DELETE_SURVEY({ commit, state }, id) {
-			axios({
-				method: 'DELETE',
-				url: `${devapi}/surveys/${id}?api_key=${state.apiKey}`,
-				headers: { 'Content-Type': 'application/json' },
-			})
-			.then((response) => {
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete excluída' } });
-			}, (err) => {
-				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			return new Promise((resolve) => {
+				axios({
+					method: 'DELETE',
+					url: `${devapi}/surveys/${id}?api_key=${state.apiKey}`,
+					headers: { 'Content-Type': 'application/json' },
+				})
+				.then((response) => {
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete excluída' } });
+					resolve(response);
+				}, (err) => {
+					console.error(err);
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				});
 			});
 		},
 		CHANGE_REDIRECT({ commit }, data) {

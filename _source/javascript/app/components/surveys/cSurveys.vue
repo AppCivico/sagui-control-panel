@@ -12,11 +12,9 @@ export default {
 	},
 	methods: {
 		removeSurvey(survey) {
-			this.$store.dispatch('DELETE_SURVEY', survey);
-			// Using timeout because there's no real API and I need to simulate it
-			setTimeout(() => {
+			this.$store.dispatch('DELETE_SURVEY', survey).then(() => {
 				this.$store.dispatch('LOAD_SURVEYS_LIST', this.id);
-			}, 500);
+			});
 		},
 	},
 };
