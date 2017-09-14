@@ -21,9 +21,6 @@ export default {
 		currentSurvey() {
 			return this.$store.state.currentSurvey;
 		},
-		currentQuestion() {
-			return this.$store.state.currentQuestion;
-		},
 	},
 	methods: {
 		addOption() {
