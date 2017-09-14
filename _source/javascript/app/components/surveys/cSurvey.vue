@@ -44,7 +44,9 @@ export default{
 		getSelectedCategory() {
 			const selectedIndex = this.categories
 				.findIndex(category => category.id === this.survey.axis[0]);
-			this.selectedCategory = this.categories[selectedIndex].name;
+			if (selectedIndex > 0) {
+				this.selectedCategory = this.categories[selectedIndex].name;
+			}
 		},
 		addQuestion(result) {
 			this.edited = true;
