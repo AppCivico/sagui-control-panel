@@ -15,7 +15,11 @@ export default {
 	methods: {
 		getIconsList() {
 			axios.get('https://rawgit.com/FortAwesome/Font-Awesome/master/src/icons.yml').then((response) => {
-				console.log(response.data);
+				const data = response.data;
+				const id = data.split('\n')
+					.filter(item => item.indexOf(' id:') > 0);
+				const array = id.map(item => item.replace('id:', '').trim());
+				console.log(array);
 			}, (err) => {
 				console.error(err);
 			});
