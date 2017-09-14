@@ -150,14 +150,17 @@ export default {
 						<div class="form-group">
 							<label>Verde</label>
 							<input type="text" class="form-control" data-unit="green" placeholder="Verde">
+							<input type="file" id="green-image">
 						</div>
 						<div class="form-group">
 							<label>Amarelo</label>
 							<input type="text" class="form-control" data-unit="yellow" placeholder="Amarelo">
+							<input type="file" id="yellow-image">
 						</div>
 						<div class="form-group">
 							<label>Vermelho</label>
 							<input type="text" class="form-control" data-unit="red" placeholder="Vermelho">
+							<input type="file" id="red-image">
 						</div>
 					</div>
 					<div id="multiple" v-if="type == 'multiple'">
