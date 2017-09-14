@@ -78,7 +78,7 @@ export default {
 				<div class="modal-body">
 					<div class="form-group">
 						<label>{{ 'title' | translate  | capitalize }}</label>
-						<input v-if="this.isEditing" type="text" class="form-control" name="title" placeholder="Título" :value="this.category.title">
+						<input v-if="this.isEditing" type="text" class="form-control" name="title" placeholder="Título" :value="this.category.name">
 						<input v-else type="text" class="form-control" name="title" placeholder="Título">
 					</div>
 				</div>
