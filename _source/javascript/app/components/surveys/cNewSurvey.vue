@@ -20,18 +20,12 @@ export default{
 		enterpriseId() {
 			return this.$store.state.selectedEnterprise;
 		},
-		selectedCategory() {
-			const selectedIndex = this.categories
-				.findIndex(category => category.id === this.surveyCategory);
-			return this.categories[selectedIndex].id;
-		},
 		currentSurvey() {
 			return this.$store.state.currentSurvey;
 		},
 	},
 	mounted() {
 		this.$store.dispatch('CHANGE_CURRENT_SURVEY', { id: '' });
-		this.$store.dispatch('LOAD_CATEGORIES_LIST');
 		this.AddRemoveError();
 	},
 	data() {
@@ -39,9 +33,18 @@ export default{
 			questions: [],
 			question: {},
 			questionIndex: 0,
+			saved: false,
+			selectedCategory: '',
 		};
 	},
 	methods: {
+		getSelectedCategory(id) {
+			const selectedIndex = this.categories
+				.findIndex(category => category.id === id);
+			if (selectedIndex > 0) {
+				this.selectedCategory = this.categories[selectedIndex].name;
+			}
+		},
 		addQuestion(result) {
 			this.questions.push(result.newQuestion);
 			this.questions[this.questions.length - 1].id = result.id;
@@ -96,7 +99,10 @@ export default{
 
 			if (valid) {
 				const newSurvey = this.createSurvey(title.value, category.value);
-				this.$store.dispatch('SAVE_SURVEY', newSurvey);
+				this.$store.dispatch('SAVE_SURVEY', newSurvey).then((res) => {
+					this.getSelectedCategory(category.value);
+					this.saved = true;
+				});
 			}
 		},
 		checkCategorie(event) {
@@ -128,7 +134,11 @@ export default{
 								<label>{{ 'title' | translate | capitalize }}</label>
 								<input type="text" class="form-control new-survey__title" :placeholder="'title' | translate | capitalize">
 			                </div>
-							<div class="form-group">
+			                <div class="form-group" v-if="saved">
+								<label>{{ 'categoria' | translate | capitalize }}</label>
+								<input type="text" class="form-control survey__category" :value="selectedCategory" disabled>
+			                </div>
+							<div class="form-group" v-else>
 								<label>{{ 'categoria' | translate | capitalize }}</label>
 								<select class="form-control new-survey__category" :value="this.surveyCategory" @change="checkCategorie($event)"  @focus="removeError($event)">
 									<option value="">Selecione a categoria</option>

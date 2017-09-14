@@ -189,18 +189,21 @@ const store = new Vuex.Store({
 			});
 		},
 		SAVE_SURVEY({ commit, state }, data) {
-			axios({
-				method: 'POST',
-				url: `${devapi}/surveys?api_key=${state.apiKey}`,
-				data,
-				headers: { 'Content-Type': 'application/json' },
-			})
-			.then((response) => {
-				commit('SET_CURRENT_SURVEY', { res: response.data });
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete salva.' } });
-			}, (err) => {
-				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			return new Promise((resolve) => {
+				axios({
+					method: 'POST',
+					url: `${devapi}/surveys?api_key=${state.apiKey}`,
+					data,
+					headers: { 'Content-Type': 'application/json' },
+				})
+				.then((response) => {
+					commit('SET_CURRENT_SURVEY', { res: response.data });
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete salva.' } });
+					resolve(response);
+				}, (err) => {
+					console.error(err);
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				});
 			});
 		},
 		CHANGE_CURRENT_SURVEY({ commit }, data) {
