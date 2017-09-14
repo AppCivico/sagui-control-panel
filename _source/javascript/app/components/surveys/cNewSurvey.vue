@@ -99,7 +99,7 @@ export default{
 
 			if (valid) {
 				const newSurvey = this.createSurvey(title.value, category.value);
-				this.$store.dispatch('SAVE_SURVEY', newSurvey).then((res) => {
+				this.$store.dispatch('SAVE_SURVEY', newSurvey).then(() => {
 					this.getSelectedCategory(category.value);
 					this.saved = true;
 				});
