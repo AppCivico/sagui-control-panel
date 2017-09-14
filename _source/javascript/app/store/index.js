@@ -207,22 +207,25 @@ const store = new Vuex.Store({
 			commit('SET_CURRENT_SURVEY', { res: data });
 		},
 		SAVE_QUESTION({ commit, state }, data) {
-			axios({
-				method: 'POST',
-				url: `${devapi}/surveys/${state.currentSurvey}/questions?api_key=${state.apiKey}`,
-				data,
-				headers: { 'Content-Type': 'application/json' },
-			})
-			.then((response) => {
-				commit('SET_CURRENT_QUESTION', { res: response.data });
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Questão salva' } });
-			}, (err) => {
-				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
-				const loading = document.querySelector('.loading');
-				if (loading) {
-					loading.classList.add('close');
-				}
+			return new Promise((resolve) => {
+				axios({
+					method: 'POST',
+					url: `${devapi}/surveys/${state.currentSurvey}/questions?api_key=${state.apiKey}`,
+					data,
+					headers: { 'Content-Type': 'application/json' },
+				})
+				.then((response) => {
+					commit('SET_CURRENT_QUESTION', { res: response.data });
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Questão salva' } });
+					resolve(response);
+				}, (err) => {
+					console.error(err);
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+					const loading = document.querySelector('.loading');
+					if (loading) {
+						loading.classList.add('close');
+					}
+				});
 			});
 		},
 		EDIT_QUESTION({ commit, state }, data) {

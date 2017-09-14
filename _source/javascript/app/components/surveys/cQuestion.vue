@@ -11,7 +11,6 @@ export default {
 			options: [
 				{},
 			],
-			result: { answers: [] },
 		};
 	},
 	mounted() {
@@ -37,36 +36,38 @@ export default {
 			this.options = [{}];
 		},
 		newQuestion(modal) {
-			this.result.survey_id = this.currentSurvey;
-			this.result.name = modal.querySelector('input[name="title"]').value;
-			this.result.description = modal.querySelector('input[name="title"]').value;
-			this.result.type = modal.querySelector('select').value;
+			const result = { answers: [] };
+			result.survey_id = this.currentSurvey;
+			result.name = modal.querySelector('input[name="title"]').value;
+			result.description = modal.querySelector('input[name="title"]').value;
+			result.type = modal.querySelector('select').value;
 
-			if (this.result.type === 'traffic_light') {
+			if (result.type === 'traffic_light') {
 				const answers = Array.from(modal.querySelectorAll('#traffic_light input[type="text"]'));
 				answers.map((answer) => {
 					const item = {
 						unit: answer.getAttribute('data-unit'),
 						title: answer.value,
 					};
-					this.result.answers.push(item);
+					result.answers.push(item);
 				});
 			}
 
-			if (this.result.type === 'multiple') {
+			if (result.type === 'multiple') {
 				const answers = Array.from(modal.querySelectorAll('#multiple input[type="text"]'));
 				answers.map((answer) => {
 					const item = {
 						title: answer.value,
 					};
-					this.result.answers.push(item);
+					result.answers.push(item);
 				});
 			}
 
-			this.$store.dispatch('SAVE_QUESTION', this.result);
-			this.$emit('newQuestion', this.result);
-			$('#new-question').modal('hide'); // eslint-disable-line no-undef
-			this.cleanFields();
+			this.$store.dispatch('SAVE_QUESTION', result).then((res) => {
+				this.$emit('newQuestion', { newQuestion: result, id: res.data.id });
+				$('#new-question').modal('hide'); // eslint-disable-line no-undef
+				this.cleanFields();
+			});
 		},
 		AddRemoveError() {
 			const inputs = Array.from(document.querySelectorAll('#new-question input'));

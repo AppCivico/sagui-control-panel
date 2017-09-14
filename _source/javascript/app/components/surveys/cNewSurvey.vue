@@ -43,11 +43,17 @@ export default{
 	},
 	methods: {
 		addQuestion(result) {
-			this.questions.push(result);
+			this.questions.push(result.newQuestion);
+			this.questions[this.questions.length - 1].id = result.id;
 		},
 		editQuestion(result) {
 			this.edited = true;
 			this.questions.splice(this.questionIndex, 1, result);
+		},
+		removeQuestion(question, number) {
+			this.$store.dispatch('DELETE_QUESTION', question.id).then(() => {
+				this.questions.splice(number, 1);
+			});
 		},
 		setEditingQuestion(question, index) {
 			this.question = question;
@@ -149,6 +155,7 @@ export default{
 				                    			{{ question.name }}
 				                    		</a>
 				                    	</h4>
+				                    	<button type="button" aria-label="Excluir" class="close" @click="removeQuestion(question, index)"><span aria-hidden="true">×</span></button>
 				                    	<button type="button" aria-label="Editar" data-toggle="modal" data-target="#edit-question" class="edit-button" @click="setEditingQuestion(question, index)"><i class="fa fa-edit"></i></button>
 				                	</div>
 				                	<div :id="'collapse'+index" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">

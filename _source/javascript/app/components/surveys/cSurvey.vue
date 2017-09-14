@@ -48,7 +48,8 @@ export default{
 		},
 		addQuestion(result) {
 			this.edited = true;
-			this.questions.push(result);
+			this.questions.push(result.newQuestion);
+			this.questions[this.questions.length - 1].id = result.id;
 		},
 		editQuestion(result) {
 			this.edited = true;
