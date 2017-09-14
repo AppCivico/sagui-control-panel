@@ -244,18 +244,19 @@ const store = new Vuex.Store({
 			});
 		},
 		DELETE_QUESTION({ commit, state }, id) {
-			axios({
-				method: 'DELETE',
-				url: `${devapi}/surveys/${state.currentSurvey}/questions/${id}?api_key=${state.apiKey}`,
-				headers: { 'Content-Type': 'application/json' },
-			})
-			.then((response) => {
-				if (response.statusText === 'OK') {
+			return new Promise((resolve) => {
+				axios({
+					method: 'DELETE',
+					url: `${devapi}/surveys/${state.currentSurvey}/questions/${id}?api_key=${state.apiKey}`,
+					headers: { 'Content-Type': 'application/json' },
+				})
+				.then((response) => {
 					commit('SET_ALERT_MESSAGE', { res: { message: 'Questão deletada' } });
-				}
-			}, (err) => {
-				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+					resolve(response);
+				}, (err) => {
+					console.error(err);
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				});
 			});
 		},
 		CHANGE_CURRENT_QUESTION({ commit }, data) {
