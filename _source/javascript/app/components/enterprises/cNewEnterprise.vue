@@ -61,15 +61,27 @@ export default {
 			this.polygon = path;
 		},
 		createEnterprise(form) {
-			const valuesArray = Array.from(form.querySelectorAll('input'));
-			const values = {};
-			valuesArray.map((el) => {
-				values[el.name] = el.value;
+			const enterpriseArray = Array.from(form.querySelectorAll('#enterprise-data input'));
+			const responsibleArray = Array.from(form.querySelectorAll('#responsible-data input'));
+			const values = { public: 0 };
+			const responsible = {};
+
+			enterpriseArray.map((el) => {
+				if (el.type !== 'file') {
+					values[el.name] = el.value;
+				}
 			});
 
-			values.addressPath = this.polygon;
+			responsibleArray.map((el) => {
+				if (el.name !== 'repeat-password') {
+					responsible[el.name] = el.value;
+				}
+			});
 
-			console.log(values);
+			values.responsible = responsible;
+			values.location = this.polygon;
+
+			this.$store.dispatch('SAVE_ENTERPRISE', values);
 		},
 		validate() {
 			let valid = true;
@@ -114,7 +126,7 @@ export default {
 						<div class="box-header with-border">
 							<h3 class="box-title">{{ 'datas' | translate | capitalize }} {{ 'of-m' | translate }} {{ 'enterprise' | translate }}</h3>
 						</div>
-						<div class="box-body">
+						<div class="box-body" id="enterprise-data">
 							<div class="form-group">
 								<label>{{ 'name' | translate | capitalize }}</label>
 								<input type="text" class="form-control" name="name">
@@ -124,8 +136,16 @@ export default {
 								<input type="text" class="form-control" name="description">
 			                </div>
 			                <div class="form-group">
+								<label>{{ 'name' | translate | capitalize }} {{ 'of' | translate }} {{ 'company' | translate }}</label>
+								<input type="text" class="form-control" name="company_name">
+			                </div>
+			                <div class="form-group">
+								<label>{{ 'contact' | translate | capitalize }} {{ 'of' | translate }} {{ 'company' | translate }}</label>
+								<input type="text" class="form-control" name="company_contact">
+			                </div>
+			                <div class="form-group">
 								<label>{{ 'location' | translate | capitalize }}</label>
-								<input type="text" class="form-control" id="autocomplete" name="location" @blur="setMap($event)" :placeholder="'insert-address' | translate">
+								<input type="text" class="form-control" id="autocomplete" name="human_address" @blur="setMap($event)" :placeholder="'insert-address' | translate">
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'photos' | translate | capitalize }}</label>
@@ -134,14 +154,14 @@ export default {
 						</div>
 					</div>
 
-					<div class="box box-solid">
+					<div class="box box-solid" id="responsible-data">
 						<div class="box-header with-border">
-							<h3 class="box-title">{{ 'datas' | translate | capitalize }}  {{ 'of-m' | translate }} {{ 'responsable' | translate }}</h3>
+							<h3 class="box-title">{{ 'datas' | translate | capitalize }}  {{ 'of-m' | translate }} {{ 'responsible' | translate }}</h3>
 						</div>
 						<div class="box-body">
 							<div class="form-group">
 								<label>{{ 'name' | translate | capitalize }}</label>
-								<input type="text" class="form-control" name="responsable">
+								<input type="text" class="form-control" name="name">
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'email' | translate | capitalize }}</label>
