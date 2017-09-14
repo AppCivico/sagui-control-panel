@@ -62,8 +62,9 @@ export default{
 			this.questionIndex = index;
 		},
 		removeQuestion(question, number) {
-			this.$store.dispatch('DELETE_QUESTION', question.id);
-			this.questions.splice(number, 1);
+			this.$store.dispatch('DELETE_QUESTION', question.id).then(() => {
+				this.questions.splice(number, 1);
+			});
 		},
 		AddRemoveError() {
 			const inputs = Array.from(document.querySelectorAll('#survey input'));
