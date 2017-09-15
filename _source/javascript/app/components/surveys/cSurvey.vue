@@ -42,8 +42,6 @@ export default{
 	},
 	methods: {
 		getSelectedCategory() {
-			console.log(this.categories);
-			console.log(this.survey.axis[0]);
 			const selectedIndex = this.categories
 				.findIndex(category => category.id === this.survey.axis[0]);
 			if (selectedIndex >= 0) {
