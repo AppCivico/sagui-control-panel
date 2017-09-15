@@ -41,7 +41,7 @@ export default{
 		getSelectedCategory(id) {
 			const selectedIndex = this.categories
 				.findIndex(category => category.id === id);
-			if (selectedIndex > 0) {
+			if (selectedIndex >= 0) {
 				this.selectedCategory = this.categories[selectedIndex].name;
 			}
 		},
