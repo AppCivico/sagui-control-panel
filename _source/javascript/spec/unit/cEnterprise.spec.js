@@ -8,23 +8,12 @@ import translations from '../../app/translations';
 import cEnterprise from '../../app/components/enterprises/cEnterprise.vue';
 
 describe('cEnterprise.vue', () => {
-	it('should translate content', () => {
+	it('should load store', () => {
 		Vue.use(router);
 		Vue.filter('capitalize', function (value) { // eslint-disable-line prefer-arrow-callback, func-names
 			if (!value) return '';
 			return value.toString().charAt(0).toUpperCase() + value.toString().slice(1);
 		});
-		const vm = new Vue({
-			el: document.createElement('div'),
-			store,
-			translations,
-			router,
-			render: h => h(cEnterprise),
-		});
-		expect(vm.$el.querySelector('.breadcrumb li:first-of-type').textContent).to.equal('Empreendimentos');
-	});
-	it('should load store', () => {
-		Vue.use(router);
 		const vm = new Vue({
 			el: document.createElement('div'),
 			store,
