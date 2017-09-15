@@ -9,6 +9,7 @@ import cSurvey from '../components/surveys/cSurvey.vue';
 import cEnterprise from '../components/enterprises/cEnterprise.vue';
 import cListEnterprises from '../components/enterprises/cListEnterprises.vue';
 import cNewEnterprise from '../components/enterprises/cNewEnterprise.vue';
+import cEditEnterprise from '../components/enterprises/cEditEnterprise.vue';
 import cNotifications from '../components/notifications/cNotifications.vue';
 import cComplaints from '../components/complaints/cComplaints.vue';
 
@@ -31,6 +32,12 @@ export default new Router({
 			path: '/enterprises/:id',
 			name: 'Empreendimento',
 			component: cEnterprise,
+			props: true,
+		},
+		{
+			path: '/edit-enterprise/:id',
+			name: 'Editar empreendimento',
+			component: cEditEnterprise,
 			props: true,
 		},
 		{
