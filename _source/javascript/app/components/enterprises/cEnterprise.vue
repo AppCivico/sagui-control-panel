@@ -18,14 +18,11 @@ export default {
 	<div>
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
-			<h1>
+			<h1 class="pull-left">
 				{{ 'enterprise' | translate | capitalize }}
 				<small>{{ enterprise.name }}</small>
 			</h1>
-			<ol class="breadcrumb">
-				<li><router-link to="/"><i class="fa fa-dashboard"></i>{{ 'enterprises' | translate | capitalize }}</router-link></li>
-				<li class="active">{{ enterprise.name }}</li>
-			</ol>
+			<router-link to="/edit-enterprise" class="btn btn-primary pull-right">{{ 'edit' | translate | capitalize }} {{ 'enterprise' | translate }}</router-link>
 		</section>
 
 		<!-- Main content -->
@@ -144,5 +141,9 @@ export default {
 <style scoped>
 	.info-box-number {
 		font-size: 40px;
+	}
+	.content-header {
+		display: table;
+		width: 100%;
 	}
 </style>
