@@ -86,5 +86,8 @@ const ptBr = {
 	"no-cases": "Nenhuma ocorrência registrada nesse empreendimento.",
 	"no-survey": "Nenhuma enquete cadastrada nesta categoria.",
 	"no-categories": "Nenhuma categoria registrada nesse empreendimento.",
+
+	// results
+	"download-csv": "Faça o download da planilha com todos os resultados"
 };
 export { ptBr as default };
