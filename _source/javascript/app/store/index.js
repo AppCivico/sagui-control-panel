@@ -370,7 +370,7 @@ const store = new Vuex.Store({
 					method: 'POST',
 					url: `${devapi}/assets?api_key=${state.apiKey}`,
 					data,
-					headers: { 'Content-Type': 'multipart/mixed' },
+					headers: { 'Content-Type': 'multipart/form-data' },
 				})
 				.then((response) => {
 					resolve(response);
