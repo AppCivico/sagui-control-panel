@@ -2,16 +2,11 @@
 import Vue from 'vue';
 import methods from '../../methods';
 
-import cIconPicker from '../utilities/cIconPicker.vue';
-
 export default {
 	name: 'cCategorie',
 	props: {
 		category: Object,
 		isEditing: Boolean,
-	},
-	components: {
-		cIconPicker,
 	},
 	computed: {
 		selectedEnterprise() {
@@ -85,7 +80,6 @@ export default {
 						<label>{{ 'title' | translate  | capitalize }}</label>
 						<input v-if="this.isEditing" type="text" class="form-control" name="title" placeholder="Título" :value="this.category.name">
 						<input v-else type="text" class="form-control" name="title" placeholder="Título">
-						<c-icon-picker></c-icon-picker>
 					</div>
 				</div>
 				<div class="modal-footer">
