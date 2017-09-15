@@ -35,7 +35,7 @@ export default {
 			this.type = '';
 			this.options = [{}];
 		},
-		newQuestion(modal) {
+		newQuestion(modal, hasImage) {
 			const result = { answers: [] };
 			result.survey_id = this.currentSurvey;
 			result.name = modal.querySelector('input[name="title"]').value;
@@ -63,11 +63,25 @@ export default {
 				});
 			}
 
-			this.$store.dispatch('SAVE_QUESTION', result).then((res) => {
-				this.$emit('newQuestion', { newQuestion: result, id: res.data.id });
-				$('#new-question').modal('hide'); // eslint-disable-line no-undef
-				this.cleanFields();
-			});
+			console.log(hasImage);
+
+			if (hasImage) {
+				const images = Array.from(document.querySelectorAll('#traffic_light input[type="file"]'));
+				images.map((img) => {
+					const oData = new FormData();
+					const im = oData.append('image', img.files[0]);
+					console.log(im);
+					this.$store.dispatch('UPLOAD_IMAGE', oData).then((res) => {
+						console.log(res);
+					});
+				});
+			} else {
+				this.$store.dispatch('SAVE_QUESTION', result).then((res) => {
+					this.$emit('newQuestion', { newQuestion: result, id: res.data.id });
+					$('#new-question').modal('hide'); // eslint-disable-line no-undef
+					this.cleanFields();
+				});
+			}
 		},
 		AddRemoveError() {
 			const inputs = Array.from(document.querySelectorAll('#new-question input'));
@@ -81,6 +95,7 @@ export default {
 		},
 		validate() {
 			let valid = true;
+			let imageFile = 0;
 			const title = document.querySelector('#new-question input[name="title"]');
 			const type = document.querySelector('#new-question select');
 
@@ -115,9 +130,24 @@ export default {
 						valid = false;
 					}
 				});
+
+				const images = Array.from(document.querySelectorAll('#traffic_light input[type="file"]'));
+				images.map((img) => {
+					if (img.value !== '') {
+						imageFile += 1;
+					}
+				});
+				if (imageFile > 0 && imageFile < 3) {
+					this.$store.dispatch('CHANGE_ALERT_MESSAGE', Vue.i18n.translate('minimum-images'));
+					valid = false;
+				}
 			}
 			if (valid) {
-				this.newQuestion(document.querySelector('#new-question'));
+				if (imageFile === 3) {
+					this.newQuestion(document.querySelector('#new-question'), true);
+				} else {
+					this.newQuestion(document.querySelector('#new-question'), false);
+				}
 			}
 		},
 	},
