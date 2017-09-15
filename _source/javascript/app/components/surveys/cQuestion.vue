@@ -42,6 +42,16 @@ export default {
 			result.description = modal.querySelector('input[name="title"]').value;
 			result.type = modal.querySelector('select').value;
 
+			if (result.type === 'multiple') {
+				const answers = Array.from(modal.querySelectorAll('#multiple input[type="text"]'));
+				answers.map((answer) => {
+					const item = {
+						title: answer.value,
+					};
+					result.answers.push(item);
+				});
+			}
+
 			if (result.type === 'traffic_light') {
 				const answers = Array.from(modal.querySelectorAll('#traffic_light input[type="text"]'));
 				answers.map((answer) => {
@@ -53,35 +63,27 @@ export default {
 				});
 			}
 
-			if (result.type === 'multiple') {
-				const answers = Array.from(modal.querySelectorAll('#multiple input[type="text"]'));
-				answers.map((answer) => {
-					const item = {
-						title: answer.value,
-					};
-					result.answers.push(item);
-				});
-			}
-
-			console.log(hasImage);
-
 			if (hasImage) {
 				const images = Array.from(document.querySelectorAll('#traffic_light input[type="file"]'));
-				images.map((img) => {
-					const oData = new FormData();
-					const im = oData.append('image', img.files[0]);
-					console.log(im);
-					this.$store.dispatch('UPLOAD_IMAGE', oData).then((res) => {
-						console.log(res);
+				images.map((img, i) => {
+					const imgData = new FormData();
+					imgData.append('file', img.files[0]);
+					this.$store.dispatch('UPLOAD_IMAGE', imgData).then((res) => {
+						result.answers[i].image_path = res.data.path;
+						result.answers[i].image_id = res.data.id;
 					});
 				});
+				this.saveQuestion(result);
 			} else {
-				this.$store.dispatch('SAVE_QUESTION', result).then((res) => {
-					this.$emit('newQuestion', { newQuestion: result, id: res.data.id });
-					$('#new-question').modal('hide'); // eslint-disable-line no-undef
-					this.cleanFields();
-				});
+				this.saveQuestion(result);
 			}
+		},
+		saveQuestion(result) {
+			this.$store.dispatch('SAVE_QUESTION', result).then((res) => {
+				this.$emit('newQuestion', { newQuestion: result, id: res.data.id });
+				$('#new-question').modal('hide'); // eslint-disable-line no-undef
+				this.cleanFields();
+			});
 		},
 		AddRemoveError() {
 			const inputs = Array.from(document.querySelectorAll('#new-question input'));

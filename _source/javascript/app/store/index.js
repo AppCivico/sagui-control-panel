@@ -238,6 +238,7 @@ const store = new Vuex.Store({
 			commit('SET_CURRENT_SURVEY', { res: data });
 		},
 		SAVE_QUESTION({ commit, state }, data) {
+			console.log(data);
 			return new Promise((resolve) => {
 				axios({
 					method: 'POST',

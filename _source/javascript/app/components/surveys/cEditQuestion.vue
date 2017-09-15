@@ -147,7 +147,7 @@ export default {
 						<div class="form-group" v-for="answer in this.question.answers">
 							<label>{{ answer.unit | translate | capitalize }}</label>
 							<input type="text" class="form-control" :data-unit="answer.unit" :placeholder="answer.unit" :value="answer.title">
-							<img :src="answer.img" :alt="answer.unit" v-if="answer.img">
+							<img :src="'http://dev-sagui-api.eokoe.com'+answer.image_path" :alt="answer.unit" v-if="answer.image_path">
 						</div>
 					</div>
 					<div id="multiple" v-if="selected == 'multiple'">
