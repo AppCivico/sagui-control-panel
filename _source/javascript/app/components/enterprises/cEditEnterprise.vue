@@ -5,6 +5,12 @@ import cEnterpriseLocation from './cEnterpriseLocation.vue';
 
 export default {
 	name: 'cEditEnterprise',
+	props: ['id'],
+	computed: {
+		enterprise() {
+			return this.$store.state.enterprise;
+		},
+	},
 	components: {
 		cEnterpriseLocation,
 	},
@@ -18,6 +24,7 @@ export default {
 	mounted() {
 		this.initAutocomplete();
 		this.AddRemoveError();
+		this.$store.dispatch('LOAD_ENTERPRISE', this.id);
 	},
 	methods: {
 		AddRemoveError() {
@@ -62,7 +69,8 @@ export default {
 		},
 		createEnterprise(form) {
 			const enterpriseArray = Array.from(form.querySelectorAll('#enterprise-data input'));
-			const values = { active: 0 };
+			const status = form.querySelector('#enterprise-data .enterprise-data__status');
+			const values = {};
 
 			enterpriseArray.map((el) => {
 				if (el.type !== 'file') {
@@ -71,6 +79,7 @@ export default {
 			});
 
 			values.location = this.polygon;
+			values.public = status.value;
 
 			this.$store.dispatch('EDIT_ENTERPRISE', values);
 		},
@@ -106,7 +115,7 @@ export default {
 	<div>
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
-			<h1>{{ 'register' | translate | capitalize }} {{ 'enterprise' | translate }}</h1>
+			<h1>{{ 'edit' | translate | capitalize }} {{ 'enterprise' | translate }}</h1>
 		</section>
 
 		<!-- Main content -->
@@ -119,33 +128,37 @@ export default {
 						</div>
 						<div class="box-body" id="enterprise-data">
 							<div class="form-group">
-								<label>{{ 'name' | translate | capitalize }}</label>
-								<input type="text" class="form-control" name="name">
-			                </div>
+								<label>{{ 'status' | translate | capitalize }}</label>
+								<!-- change value to enterprise.public when available -->
+								<select class="form-control enterprise-data__status" :value="enterprise.active" @focus="removeError($event)">
+									<option value="0">{{ 'no' | translate | capitalize }} {{ 'public' | translate }}</option>
+									<option value="1">{{ 'public' | translate | capitalize }}</option>
+								</select>
+							</div>
 							<div class="form-group">
 								<label>{{ 'name' | translate | capitalize }}</label>
-								<input type="text" class="form-control" name="name">
-			                </div>
-			                <div class="form-group">
+								<input type="text" class="form-control" name="name" :value="enterprise.name">
+							</div>
+							<div class="form-group">
 								<label>{{ 'short' | translate | capitalize }} {{ 'description' | translate }}</label>
-								<input type="text" class="form-control" name="description">
-			                </div>
-			                <div class="form-group">
+								<input type="text" class="form-control" name="description" :value="enterprise.description">
+							</div>
+							<div class="form-group">
 								<label>{{ 'name' | translate | capitalize }} {{ 'of' | translate }} {{ 'company' | translate }}</label>
-								<input type="text" class="form-control" name="company_name">
-			                </div>
-			                <div class="form-group">
+								<input type="text" class="form-control" name="company_name" :value="enterprise.company_name">
+							</div>
+							<div class="form-group">
 								<label>{{ 'contact' | translate | capitalize }} {{ 'of' | translate }} {{ 'company' | translate }}</label>
-								<input type="text" class="form-control" name="company_contact">
-			                </div>
-			                <div class="form-group">
+								<input type="text" class="form-control" name="company_contact" :value="enterprise.company_contact">
+							</div>
+							<div class="form-group">
 								<label>{{ 'location' | translate | capitalize }}</label>
-								<input type="text" class="form-control" id="autocomplete" name="human_address" @blur="setMap($event)" :placeholder="'insert-address' | translate">
-			                </div>
-			                <div class="form-group">
+								<input type="text" class="form-control" id="autocomplete" name="human_address" @blur="setMap($event)" :placeholder="'insert-address' | translate" :value="enterprise.human_address">
+							</div>
+							<div class="form-group">
 								<label>{{ 'photos' | translate | capitalize }}</label>
 								<input type="file" class="form-control" name="photos">
-			                </div>
+							</div>
 						</div>
 					</div>
 
