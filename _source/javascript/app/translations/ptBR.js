@@ -74,6 +74,7 @@ const ptBr = {
 	"required-type": "É necessário selecionar o tipo da pergunta",
 	"password-match": "Os campo de senha não coincidem.",
 	"minimum-question": "É obrigatório inserir pelo menos uma pergunta.",
+	"minimum-images": "É necessário cadastrar uma imagem para todas as opções",
 	"insert-address": "Insira aqui um endereço inicial.",
 	"invalid-location": "Localização não encontrada,tente novamente.",
 
