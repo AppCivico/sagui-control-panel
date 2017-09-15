@@ -364,6 +364,22 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
+		UPLOAD_IMAGE({ commit, state }, data) {
+			return new Promise((resolve) => {
+				axios({
+					method: 'POST',
+					url: `${devapi}/assets?api_key=${state.apiKey}`,
+					data,
+					headers: { 'Content-Type': 'multipart/mixed' },
+				})
+				.then((response) => {
+					resolve(response);
+				}, (err) => {
+					console.error(err);
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				});
+			});
+		},
 	},
 	mutations: {
 		SET_USER(state, { user }) {
