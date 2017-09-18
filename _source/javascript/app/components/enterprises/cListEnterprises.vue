@@ -8,6 +8,7 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch('LOAD_ENTERPRISES_LIST');
+		$.AdminLTE.layout.activate(); // eslint-disable-line no-undef
 	},
 };
 </script>
