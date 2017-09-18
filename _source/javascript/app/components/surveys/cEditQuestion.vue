@@ -76,6 +76,7 @@ export default {
 		},
 		validate() {
 			let valid = true;
+			let imageFile = 0;
 			const title = document.querySelector('#edit-question input[name="title"]');
 			const type = document.querySelector('#edit-question select');
 
@@ -110,12 +111,27 @@ export default {
 						valid = false;
 					}
 				});
+
+				const images = Array.from(document.querySelectorAll('#traffic_light input[type="file"]'));
+				images.map((img) => {
+					if (img.value !== '') {
+						imageFile += 1;
+					}
+				});
+				if (imageFile > 0 && imageFile < 3) {
+					this.$store.dispatch('CHANGE_ALERT_MESSAGE', Vue.i18n.translate('minimum-images'));
+					valid = false;
+				}
 			}
 			if (valid) {
 				this.editQuestion(document.querySelector('#edit-question'));
 				$('#edit-question').modal('hide'); // eslint-disable-line no-undef
 				this.cleanFields();
 			}
+		},
+		removeImage(index) {å
+			this.question.answers[index].image_path = '';
+			this.question.answers[index].image_id = '';
 		},
 	},
 };
@@ -144,10 +160,18 @@ export default {
 					</div>
 					<hr>
 					<div id="traffic_light" v-if="selected == 'traffic_light'">
-						<div class="form-group" v-for="answer in this.question.answers">
+						<div class="form-group" v-for="(answer, index) in this.question.answers">
 							<label>{{ answer.unit | translate | capitalize }}</label>
 							<input type="text" class="form-control" :data-unit="answer.unit" :placeholder="answer.unit" :value="answer.title">
-							<img :src="'http://dev-sagui-api.eokoe.com'+answer.image_path" :alt="answer.unit" v-if="answer.image_path">
+							<div class="traffic_light__image">
+								<template v-if="answer.image_path != ''">
+									<button type="button" aria-label="Excluir" class="close" @click="removeImage(index)"><span aria-hidden="true">×</span></button>
+									<img :src="'http://dev-sagui-api.eokoe.com'+answer.image_path" :alt="answer.unit">
+								</template>
+								<template v-else>
+									<input type="file" id="traffic_light__image-option">
+								</template>
+							</div>
 						</div>
 					</div>
 					<div id="multiple" v-if="selected == 'multiple'">
@@ -169,3 +193,10 @@ export default {
 		<!-- /.modal-dialog -->
 	</div>
 </template>
+
+<style scoped>
+	.traffic_light__image {
+	    display: inline-block;
+		margin: 10px 0;
+    }
+</style>
