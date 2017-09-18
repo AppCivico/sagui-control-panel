@@ -63,12 +63,25 @@ export default {
 		createEnterprise(form) {
 			const enterpriseArray = Array.from(form.querySelectorAll('#enterprise-data input'));
 			const responsibleArray = Array.from(form.querySelectorAll('#responsible-data input'));
-			const values = { public: 0 };
+			const values = { public: 0, images: [] };
 			const responsible = {};
+			const promises = [];
+			let photos = false; // eslint-disable-line prefer-const
 
 			enterpriseArray.map((el) => {
 				if (el.type !== 'file') {
 					values[el.name] = el.value;
+				} else {
+					if (el.files.length > 0) { // eslint-disable-line no-lonely-if
+						photos = true;
+
+						const images = Array.from(el.files);
+						images.map((img, i) => {
+							const imgData = new FormData();
+							imgData.append('file', img);
+							promises.push(this.$store.dispatch('UPLOAD_IMAGE', imgData));
+						});
+					}
 				}
 			});
 
@@ -81,7 +94,26 @@ export default {
 			values.responsible = responsible;
 			values.location = this.polygon;
 
-			this.$store.dispatch('SAVE_ENTERPRISE', values);
+			if (photos) {
+				Promise.all(promises)
+					.then((res) => {
+						res.map((item) => {
+							const newPhoto = {
+								image_path: item.data.path,
+								image_id: item.data.id,
+							};
+							values.images.push(newPhoto);
+						});
+						console.log('com foto', values);
+						// this.$store.dispatch('SAVE_ENTERPRISE', values);
+					})
+					.catch((e) => {
+						console.error(e);
+					});
+			} else {
+				console.log('sem foto', values);
+				// this.$store.dispatch('SAVE_ENTERPRISE', values);
+			}
 		},
 		validate() {
 			let valid = true;
@@ -100,6 +132,14 @@ export default {
 				if (input.name === 'repeat-password' && input.value !== form.querySelector('input[name="password"]').value) {
 					methods.addError(input.parentNode, Vue.i18n.translate('password-match'));
 					valid = false;
+				}
+
+				// check for files amount
+				if (input.type === 'file') {
+					if (input.files.length > 5) {
+						methods.addError(input.parentNode, Vue.i18n.translate('max-photos'));
+						valid = false;
+					}
 				}
 			});
 
@@ -149,7 +189,8 @@ export default {
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'photos' | translate | capitalize }}</label>
-								<input type="file" class="form-control" name="photos">
+								<input type="file" class="form-control" name="photos" multiple>
+								<p class="help-block">Inserir no máximo 5 imagens.</p>
 			                </div>
 						</div>
 					</div>

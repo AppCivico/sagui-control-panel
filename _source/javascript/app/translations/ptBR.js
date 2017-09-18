@@ -77,6 +77,7 @@ const ptBr = {
 	"minimum-images": "É necessário cadastrar uma imagem para todas as opções",
 	"insert-address": "Insira aqui um endereço inicial.",
 	"invalid-location": "Localização não encontrada,tente novamente.",
+	"max-photos": "O limite de imagens foi ultrapassado.",
 
 	// notifications
 	"not-read": "não lidos",
