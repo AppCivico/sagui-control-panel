@@ -35,7 +35,7 @@ export default {
 			this.type = '';
 			this.options = [{}];
 		},
-		editQuestion(modal) {
+		editQuestion(modal, hasImage) {
 			const result = { answers: [] };
 			result.name = modal.querySelector('input[name="title"]').value;
 			result.type = modal.querySelector('select').value;
@@ -61,8 +61,35 @@ export default {
 				});
 			}
 
-			this.$store.dispatch('EDIT_QUESTION', { question: result, id: this.question.id });
-			this.$emit('editQuestion', result);
+			if (hasImage) {
+				const images = Array.from(document.querySelectorAll('#traffic_light input[type="file"]'));
+				const promises = [];
+				images.map((img) => {
+					const imgData = new FormData();
+					imgData.append('file', img.files[0]);
+					promises.push(this.$store.dispatch('UPLOAD_IMAGE', imgData));
+				});
+				Promise.all(promises)
+					.then((res) => {
+						res.map((item, i) => {
+							result.answers[i].image_path = item.data.path;
+							result.answers[i].image_id = item.data.id;
+						});
+						this.saveQuestion(result);
+					})
+					.catch((e) => {
+						console.error(e);
+					});
+			} else {
+				this.saveQuestion(result);
+			}
+		},
+		saveQuestion(result) {
+			this.$store.dispatch('EDIT_QUESTION', { question: result, id: this.question.id }).then(() => {
+				this.$emit('editQuestion', result);
+				$('#edit-question').modal('hide'); // eslint-disable-line no-undef
+				this.cleanFields();
+			});
 		},
 		AddRemoveError() {
 			const inputs = Array.from(document.querySelectorAll('#edit-question input'));
@@ -113,23 +140,27 @@ export default {
 				});
 
 				const images = Array.from(document.querySelectorAll('#traffic_light input[type="file"]'));
-				images.map((img) => {
-					if (img.value !== '') {
-						imageFile += 1;
+				if (images) {
+					images.map((img) => {
+						if (img.value !== '') {
+							imageFile += 1;
+						}
+					});
+					if (imageFile > 0 && imageFile < 3) {
+						this.$store.dispatch('CHANGE_ALERT_MESSAGE', Vue.i18n.translate('minimum-images'));
+						valid = false;
 					}
-				});
-				if (imageFile > 0 && imageFile < 3) {
-					this.$store.dispatch('CHANGE_ALERT_MESSAGE', Vue.i18n.translate('minimum-images'));
-					valid = false;
 				}
 			}
 			if (valid) {
-				this.editQuestion(document.querySelector('#edit-question'));
-				$('#edit-question').modal('hide'); // eslint-disable-line no-undef
-				this.cleanFields();
+				if (imageFile === 3) {
+					this.editQuestion(document.querySelector('#edit-question'), true);
+				} else {
+					this.editQuestion(document.querySelector('#edit-question'), false);
+				}
 			}
 		},
-		removeImage(index) {å
+		removeImage(index) {
 			this.question.answers[index].image_path = '';
 			this.question.answers[index].image_id = '';
 		},
@@ -164,7 +195,7 @@ export default {
 							<label>{{ answer.unit | translate | capitalize }}</label>
 							<input type="text" class="form-control" :data-unit="answer.unit" :placeholder="answer.unit" :value="answer.title">
 							<div class="traffic_light__image">
-								<template v-if="answer.image_path != ''">
+								<template v-if="answer.image_path">
 									<button type="button" aria-label="Excluir" class="close" @click="removeImage(index)"><span aria-hidden="true">×</span></button>
 									<img :src="'http://dev-sagui-api.eokoe.com'+answer.image_path" :alt="answer.unit">
 								</template>
