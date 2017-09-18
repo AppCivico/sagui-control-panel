@@ -65,15 +65,23 @@ export default {
 
 			if (hasImage) {
 				const images = Array.from(document.querySelectorAll('#traffic_light input[type="file"]'));
-				images.map((img, i) => {
+				const promises = [];
+				images.map((img) => {
 					const imgData = new FormData();
 					imgData.append('file', img.files[0]);
-					this.$store.dispatch('UPLOAD_IMAGE', imgData).then((res) => {
-						result.answers[i].image_path = res.data.path;
-						result.answers[i].image_id = res.data.id;
-					});
+					promises.push(this.$store.dispatch('UPLOAD_IMAGE', imgData));
 				});
-				this.saveQuestion(result);
+				Promise.all(promises)
+					.then((res) => {
+						res.map((item, i) => {
+							result.answers[i].image_path = item.data.path;
+							result.answers[i].image_id = item.data.id;
+						});
+						this.saveQuestion(result);
+					})
+					.catch((e) => {
+						console.error(e);
+					});
 			} else {
 				this.saveQuestion(result);
 			}
