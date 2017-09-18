@@ -1,6 +1,17 @@
 <script>
 export default {
 	name: 'cResults',
+	computed: {
+		surveys() {
+			return this.$store.state.surveys;
+		},
+		apiKey() {
+			return this.$store.state.apiKey;
+		},
+	},
+	mounted() {
+		this.$store.dispatch('LOAD_SURVEYS_LIST_BY_ENTERPRISE');
+	},
 };
 </script>
 
@@ -16,10 +27,17 @@ export default {
 		<!-- Main content -->
 		<section class="content">
 			<div class="box box-solid">
-				<div class="box-body">
-					<button type="button" class="btn btn-primary">
-						{{ 'download-csv' | translate | capitalize }}
-					</button>
+				<div v-if="surveys.length < 1" class="alert alert-info">
+					{{ 'no-survey' | translate }}
+				</div>
+				<div class="box-body no-padding" v-else>
+					<ul class="nav nav-pills nav-stacked">
+						<li v-for="survey in surveys">
+							<a :href="'http://dev-sagui-api.eokoe.com/v1/surveys/'+survey.id+'/reports?api_key='+apiKey" target="_blank">
+								<i class="fa fa-file-text-o"></i> {{ survey.name }}
+							</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</section>

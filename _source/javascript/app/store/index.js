@@ -205,6 +205,14 @@ const store = new Vuex.Store({
 				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
 			});
 		},
+		LOAD_SURVEYS_LIST_BY_ENTERPRISE({ commit, state }) {
+			axios.get(`${devapi}/surveys?enterprise_id=${state.selectedEnterprise}&api_key=${state.apiKey}`).then((response) => {
+				commit('SET_SURVEYS_LIST', { list: response.data });
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			});
+		},
 		LOAD_SURVEY({ commit, state }, id) {
 			return new Promise((resolve) => {
 				axios.get(`${devapi}/surveys/${id}?api_key=${state.apiKey}`).then((response) => {
