@@ -50,7 +50,7 @@ export default {
 				if (result) {
 					if (result.place_id) {
 						this.placeId = result.place_id;
-						$('#enterprise-location').modal('show'); // eslint-disable-line no-undef
+						$('#enterprise-location').modal('show');
 					}
 				} else {
 					methods.addError(event.target.parentNode, Vue.i18n.translate('invalid-location'));

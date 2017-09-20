@@ -87,7 +87,7 @@ export default {
 		saveQuestion(result) {
 			this.$store.dispatch('EDIT_QUESTION', { question: result, id: this.question.id }).then(() => {
 				this.$emit('editQuestion', result);
-				$('#edit-question').modal('hide'); // eslint-disable-line no-undef
+				$('#edit-question').modal('hide');
 				this.cleanFields();
 			});
 		},

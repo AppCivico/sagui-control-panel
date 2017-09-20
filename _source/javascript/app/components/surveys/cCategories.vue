@@ -47,11 +47,11 @@ export default {
 		editCategorie(category) {
 			this.isEditing = true;
 			this.editingCategory = category;
-			$('#new-category').modal('show'); // eslint-disable-line no-undef
+			$('#new-category').modal('show');
 		},
 		addCategorie() {
 			this.isEditing = false;
-			$('#new-category').modal('show'); // eslint-disable-line no-undef
+			$('#new-category').modal('show');
 		},
 		deleteCategory(id) {
 			this.$store.dispatch('LOAD_SURVEYS_LIST', id);

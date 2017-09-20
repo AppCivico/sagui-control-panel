@@ -89,7 +89,7 @@ export default {
 		saveQuestion(result) {
 			this.$store.dispatch('SAVE_QUESTION', result).then((res) => {
 				this.$emit('newQuestion', { newQuestion: result, id: res.data.id });
-				$('#new-question').modal('hide'); // eslint-disable-line no-undef
+				$('#new-question').modal('hide');
 				this.cleanFields();
 			});
 		},

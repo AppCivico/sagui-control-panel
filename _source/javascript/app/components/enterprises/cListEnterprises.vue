@@ -15,7 +15,7 @@ export default {
 		this.$store.dispatch('LOAD_ENTERPRISES_LIST').then(() => {
 			this.getThumbnails();
 		});
-		// $.AdminLTE.layout.activate(); // eslint-disable-line no-undef
+		$.AdminLTE.layout.activate();
 	},
 	methods: {
 		getThumbnails() {

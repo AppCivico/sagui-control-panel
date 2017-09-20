@@ -107,7 +107,7 @@ export default{
 		},
 		checkCategorie(event) {
 			if (event.target.value === 'new-category') {
-				$('#new-category').modal('show'); // eslint-disable-line no-undef
+				$('#new-category').modal('show');
 			}
 		},
 	},
