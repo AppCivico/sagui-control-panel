@@ -154,11 +154,14 @@ const store = new Vuex.Store({
 			commit('SET_ALERT_MESSAGE', { res: { message } });
 		},
 		LOAD_ENTERPRISES_LIST({ commit, state }) {
-			axios.get(`${devapi}/enterprises?api_key=${state.apiKey}`).then((response) => {
-				commit('SET_ENTERPRISES_LIST', { list: response.data });
-			}, (err) => {
-				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			return new Promise((resolve) => {
+				axios.get(`${devapi}/enterprises?api_key=${state.apiKey}`).then((response) => {
+					commit('SET_ENTERPRISES_LIST', { list: response.data });
+					resolve(response);
+				}, (err) => {
+					console.error(err);
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				});
 			});
 		},
 		LOAD_ENTERPRISE({ commit, state }, id) {

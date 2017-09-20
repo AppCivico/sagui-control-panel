@@ -1,14 +1,33 @@
 <script>
 export default {
 	name: 'cListEnterprises',
+	data() {
+		return {
+			thumbnails: [],
+		};
+	},
 	computed: {
 		enterprises() {
 			return this.$store.state.enterprises;
 		},
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_ENTERPRISES_LIST');
-		$.AdminLTE.layout.activate(); // eslint-disable-line no-undef
+		this.$store.dispatch('LOAD_ENTERPRISES_LIST').then(() => {
+			this.getThumbnails();
+		});
+		// $.AdminLTE.layout.activate(); // eslint-disable-line no-undef
+	},
+	methods: {
+		getThumbnails() {
+			this.enterprises.map((item) => {
+				if (item.images[0]) {
+					const thumbnail = `background-image: url(http://dev-sagui-api.eokoe.com/${item.images[0].image_path})`;
+					this.thumbnails.push(thumbnail);
+				} else {
+					this.thumbnails.push('');
+				}
+			});
+		},
 	},
 };
 </script>
@@ -24,11 +43,11 @@ export default {
 		<!-- Main content -->
 		<section class="content">
 			<div class="row">
-				<div class="col-md-6" v-for="enterprise in enterprises">
+				<div class="col-md-6" v-for="(enterprise, i) in enterprises">
 					<div class="info-box">
-						<span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+						<div class="col-md-3 info-box-image" :style="thumbnails[i]"></div>
 
-						<div class="info-box-content">
+						<div class="col-md-9 info-box-content">
 							<span class="info-box-text">
 								<router-link :to="'/enterprises/'+enterprise.id">{{ enterprise.name }}</router-link>
 								<p>{{ enterprise.human_address }}</p>
@@ -40,6 +59,7 @@ export default {
 								</ul>
 							</span>
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -52,5 +72,18 @@ export default {
 	.content-header {
 		display: table;
 		width: 100%;
+	}
+	.info-box {
+		display: table;
+	}
+	.info-box-image {
+		background-color: #ccc;
+		background-position: center;
+	    background-size: cover;
+	    height: 200px;
+	    display: inline-block;
+	}
+	.info-box-content {
+   		margin: 0;
 	}
 </style>
