@@ -76,7 +76,7 @@ export default {
 						photos = true;
 
 						const images = Array.from(el.files);
-						images.map((img, i) => {
+						images.map((img) => {
 							const imgData = new FormData();
 							imgData.append('file', img);
 							promises.push(this.$store.dispatch('UPLOAD_IMAGE', imgData));
