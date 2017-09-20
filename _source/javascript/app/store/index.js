@@ -170,17 +170,20 @@ const store = new Vuex.Store({
 			});
 		},
 		SAVE_ENTERPRISE({ commit, state }, data) {
-			axios({
-				method: 'POST',
-				url: `${devapi}/enterprises?api_key=${state.apiKey}`,
-				data,
-				headers: { 'Content-Type': 'application/json' },
-			})
-			.then(() => {
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Empreendimento salvo com sucesso.', redirect: { state: true, path: '-1' } } });
-			}, (err) => {
-				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+			return new Promise((resolve) => {
+				axios({
+					method: 'POST',
+					url: `${devapi}/enterprises?api_key=${state.apiKey}`,
+					data,
+					headers: { 'Content-Type': 'application/json' },
+				})
+				.then((res) => {
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Empreendimento salvo com sucesso.', redirect: { state: true, path: '-1' } } });
+					resolve(res);
+				}, (err) => {
+					console.error(err);
+					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				});
 			});
 		},
 		EDIT_ENTERPRISE({ commit, state }, data) {

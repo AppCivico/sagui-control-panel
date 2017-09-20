@@ -104,18 +104,20 @@ export default {
 							};
 							values.images.push(newPhoto);
 						});
-						console.log('com foto', values);
-						// this.$store.dispatch('SAVE_ENTERPRISE', values);
+						this.$store.dispatch('SAVE_ENTERPRISE', values).then(() => {
+							document.querySelector('.new-enterprise__button').removeAttribute('disabled');
+						});
 					})
 					.catch((e) => {
 						console.error(e);
 					});
 			} else {
-				console.log('sem foto', values);
-				// this.$store.dispatch('SAVE_ENTERPRISE', values);
+				this.$store.dispatch('SAVE_ENTERPRISE', values).then(() => {
+					document.querySelector('.new-enterprise__button').removeAttribute('disabled');
+				});
 			}
 		},
-		validate() {
+		validate(event) {
 			let valid = true;
 			const form = document.querySelector('#new-enterprise');
 			const inputs = Array.from(form.querySelectorAll('input'));
@@ -144,6 +146,7 @@ export default {
 			});
 
 			if (valid) {
+				event.target.setAttribute('disabled', 'disabled');
 				this.createEnterprise(form);
 			}
 		},
@@ -219,7 +222,7 @@ export default {
 						</div>
 					</div>
 
-					<button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'enterprise' | translate }}</button>
+					<button type="button" class="btn btn-block btn-success new-enterprise__button" @click="validate($event)">{{ 'register' | translate | capitalize }} {{ 'enterprise' | translate }}</button>
 				</div>
 			</div>
 		</section>
