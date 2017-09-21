@@ -136,7 +136,7 @@ const store = new Vuex.Store({
 			axios({
 				method: 'PUT',
 				url: `${devapi}/enterprises/${state.selectedEnterprise}/axis/${data.id}?api_key=${state.apiKey}`,
-				data: { name: data.name },
+				data: { name: data.name, icon: data.icon },
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.then((response) => {
