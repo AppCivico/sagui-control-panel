@@ -8,14 +8,12 @@ export default {
 		return {
 			selected: '',
 			iconContent: '',
+			icons,
 		};
 	},
 	computed: {
 		searchPlaceholder() {
 			return this.seachbox || 'search box';
-		},
-		icons() {
-			return icons;
 		},
 	},
 	methods: {
@@ -25,7 +23,7 @@ export default {
 				icon.classList.remove('selected');
 			});
 		},
-		selectIcon(event) {
+		getIcon(event) {
 			const clickTarget = event.target;
 
 			this.cleanIcons();
@@ -43,19 +41,43 @@ export default {
 			const iconContent = window
 				.getComputedStyle(document.querySelector(`.fa.${icon}`), ':before')
 				.getPropertyValue('content');
-			console.log(icon);
 			this.convert(iconContent);
 		},
 		convert(value) {
-			let newValue = value.charCodeAt().toString(10);
-			//newValue = newValue.replace(/\D/g, '');
+			const newValue = value
+				.charCodeAt(1)
+				.toString(10)
+				.replace(/\D/g, '');
 
 			let hexValue = Number(newValue).toString(16);
+
 			while (hexValue.length < 4) {
 				hexValue = `0${hexValue}`;
 			}
 
-			console.log(hexValue.toUpperCase());
+			this.selectIcon(hexValue.toUpperCase());
+		},
+		selectIcon(value) {
+			const result = {
+				className: this.selected,
+				cssValue: value,
+			};
+			this.$emit('selectIcon', result);
+		},
+		filterIcons(event) {
+			const search = event.target.value.trim();
+			let filter = [];
+
+			if (search.length > 3) {
+				filter = icons.filter((item) => {
+					const regex = new RegExp(search, 'gi');
+					return item.match(regex);
+				});
+			}
+
+			if (filter.length > 0) {
+				this.icons = filter;
+			}
 		},
 	},
 };
@@ -64,11 +86,11 @@ export default {
 <template>
 	<div id="iconPicker">
 		<div class="iconPicker__header">
-			<input type="text" :placeholder="searchPlaceholder">
+			<input type="text" :placeholder="searchPlaceholder" @keyup="filterIcons($event)">
 		</div>
 		<div class="iconPicker__body">
 			<div class="iconPicker__icons">
-				<a href="#" @click.stop.prevent="selectIcon($event)" class="item" v-for="icon in icons"><i :class="'fa '+icon" :data-type="icon"></i></a>
+				<a href="#" @click.stop.prevent="getIcon($event)" class="item" v-for="icon in icons"><i :class="'fa '+icon" :data-type="icon"></i></a>
 			</div>
 		</div>
 	</div>
