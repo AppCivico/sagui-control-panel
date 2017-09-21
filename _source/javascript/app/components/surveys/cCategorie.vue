@@ -115,7 +115,7 @@ export default {
 							<i class="fa showIcon" v-else></i>
 						</div>
 
-						<button type="button" class="btn btn-default" @click="showIconPicker()" v-if="this.isEditing">{{ 'change' | translate  | capitalize }} {{ 'icon' | translate }}</button>
+						<button type="button" class="btn btn-default" @click="showIconPicker()" v-if="this.isEditing">{{ 'edit' | translate  | capitalize }} {{ 'icon' | translate }}</button>
 						<button type="button" class="btn btn-default" @click="showIconPicker()" v-else>{{ 'select' | translate  | capitalize }} {{ 'icon' | translate }}</button>
 						<c-icon-picker :seachbox="'search' | translate  | capitalize" v-on:selectIcon="selectIcon"></c-icon-picker>
 					</div>
