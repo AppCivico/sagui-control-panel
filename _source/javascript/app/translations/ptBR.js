@@ -30,6 +30,7 @@ const ptBr = {
 	"email": "e-mail",
 	"gadget": "aparelho",
 	"green": "verde",
+	"icon": "ícone",
 	"insert_option": "Digite aqui uma opção",
 	"location": "localização",
 	"multiple": "multipla escolha",
@@ -54,6 +55,8 @@ const ptBr = {
 	"responsible": "responsável",
 	"results": "resultados",
 	"save": "salvar",
+	"search": "pesquisar",
+	"select": "selecionar",
 	"sign-out": "sair",
 	"short": "breve",
 	"survey": "enquete",
@@ -78,6 +81,7 @@ const ptBr = {
 	"insert-address": "Insira aqui um endereço inicial.",
 	"invalid-location": "Localização não encontrada,tente novamente.",
 	"max-photos": "O limite de imagens foi ultrapassado.",
+	"no-icon": "É necessário selecionar um ícone para a categoria.",
 
 	// notifications
 	"not-read": "não lidos",
