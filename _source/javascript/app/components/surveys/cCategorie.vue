@@ -62,14 +62,14 @@ export default {
 					const category = {
 						name: title.value,
 						id: this.category.id,
-						icon: this.selectedIcon,
+						icon_code: this.selectedIcon,
 					};
 					this.$store.dispatch('EDIT_CATEGORY', category);
 				} else {
 					const category = {
 						name: title.value,
 						dimension: 'category',
-						icon: this.selectedIcon,
+						icon_code: this.selectedIcon,
 					};
 					this.$store.dispatch('ADD_CATEGORY', category);
 				}
