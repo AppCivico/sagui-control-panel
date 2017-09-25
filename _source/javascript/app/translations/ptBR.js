@@ -9,12 +9,13 @@ const ptBr = {
 	"add": "adicionar",
 	"agent": "agente",
 	"agents": "agentes",
+	"alert": "Alerta",
 	"answer": "resposta",
 	"answers": "respostas",
 	"area": "área",
 	"cancel": "cancelar",
 	"cases": "ocorrências",
-	"categorie": "categoria",
+	"category": "categoria",
 	"categories": "categorias",
 	"choose_enterprise": "Escolha o empreendimento",
 	"company": "companhia",
@@ -23,6 +24,7 @@ const ptBr = {
 	"contributions": "contribuições",
 	"current": "atual",
 	"datas": "dados",
+	"data": "dados",
 	"description": "descrição",
 	"enterprise": "empreendimento",
 	"enterprises": "empreendimentos",
@@ -46,6 +48,7 @@ const ptBr = {
 	"of": "da",
 	"of-m": "do",
 	"of-n": "de",
+	"ok": "Ok",
 	"password": "senha",
 	"photos": "fotos",
 	"public": "publicado",
@@ -75,6 +78,9 @@ const ptBr = {
 	"yellow": "amarelo",
 	"you-have": "você tem",
 
+	// Question
+	"choose-type-question": "Escolha um tipo de resposta",
+
 	// form validation
 	"required-field": "Este campo é obrigatório.",
 	"required-category": "É necessário selecionar a categoria da enquete.",
@@ -90,6 +96,7 @@ const ptBr = {
 	"no-icon": "É necessário selecionar um ícone para a categoria.",
 	"no-area": "É necessário delimitar uma área no mapa",
 	"remove-category": "As enquetes cadastradas nesta categoria também serão excluídas, tem certeza que deseja deleter esta categoria?",
+	"no-editions": "Nenhuma alteração foi efetuada",
 
 	// notifications
 	"not-read": "não lidos",

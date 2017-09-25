@@ -187,7 +187,7 @@ export default {
 					<div class="form-group">
 						<label>{{ 'type' | translate | capitalize }}</label>
 						<select class="form-control" v-model="selected" :value="selected" @focus="removeError($event)">
-							<option value="">Escolha um tipo de resposta</option>
+							<option value="">{{ 'choose-type-question' | translate | capitalize }}</option>
 							<option v-for="option in types" :value="option">{{ option | translate | capitalize }}</option>
 						</select>
 					</div>

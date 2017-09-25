@@ -4,7 +4,7 @@ import methods from '../../methods';
 import cIconPicker from '../utilities/iconPicker/index.vue';
 
 export default {
-	name: 'cCategorie',
+	name: 'cCategory',
 	props: {
 		category: Object,
 		isEditing: Boolean,
@@ -100,8 +100,8 @@ export default {
 					<button type="button" class="close" data-dismiss="modal" aria-label="Cancelar" @click="cleanFields()">
 						<span aria-hidden="true">×</span>
 					</button>
-					<h4 v-if="this.isEditing" class="modal-title">{{ 'edit' | translate  | capitalize }} {{ 'categorie' | translate }}</h4>
-					<h4 v-else class="modal-title">{{ 'new' | translate  | capitalize }} {{ 'categorie' | translate }}</h4>
+					<h4 v-if="this.isEditing" class="modal-title">{{ 'edit' | translate  | capitalize }} {{ 'category' | translate }}</h4>
+					<h4 v-else class="modal-title">{{ 'new' | translate  | capitalize }} {{ 'category' | translate }}</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">

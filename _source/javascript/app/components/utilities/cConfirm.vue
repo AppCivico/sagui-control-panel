@@ -34,14 +34,14 @@ export default {
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Cancelar">
 						<span aria-hidden="true">×</span></button>
-					<h4 class="modal-title">Alerta</h4>
+					<h4 class="modal-title">{{ 'alert' | translate  | capitalize }}</h4>
 				</div>
 				<div class="modal-body">
 					<p>{{ this.confirm.message }}</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default pull-left" data-dismiss="modal" @click="changeState(false)">{{ 'cancel' | translate | capitalize }}</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" @click="positive()">Ok</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" @click="positive()">{{ 'ok' | translate  | capitalize }}</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->

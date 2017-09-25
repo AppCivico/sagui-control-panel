@@ -3,7 +3,7 @@ import Vue from 'vue';
 import methods from '../../methods';
 import cQuestion from './cQuestion.vue';
 import cEditQuestion from './cEditQuestion.vue';
-import cCategorie from './cCategorie.vue';
+import cCategory from './cCategory.vue';
 import config from '../../config'; // eslint-disable-line no-unused-vars
 
 export default{
@@ -11,7 +11,7 @@ export default{
 	props: ['id'],
 	components: {
 		cQuestion,
-		cCategorie,
+		cCategory,
 		cEditQuestion,
 	},
 	data() {
@@ -107,13 +107,8 @@ export default{
 					const edited = this.createSurvey(title.value);
 					this.$store.dispatch('EDIT_SURVEY', { id: this.survey.id, survey: edited });
 				} else {
-					this.$store.dispatch('CHANGE_ALERT_MESSAGE', 'Nenhuma alteração foi efetuada.');
+					this.$store.dispatch('CHANGE_ALERT_MESSAGE', Vue.i18n.translate('no-editions'));
 				}
-			}
-		},
-		checkCategorie(event) {
-			if (event.target.value === 'new-category') {
-				$('#new-category').modal('show');
 			}
 		},
 	},
@@ -133,7 +128,7 @@ export default{
 				<div class="col-md-6">
 					<div class="box box-solid">
 						<div class="box-header with-border">
-							<h3 class="box-title">Dados</h3>
+							<h3 class="box-title">{{ 'data' | translate | capitalize }}</h3>
 						</div>
 						<div class="box-body">
 							<div class="form-group">
@@ -192,7 +187,7 @@ export default{
 
 				<c-question v-on:newQuestion="addQuestion"></c-question>
 				<c-edit-question v-on:editQuestion="editQuestion" :question="this.question"></c-edit-question>
-				<c-categorie></c-categorie>
+				<c-category></c-category>
 			</div>
 		</section>
 		<!-- /.content -->

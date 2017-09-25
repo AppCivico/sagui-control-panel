@@ -3,7 +3,7 @@ import Vue from 'vue';
 import methods from '../../methods';
 import cQuestion from './cQuestion.vue';
 import cEditQuestion from './cEditQuestion.vue';
-import cCategorie from './cCategorie.vue';
+import cCategory from './cCategory.vue';
 import config from '../../config'; // eslint-disable-line no-unused-vars
 
 export default{
@@ -11,7 +11,7 @@ export default{
 	props: ['surveyCategory'],
 	components: {
 		cQuestion,
-		cCategorie,
+		cCategory,
 		cEditQuestion,
 	},
 	computed: {
@@ -107,7 +107,7 @@ export default{
 				});
 			}
 		},
-		checkCategorie(event) {
+		checkCategory(event) {
 			if (event.target.value === 'new-category') {
 				$('#new-category').modal('show');
 			}
@@ -129,7 +129,7 @@ export default{
 				<div class="col-md-6">
 					<div class="box box-solid">
 						<div class="box-header with-border">
-							<h3 class="box-title">Dados</h3>
+							<h3 class="box-title">{{ 'data' | translate | capitalize }}</h3>
 						</div>
 						<div class="box-body">
 							<div class="form-group">
@@ -142,10 +142,10 @@ export default{
 			                </div>
 							<div class="form-group" v-else>
 								<label>{{ 'categoria' | translate | capitalize }}</label>
-								<select class="form-control new-survey__category" :value="this.surveyCategory" @change="checkCategorie($event)"  @focus="removeError($event)">
-									<option value="">{{ 'select' | translate | capitalize }} {{ 'categorie' | translate }}</option>
+								<select class="form-control new-survey__category" :value="this.surveyCategory" @change="checkCategory($event)"  @focus="removeError($event)">
+									<option value="">{{ 'select' | translate | capitalize }} {{ 'category' | translate }}</option>
 									<option v-for="(category, index) in categories" :value="category.id">{{ category.name }}</option>
-									<option value="new-category">Inserir nova categoria</option>
+									<option value="new-category">{{ 'insert' | translate | capitalize }} {{ 'new' | translate }} {{ 'category' | translate }}</option>
 								</select>
 			                </div>
 							<button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'survey' | translate }}</button>
@@ -196,7 +196,7 @@ export default{
 
 				<c-question v-on:newQuestion="addQuestion"></c-question>
 				<c-edit-question v-on:editQuestion="editQuestion" :question="this.question"></c-edit-question>
-				<c-categorie></c-categorie>
+				<c-category></c-category>
 			</div>
 		</section>
 		<!-- /.content -->

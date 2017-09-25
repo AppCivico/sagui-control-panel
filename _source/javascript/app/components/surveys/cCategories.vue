@@ -1,11 +1,12 @@
 <script>
-import cCategorie from './cCategorie.vue';
+import Vue from 'vue';
+import cCategory from './cCategory.vue';
 import cConfirm from '../utilities/cConfirm.vue';
 
 export default {
 	name: 'cCategories',
 	components: {
-		cCategorie,
+		cCategory,
 		cConfirm,
 	},
 	data() {
@@ -41,15 +42,15 @@ export default {
 			this.$store.dispatch('DELETE_SURVEY', id);
 		},
 		removeCategory(category) { // eslint-disable-line no-unused-vars
-			this.$store.dispatch('CHANGE_CONFIRM_MESSAGE', { message: 'As enquetes cadastradas nesta categoria também serão excluídas, tem certeza que deseja deleter esta categoria?' });
+			this.$store.dispatch('CHANGE_CONFIRM_MESSAGE', { message: Vue.i18n.translate('remove-category') });
 			this.selected = category;
 		},
-		editCategorie(category) {
+		editCategory(category) {
 			this.isEditing = true;
 			this.editingCategory = category;
 			$('#new-category').modal('show');
 		},
-		addCategorie() {
+		addCategory() {
 			this.isEditing = false;
 			$('#new-category').modal('show');
 		},
@@ -77,8 +78,8 @@ export default {
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>{{ 'categories' | translate | capitalize }}
-				<button type="button" class="btn btn-primary pull-right" @click="addCategorie()">
-					{{ 'add' | translate | capitalize }} {{ 'categorie' | translate }}
+				<button type="button" class="btn btn-primary pull-right" @click="addCategory()">
+					{{ 'add' | translate | capitalize }} {{ 'category' | translate }}
 				</button>
 			</h1>
 		</section>
@@ -95,14 +96,14 @@ export default {
 							<router-link :to="'/surveys/category/'+category.id">
 								<i class="fa fa-list"></i> {{ category.name }}
 
-								<button type="button" aria-label="Editar" data-toggle="modal" data-target="#new-category" class="edit-button" @click.stop.prevent="editCategorie(category)"><i class="fa fa-edit"></i></button>
+								<button type="button" aria-label="Editar" data-toggle="modal" data-target="#new-category" class="edit-button" @click.stop.prevent="editCategory(category)"><i class="fa fa-edit"></i></button>
 							</router-link>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</section>
-		<c-categorie :category="this.editingCategory" :isEditing="this.isEditing"></c-categorie>
+		<c-category :category="this.editingCategory" :isEditing="this.isEditing"></c-category>
 		<c-confirm></c-confirm>
 		<!-- /.content -->
 	</div>
