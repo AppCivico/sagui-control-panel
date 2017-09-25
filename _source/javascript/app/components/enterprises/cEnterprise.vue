@@ -27,7 +27,6 @@ export default {
 			this.initMap();
 		},
 		initMap() {
-			console.log(this.decodedPath);
 			const bounds = new google.maps.LatLngBounds();
 			const map = new google.maps.Map(document.getElementById('enterprise__map'), {
 				zoom: 14,
