@@ -201,7 +201,7 @@ export default {
 			                <div class="form-group">
 								<label>{{ 'photos' | translate | capitalize }}</label>
 								<input type="file" class="form-control" name="photos" multiple>
-								<p class="help-block">Inserir no máximo 5 imagens.</p>
+								<p class="help-block">{{ 'max-photos-helper' | translate }}</p>
 			                </div>
 						</div>
 					</div>

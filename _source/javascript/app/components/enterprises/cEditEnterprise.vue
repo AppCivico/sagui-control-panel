@@ -223,7 +223,7 @@ export default {
 									</div>
 								</div>
 								<input type="file" class="form-control" name="photos" v-if="enterprise.images.length < 5" multiple>
-								<p class="help-block">Inserir no máximo 5 imagens.</p>
+								<p class="help-block">{{ 'max-photos-helper' | translate }}</p>
 							</div>
 						</div>
 					</div>

@@ -70,7 +70,9 @@ const ptBr = {
 	"textarea": "texto livre",
 	"type": "tipo",
 	"traffic_light": "farol",
+	"toggle-navigation": "abrir menu",
 	"yellow": "amarelo",
+	"you-have": "você tem",
 
 	// form validation
 	"required-field": "Este campo é obrigatório.",
@@ -83,6 +85,7 @@ const ptBr = {
 	"insert-address": "Insira aqui um endereço inicial.",
 	"invalid-location": "Localização não encontrada,tente novamente.",
 	"max-photos": "O limite de imagens foi ultrapassado.",
+	"max-photos-helper": "Inserir no máximo 5 imagens.",
 	"no-icon": "É necessário selecionar um ícone para a categoria.",
 	"no-area": "É necessário delimitar uma área no mapa",
 
@@ -98,5 +101,20 @@ const ptBr = {
 
 	// results
 	"download-csv": "Faça o download da planilha com todos os resultados",
+
+	// store
+	"failed-login": "Dados incorretos. Tente novamente.",
+	"request-error": "Ocorreu um erro. Tente novamente.",
+	"new-category": "Nova categoria salva.",
+	"delete-category": "Categoria excluída.",
+	"edit-category": "Categoria alterada.",
+	"new-enterprise": "Empreendimento salvo com sucesso!",
+	"edit-enterprise": "Empreendimento editado com sucesso.",
+	"new-survey": "Enquete salva.",
+	"edit-survey": "Alterações salvas.",
+	"delete-survey": "Enquete excluída com sucesso.",
+	"new-question": "Questão salva.",
+	"edit-question": "Questão editada com sucesso.",
+	"delete-question": "Questão excluída.",
 };
 export { ptBr as default };

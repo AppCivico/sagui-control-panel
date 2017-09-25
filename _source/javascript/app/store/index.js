@@ -70,7 +70,7 @@ const store = new Vuex.Store({
 				commit('SET_USER', { user: response.data });
 			}, (err) => {
 				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Dados incorretos. Tente novamente.' } });
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('failed-login') } });
 			});
 		},
 		SIGNOUT({ commit }) {
@@ -84,7 +84,7 @@ const store = new Vuex.Store({
 				commit('SET_USER', { user: response.data });
 			}, (err) => {
 				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 			});
 		},
 		LOAD_CATEGORIES_LIST({ commit, state }) {
@@ -94,7 +94,7 @@ const store = new Vuex.Store({
 					resolve(response);
 				}, (err) => {
 					console.error(err);
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 				});
 			});
 		},
@@ -107,13 +107,13 @@ const store = new Vuex.Store({
 			})
 			.then((response) => {
 				if (response.statusText === 'Created') {
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Nova categoria salva' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('new-category') } });
 					store.dispatch('LOAD_CATEGORIES_LIST');
 					$('#new-category').modal('hide');
 				}
 			}, (err) => {
 				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 			});
 		},
 		DELETE_CATEGORY({ commit, state }, id) {
@@ -124,11 +124,11 @@ const store = new Vuex.Store({
 					headers: { 'Content-Type': 'application/json' },
 				})
 				.then((response) => {
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Categoria excluída' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('new-category') } });
 					resolve(response);
 				}, (err) => {
 					console.error(err);
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('delete-category') } });
 				});
 			});
 		},
@@ -141,13 +141,13 @@ const store = new Vuex.Store({
 			})
 			.then((response) => {
 				if (response.statusText === 'OK') {
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Categoria alterada' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('edit-category') } });
 					store.dispatch('LOAD_CATEGORIES_LIST');
 					$('#new-category').modal('hide');
 				}
 			}, (err) => {
 				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 			});
 		},
 		CHANGE_ALERT_MESSAGE({ commit }, message) {
@@ -160,7 +160,7 @@ const store = new Vuex.Store({
 					resolve(response);
 				}, (err) => {
 					console.error(err);
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 				});
 			});
 		},
@@ -171,7 +171,7 @@ const store = new Vuex.Store({
 					resolve(response);
 				}, (err) => {
 					console.error(err);
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 				});
 			});
 		},
@@ -184,11 +184,11 @@ const store = new Vuex.Store({
 					headers: { 'Content-Type': 'application/json' },
 				})
 				.then((res) => {
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Empreendimento salvo com sucesso.', redirect: { state: true, path: '-1' } } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('new-enterprise'), redirect: { state: true, path: '-1' } } });
 					resolve(res);
 				}, (err) => {
 					console.error(err);
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 				});
 			});
 		},
@@ -201,11 +201,11 @@ const store = new Vuex.Store({
 					headers: { 'Content-Type': 'application/json' },
 				})
 				.then(() => {
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Empreendimento editado com sucesso.', redirect: { state: true, path: '-1' } } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('edit-enterprise'), redirect: { state: true, path: '-1' } } });
 					resolve(res);
 				}, (err) => {
 					console.error(err);
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 				});
 			});
 		},
@@ -214,7 +214,7 @@ const store = new Vuex.Store({
 				commit('SET_SURVEYS_LIST', { list: response.data });
 			}, (err) => {
 				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 			});
 		},
 		LOAD_SURVEYS_LIST_BY_ENTERPRISE({ commit, state }) {
@@ -222,7 +222,7 @@ const store = new Vuex.Store({
 				commit('SET_SURVEYS_LIST', { list: response.data });
 			}, (err) => {
 				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 			});
 		},
 		LOAD_SURVEY({ commit, state }, id) {
@@ -232,7 +232,7 @@ const store = new Vuex.Store({
 					resolve(response);
 				}, (err) => {
 					console.error(err);
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 				});
 			});
 		},
@@ -246,11 +246,11 @@ const store = new Vuex.Store({
 				})
 				.then((response) => {
 					commit('SET_CURRENT_SURVEY', { res: response.data });
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete salva.' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('new-survey') } });
 					resolve(response);
 				}, (err) => {
 					console.error(err);
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 				});
 			});
 		},
@@ -268,11 +268,11 @@ const store = new Vuex.Store({
 				})
 				.then((response) => {
 					commit('SET_CURRENT_QUESTION', { res: response.data });
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Questão salva' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('new-question') } });
 					resolve(response);
 				}, (err) => {
 					console.error(err);
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 					const loading = document.querySelector('.loading');
 					if (loading) {
 						loading.classList.add('close');
@@ -288,10 +288,10 @@ const store = new Vuex.Store({
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.then(() => {
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Questão salva' } });
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('edit-question') } });
 			}, (err) => {
 				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 				const loading = document.querySelector('.loading');
 				if (loading) {
 					loading.classList.add('close');
@@ -306,11 +306,11 @@ const store = new Vuex.Store({
 					headers: { 'Content-Type': 'application/json' },
 				})
 				.then((response) => {
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Questão deletada' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('delete-question') } });
 					resolve(response);
 				}, (err) => {
 					console.error(err);
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 				});
 			});
 		},
@@ -326,11 +326,11 @@ const store = new Vuex.Store({
 			})
 			.then((response) => {
 				if (response.statusText === 'OK') {
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Alterações salvas', redirect: { state: true, path: '-1' } } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('edit-survey'), redirect: { state: true, path: '-1' } } });
 				}
 			}, (err) => {
 				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 			});
 		},
 		DELETE_SURVEY({ commit, state }, id) {
@@ -341,11 +341,11 @@ const store = new Vuex.Store({
 					headers: { 'Content-Type': 'application/json' },
 				})
 				.then((response) => {
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Enquete excluída' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('delete-survey') } });
 					resolve(response);
 				}, (err) => {
 					console.error(err);
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 				});
 			});
 		},
@@ -366,7 +366,7 @@ const store = new Vuex.Store({
 				commit('SET_NOTIFICATIONS_LIST', { list: response.data });
 			}, (err) => {
 				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 			});
 		},
 		LOAD_AGENTS_LIST({ commit }, id) { // eslint-disable-line no-unused-vars
@@ -374,7 +374,7 @@ const store = new Vuex.Store({
 				commit('SET_AGENTS_LIST', { list: response.data });
 			}, (err) => {
 				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 			});
 		},
 		LOAD_COMPLAINTS_LIST({ commit }, options) { // eslint-disable-line no-unused-vars
@@ -382,7 +382,7 @@ const store = new Vuex.Store({
 				commit('SET_COMPLAINTS_LIST', { list: response.data });
 			}, (err) => {
 				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 			});
 		},
 		UPLOAD_IMAGE({ commit, state }, data) {
@@ -397,7 +397,7 @@ const store = new Vuex.Store({
 					resolve(response);
 				}, (err) => {
 					console.error(err);
-					commit('SET_ALERT_MESSAGE', { res: { message: 'Ocorreu um erro. Tente novamente.' } });
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
 				});
 			});
 		},
