@@ -143,7 +143,7 @@ export default{
 							<div class="form-group" v-else>
 								<label>{{ 'categoria' | translate | capitalize }}</label>
 								<select class="form-control new-survey__category" :value="this.surveyCategory" @change="checkCategorie($event)"  @focus="removeError($event)">
-									<option value="">Selecione a categoria</option>
+									<option value="">{{ 'select' | translate | capitalize }} {{ 'categorie' | translate }}</option>
 									<option v-for="(category, index) in categories" :value="category.id">{{ category.name }}</option>
 									<option value="new-category">Inserir nova categoria</option>
 								</select>

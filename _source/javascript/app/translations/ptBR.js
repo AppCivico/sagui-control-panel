@@ -35,6 +35,7 @@ const ptBr = {
 	"insert_option": "Digite aqui uma opção",
 	"limit": "delimitar",
 	"location": "localização",
+	"login": "entrar",
 	"multiple": "multipla escolha",
 	"name": "nome",
 	"new": "nova",
@@ -88,6 +89,7 @@ const ptBr = {
 	"max-photos-helper": "Inserir no máximo 5 imagens.",
 	"no-icon": "É necessário selecionar um ícone para a categoria.",
 	"no-area": "É necessário delimitar uma área no mapa",
+	"remove-category": "As enquetes cadastradas nesta categoria também serão excluídas, tem certeza que deseja deleter esta categoria?",
 
 	// notifications
 	"not-read": "não lidos",
