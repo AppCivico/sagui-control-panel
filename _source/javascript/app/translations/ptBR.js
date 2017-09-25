@@ -11,6 +11,7 @@ const ptBr = {
 	"agents": "agentes",
 	"answer": "resposta",
 	"answers": "respostas",
+	"area": "área",
 	"cancel": "cancelar",
 	"cases": "ocorrências",
 	"categorie": "categoria",
@@ -32,6 +33,7 @@ const ptBr = {
 	"green": "verde",
 	"icon": "ícone",
 	"insert_option": "Digite aqui uma opção",
+	"limit": "delimitar",
 	"location": "localização",
 	"multiple": "multipla escolha",
 	"name": "nome",
@@ -82,6 +84,7 @@ const ptBr = {
 	"invalid-location": "Localização não encontrada,tente novamente.",
 	"max-photos": "O limite de imagens foi ultrapassado.",
 	"no-icon": "É necessário selecionar um ícone para a categoria.",
+	"no-area": "É ncessário delimitar uma área no mapa",
 
 	// notifications
 	"not-read": "não lidos",

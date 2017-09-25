@@ -13,6 +13,7 @@ export default {
 			autocomplete: '',
 			placeId: '',
 			polygon: '',
+			hasAddress: false,
 		};
 	},
 	mounted() {
@@ -44,8 +45,9 @@ export default {
 			);
 		},
 		setMap(event) {
+			const autocompleteInput = document.querySelector('#autocomplete');
 			let result;
-			if (event.target.value !== '') {
+			if (autocompleteInput.value !== '') {
 				result = this.autocomplete.getPlace();
 				if (result) {
 					if (result.place_id) {
@@ -145,6 +147,11 @@ export default {
 				}
 			});
 
+			if (this.polygon === '') {
+				this.$store.dispatch('CHANGE_ALERT_MESSAGE', Vue.i18n.translate('no-area'));
+				valid = false;
+			}
+
 			if (valid) {
 				event.target.setAttribute('disabled', 'disabled');
 				this.createEnterprise(form);
@@ -188,7 +195,8 @@ export default {
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'location' | translate | capitalize }}</label>
-								<input type="text" class="form-control" id="autocomplete" name="human_address" @blur="setMap($event)" :placeholder="'insert-address' | translate">
+								<input type="text" class="form-control" id="autocomplete" name="human_address" @blur="hasAddress = true" :placeholder="'insert-address' | translate">
+								<button type="button" class="btn btn-block btn-success" @click.prevent="setMap()" v-if="hasAddress">{{ 'limit' | translate | capitalize }} {{ 'area' | translate }}</button>
 			                </div>
 			                <div class="form-group">
 								<label>{{ 'photos' | translate | capitalize }}</label>
