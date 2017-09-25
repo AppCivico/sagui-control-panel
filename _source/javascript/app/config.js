@@ -2,4 +2,4 @@ const config = {
 	url: 'http://dev-sagui-api.eokoe.com',
 };
 
-export default config;
+export { config as default };

@@ -31,6 +31,7 @@ export default{
 	},
 	data() {
 		return {
+			url: config.url,
 			questions: [],
 			question: {},
 			questionIndex: 0,
@@ -178,7 +179,7 @@ export default{
 
 												<div class="col-md-4" v-for="answer in question.answers" v-if="question.type != 'textarea'">
 													<h5>{{ answer.title }}</h5>
-													<img :src="config.url+answer.image_path" alt="image" v-if="answer.image_path" class="answer_img">
+													<img :src="url+answer.image_path" alt="image" v-if="answer.image_path" class="answer_img">
 												</div>
 												<div class="col-md-12" v-if="question.type == 'textarea'">
 													<h5>{{ 'textarea' | translate | capitalize }}</h5>

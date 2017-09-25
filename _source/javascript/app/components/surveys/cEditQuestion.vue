@@ -8,6 +8,7 @@ export default {
 	props: ['question'],
 	data() {
 		return {
+			url: config.url,
 			types: ['traffic_light', 'multiple', 'textarea'],
 		};
 	},
@@ -198,7 +199,7 @@ export default {
 							<div class="traffic_light__image">
 								<template v-if="answer.image_path">
 									<button type="button" aria-label="Excluir" class="close" @click="removeImage(index)"><span aria-hidden="true">×</span></button>
-									<img :src="config.url+answer.image_path" :alt="answer.unit">
+									<img :src="url+answer.image_path" :alt="answer.unit">
 								</template>
 								<template v-else>
 									<input type="file" id="traffic_light__image-option">
