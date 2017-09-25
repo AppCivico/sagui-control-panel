@@ -1,6 +1,7 @@
 <script>
 import Vue from 'vue';
 import methods from '../../methods';
+import config from '../../config'; // eslint-disable-line no-unused-vars
 
 export default {
 	name: 'cEditQuestion',
@@ -197,7 +198,7 @@ export default {
 							<div class="traffic_light__image">
 								<template v-if="answer.image_path">
 									<button type="button" aria-label="Excluir" class="close" @click="removeImage(index)"><span aria-hidden="true">×</span></button>
-									<img :src="'http://dev-sagui-api.eokoe.com'+answer.image_path" :alt="answer.unit">
+									<img :src="config.url+answer.image_path" :alt="answer.unit">
 								</template>
 								<template v-else>
 									<input type="file" id="traffic_light__image-option">

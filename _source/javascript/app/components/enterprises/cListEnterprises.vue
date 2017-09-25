@@ -1,4 +1,6 @@
 <script>
+import config from '../../config'; // eslint-disable-line no-unused-vars
+
 export default {
 	name: 'cListEnterprises',
 	data() {
@@ -20,7 +22,7 @@ export default {
 		getThumbnails() {
 			this.enterprises.map((item) => {
 				if (item.images[0]) {
-					const thumbnail = `background-image: url(http://dev-sagui-api.eokoe.com/${item.images[0].image_path})`;
+					const thumbnail = `background-image: url(${config.url}/${item.images[0].image_path})`;
 					this.thumbnails.push(thumbnail);
 				} else {
 					this.thumbnails.push('');

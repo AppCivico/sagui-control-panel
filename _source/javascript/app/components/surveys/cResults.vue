@@ -1,4 +1,6 @@
 <script>
+import config from '../../config'; // eslint-disable-line no-unused-vars
+
 export default {
 	name: 'cResults',
 	computed: {
@@ -33,7 +35,7 @@ export default {
 				<div class="box-body no-padding" v-else>
 					<ul class="nav nav-pills nav-stacked">
 						<li v-for="survey in surveys">
-							<a :href="'http://dev-sagui-api.eokoe.com/v1/surveys/'+survey.id+'/reports?api_key='+apiKey" target="_blank">
+							<a :href="config.url+ '/v1/surveys/'+survey.id+'/reports?api_key='+apiKey" target="_blank">
 								<i class="fa fa-file-text-o"></i> {{ survey.name }}
 							</a>
 						</li>
