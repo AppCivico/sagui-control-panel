@@ -19,12 +19,15 @@ export default {
 			autocomplete: '',
 			placeId: '',
 			polygon: '',
+			hasAddress: false,
 		};
 	},
 	mounted() {
 		this.initAutocomplete();
 		this.AddRemoveError();
-		this.$store.dispatch('LOAD_ENTERPRISE', this.id);
+		this.$store.dispatch('LOAD_ENTERPRISE', this.id).then(() => {
+			this.polygon = this.enterprise.location;
+		});
 	},
 	methods: {
 		AddRemoveError() {
@@ -51,8 +54,9 @@ export default {
 			);
 		},
 		setMap(event) {
+			const autocompleteInput = document.querySelector('#autocomplete');
 			let result;
-			if (event.target.value !== '') {
+			if (autocompleteInput.value !== '') {
 				result = this.autocomplete.getPlace();
 				if (result) {
 					if (result.place_id) {
@@ -71,17 +75,52 @@ export default {
 			const enterpriseArray = Array.from(form.querySelectorAll('#enterprise-data input'));
 			const status = form.querySelector('#enterprise-data .enterprise-data__status');
 			const values = {};
+			const promises = [];
+			let photos = false; // eslint-disable-line prefer-const
 
 			enterpriseArray.map((el) => {
 				if (el.type !== 'file') {
 					values[el.name] = el.value;
+				} else {
+					if (el.files.length > 0) { // eslint-disable-line no-lonely-if
+						photos = true;
+
+						const images = Array.from(el.files);
+						images.map((img) => {
+							const imgData = new FormData();
+							imgData.append('file', img);
+							promises.push(this.$store.dispatch('UPLOAD_IMAGE', imgData));
+						});
+					}
 				}
 			});
 
+			values.images = this.enterprise.images;
 			values.location = this.polygon;
 			values.public = status.value;
 
-			this.$store.dispatch('EDIT_ENTERPRISE', values);
+			if (photos) {
+				Promise.all(promises)
+					.then((res) => {
+						res.map((item) => {
+							const newPhoto = {
+								image_path: item.data.path,
+								image_id: item.data.id,
+							};
+							values.images.push(newPhoto);
+						});
+						this.$store.dispatch('EDIT_ENTERPRISE', values).then(() => {
+							document.querySelector('.new-enterprise__button').removeAttribute('disabled');
+						});
+					})
+					.catch((e) => {
+						console.error(e);
+					});
+			} else {
+				this.$store.dispatch('EDIT_ENTERPRISE', values).then(() => {
+					document.querySelector('.new-enterprise__button').removeAttribute('disabled');
+				});
+			}
 		},
 		validate() {
 			let valid = true;
@@ -101,11 +140,28 @@ export default {
 					methods.addError(input.parentNode, Vue.i18n.translate('password-match'));
 					valid = false;
 				}
+
+				// check for files amount
+				if (input.type === 'file') {
+					if ((this.enterprise.images.length + input.files.length) > 5) {
+						methods.addError(input.parentNode, Vue.i18n.translate('max-photos'));
+						valid = false;
+					}
+				}
 			});
 
+			if (this.polygon === '') {
+				this.$store.dispatch('CHANGE_ALERT_MESSAGE', Vue.i18n.translate('no-area'));
+				valid = false;
+			}
+
 			if (valid) {
+				event.target.setAttribute('disabled', 'disabled');
 				this.createEnterprise(form);
 			}
+		},
+		removeImage(index) {
+			this.enterprise.images.splice(index, 1);
 		},
 	},
 };
@@ -153,16 +209,24 @@ export default {
 							</div>
 							<div class="form-group">
 								<label>{{ 'location' | translate | capitalize }}</label>
-								<input type="text" class="form-control" id="autocomplete" name="human_address" @blur="setMap($event)" :placeholder="'insert-address' | translate" :value="enterprise.human_address">
+								<input type="text" class="form-control" id="autocomplete" name="human_address" @blur="hasAddress = true" :placeholder="'insert-address' | translate" :value="enterprise.human_address">
+								<button type="button" class="btn btn-block btn-success" @click.prevent="setMap()" v-if="hasAddress">{{ 'limit' | translate | capitalize }} {{ 'area' | translate }}</button>
 							</div>
 							<div class="form-group">
 								<label>{{ 'photos' | translate | capitalize }}</label>
-								<input type="file" class="form-control" name="photos">
+								<div class="row" v-if="enterprise.images">
+									<div class="col-md-4" v-for="image in enterprise.images">
+										<button type="button" aria-label="Excluir" class="close" @click="removeImage(index)"><span aria-hidden="true">×</span></button>
+										<img :src="'http://dev-sagui-api.eokoe.com'+image.image_path" alt="foto do empreendimento" class="img-responsive">
+									</div>
+								</div>
+								<input type="file" class="form-control" name="photos" v-if="enterprise.images.length < 5" multiple>
+								<p class="help-block">Inserir no máximo 5 imagens.</p>
 							</div>
 						</div>
 					</div>
 
-					<button type="button" class="btn btn-block btn-success" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'enterprise' | translate }}</button>
+					<button type="button" class="btn btn-block btn-success new-enterprise__button" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'enterprise' | translate }}</button>
 				</div>
 			</div>
 		</section>
