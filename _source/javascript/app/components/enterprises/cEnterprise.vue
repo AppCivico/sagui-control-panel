@@ -1,4 +1,5 @@
 <script>
+/* eslint-disable no-undef, new-parens */
 export default {
 	name: 'cEnterprise',
 	props: ['id'],
@@ -7,9 +8,49 @@ export default {
 			return this.$store.state.enterprise;
 		},
 	},
+	data() {
+		return {
+			decodedPath: '',
+		};
+	},
 	mounted() {
-		this.$store.dispatch('LOAD_ENTERPRISE', this.id);
+		this.$store.dispatch('LOAD_ENTERPRISE', this.id).then(() => {
+			if (this.enterprise.location) {
+				this.decodePath();
+			}
+		});
 		this.$store.dispatch('CHANGE_SELECTED_ENTERPRISE', this.id);
+	},
+	methods: {
+		decodePath() {
+			this.decodedPath = google.maps.geometry.encoding.decodePath(this.enterprise.location);
+			this.initMap();
+		},
+		initMap() {
+			console.log(this.decodedPath);
+			const bounds = new google.maps.LatLngBounds();
+			const map = new google.maps.Map(document.getElementById('enterprise__map'), {
+				zoom: 14,
+			});
+			const polygon = new google.maps.Polygon({
+				paths: this.decodedPath,
+				draggable: true, // turn off if it gets annoying
+				editable: true,
+				strokeColor: '#FF0000',
+				strokeOpacity: 0.1,
+				strokeWeight: 2,
+				fillColor: '#FF0000',
+				fillOpacity: 0.1,
+			});
+
+			this.decodedPath.map((item) => {
+				bounds.extend(item);
+			});
+
+			polygon.setMap(map);
+			google.maps.event.trigger(map, 'resize');
+			map.setCenter(bounds.getCenter());
+		},
 	},
 };
 </script>
@@ -133,6 +174,12 @@ export default {
 					</div>
 				</div>
 			</div>
+
+			<div class="row" v-if="this.enterprise.location">
+				<div class="col-md-12">
+					<div id="enterprise__map"></div>
+				</div>
+			</div>
 		</section>
 		<!-- /.content -->
 	</div>
@@ -144,6 +191,10 @@ export default {
 	}
 	.content-header {
 		display: table;
+		width: 100%;
+	}
+	#enterprise__map {
+		height: 450px;
 		width: 100%;
 	}
 </style>
