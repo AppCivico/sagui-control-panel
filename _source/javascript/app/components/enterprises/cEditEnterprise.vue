@@ -186,7 +186,7 @@ export default {
 							<div class="form-group">
 								<label>{{ 'status' | translate | capitalize }}</label>
 								<!-- change value to enterprise.public when available -->
-								<select class="form-control enterprise-data__status" :value="enterprise.active" @focus="removeError($event)">
+								<select class="form-control enterprise-data__status" :value="enterprise.public" @focus="removeError($event)">
 									<option value="0">{{ 'no' | translate | capitalize }} {{ 'public' | translate }}</option>
 									<option value="1">{{ 'public' | translate | capitalize }}</option>
 								</select>
