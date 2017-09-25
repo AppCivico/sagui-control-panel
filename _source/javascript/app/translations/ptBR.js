@@ -84,7 +84,7 @@ const ptBr = {
 	"invalid-location": "Localização não encontrada,tente novamente.",
 	"max-photos": "O limite de imagens foi ultrapassado.",
 	"no-icon": "É necessário selecionar um ícone para a categoria.",
-	"no-area": "É ncessário delimitar uma área no mapa",
+	"no-area": "É necessário delimitar uma área no mapa",
 
 	// notifications
 	"not-read": "não lidos",
