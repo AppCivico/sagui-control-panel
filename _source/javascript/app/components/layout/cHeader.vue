@@ -1,4 +1,6 @@
 <script>
+import config from '../../config'; // eslint-disable-line no-unused-vars
+
 export default {
 	name: 'cHeader',
 	computed: {
@@ -10,6 +12,30 @@ export default {
 		},
 		notifications() {
 			return this.$store.state.notifications;
+		},
+		name() {
+			let final = '';
+			const fullName = config.name.split(' ');
+			fullName.map((word, i) => {
+				if (i === 0) {
+					final = `<b>${word}</b>`;
+				} else {
+					final = `${final} ${word}`;
+				}
+			});
+			return final;
+		},
+		initials() {
+			let final = '';
+			const fullName = config.name.split(' ');
+			fullName.map((word, i) => {
+				if (i === 0) {
+					final = `<b>${word[0]}</b>`;
+				} else {
+					final = `${final} ${word[0]}`;
+				}
+			});
+			return final;
 		},
 	},
 	mounted() {
@@ -35,15 +61,15 @@ export default {
 		<!-- Logo -->
 		<a href="/" class="logo">
 			<!-- mini logo for sidebar mini 50x50 pixels -->
-			<span class="logo-mini"><b>P</b>S</span>
+			<span class="logo-mini" v-html="initials"></span>
 			<!-- logo for regular state and mobile devices -->
-			<span class="logo-lg"><b>Projeto</b>Sagui</span>
+			<span class="logo-lg" v-html="name"></span>
 		</a>
 		<!-- Header Navbar: style can be found in header.less -->
 		<nav class="navbar navbar-static-top">
 			<!-- Sidebar toggle button-->
 			<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-			<span class="sr-only">Toggle navigation</span>
+			<span class="sr-only">{{ 'toggle-navigation' | translate | capitalize }}</span>
 			</a>
 
 			<div class="navbar-custom-menu">
@@ -55,7 +81,7 @@ export default {
 							<span class="label label-warning">{{ notifications.length }}</span>
 						</a>
 						<ul class="dropdown-menu">
-							<li class="header">You have {{ notifications.length }} notifications</li>
+							<li class="header">{{ 'you-have' | translate | capitalize }} {{ notifications.length }} {{ 'notifications' | translate }}</li>
 							<li>
 								<!-- inner menu: contains the actual data -->
 								<ul class="menu">
