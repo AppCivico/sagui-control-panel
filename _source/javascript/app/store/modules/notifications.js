@@ -5,6 +5,18 @@ import Vue from 'vue';
 import config from '../../config';
 
 // Add a response interceptor
+axios.interceptors.request.use((config) => {
+	const loading = document.querySelector('.loading');
+	if (loading) {
+		loading.classList.remove('close');
+	}
+	return config;
+}, (error) => {
+	// Do something with request error
+	return Promise.reject(error);
+});
+
+// Add a response interceptor; remove after modularization
 axios.interceptors.response.use((response) => {
 	const loading = document.querySelector('.loading');
 	if (loading) {
