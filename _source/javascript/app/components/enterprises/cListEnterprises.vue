@@ -11,7 +11,7 @@ export default {
 	},
 	computed: {
 		enterprises() {
-			return this.$store.state.enterprises;
+			return this.$store.state.enterprises.enterprises;
 		},
 	},
 	mounted() {

@@ -5,7 +5,7 @@ export default {
 	props: ['id'],
 	computed: {
 		enterprise() {
-			return this.$store.state.enterprise;
+			return this.$store.state.enterprises.enterprise;
 		},
 	},
 	data() {
