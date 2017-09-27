@@ -53,27 +53,39 @@ export default {
 				methods.addError(title.parentNode, Vue.i18n.translate('required-field'));
 				valid = false;
 			}
-			if (this.selectedIcon === '') {
+			if (this.selectedIcon === '' && !this.isEditing) {
 				this.$store.dispatch('CHANGE_ALERT_MESSAGE', Vue.i18n.translate('no-icon'));
 				valid = false;
 			}
 			if (valid) {
 				if (this.isEditing) {
-					const category = {
+					const categoryValues = {
 						name: title.value,
 						id: this.category.id,
-						icon_code: this.selectedIcon.cssValue,
-						icon_name: this.selectedIcon.className,
 					};
-					this.$store.dispatch('EDIT_CATEGORY', category);
+
+					if (this.selectedIcon !== '') {
+						console.log('editei icone');
+
+						categoryValues.icon_code = this.selectedIcon.cssValue;
+						categoryValues.icon_name = this.selectedIcon.className;
+					} else {
+						console.log('nao editei icone');
+
+						categoryValues.icon_code = this.category.icon_code;
+						categoryValues.icon_name = this.category.icon_name;
+					}
+
+					this.$store.dispatch('EDIT_CATEGORY', categoryValues);
+					/* eslint-enable */
 				} else {
-					const category = {
+					const categoryValues = {
 						name: title.value,
 						dimension: 'category',
 						icon_code: this.selectedIcon.cssValue,
 						icon_name: this.selectedIcon.className,
 					};
-					this.$store.dispatch('ADD_CATEGORY', category);
+					this.$store.dispatch('ADD_CATEGORY', categoryValues);
 				}
 			}
 		},
