@@ -5,10 +5,10 @@ export default {
 	name: 'cHeader',
 	computed: {
 		apiKey() {
-			return this.$store.state.apiKey;
+			return this.$store.state.auth.apiKey;
 		},
 		user() {
-			return this.$store.state.user;
+			return this.$store.state.auth.user;
 		},
 		notifications() {
 			return this.$store.state.notifications;

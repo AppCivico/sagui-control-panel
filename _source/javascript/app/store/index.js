@@ -4,6 +4,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 
+import auth from './modules/auth';
+
 Vue.use(Vuex);
 
 // const api = 'http://localhost:3000';
@@ -34,8 +36,10 @@ axios.interceptors.response.use((response) => {
 });
 
 const store = new Vuex.Store({
+	modules: {
+		auth,
+	},
 	state: {
-		apiKey: '',
 		agents: [],
 		alertMessage: '',
 		categories: [],
@@ -56,40 +60,11 @@ const store = new Vuex.Store({
 		selectedEnterprise: '',
 		surveys: [],
 		survey: {},
-		user: {},
 	},
 	actions: {
-		AUTHENTICATION({ commit }, user) {
-			axios({
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				url: `${devapi}/auth/signin`,
-				data: user,
-			})
-			.then((response) => {
-				commit('SET_USER', { user: response.data });
-			}, (err) => {
-				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('failed-login') } });
-			});
-		},
-		SIGNOUT({ commit }) {
-			commit('CLEAR_USER');
-		},
-		EDIT_APIKEY({ commit }, apiKey) {
-			commit('SET_APIKEY', { apiKey });
-		},
-		LOAD_USER({ commit, state }) {
-			axios.get(`${devapi}/user-profile?api_key=${state.apiKey}`).then((response) => {
-				commit('SET_USER', { user: response.data });
-			}, (err) => {
-				console.error(err);
-				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } });
-			});
-		},
 		LOAD_CATEGORIES_LIST({ commit, state }) {
 			return new Promise((resolve) => {
-				axios.get(`${devapi}/enterprises/${state.selectedEnterprise}/axis?api_key=${state.apiKey}`).then((response) => {
+				axios.get(`${devapi}/enterprises/${state.selectedEnterprise}/axis?api_key=${state.auth.apiKey}`).then((response) => {
 					commit('SET_CATEGORIES_LIST', { list: response.data });
 					resolve(response);
 				}, (err) => {
@@ -101,7 +76,7 @@ const store = new Vuex.Store({
 		ADD_CATEGORY({ commit, state }, data) {
 			axios({
 				method: 'POST',
-				url: `${devapi}/enterprises/${state.selectedEnterprise}/axis?api_key=${state.apiKey}`,
+				url: `${devapi}/enterprises/${state.selectedEnterprise}/axis?api_key=${state.auth.apiKey}`,
 				data,
 				headers: { 'Content-Type': 'application/json' },
 			})
@@ -120,7 +95,7 @@ const store = new Vuex.Store({
 			return new Promise((resolve) => {
 				axios({
 					method: 'DELETE',
-					url: `${devapi}/enterprises/${state.selectedEnterprise}/axis/${id}?api_key=${state.apiKey}`,
+					url: `${devapi}/enterprises/${state.selectedEnterprise}/axis/${id}?api_key=${state.auth.apiKey}`,
 					headers: { 'Content-Type': 'application/json' },
 				})
 				.then((response) => {
@@ -135,7 +110,7 @@ const store = new Vuex.Store({
 		EDIT_CATEGORY({ commit, state }, data) {
 			axios({
 				method: 'PUT',
-				url: `${devapi}/enterprises/${state.selectedEnterprise}/axis/${data.id}?api_key=${state.apiKey}`,
+				url: `${devapi}/enterprises/${state.selectedEnterprise}/axis/${data.id}?api_key=${state.auth.apiKey}`,
 				data: { name: data.name, icon: data.icon },
 				headers: { 'Content-Type': 'application/json' },
 			})
@@ -155,7 +130,7 @@ const store = new Vuex.Store({
 		},
 		LOAD_ENTERPRISES_LIST({ commit, state }) {
 			return new Promise((resolve) => {
-				axios.get(`${devapi}/enterprises?api_key=${state.apiKey}`).then((response) => {
+				axios.get(`${devapi}/enterprises?api_key=${state.auth.apiKey}`).then((response) => {
 					commit('SET_ENTERPRISES_LIST', { list: response.data });
 					resolve(response);
 				}, (err) => {
@@ -166,7 +141,7 @@ const store = new Vuex.Store({
 		},
 		LOAD_ENTERPRISE({ commit, state }, id) {
 			return new Promise((resolve) => {
-				axios.get(`${devapi}/enterprises/${id}?api_key=${state.apiKey}`).then((response) => {
+				axios.get(`${devapi}/enterprises/${id}?api_key=${state.auth.apiKey}`).then((response) => {
 					commit('SET_ENTERPRISE', { res: response.data });
 					resolve(response);
 				}, (err) => {
@@ -179,7 +154,7 @@ const store = new Vuex.Store({
 			return new Promise((resolve) => {
 				axios({
 					method: 'POST',
-					url: `${devapi}/enterprises?api_key=${state.apiKey}`,
+					url: `${devapi}/enterprises?api_key=${state.auth.apiKey}`,
 					data,
 					headers: { 'Content-Type': 'application/json' },
 				})
@@ -196,7 +171,7 @@ const store = new Vuex.Store({
 			return new Promise((resolve) => {
 				axios({
 					method: 'PUT',
-					url: `${devapi}/enterprises/${state.selectedEnterprise}?api_key=${state.apiKey}`,
+					url: `${devapi}/enterprises/${state.selectedEnterprise}?api_key=${state.auth.apiKey}`,
 					data,
 					headers: { 'Content-Type': 'application/json' },
 				})
@@ -210,7 +185,7 @@ const store = new Vuex.Store({
 			});
 		},
 		LOAD_SURVEYS_LIST({ commit, state }, id) {
-			axios.get(`${devapi}/surveys?axis_id=${id}&api_key=${state.apiKey}`).then((response) => {
+			axios.get(`${devapi}/surveys?axis_id=${id}&api_key=${state.auth.apiKey}`).then((response) => {
 				commit('SET_SURVEYS_LIST', { list: response.data });
 			}, (err) => {
 				console.error(err);
@@ -218,7 +193,7 @@ const store = new Vuex.Store({
 			});
 		},
 		LOAD_SURVEYS_LIST_BY_ENTERPRISE({ commit, state }) {
-			axios.get(`${devapi}/surveys?enterprise_id=${state.selectedEnterprise}&api_key=${state.apiKey}`).then((response) => {
+			axios.get(`${devapi}/surveys?enterprise_id=${state.selectedEnterprise}&api_key=${state.auth.apiKey}`).then((response) => {
 				commit('SET_SURVEYS_LIST', { list: response.data });
 			}, (err) => {
 				console.error(err);
@@ -227,7 +202,7 @@ const store = new Vuex.Store({
 		},
 		LOAD_SURVEY({ commit, state }, id) {
 			return new Promise((resolve) => {
-				axios.get(`${devapi}/surveys/${id}?api_key=${state.apiKey}`).then((response) => {
+				axios.get(`${devapi}/surveys/${id}?api_key=${state.auth.apiKey}`).then((response) => {
 					commit('SET_SURVEY', { res: response.data });
 					resolve(response);
 				}, (err) => {
@@ -240,7 +215,7 @@ const store = new Vuex.Store({
 			return new Promise((resolve) => {
 				axios({
 					method: 'POST',
-					url: `${devapi}/surveys?api_key=${state.apiKey}`,
+					url: `${devapi}/surveys?api_key=${state.auth.apiKey}`,
 					data,
 					headers: { 'Content-Type': 'application/json' },
 				})
@@ -262,7 +237,7 @@ const store = new Vuex.Store({
 			return new Promise((resolve) => {
 				axios({
 					method: 'POST',
-					url: `${devapi}/surveys/${state.currentSurvey}/questions?api_key=${state.apiKey}`,
+					url: `${devapi}/surveys/${state.currentSurvey}/questions?api_key=${state.auth.apiKey}`,
 					data,
 					headers: { 'Content-Type': 'application/json' },
 				})
@@ -283,7 +258,7 @@ const store = new Vuex.Store({
 		EDIT_QUESTION({ commit, state }, data) {
 			axios({
 				method: 'PUT',
-				url: `${devapi}/surveys/${state.currentSurvey}/questions/${state.currentQuestion}?api_key=${state.apiKey}`,
+				url: `${devapi}/surveys/${state.currentSurvey}/questions/${state.currentQuestion}?api_key=${state.auth.apiKey}`,
 				data: data.question,
 				headers: { 'Content-Type': 'application/json' },
 			})
@@ -302,7 +277,7 @@ const store = new Vuex.Store({
 			return new Promise((resolve) => {
 				axios({
 					method: 'DELETE',
-					url: `${devapi}/surveys/${state.currentSurvey}/questions/${id}?api_key=${state.apiKey}`,
+					url: `${devapi}/surveys/${state.currentSurvey}/questions/${id}?api_key=${state.auth.apiKey}`,
 					headers: { 'Content-Type': 'application/json' },
 				})
 				.then((response) => {
@@ -320,7 +295,7 @@ const store = new Vuex.Store({
 		EDIT_SURVEY({ commit, state }, data) {
 			axios({
 				method: 'PUT',
-				url: `${devapi}/surveys/${data.id}?api_key=${state.apiKey}`,
+				url: `${devapi}/surveys/${data.id}?api_key=${state.auth.apiKey}`,
 				data: data.survey,
 				headers: { 'Content-Type': 'application/json' },
 			})
@@ -337,7 +312,7 @@ const store = new Vuex.Store({
 			return new Promise((resolve) => {
 				axios({
 					method: 'DELETE',
-					url: `${devapi}/surveys/${id}?api_key=${state.apiKey}`,
+					url: `${devapi}/surveys/${id}?api_key=${state.auth.apiKey}`,
 					headers: { 'Content-Type': 'application/json' },
 				})
 				.then((response) => {
@@ -389,7 +364,7 @@ const store = new Vuex.Store({
 			return new Promise((resolve) => {
 				axios({
 					method: 'POST',
-					url: `${devapi}/assets?api_key=${state.apiKey}`,
+					url: `${devapi}/assets?api_key=${state.auth.apiKey}`,
 					data,
 					headers: { 'Content-Type': 'multipart/form-data' },
 				})
@@ -403,25 +378,6 @@ const store = new Vuex.Store({
 		},
 	},
 	mutations: {
-		SET_USER(state, { user }) {
-			const apiKey = sessionStorage.getItem('api-key');
-			state.user = user;
-
-			if (!apiKey) {
-				sessionStorage.setItem('api-key', user.api_key);
-			} else {
-				state.apiKey = apiKey;
-			}
-			if (user.api_key) {
-				state.apiKey = user.api_key;
-			}
-		},
-		SET_APIKEY(state, { apiKey }) {
-			state.apiKey = apiKey;
-		},
-		CLEAR_USER(state) {
-			state.user = {};
-		},
 		SET_ALERT_MESSAGE(state, { res }) {
 			if (res.redirect) {
 				state.redirect.state = res.redirect.state;
@@ -478,8 +434,6 @@ const store = new Vuex.Store({
 		SET_COMPLAINTS_LIST(state, { list }) {
 			state.complaints = list;
 		},
-	},
-	getters: {
 	},
 });
 
