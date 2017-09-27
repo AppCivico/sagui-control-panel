@@ -4,13 +4,13 @@ export default {
 	props: ['status'],
 	computed: {
 		complaints() {
-			return this.$store.state.complaints;
+			return this.$store.state.complaints.complaints;
 		},
 		selectedEnterprise() {
 			return this.$store.state.selectedEnterprise;
 		},
 		categories() {
-			return this.$store.state.categories;
+			return this.$store.state.categories.categories;
 		},
 	},
 	watch: {
