@@ -22,7 +22,7 @@ export default{
 			return this.$store.state.selectedEnterprise;
 		},
 		currentSurvey() {
-			return this.$store.state.currentSurvey;
+			return this.$store.state.surveys.currentSurvey;
 		},
 	},
 	mounted() {

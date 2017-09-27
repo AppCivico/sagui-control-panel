@@ -10,10 +10,10 @@ export default {
 	},
 	computed: {
 		surveys() {
-			return this.$store.state.surveys;
+			return this.$store.state.surveys.surveys;
 		},
 		apiKey() {
-			return this.$store.state.apiKey;
+			return this.$store.state.auth.apiKey;
 		},
 	},
 	mounted() {

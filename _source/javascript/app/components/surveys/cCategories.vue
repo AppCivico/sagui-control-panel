@@ -24,7 +24,7 @@ export default {
 			return this.$store.state.confirm.state;
 		},
 		surveys() {
-			return this.$store.state.surveys;
+			return this.$store.state.surveys.surveys;
 		},
 	},
 	watch: {

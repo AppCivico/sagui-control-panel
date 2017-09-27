@@ -18,7 +18,7 @@ export default {
 	},
 	computed: {
 		currentSurvey() {
-			return this.$store.state.currentSurvey;
+			return this.$store.state.surveys.currentSurvey;
 		},
 	},
 	methods: {

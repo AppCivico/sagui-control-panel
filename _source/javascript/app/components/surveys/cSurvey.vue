@@ -28,10 +28,10 @@ export default{
 			return this.$store.state.categories.categories;
 		},
 		survey() {
-			return this.$store.state.survey;
+			return this.$store.state.surveys.survey;
 		},
 		questions() {
-			return this.$store.state.survey.questions;
+			return this.$store.state.surveys.survey.questions;
 		},
 	},
 	mounted() {

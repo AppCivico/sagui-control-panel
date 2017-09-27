@@ -4,7 +4,7 @@ export default {
 	props: ['id'],
 	computed: {
 		surveys() {
-			return this.$store.state.surveys;
+			return this.$store.state.surveys.surveys;
 		},
 	},
 	mounted() {
