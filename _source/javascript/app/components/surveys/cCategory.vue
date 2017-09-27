@@ -62,14 +62,16 @@ export default {
 					const category = {
 						name: title.value,
 						id: this.category.id,
-						icon_code: this.selectedIcon,
+						icon_code: this.selectedIcon.cssValue,
+						icon_name: this.selectedIcon.className,
 					};
 					this.$store.dispatch('EDIT_CATEGORY', category);
 				} else {
 					const category = {
 						name: title.value,
 						dimension: 'category',
-						icon_code: this.selectedIcon,
+						icon_code: this.selectedIcon.cssValue,
+						icon_name: this.selectedIcon.className,
 					};
 					this.$store.dispatch('ADD_CATEGORY', category);
 				}
@@ -77,8 +79,11 @@ export default {
 		},
 		selectIcon(value) {
 			const icon = document.querySelector('#new-category .showIcon');
+			const iconClasses = Array.from(icon.classList);
+			const lastClass = iconClasses[iconClasses.length - 1];
+			icon.classList.remove(lastClass);
 			icon.classList.add(value.className);
-			this.selectedIcon = value.cssValue;
+			this.selectedIcon = value;
 		},
 		showIconPicker() {
 			const el = document.querySelector('#new-category #iconPicker');
@@ -111,7 +116,7 @@ export default {
 						<hr>
 						<label>{{ 'icon' | translate  | capitalize }}</label>
 						<div>
-							<i :class="'fa showIcon '+this.category.icon" v-if="this.isEditing"></i>
+							<i :class="'fa showIcon '+this.category.icon_name" v-if="this.isEditing"></i>
 							<i class="fa showIcon" v-else></i>
 						</div>
 
