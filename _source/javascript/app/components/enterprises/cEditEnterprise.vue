@@ -228,7 +228,7 @@ export default {
 						</div>
 					</div>
 
-					<button type="button" class="btn btn-block btn-success new-enterprise__button" @click="validate()">{{ 'register' | translate | capitalize }} {{ 'enterprise' | translate }}</button>
+					<button type="button" class="btn btn-block btn-success new-enterprise__button" @click="validate()">{{ 'edit' | translate | capitalize }} {{ 'enterprise' | translate }}</button>
 				</div>
 			</div>
 		</section>
