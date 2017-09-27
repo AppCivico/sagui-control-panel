@@ -65,13 +65,9 @@ export default {
 					};
 
 					if (this.selectedIcon !== '') {
-						console.log('editei icone');
-
 						categoryValues.icon_code = this.selectedIcon.cssValue;
 						categoryValues.icon_name = this.selectedIcon.className;
 					} else {
-						console.log('nao editei icone');
-
 						categoryValues.icon_code = this.category.icon_code;
 						categoryValues.icon_name = this.category.icon_name;
 					}

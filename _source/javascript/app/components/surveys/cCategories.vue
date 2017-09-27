@@ -94,7 +94,7 @@ export default {
 					<ul class="nav nav-pills nav-stacked">
 						<li v-for="category in categories">
 							<router-link :to="'/surveys/category/'+category.id">
-								<i class="fa fa-list"></i> {{ category.name }}
+								<i :class="'fa '+category.icon_name"></i> {{ category.name }}
 
 								<button type="button" aria-label="Editar" data-toggle="modal" data-target="#new-category" class="edit-button" @click.stop.prevent="editCategory(category)"><i class="fa fa-edit"></i></button>
 							</router-link>
