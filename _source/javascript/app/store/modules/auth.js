@@ -4,18 +4,6 @@ import axios from 'axios';
 import Vue from 'vue';
 import config from '../../config';
 
-// Add a response interceptor
-axios.interceptors.response.use((response) => {
-	const loading = document.querySelector('.loading');
-	if (loading) {
-		loading.classList.add('close');
-	}
-	return response;
-}, (error) => {
-	// Do something with response error
-	return Promise.reject(error);
-});
-
 const state = {
 	apiKey: '',
 	user: {},
