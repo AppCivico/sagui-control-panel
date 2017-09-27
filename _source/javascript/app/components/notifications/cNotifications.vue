@@ -3,7 +3,7 @@ export default {
 	name: 'cNotifications',
 	computed: {
 		notifications() {
-			return this.$store.state.notifications;
+			return this.$store.state.notifications.notifications;
 		},
 	},
 	mounted() {
