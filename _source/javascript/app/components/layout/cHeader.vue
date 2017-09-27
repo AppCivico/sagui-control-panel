@@ -11,7 +11,7 @@ export default {
 			return this.$store.state.auth.user;
 		},
 		notifications() {
-			return this.$store.state.notifications;
+			return this.$store.state.notifications.notifications;
 		},
 		name() {
 			let final = '';
