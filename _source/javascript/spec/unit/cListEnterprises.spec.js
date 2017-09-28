@@ -20,7 +20,7 @@ describe('cListEnterprises.vue', () => {
 			router,
 			render: h => h(cListEnterprises),
 		});
-		expect(vm.$store.state.enterprises).to.be.an('array');
+		expect(vm.$store.state.enterprises.enterprises).to.be.an('array');
 	});
 
 	// Create test for the ajax call when real api is working

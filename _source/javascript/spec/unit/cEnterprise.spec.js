@@ -21,7 +21,7 @@ describe('cEnterprise.vue', () => {
 			router,
 			render: h => h(cEnterprise),
 		});
-		expect(vm.$store.state.enterprise).to.be.a('object');
+		expect(vm.$store.state.enterprises.enterprise).to.be.a('object');
 	});
 
 	// Create test for the ajax call when real api is working
