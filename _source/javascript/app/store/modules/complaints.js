@@ -54,6 +54,21 @@ const actions = {
 			commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } }, { root: true });
 		});
 	},
+	DELETE_COMPLAINT({ commit, rootState }, id) { // eslint-disable-line no-unused-vars
+		return new Promise((resolve) => {
+			axios({
+				method: 'DELETE',
+				url: `${config.devapi}/complaints/${id}?api_key=${rootState.auth.apiKey}`,
+			})
+			.then((response) => {
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('delete-complaint'), redirect: { state: true, path: '-1' } } }, { root: true });
+				resolve(response);
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } }, { root: true });
+			});
+		});
+	},
 	SAVE_ANSWER({ commit, rootState }, info) { // eslint-disable-line no-unused-vars
 		return new Promise((resolve) => {
 			axios({

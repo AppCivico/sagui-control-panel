@@ -20,11 +20,13 @@ const ptBr = {
 	"choose_enterprise": "Escolha o empreendimento",
 	"company": "companhia",
 	"complaints": "apontamentos",
+	"complaint": "apontamento",
 	"contact": "contato",
 	"contributions": "contribuições",
 	"current": "atual",
 	"datas": "dados",
 	"data": "dados",
+	"delete": "excluir",
 	"description": "descrição",
 	"enterprise": "empreendimento",
 	"enterprises": "empreendimentos",
@@ -127,5 +129,6 @@ const ptBr = {
 	"edit-question": "Questão editada com sucesso.",
 	"delete-question": "Questão excluída.",
 	"new-answer": "Resposta salva com sucesso.",
+	"delete-complaint": "Apontamento excluído.",
 };
 export { ptBr as default };

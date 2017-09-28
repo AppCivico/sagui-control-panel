@@ -51,6 +51,9 @@ export default {
 			this.editingAnswerIndex = index;
 			this.isEditing = true;
 		},
+		deleteComplaint() {
+			this.$store.dispatch('DELETE_COMPLAINT', this.id);
+		},
 	},
 };
 </script>
@@ -67,6 +70,7 @@ export default {
 							<h3 class="box-title"><router-link to="/">{{ complaint.title | capitalize }}</router-link> <span v-if="remainingActions(complaint.confirmations)" class="remaining">Faltam: {{ remainingActions(complaint.confirmations) }} confirmações</span></h3>
 						</div>
 						<div class="box-body">
+							<button type="button" class="btn btn-danger pull-right" @click="deleteComplaint()">{{ 'delete' | translate | capitalize }} {{ 'complaint' | translate }}</button>
 							<span>{{ complaint.human_address }}</span><br>
 							<span>{{ complaint.axis.name }}</span><br><br>
 							<p>{{ complaint.description }}</p>
