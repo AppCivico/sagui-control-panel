@@ -7,6 +7,7 @@ import config from '../../config';
 const state = {
 	apiKey: '',
 	user: {},
+	authorization: false,
 };
 
 // actions
@@ -54,6 +55,10 @@ const mutations = {
 		}
 		if (user.api_key) {
 			state.apiKey = user.api_key;
+
+			if (user.roles[0] === 'admin') {
+				state.authorization = true;
+			}
 		}
 	},
 	SET_APIKEY(state, { apiKey }) {
@@ -61,6 +66,7 @@ const mutations = {
 	},
 	CLEAR_USER(state) {
 		state.user = {};
+		state.authorization = false;
 	},
 };
 
