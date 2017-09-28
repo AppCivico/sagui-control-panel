@@ -6,21 +6,14 @@ export default {
 		complaints() {
 			return this.$store.state.complaints.complaints;
 		},
-		selectedEnterprise() {
-			return this.$store.state.selectedEnterprise;
-		},
-		categories() {
-			return this.$store.state.categories.categories;
-		},
 	},
 	watch: {
 		status() {
-			this.$store.dispatch('LOAD_COMPLAINTS_LIST', { enterprise: this.selectedEnterprise, status: this.status });
+			this.$store.dispatch('LOAD_COMPLAINTS_LIST', { status: this.status });
 		},
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_CATEGORIES_LIST', this.selectedEnterprise);
-		this.$store.dispatch('LOAD_COMPLAINTS_LIST', { enterprise: this.selectedEnterprise, status: this.status });
+		this.$store.dispatch('LOAD_COMPLAINTS_LIST', { status: this.status });
 	},
 	methods: {
 		remainingActions(actions) {
@@ -29,11 +22,8 @@ export default {
 			}
 			return false;
 		},
-		categoryName(id) {
-			const category = this.categories.filter((cat) => { // eslint-disable-line arrow-body-style
-				return cat.id === id;
-			});
-			return category[0].title;
+		shortDescription(description) {
+			return description.replace(/^(.{100}[^\s]*).*/, '$1');
 		},
 	},
 };
@@ -55,28 +45,38 @@ export default {
 				<template v-if="status === 'complaint'">{{ 'no-complaints' | translate }}</template>
 				<template v-else>{{ 'no-cases' | translate }}</template>
 			</div>
-			<div class="row">
-				<div class="col-md-6" v-for="complaint in complaints">
-					<div class="box box-solid">
+			<div class="row" v-else>
+				<div class="col-md-4" v-for="complaint in complaints">
+					<div class="box box-solid complaint">
 						<div class="box-header with-border">
-							<h3 class="box-title"><router-link to="/">{{ complaint.title }}</router-link> <span v-if="remainingActions(complaint.actions)">Faltam: {{ remainingActions(complaint.actions) }} confirmações</span></h3>
+							<h3 class="box-title"><router-link :to="'/complaint/'+complaint.id">{{ complaint.title }}</router-link> <span v-if="remainingActions(complaint.confirmations)" class="remaining">Faltam: {{ remainingActions(complaint.confirmations) }} confirmações</span></h3>
 						</div>
 						<div class="box-body">
-							<span>{{ complaint.address }}</span><br>
-							<span><strong>Categoria:</strong> {{ categoryName(complaint.category) }}</span><br><br>
-							<p>{{ complaint.description }}</p>
-
-							<template v-if="status === 'case'">
-								<h4>Respostas:</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ultrices ante nec tristique placerat. Mauris lacus elit, sagittis sit amet neque vel, malesuada ultrices elit. Praesent hendrerit viverra elit sit amet accumsan.</p>
-								<button type="button" class="btn btn-info">{{ 'new' | translate | capitalize }} {{ 'answer' | translate }}</button>
-							</template>
+							<span>{{ complaint.human_address }}</span><br>
+							<span>{{ complaint.axis.name }}</span><br><br>
+							<p>{{ shortDescription(complaint.description) }}</p>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</section>
 		<!-- /.content -->
 	</div>
 </template>
+
+<style scoped>
+	.complaint {
+		min-height: 180px;
+	}
+	.complaint .box-title {
+		width: 100%;
+		display: table;
+	}
+	.complaint .remaining {
+		float: right;
+		font-size: 0.8em;
+	}
+	.complaint .box-body span {
+		font-size: 0.9em;
+	}
+</style>
