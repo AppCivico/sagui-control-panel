@@ -18,6 +18,7 @@ export default {
 		this.$store.dispatch('LOAD_ENTERPRISES_LIST').then(() => {
 			this.getThumbnails();
 		});
+		window.dispatchEvent(new Event('resize'));
 	},
 	methods: {
 		getThumbnails() {
