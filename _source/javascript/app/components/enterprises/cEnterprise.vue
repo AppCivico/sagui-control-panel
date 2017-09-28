@@ -62,7 +62,7 @@ export default {
 				{{ 'enterprise' | translate | capitalize }}
 				<small>{{ enterprise.name }}</small>
 			</h1>
-			<router-link :to="'/edit-enterprise/'+enterprise.id" class="btn btn-primary pull-right">{{ 'edit' | translate | capitalize }} {{ 'enterprise' | translate }}</router-link>
+			<router-link :to="'/edit-enterprise/'+enterprise.id" class="btn btn-primary pull-right" v-if="authorization">{{ 'edit' | translate | capitalize }} {{ 'enterprise' | translate }}</router-link>
 		</section>
 
 		<!-- Main content -->

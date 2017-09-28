@@ -13,6 +13,9 @@ export default {
 		enterprises() {
 			return this.$store.state.enterprises.enterprises;
 		},
+		authorization() {
+			return this.$store.state.auth.authorization;
+		},
 	},
 	mounted() {
 		this.$store.dispatch('LOAD_ENTERPRISES_LIST').then(() => {
@@ -40,7 +43,7 @@ export default {
 		<!-- Content Header (Page header) -->
 		<section class='content-header'>
 			<h1 class='pull-left'>{{ 'choose_enterprise' | translate }}</h1>
-			<router-link to='/new-enterprise' class='btn btn-primary pull-right'>{{ 'new-m' | translate | capitalize }} {{ 'enterprise' | translate }}</router-link>
+			<router-link to='/new-enterprise' class='btn btn-primary pull-right' v-if="authorization">{{ 'new-m' | translate | capitalize }} {{ 'enterprise' | translate }}</router-link>
 		</section>
 
 		<!-- Main content -->

@@ -10,6 +10,9 @@ export default{
 		selectedEnterprise() {
 			return this.$store.state.selectedEnterprise;
 		},
+		authorization() {
+			return this.$store.state.auth.authorization;
+		},
 	},
 	watch: {
 		selectedEnterprise() {
@@ -45,7 +48,7 @@ export default{
 						</span>
 					</a>
 					<ul class="treeview-menu">
-						<li><router-link to="/categories"><i class="fa fa-circle-o"></i>{{ 'categories' | translate | capitalize }}</router-link></li>
+						<li><router-link to="/categories" v-if="authorization"><i class="fa fa-circle-o"></i>{{ 'categories' | translate | capitalize }}</router-link></li>
 						<li><router-link to="/results"><i class="fa fa-circle-o"></i>{{ 'results' | translate | capitalize }}</router-link></li>
 					</ul>
 				</li>
