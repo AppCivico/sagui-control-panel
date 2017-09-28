@@ -107,6 +107,7 @@ const ptBr = {
 	"no-cases": "Nenhuma ocorrência registrada nesse empreendimento.",
 	"no-survey": "Nenhuma enquete cadastrada nesta categoria.",
 	"no-categories": "Nenhuma categoria registrada nesse empreendimento.",
+	"no-answers": "Nenhuma resposta.",
 
 	// results
 	"download-csv": "Faça o download da planilha com todos os resultados",
@@ -125,5 +126,6 @@ const ptBr = {
 	"new-question": "Questão salva.",
 	"edit-question": "Questão editada com sucesso.",
 	"delete-question": "Questão excluída.",
+	"new-answer": "Resposta salva com sucesso.",
 };
 export { ptBr as default };
