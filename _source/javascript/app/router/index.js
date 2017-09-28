@@ -13,6 +13,7 @@ import cNewEnterprise from '../components/enterprises/cNewEnterprise.vue';
 import cEditEnterprise from '../components/enterprises/cEditEnterprise.vue';
 import cNotifications from '../components/notifications/cNotifications.vue';
 import cComplaints from '../components/complaints/cComplaints.vue';
+import cComplaint from '../components/complaints/cComplaint.vue';
 
 Vue.use(Router);
 
@@ -83,6 +84,12 @@ export default new Router({
 			path: '/complaints/:status',
 			name: 'Complaints',
 			component: cComplaints,
+			props: true,
+		},
+		{
+			path: '/complaint/:id',
+			name: 'Complaint',
+			component: cComplaint,
 			props: true,
 		},
 	],
