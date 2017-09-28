@@ -7,6 +7,9 @@ export default {
 		enterprise() {
 			return this.$store.state.enterprises.enterprise;
 		},
+		complaints() {
+			return this.$store.state.complaints.complaints;
+		},
 	},
 	data() {
 		return {
@@ -16,7 +19,9 @@ export default {
 	mounted() {
 		this.$store.dispatch('LOAD_ENTERPRISE', this.id).then(() => {
 			if (this.enterprise.location) {
-				this.decodePath();
+				this.$store.dispatch('LOAD_COMPLAINTS_LIST', { status: '' }).then(() => {
+					this.decodePath();
+				});
 			}
 		});
 		this.$store.dispatch('CHANGE_SELECTED_ENTERPRISE', this.id);
@@ -40,6 +45,17 @@ export default {
 				strokeWeight: 2,
 				fillColor: '#FF0000',
 				fillOpacity: 0.1,
+			});
+
+			this.complaints.map((complaint) => {
+				const marker = new google.maps.Marker({ // eslint-disable-line no-unused-vars
+					position: {
+						lat: complaint.location.lat,
+						lng: complaint.location.long,
+					},
+					map,
+					title: complaint.title,
+				});
 			});
 
 			this.decodedPath.map((item) => {
