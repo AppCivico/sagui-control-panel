@@ -74,21 +74,23 @@ export default {
 						categoryValues.category.icon_name = this.category.icon_name;
 					}
 
-					console.log(categoryValues);
-
 					this.$store.dispatch('EDIT_CATEGORY', categoryValues).then(() => {
 						this.$store.dispatch('LOAD_CATEGORIES_LIST');
 						$('#new-category').modal('hide');
 					});
 					/* eslint-enable */
 				} else {
-					const categoryValues = {
+					const newCategory = {
 						name: title.value,
 						dimension: 'category',
 						icon_code: this.selectedIcon.cssValue,
 						icon_name: this.selectedIcon.className,
 					};
-					this.$store.dispatch('ADD_CATEGORY', categoryValues);
+
+					this.$store.dispatch('ADD_CATEGORY', newCategory).then(() => {
+						this.$store.dispatch('LOAD_CATEGORIES_LIST');
+						$('#new-category').modal('hide');
+					});
 				}
 			}
 		},

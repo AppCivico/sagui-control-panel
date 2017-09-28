@@ -46,21 +46,22 @@ const actions = {
 		});
 	},
 	ADD_CATEGORY({ commit, rootState }, data) {
-		axios({
-			method: 'POST',
-			url: `${config.devapi}/enterprises/${rootState.selectedEnterprise}/axis?api_key=${rootState.auth.apiKey}`,
-			data,
-			headers: { 'Content-Type': 'application/json' },
-		})
-		.then((response) => {
-			if (response.statusText === 'Created') {
-				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('new-category') } }, { root: true });
-				store.dispatch('LOAD_CATEGORIES_LIST');
-				$('#new-category').modal('hide');
-			}
-		}, (err) => {
-			console.error(err);
-			commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } }, { root: true });
+		return new Promise((resolve) => {
+			axios({
+				method: 'POST',
+				url: `${config.devapi}/enterprises/${rootState.selectedEnterprise}/axis?api_key=${rootState.auth.apiKey}`,
+				data,
+				headers: { 'Content-Type': 'application/json' },
+			})
+			.then((response) => {
+				if (response.statusText === 'Created') {
+					commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('new-category') } }, { root: true });
+					resolve(response);
+				}
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } }, { root: true });
+			});
 		});
 	},
 	DELETE_CATEGORY({ commit, rootState }, id) {
