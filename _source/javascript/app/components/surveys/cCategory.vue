@@ -60,19 +60,26 @@ export default {
 			if (valid) {
 				if (this.isEditing) {
 					const categoryValues = {
-						name: title.value,
+						category: {
+							name: title.value,
+						},
 						id: this.category.id,
 					};
 
 					if (this.selectedIcon !== '') {
-						categoryValues.icon_code = this.selectedIcon.cssValue;
-						categoryValues.icon_name = this.selectedIcon.className;
+						categoryValues.category.icon_code = this.selectedIcon.cssValue;
+						categoryValues.category.icon_name = this.selectedIcon.className;
 					} else {
-						categoryValues.icon_code = this.category.icon_code;
-						categoryValues.icon_name = this.category.icon_name;
+						categoryValues.category.icon_code = this.category.icon_code;
+						categoryValues.category.icon_name = this.category.icon_name;
 					}
 
-					this.$store.dispatch('EDIT_CATEGORY', categoryValues);
+					console.log(categoryValues);
+
+					this.$store.dispatch('EDIT_CATEGORY', categoryValues).then(() => {
+						this.$store.dispatch('LOAD_CATEGORIES_LIST');
+						$('#new-category').modal('hide');
+					});
 					/* eslint-enable */
 				} else {
 					const categoryValues = {

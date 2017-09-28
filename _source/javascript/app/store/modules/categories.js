@@ -80,21 +80,20 @@ const actions = {
 		});
 	},
 	EDIT_CATEGORY({ commit, rootState }, data) {
-		axios({
-			method: 'PUT',
-			url: `${config.devapi}/enterprises/${rootState.selectedEnterprise}/axis/${data.id}?api_key=${rootState.auth.apiKey}`,
-			data: { name: data.name, icon: data.icon },
-			headers: { 'Content-Type': 'application/json' },
-		})
-		.then((response) => {
-			if (response.statusText === 'OK') {
+		return new Promise((resolve) => {
+			axios({
+				method: 'PUT',
+				url: `${config.devapi}/enterprises/${rootState.selectedEnterprise}/axis/${data.id}?api_key=${rootState.auth.apiKey}`,
+				data: data.category,
+				headers: { 'Content-Type': 'application/json' },
+			})
+			.then((response) => {
 				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('edit-category') } }, { root: true });
-				store.dispatch('LOAD_CATEGORIES_LIST');
-				$('#new-category').modal('hide');
-			}
-		}, (err) => {
-			console.error(err);
-			commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } }, { root: true });
+				resolve(response);
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } }, { root: true });
+			});
 		});
 	},
 };
