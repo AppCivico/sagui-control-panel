@@ -55,10 +55,9 @@ const mutations = {
 		}
 		if (user.api_key) {
 			state.apiKey = user.api_key;
-
-			if (user.roles[0] === 'admin') {
-				state.authorization = true;
-			}
+		}
+		if (user.roles[0] === 'admin') {
+			state.authorization = true;
 		}
 	},
 	SET_APIKEY(state, { apiKey }) {
