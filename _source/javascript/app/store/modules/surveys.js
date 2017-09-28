@@ -118,7 +118,6 @@ const actions = {
 		commit('SET_CURRENT_SURVEY', { res: data });
 	},
 	SAVE_QUESTION({ commit, rootState }, data) {
-		console.log(data);
 		return new Promise((resolve) => {
 			axios({
 				method: 'POST',
