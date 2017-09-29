@@ -93,8 +93,8 @@ export default {
 							<h5><strong>Respostas:</strong></h5>
 							<div class="box-comment" v-for="(answer, index) in comments">
 								<div class="comment-text" >
-									<span class="username" v-if="answer.created_at">
-										{{ converteDate(answer.created_at) }}
+									<span class="username">
+										<template v-if="answer.created_at">{{ converteDate(answer.created_at) }}</template>
 										<button type="button" aria-label="Excluir" class="close" @click="removeAnswer(answer, index)"><span aria-hidden="true">×</span></button>
 										<button type="button" aria-label="Editar" data-toggle="modal" data-target="#answer" class="edit-button" @click="setEditingAnswer(answer, index)"><i class="fa fa-edit"></i></button>
 									</span>
