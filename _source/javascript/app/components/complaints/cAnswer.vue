@@ -44,8 +44,13 @@ export default {
 				};
 
 				if (this.isEditing) {
-					// this.$store.dispatch('EDIT_CATEGORY', categoryValues);
-					/* eslint-enable */
+					result.answerId = this.answer.id;
+
+					this.$store.dispatch('EDIT_ANSWER', result).then((res) => {
+						this.$emit('editAnswer', { newAnswer: res.data });
+						$('#answer').modal('hide');
+						this.cleanFields();
+					});
 				} else {
 					this.$store.dispatch('SAVE_ANSWER', result).then((res) => {
 						this.$emit('newAnswer', { newAnswer: result, id: res.data.id });

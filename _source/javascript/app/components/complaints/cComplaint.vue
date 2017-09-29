@@ -39,6 +39,11 @@ export default {
 			this.comments.push(result.newAnswer.data);
 			this.comments[this.comments.length - 1].id = result.id;
 		},
+		editAnswer(result) {
+			if (result) {
+				this.comments.splice(this.editingAnswerIndex, 1, result.newAnswer);
+			}
+		},
 		converteDate(timestamp) {
 			return timestamp
 				.split('T')[0]
@@ -81,11 +86,10 @@ export default {
 								<div class="comment-text" >
 									<span class="username" v-if="answer.created_at">
 										{{ converteDate(answer.created_at) }}
-										<!-- <button type="button" aria-label="Editar" data-toggle="modal" data-target="#answer" class="edit-button" @click="setEditingAnswer(answer, index)"><i class="fa fa-edit"></i></button> -->
-									</span><!-- /.username -->
+										<button type="button" aria-label="Editar" data-toggle="modal" data-target="#answer" class="edit-button" @click="setEditingAnswer(answer, index)"><i class="fa fa-edit"></i></button>
+									</span>
 									{{ answer.content }}
 								</div>
-								<!-- /.comment-text -->
 							</div>
 							<button type="button" class="btn btn-info" data-toggle="modal" data-target="#answer" @click="newAnswer()">{{ 'new' | translate | capitalize }} {{ 'answer' | translate }}</button>
 						</div>
@@ -94,7 +98,7 @@ export default {
 			</div>
 		</section>
 		<!-- /.content -->
-		<c-answer :answer="this.editingAnswer" :complaintId="this.id" :isEditing="this.isEditing" v-on:newAnswer="addAnswer"></c-answer>
+		<c-answer :answer="this.editingAnswer" :complaintId="this.id" :isEditing="this.isEditing" v-on:newAnswer="addAnswer" v-on:editAnswer="editAnswer"></c-answer>
 	</div>
 </template>
 
