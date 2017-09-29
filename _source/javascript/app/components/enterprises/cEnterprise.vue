@@ -10,6 +10,9 @@ export default {
 		complaints() {
 			return this.$store.state.complaints.complaints;
 		},
+		authorization() {
+			return this.$store.state.auth.authorization;
+		},
 	},
 	data() {
 		return {
