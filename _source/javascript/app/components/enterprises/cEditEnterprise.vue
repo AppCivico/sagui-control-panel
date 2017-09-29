@@ -134,8 +134,15 @@ export default {
 			inputs.map((input) => { // eslint-disable-line
 				// check for empty fields
 				if (input.value === '' && input.type !== 'file') {
-					methods.addError(input.parentNode, Vue.i18n.translate('required-field'));
-					valid = false;
+					if (input.getAttribute('id') === 'autocomplete') {
+						if (!this.enterprise.human_address) {
+							methods.addError(input.parentNode, Vue.i18n.translate('required-field'));
+							valid = false;
+						}
+					} else {
+						methods.addError(input.parentNode, Vue.i18n.translate('required-field'));
+						valid = false;
+					}
 				}
 				// check for password fields equivalence
 				if (input.name === 'repeat-password' && input.value !== form.querySelector('input[name="password"]').value) {
@@ -211,7 +218,7 @@ export default {
 							</div>
 							<div class="form-group">
 								<label>{{ 'location' | translate | capitalize }}</label>
-								<input type="text" class="form-control" id="autocomplete" name="human_address" @blur="hasAddress = true" :placeholder="'insert-address' | translate" :value="enterprise.human_address">
+								<input type="text" class="form-control" id="autocomplete" name="human_address" @blur="hasAddress = true" :placeholder="enterprise.human_address">
 								<button type="button" class="btn btn-block btn-success" @click.prevent="setMap()" v-if="hasAddress">{{ 'limit' | translate | capitalize }} {{ 'area' | translate }}</button>
 							</div>
 							<div class="form-group">
