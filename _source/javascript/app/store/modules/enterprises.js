@@ -82,7 +82,7 @@ const actions = {
 				data,
 				headers: { 'Content-Type': 'application/json' },
 			})
-			.then(() => {
+			.then((res) => {
 				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('edit-enterprise'), redirect: { state: true, path: '-1' } } }, { root: true });
 				resolve(res);
 			}, (err) => {
