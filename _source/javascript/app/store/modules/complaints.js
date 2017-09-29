@@ -103,6 +103,22 @@ const actions = {
 			});
 		});
 	},
+	DELETE_ANSWER({ commit, rootState }, info) { // eslint-disable-line no-unused-vars
+		return new Promise((resolve) => {
+			axios({
+				method: 'DELETE',
+				url: `${config.devapi}/complaints/${info.id}/comments/${info.answerId}/?api_key=${rootState.auth.apiKey}`,
+				headers: { 'Content-Type': 'application/json' },
+			})
+			.then((response) => {
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('delete-answer') } }, { root: true });
+				resolve(response);
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } }, { root: true });
+			});
+		});
+	},
 };
 
 // mutations

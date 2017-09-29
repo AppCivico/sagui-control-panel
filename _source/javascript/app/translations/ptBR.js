@@ -130,6 +130,7 @@ const ptBr = {
 	"delete-question": "Questão excluída.",
 	"new-answer": "Resposta salva com sucesso.",
 	"edit-answer": "Resposta editada com sucesso.",
+	"delete-answer": "Resposta excluída.",
 	"delete-complaint": "Apontamento excluído.",
 };
 export { ptBr as default };

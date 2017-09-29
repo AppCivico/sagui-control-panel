@@ -59,6 +59,15 @@ export default {
 		deleteComplaint() {
 			this.$store.dispatch('DELETE_COMPLAINT', this.id);
 		},
+		removeAnswer(answer, number) {
+			const info = {
+				id: this.id,
+				answerId: answer.id,
+			};
+			this.$store.dispatch('DELETE_ANSWER', info).then(() => {
+				this.comments.splice(number, 1);
+			});
+		},
 	},
 };
 </script>
@@ -86,6 +95,7 @@ export default {
 								<div class="comment-text" >
 									<span class="username" v-if="answer.created_at">
 										{{ converteDate(answer.created_at) }}
+										<button type="button" aria-label="Excluir" class="close" @click="removeAnswer(answer, index)"><span aria-hidden="true">×</span></button>
 										<button type="button" aria-label="Editar" data-toggle="modal" data-target="#answer" class="edit-button" @click="setEditingAnswer(answer, index)"><i class="fa fa-edit"></i></button>
 									</span>
 									{{ answer.content }}
