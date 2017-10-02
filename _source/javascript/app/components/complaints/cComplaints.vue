@@ -53,7 +53,7 @@ export default {
 				<div class="col-md-4" v-for="(complaint, index) in complaints">
 					<div class="box box-solid complaint">
 						<div class="box-header with-border">
-							<h3 class="box-title"><router-link :to="'/complaint/'+complaint.id">{{ complaint.title }}</router-link> <span v-if="remainingActions(index)" class="remaining">Faltam: {{ remainingActions(index) }} confirmações</span></h3>
+							<h3 class="box-title"><router-link :to="'/complaint/'+complaint.id">{{ complaint.title | capitalize }}</router-link> <span v-if="remainingActions(index)" class="remaining">Faltam: {{ remainingActions(index) }} confirmações</span></h3>
 						</div>
 						<div class="box-body">
 							<span>{{ complaint.human_address }}</span><br>
