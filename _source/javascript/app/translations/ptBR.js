@@ -14,6 +14,7 @@ const ptBr = {
 	"answers": "respostas",
 	"area": "área",
 	"cancel": "cancelar",
+	"case": "ocorrência",
 	"cases": "ocorrências",
 	"category": "categoria",
 	"categories": "categorias",
