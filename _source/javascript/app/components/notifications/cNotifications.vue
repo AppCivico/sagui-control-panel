@@ -11,6 +11,7 @@ export default {
 			types: {
 				enterprise: 'enterprises',
 				complaint: 'complaint',
+				complaint_comment: 'complaint',
 			},
 		};
 	},
@@ -44,7 +45,7 @@ export default {
 				<div class="box-body">
 					<h4>{{ 'not-read' | translate }}</h4>
 					<template v-for="(notification, index) in notifications">
-						<div class="'callout callout-success">
+						<div class="callout callout-info">
 							<h4><router-link :to="createLink(index)">{{ notification.title }}</router-link></h4>
 							<p><router-link :to="createLink(index)">{{ notification.content }}</router-link></p>
 						</div>
