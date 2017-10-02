@@ -13,6 +13,32 @@ export default {
 		authorization() {
 			return this.$store.state.auth.authorization;
 		},
+		complaintsUnanswered() {
+			return this.complaints.filter(complaint => complaint.comments.length === 0).slice(0, 5);
+		},
+		top5Complaints() {
+			const top5 = this.complaints.sort((a, b) => {
+				if (a.confirmations > b.confirmations) {
+					return -1;
+				}
+				if (a.confirmations < b.confirmations) {
+					return 1;
+				}
+
+				return 0;
+			});
+			top5.map((complaint) => {
+				/* eslint-disable no-param-reassign */
+				complaint.width = (100 * complaint.confirmations.length) / complaint.num_to_became_cause;
+				if (complaint.confirmations.length >= complaint.num_to_became_cause) {
+					complaint.color = 'green';
+				} else {
+					complaint.color = 'aqua';
+				}
+			});
+
+			return top5.slice(0, 5);
+		},
 	},
 	data() {
 		return {
@@ -137,21 +163,13 @@ export default {
 						</div>
 						<div class="box-body">
 							<ul class="list-unstyled">
-								<li class="clearfix">
-									<h4 class="pull-left">Lorem ipsum dolor</h4>
-									<small class="pull-right">37 {{ 'contributions' | translate }}</small>
-								</li>
-								<li class="clearfix">
-									<h4 class="pull-left">Lorem ipsum dolor</h4>
-									<small class="pull-right">37 {{ 'contributions' | translate }}</small>
-								</li>
-								<li class="clearfix">
-									<h4 class="pull-left">Lorem ipsum dolor</h4>
-									<small class="pull-right">37 {{ 'contributions' | translate }}</small>
-								</li>
-								<li class="clearfix">
-									<h4 class="pull-left">Lorem ipsum dolor</h4>
-									<small class="pull-right">37 {{ 'contributions' | translate }}</small>
+								<li class="clearfix" v-for="complaint in complaintsUnanswered">
+									<h4 class="pull-left"><router-link :to="'/complaint/'+complaint.id">{{ complaint.title | capitalize }}</router-link></h4>
+									<small class="pull-right" v-if="complaint.confirmations.length > 0">
+										{{ complaint.confirmations.length }}
+										<template v-if="complaint.confirmations.length === 1">{{ 'contribution' | translate }}</template>
+										<template v-else>{{ 'contributions' | translate }}</template>
+									</small>
 								</li>
 							</ul>
 						</div>
@@ -163,30 +181,14 @@ export default {
 							<h3 class="box-title">{{ 'ranking' | translate | capitalize }} {{ 'complaints' | translate }}</h3>
 						</div>
 						<div class="box-body">
-							<p>Text 1</p>
-							<div class="progress">
-								<div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-									<span class="sr-only">40% Complete (success)</span>
+							<template v-for="complaint in top5Complaints">
+								<router-link :to="'/complaint/'+complaint.id">{{ complaint.title | capitalize }}</router-link>
+								<div class="progress">
+									<div :class="'progress-bar progress-bar-'+complaint.color" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" :style="'width: '+complaint.width+'%'">
+										<span class="sr-only">{{ complaint.width }}% Complete (success)</span>
+									</div>
 								</div>
-							</div>
-							<p>Text 2</p>
-							<div class="progress">
-								<div class="progress-bar progress-bar-aqua" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-									<span class="sr-only">20% Complete</span>
-								</div>
-							</div>
-							<p>Text 3</p>
-							<div class="progress">
-								<div class="progress-bar progress-bar-yellow" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-									<span class="sr-only">60% Complete (warning)</span>
-								</div>
-							</div>
-							<p>Text 4</p>
-							<div class="progress">
-								<div class="progress-bar progress-bar-red" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-									<span class="sr-only">80% Complete</span>
-								</div>
-							</div>
+							</template>
 						</div>
 						<!-- /.box-body -->
 					</div>
