@@ -37,12 +37,12 @@ export default {
 		initMap() {
 			const bounds = new google.maps.LatLngBounds();
 			const map = new google.maps.Map(document.getElementById('enterprise__map'), {
-				zoom: 14,
+				zoom: 11,
 			});
 			const polygon = new google.maps.Polygon({
 				paths: this.decodedPath,
-				draggable: true, // turn off if it gets annoying
-				editable: true,
+				draggable: false, // turn off if it gets annoying
+				editable: false,
 				strokeColor: '#FF0000',
 				strokeOpacity: 0.1,
 				strokeWeight: 2,
