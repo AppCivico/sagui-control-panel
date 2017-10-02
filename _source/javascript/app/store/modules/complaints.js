@@ -35,9 +35,9 @@ const state = {
 
 // actions
 const actions = {
-	LOAD_COMPLAINTS_LIST({ commit, rootState }, options) { // eslint-disable-line no-unused-vars
+	LOAD_COMPLAINTS_LIST({ commit, rootState }, status) { // eslint-disable-line no-unused-vars
 		return new Promise((resolve) => {
-			axios.get(`${config.devapi}/enterprises/${rootState.selectedEnterprise}/complaints?api_key=${rootState.auth.apiKey}`).then((response) => {
+			axios.get(`${config.devapi}/enterprises/${rootState.selectedEnterprise}/complaints?api_key=${rootState.auth.apiKey}&is_cause=${status}`).then((response) => {
 				commit('SET_COMPLAINTS_LIST', { list: response.data });
 				resolve(response);
 			}, (err) => {
