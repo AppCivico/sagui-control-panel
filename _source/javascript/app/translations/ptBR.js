@@ -23,6 +23,7 @@ const ptBr = {
 	"complaints": "apontamentos",
 	"complaint": "apontamento",
 	"contact": "contato",
+	"contribution": "contribuição",
 	"contributions": "contribuições",
 	"current": "atual",
 	"datas": "dados",
