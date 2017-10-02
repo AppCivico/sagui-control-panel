@@ -34,8 +34,8 @@ const state = {
 
 // actions
 const actions = {
-	LOAD_NOTIFICATIONS_LIST({ commit }, id) { // eslint-disable-line no-unused-vars
-		axios.get(`${devconfig.api}/activities`).then((response) => {
+	LOAD_NOTIFICATIONS_LIST({ commit, rootState }, id) { // eslint-disable-line no-unused-vars
+		axios.get(`${config.devapi}/activities?api_key=${rootState.auth.apiKey}&`).then((response) => {
 			commit('SET_NOTIFICATIONS_LIST', { list: response.data });
 		}, (err) => {
 			console.error(err);
