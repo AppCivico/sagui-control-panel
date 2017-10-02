@@ -12,6 +12,7 @@ export default {
 			isEditing: false,
 			editingAnswer: {},
 			editingAnswerIndex: 0,
+			remainingActions: 0,
 		};
 	},
 	computed: {
@@ -23,14 +24,18 @@ export default {
 		},
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_COMPLAINT', this.id);
+		this.$store.dispatch('LOAD_COMPLAINT', this.id).then(() => {
+			this.getRemainingActions();
+		});
 	},
 	methods: {
-		remainingActions(actions) {
-			if (actions < 30) {
-				return 30 - actions;
+		getRemainingActions() {
+			const confirmationsQtd = this.complaint.confirmations.length;
+			const limit = this.complaint.num_to_became_cause;
+
+			if (confirmationsQtd > 0 && confirmationsQtd < limit) {
+				this.remainingActions = limit - confirmationsQtd;
 			}
-			return false;
 		},
 		newAnswer() {
 			this.isEditing = false;
@@ -81,7 +86,7 @@ export default {
 					<div class="box box-solid complaint">
 						<div class="box-header with-border">
 							<!-- adicionar v-if quando tiver flag de status -->
-							<h3 class="box-title"><router-link to="/">{{ complaint.title | capitalize }}</router-link> <span v-if="remainingActions(complaint.confirmations)" class="remaining">Faltam: {{ remainingActions(complaint.confirmations) }} confirmações</span></h3>
+							<h3 class="box-title"><router-link to="/">{{ complaint.title | capitalize }}</router-link> <span v-if="remainingActions > 0" class="remaining">Faltam: {{ remainingActions }} confirmações</span></h3>
 						</div>
 						<div class="box-body">
 							<button type="button" class="btn btn-danger pull-right" @click="deleteComplaint()">{{ 'delete' | translate | capitalize }} {{ 'complaint' | translate }}</button>

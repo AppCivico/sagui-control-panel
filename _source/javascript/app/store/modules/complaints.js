@@ -47,11 +47,14 @@ const actions = {
 		});
 	},
 	LOAD_COMPLAINT({ commit, rootState }, id) { // eslint-disable-line no-unused-vars
-		axios.get(`${config.devapi}/complaints/${id}?api_key=${rootState.auth.apiKey}`).then((response) => {
-			commit('SET_COMPLAINT', { res: response.data });
-		}, (err) => {
-			console.error(err);
-			commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } }, { root: true });
+		return new Promise((resolve) => {
+			axios.get(`${config.devapi}/complaints/${id}?api_key=${rootState.auth.apiKey}`).then((response) => {
+				commit('SET_COMPLAINT', { res: response.data });
+				resolve(response);
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } }, { root: true });
+			});
 		});
 	},
 	DELETE_COMPLAINT({ commit, rootState }, id) { // eslint-disable-line no-unused-vars

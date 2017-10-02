@@ -9,18 +9,22 @@ export default {
 	},
 	watch: {
 		status() {
-			this.$store.dispatch('LOAD_COMPLAINTS_LIST', { status: this.status });
+			this.$store.dispatch('LOAD_COMPLAINTS_LIST', this.status);
 		},
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_COMPLAINTS_LIST', { status: this.status });
+		this.$store.dispatch('LOAD_COMPLAINTS_LIST', this.status);
 	},
 	methods: {
-		remainingActions(actions) {
-			if (actions < 30) {
-				return 30 - actions;
+		remainingActions(i) {
+			const confirmationsQtd = this.complaints[i].confirmations.length;
+			const limit = this.complaints[i].num_to_became_cause;
+
+			if (confirmationsQtd > 0 && confirmationsQtd < limit) {
+				return limit - confirmationsQtd;
 			}
-			return false;
+
+			return limit;
 		},
 		shortDescription(description) {
 			return description.replace(/^(.{100}[^\s]*).*/, '$1');
@@ -33,7 +37,7 @@ export default {
 	<div>
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
-			<h1 v-if="status === 'complaint'">{{ 'complaints' | translate | capitalize }}
+			<h1 v-if="status === '0'">{{ 'complaints' | translate | capitalize }}
 			</h1>
 			<h1 v-else>{{ 'cases' | translate | capitalize }}
 			</h1>
@@ -42,14 +46,14 @@ export default {
 		<!-- Main content -->
 		<section class="content">
 			<div v-if="complaints.length < 1" class="alert alert-info">
-				<template v-if="status === 'complaint'">{{ 'no-complaints' | translate }}</template>
+				<template v-if="status === '0'">{{ 'no-complaints' | translate }}</template>
 				<template v-else>{{ 'no-cases' | translate }}</template>
 			</div>
 			<div class="row" v-else>
-				<div class="col-md-4" v-for="complaint in complaints">
+				<div class="col-md-4" v-for="(complaint, index) in complaints">
 					<div class="box box-solid complaint">
 						<div class="box-header with-border">
-							<h3 class="box-title"><router-link :to="'/complaint/'+complaint.id">{{ complaint.title }}</router-link> <span v-if="remainingActions(complaint.confirmations)" class="remaining">Faltam: {{ remainingActions(complaint.confirmations) }} confirmações</span></h3>
+							<h3 class="box-title"><router-link :to="'/complaint/'+complaint.id">{{ complaint.title }}</router-link> <span v-if="remainingActions(index)" class="remaining">Faltam: {{ remainingActions(index) }} confirmações</span></h3>
 						</div>
 						<div class="box-body">
 							<span>{{ complaint.human_address }}</span><br>
