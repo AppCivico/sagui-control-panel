@@ -5,7 +5,7 @@ import { chai, expect } from 'chai';
 import store from '../../app/store';
 import translations from '../../app/translations';
 import router from '../../app/router';
-import cListEnterprises from '../../app/components/login/cLogin.vue';
+import cLogin from '../../app/components/login/cLogin.vue';
 
 
 Vue.filter('capitalize', function (value) { // eslint-disable-line prefer-arrow-callback, func-names
@@ -17,7 +17,7 @@ const vm = new Vue({
 	store,
 	router,
 	translations,
-	render: h => h(cListEnterprises),
+	render: h => h(cLogin),
 });
 
 
