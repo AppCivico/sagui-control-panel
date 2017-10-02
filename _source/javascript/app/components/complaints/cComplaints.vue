@@ -24,7 +24,7 @@ export default {
 				return limit - confirmationsQtd;
 			}
 
-			return limit;
+			return false;
 		},
 		shortDescription(description) {
 			return description.replace(/^(.{100}[^\s]*).*/, '$1');

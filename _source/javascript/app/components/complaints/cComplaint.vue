@@ -89,7 +89,8 @@ export default {
 							<h3 class="box-title"><router-link to="/">{{ complaint.title | capitalize }}</router-link> <span v-if="remainingActions > 0" class="remaining">Faltam: {{ remainingActions }} confirmações</span></h3>
 						</div>
 						<div class="box-body">
-							<button type="button" class="btn btn-danger pull-right" @click="deleteComplaint()">{{ 'delete' | translate | capitalize }} {{ 'complaint' | translate }}</button>
+							<button v-if="complaint.is_cause === 0"  type="button" class="btn btn-danger pull-right" @click="deleteComplaint()">{{ 'delete' | translate | capitalize }} {{ 'complaint' | translate }}</button>
+							<button v-else  type="button" class="btn btn-danger pull-right" @click="deleteComplaint()">{{ 'delete' | translate | capitalize }} {{ 'case' | translate }}</button>
 							<span>{{ complaint.human_address }}</span><br>
 							<span>{{ complaint.axis.name }}</span><br><br>
 							<p>{{ complaint.description }}</p>
@@ -106,7 +107,7 @@ export default {
 									{{ answer.content }}
 								</div>
 							</div>
-							<button type="button" class="btn btn-info" data-toggle="modal" data-target="#answer" @click="newAnswer()">{{ 'new' | translate | capitalize }} {{ 'answer' | translate }}</button>
+							<button type="button"class="btn btn-info" data-toggle="modal" data-target="#answer" @click="newAnswer()">{{ 'new' | translate | capitalize }} {{ 'answer' | translate }}</button>
 						</div>
 					</div>
 				</div>
