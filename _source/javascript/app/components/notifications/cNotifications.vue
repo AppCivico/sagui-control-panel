@@ -6,8 +6,26 @@ export default {
 			return this.$store.state.notifications.notifications;
 		},
 	},
+	data() {
+		return {
+			types: {
+				enterprise: 'enterprises',
+				complaint: 'complaint',
+			},
+		};
+	},
 	mounted() {
 		this.$store.dispatch('LOAD_NOTIFICATIONS_LIST');
+	},
+	methods: {
+		createLink(i) {
+			let link = '';
+			if (this.types[this.notifications[i].resource_type]) {
+				link = `${this.types[this.notifications[i].resource_type]}/${this.notifications[i].resource_id}`;
+			}
+
+			return link;
+		},
 	},
 };
 </script>
@@ -25,10 +43,10 @@ export default {
 			<div class="box box-solid">
 				<div class="box-body">
 					<h4>{{ 'not-read' | translate }}</h4>
-					<template v-for="notification in notifications">
-						<div :class="'callout callout-'+ notification.level">
-							<h4><router-link :to="notification.link">{{ notification.title }}</router-link></h4>
-							<p><router-link :to="notification.link">{{ notification.description }}</router-link></p>
+					<template v-for="(notification, index) in notifications">
+						<div class="'callout callout-success">
+							<h4><router-link :to="createLink(index)">{{ notification.title }}</router-link></h4>
+							<p><router-link :to="createLink(index)">{{ notification.content }}</router-link></p>
 						</div>
 					</template>
 				</div>

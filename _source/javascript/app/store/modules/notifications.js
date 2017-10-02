@@ -35,7 +35,7 @@ const state = {
 // actions
 const actions = {
 	LOAD_NOTIFICATIONS_LIST({ commit }, id) { // eslint-disable-line no-unused-vars
-		axios.get(`${config.api}/notifications`).then((response) => {
+		axios.get(`${devconfig.api}/activities`).then((response) => {
 			commit('SET_NOTIFICATIONS_LIST', { list: response.data });
 		}, (err) => {
 			console.error(err);
