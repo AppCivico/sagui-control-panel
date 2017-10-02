@@ -89,7 +89,7 @@ export default {
 								<!-- inner menu: contains the actual data -->
 								<ul class="menu">
 									<li v-for="notification in notifications">
-										<router-link :to="notification.link">{{ notification.title }}</router-link>
+										<router-link :to="notification.title">{{ notification.title }}</router-link>
 								 	</li>
 								</ul>
 							</li>
