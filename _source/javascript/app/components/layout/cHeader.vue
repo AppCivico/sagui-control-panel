@@ -10,6 +10,9 @@ export default {
 		user() {
 			return this.$store.state.auth.user;
 		},
+		selectedEnterprise() {
+			return this.$store.state.selectedEnterprise;
+		},
 		notifications() {
 			return this.$store.state.notifications.notifications;
 		},
@@ -75,7 +78,7 @@ export default {
 			<div class="navbar-custom-menu">
 				<ul class="nav navbar-nav">
 					<!-- Notifications: style can be found in dropdown.less -->
-					<li class="dropdown notifications-menu">
+					<li class="dropdown notifications-menu" v-if="selectedEnterprise !== ''">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="fa fa-bell-o"></i>
 							<span class="label label-warning">{{ notifications.length }}</span>
