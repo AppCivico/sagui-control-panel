@@ -94,6 +94,7 @@ export default {
 			polygon.setMap(map);
 			google.maps.event.trigger(map, 'resize');
 			map.setCenter(bounds.getCenter());
+			map.fitBounds(bounds);
 		},
 	},
 };
