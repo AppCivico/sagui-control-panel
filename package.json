@@ -43,6 +43,7 @@
     "admin-lte": "^2.3.11",
     "axios": "^0.16.2",
     "jquery": "^3.2.1",
+    "raven-js": "^3.18.1",
     "vue": "^2.0.1",
     "vue-observe-visibility": "^0.2.2",
     "vue-router": "^2.7.0",

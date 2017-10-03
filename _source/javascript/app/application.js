@@ -2,6 +2,8 @@
 // so you don't have to do: import Vue from 'vue/dist/vue'
 // This is done with the browser options. For the config, see package.json
 import Vue from 'vue';
+import Raven from 'raven-js';
+import RavenVue from 'raven-js/plugins/vue';
 
 import App from './App.vue';
 import store from './store';
@@ -20,4 +22,8 @@ new Vue({ // eslint-disable-line no-new, no-unused-vars
 	translations,
 	render: h => h(App),
 });
-// export { vm as default };
+
+Raven
+    .config('https://707827dad6334ea08dad9b6f031bc077@sentry.io/<project>')
+    .addPlugin(RavenVue, Vue)
+    .install();
