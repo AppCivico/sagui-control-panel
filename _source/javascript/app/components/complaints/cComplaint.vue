@@ -43,6 +43,7 @@ export default {
 		addAnswer(result) {
 			this.comments.push(result.newAnswer.data);
 			this.comments[this.comments.length - 1].id = result.id;
+			this.comments[this.comments.length - 1].created_at = result.created_at;
 		},
 		editAnswer(result) {
 			if (result) {

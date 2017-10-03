@@ -53,7 +53,7 @@ export default {
 					});
 				} else {
 					this.$store.dispatch('SAVE_ANSWER', result).then((res) => {
-						this.$emit('newAnswer', { newAnswer: result, id: res.data.id });
+						this.$emit('newAnswer', { newAnswer: result, id: res.data.id, created_at: res.data.created_at });
 						$('#answer').modal('hide');
 						this.cleanFields();
 					});
