@@ -1,7 +1,7 @@
 <script>
 export default {
 	name: 'cAssets',
-	props: ['type', 'path'],
+	props: ['file'],
 	methods: {
 	},
 };
@@ -14,13 +14,12 @@ export default {
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Cancelar">
 						<span aria-hidden="true">×</span></button>
-					<h4 class="modal-title">{{ 'alert' | translate  | capitalize }}</h4>
 				</div>
 				<div class="modal-body">
-					<p>{{ message }}</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" @click="ifRedirect()">{{ 'ok' | translate  | capitalize }}</button>
+					<img :src="this.file.path" class="img-responsive" v-if="this.file.type === 'image'">
+					<div class="embed-responsive embed-responsive-16by9" v-if="this.file.type === 'video'">
+						<video class="embed-responsive-item" :src="this.file.path" controls preload="none"></video>
+					</div>
 				</div>
 			</div>
 			<!-- /.modal-content -->
@@ -28,3 +27,15 @@ export default {
 		<!-- /.modal-dialog -->
 	</div>
 </template>
+
+<style scoped>
+	#assets .modal-dialog {
+		width: 60%;
+		height: 60%;
+	}
+	#assets .modal-content {
+		height: auto;
+		min-height: 100%;
+		border-radius: 0;
+	}
+</style>
