@@ -95,6 +95,15 @@ export default {
 							<span>{{ complaint.human_address }}</span><br>
 							<span>{{ complaint.axis.name }}</span><br><br>
 							<p>{{ complaint.description }}</p>
+							<hr>
+							<template v-if="complaint.files.length > 0">
+								<h5><strong>Files:</strong></h5>
+								<div class="row">
+									<div class="col-md-2" v-for="file in complaint.files">
+										<img :src="file.path" class="img-responsive">
+									</div>
+								</div>
+							</template>
 						</div>
 						<div class="box-footer box-comments">
 							<h5><strong>Respostas:</strong></h5>
