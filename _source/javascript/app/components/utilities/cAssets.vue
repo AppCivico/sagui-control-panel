@@ -1,8 +1,7 @@
 <script>
 export default {
 	name: 'cAssets',
-	computed: {
-	},
+	props: ['type', 'path'],
 	methods: {
 	},
 };
