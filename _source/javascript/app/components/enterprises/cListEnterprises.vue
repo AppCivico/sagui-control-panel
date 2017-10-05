@@ -1,11 +1,8 @@
 <script>
-import config from '../../config'; // eslint-disable-line no-unused-vars
-
 export default {
 	name: 'cListEnterprises',
 	data() {
 		return {
-			url: config.url,
 			thumbnails: [],
 		};
 	},
@@ -27,7 +24,7 @@ export default {
 		getThumbnails() {
 			this.enterprises.map((item) => {
 				if (item.images[0]) {
-					const thumbnail = `background-image: url(${this.url}/${item.images[0].image_path})`;
+					const thumbnail = `background-image: url(${item.images[0].image_path})`;
 					this.thumbnails.push(thumbnail);
 				} else {
 					this.thumbnails.push('');

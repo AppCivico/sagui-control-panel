@@ -4,7 +4,6 @@ import methods from '../../methods';
 import cQuestion from './cQuestion.vue';
 import cEditQuestion from './cEditQuestion.vue';
 import cCategory from './cCategory.vue';
-import config from '../../config'; // eslint-disable-line no-unused-vars
 
 export default{
 	name: 'cSurvey',
@@ -16,7 +15,6 @@ export default{
 	},
 	data() {
 		return {
-			url: config.url,
 			edited: false,
 			question: {},
 			questionIndex: 0,
@@ -170,7 +168,7 @@ export default{
 
 												<div class="col-md-4" v-for="answer in question.answers" v-if="question.type != 'textarea'">
 													<h5>{{ answer.title }}</h5>
-													<img :src="url+answer.image_path" alt="image" v-if="answer.image_path" class="img-responsive">
+													<img :src="answer.image_path" alt="image" v-if="answer.image_path" class="img-responsive">
 												</div>
 												<div class="col-md-12" v-if="question.type == 'textarea'">
 													<h5>{{ 'textarea' | translate | capitalize }}</h5>

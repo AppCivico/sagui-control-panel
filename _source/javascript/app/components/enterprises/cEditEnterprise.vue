@@ -2,7 +2,6 @@
 import Vue from 'vue';
 import methods from '../../methods';
 import cEnterpriseLocation from './cEnterpriseLocation.vue';
-import config from '../../config';  // eslint-disable-line no-unused-vars
 
 export default {
 	name: 'cEditEnterprise',
@@ -17,7 +16,6 @@ export default {
 	},
 	data() {
 		return {
-			url: config.url,
 			autocomplete: '',
 			placeId: '',
 			polygon: '',
@@ -226,7 +224,7 @@ export default {
 								<div class="row" v-if="enterprise.images">
 									<div class="col-md-4" v-for="image in enterprise.images">
 										<button type="button" aria-label="Excluir" class="close" @click="removeImage(index)"><span aria-hidden="true">×</span></button>
-										<img :src="url+image.image_path" alt="foto do empreendimento" class="img-responsive">
+										<img :src="image.image_path" alt="foto do empreendimento" class="img-responsive">
 									</div>
 								</div>
 								<input type="file" class="form-control" name="photos" v-if="enterprise.images.length < 5" multiple>
