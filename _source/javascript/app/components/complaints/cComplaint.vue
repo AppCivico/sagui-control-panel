@@ -1,11 +1,13 @@
 <script>
 import cAnswer from './cAnswer.vue';
+import cAssets from '../utilities/cAssets.vue';
 
 export default {
 	name: 'cComplaint',
 	props: ['id'],
 	components: {
 		cAnswer,
+		cAssets,
 	},
 	data() {
 		return {
@@ -13,6 +15,18 @@ export default {
 			editingAnswer: {},
 			editingAnswerIndex: 0,
 			remainingActions: 0,
+			fileTypes: {
+				jpg: 'image',
+				png: 'image',
+				jpeg: 'image',
+				mp4: 'video',
+				mp3: 'audio',
+			},
+			file: {
+				path: '',
+				type: '',
+			},
+			ready: false,
 		};
 	},
 	computed: {
@@ -26,6 +40,7 @@ export default {
 	mounted() {
 		this.$store.dispatch('LOAD_COMPLAINT', this.id).then(() => {
 			this.getRemainingActions();
+			this.getFileType();
 		});
 	},
 	methods: {
@@ -35,6 +50,18 @@ export default {
 
 			if (confirmationsQtd > 0 && confirmationsQtd < limit) {
 				this.remainingActions = limit - confirmationsQtd;
+			}
+		},
+		getFileType() {
+			if (this.complaint.files.length > 0) {
+				this.complaint.files.map((file) => {
+					const path = file.path.split('?')[0].split('.');
+					const fileType = path[path.length - 1];
+					if (this.fileTypes[fileType]) {
+						file.type = this.fileTypes[fileType]; // eslint-disable-line no-param-reassign
+					}
+				});
+				this.ready = true;
 			}
 		},
 		newAnswer() {
@@ -74,6 +101,10 @@ export default {
 				this.comments.splice(number, 1);
 			});
 		},
+		setAsset(path, type) {
+			this.file.path = path;
+			this.file.type = type;
+		},
 	},
 };
 </script>
@@ -103,11 +134,15 @@ export default {
 							<span>{{ complaint.axis.name }}</span><br><br>
 							<p>{{ complaint.description }}</p>
 							<hr>
-							<template v-if="complaint.files.length > 0">
+							<template v-if="complaint.files.length > 0 && this.ready">
 								<h5><strong>{{ 'files' | translate | capitalize }}</strong></h5>
 								<div class="row">
 									<div class="col-md-2" v-for="file in complaint.files">
-										<img :src="file.path" class="img-responsive">
+										<a href="#" data-toggle="modal" data-target="#assets" class="edit-button" @click.prevent="setAsset(file.path, file.type)">
+											<img :src="file.path" class="img-responsive" v-if="file.type === 'image'">
+											<img src="../dist/img/video-default.png" class="img-responsive" alt="Abrir vídeo" v-else-if="file.type === 'video'">
+											<img src="../dist/img/video-default.png" class="img-responsive" alt="Abrir áudio" v-else-if="file.type === 'audio'">
+										</a>
 									</div>
 								</div>
 							</template>
@@ -132,6 +167,7 @@ export default {
 		</section>
 		<!-- /.content -->
 		<c-answer :answer="this.editingAnswer" :complaintId="this.id" :isEditing="this.isEditing" v-on:newAnswer="addAnswer" v-on:editAnswer="editAnswer"></c-answer>
+		<c-assets :file="this.file"></c-assets>
 	</div>
 </template>
 
