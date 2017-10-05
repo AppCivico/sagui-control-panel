@@ -87,7 +87,14 @@ export default {
 					<div class="box box-solid complaint">
 						<div class="box-header with-border">
 							<!-- adicionar v-if quando tiver flag de status -->
-							<h3 class="box-title"><router-link to="/">{{ complaint.title | capitalize }}</router-link> <span v-if="remainingActions > 0" class="remaining">Faltam: {{ remainingActions }} confirmações</span></h3>
+							<h3 class="box-title">
+								<router-link to="/">{{ complaint.title | capitalize }}</router-link>
+								<span v-if="remainingActions > 0" class="remaining">
+									{{ 'remain' | translate | capitalize }} {{ remainingActions }}
+									<template v-if="remainingActions === 1">{{ 'contribution' | translate }}</template>
+									<template v-else>{{ 'contributions' | translate }}</template>
+								</span>
+							</h3>
 						</div>
 						<div class="box-body">
 							<button v-if="complaint.is_cause === 0"  type="button" class="btn btn-danger pull-right" @click="deleteComplaint()">{{ 'delete' | translate | capitalize }} {{ 'complaint' | translate }}</button>
@@ -97,7 +104,7 @@ export default {
 							<p>{{ complaint.description }}</p>
 							<hr>
 							<template v-if="complaint.files.length > 0">
-								<h5><strong>Files:</strong></h5>
+								<h5><strong>{{ 'files' | translate | capitalize }}</strong></h5>
 								<div class="row">
 									<div class="col-md-2" v-for="file in complaint.files">
 										<img :src="file.path" class="img-responsive">
@@ -106,7 +113,7 @@ export default {
 							</template>
 						</div>
 						<div class="box-footer box-comments">
-							<h5><strong>Respostas:</strong></h5>
+							<h5><strong>{{ 'answers' | translate | capitalize }}</strong></h5>
 							<div class="box-comment" v-for="(answer, index) in comments">
 								<div class="comment-text" >
 									<span class="username">
