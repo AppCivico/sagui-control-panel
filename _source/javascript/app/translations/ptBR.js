@@ -19,6 +19,7 @@ const ptBr = {
 	"category": "categoria",
 	"categories": "categorias",
 	"choose_enterprise": "Escolha o empreendimento",
+	"close": "fechar",
 	"company": "companhia",
 	"complaints": "apontamentos",
 	"complaint": "apontamento",
