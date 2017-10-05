@@ -1,7 +1,7 @@
 <script>
 import Vue from 'vue';
+import { fontAwesomePicker } from 'font-awesome-picker';
 import methods from '../../methods';
-import cIconPicker from '../utilities/iconPicker/index.vue';
 
 export default {
 	name: 'cCategory',
@@ -15,7 +15,7 @@ export default {
 		};
 	},
 	components: {
-		cIconPicker,
+		'font-awesome-picker': fontAwesomePicker,
 	},
 	computed: {
 		selectedEnterprise() {
@@ -139,7 +139,7 @@ export default {
 
 						<button type="button" class="btn btn-default" @click="showIconPicker()" v-if="this.isEditing">{{ 'edit' | translate  | capitalize }} {{ 'icon' | translate }}</button>
 						<button type="button" class="btn btn-default" @click="showIconPicker()" v-else>{{ 'select' | translate  | capitalize }} {{ 'icon' | translate }}</button>
-						<c-icon-picker :seachbox="'search' | translate  | capitalize" v-on:selectIcon="selectIcon"></c-icon-picker>
+						<font-awesome-picker :seachbox="'search' | translate  | capitalize" v-on:selectIcon="selectIcon"></font-awesome-picker>
 					</div>
 				</div>
 				<div class="modal-footer">
