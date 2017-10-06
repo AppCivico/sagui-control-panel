@@ -1,22 +1,25 @@
-# sagui
+# Sagui - Control Panel
 
-> Control Panel for Sagui project
+> This control panel was built using Vue.js.
+>
+> The project is divided in two main funcionalities: Surveys and Alerts.
 
-## Build Setup
+## Table of contents
+
+- [Installation](#build)
+- [Usage](#usage)
+
+# Build
 
 ``` bash
 # install dependencies
 npm install
 
+# build for production
+npm run build:prod
+
 # serve with hot reload at localhost:8080
 npm run dev
-
-# serve development api
-npm run api
-change the value of const api on _source/javascript/app/store
-
-# build for production with minification
-npm run build:prod
 
 # lint all *.js and *.vue files
 npm run lint:all
@@ -25,4 +28,39 @@ npm run lint:all
 npm test
 ```
 
-For more information see the [docs for vueify](https://github.com/vuejs/vueify).
+# Usage
+
+## Config
+
+To edit:
+- Project's name;
+- API address;
+- CP address.
+
+Edit in _source/app/config.js_
+```javascript
+const config = {
+	url: 'http://dev-sagui-api.eokoe.com',
+	name: 'Projeto Sagui',
+	devapi: 'http://dev-sagui-api.eokoe.com/v1',
+	api: 'https://fakeapi.eokoe.com',
+};
+```
+
+## Language
+
+Copy the portuguese translation file (_source/app/translations/ptBR.js) and use it as a starter file to translate to a new language.
+
+Edit _source/app/translations/index.js
+```javascript
+// Import your new file
+import enUK from './enUK';
+
+// add your translation
+Vue.i18n.add('pt-BR', enUK);
+
+// set the start locale to use it
+Vue.i18n.set('en-UK');
+```
+
+[MIT](http://opensource.org/licenses/MIT)
