@@ -95,7 +95,7 @@ export default {
 			}
 		},
 		selectIcon(value) {
-			const icon = document.querySelector('#new-category .showIcon');
+			const icon = document.querySelector('#new-category #showIcon');
 			const iconClasses = Array.from(icon.classList);
 			const lastClass = iconClasses[iconClasses.length - 1];
 			icon.classList.remove(lastClass);
@@ -133,8 +133,8 @@ export default {
 						<hr>
 						<label>{{ 'icon' | translate  | capitalize }}</label>
 						<div>
-							<i :class="'fa showIcon '+this.category.icon_name" v-if="this.isEditing"></i>
-							<i class="fa showIcon" v-else></i>
+							<i :class="'fa '+this.category.icon_name" id="showIcon" v-if="this.isEditing"></i>
+							<i class="fa fa-file-o" id="showIcon" v-else></i>
 						</div>
 
 						<button type="button" class="btn btn-default" @click="showIconPicker()" v-if="this.isEditing">{{ 'edit' | translate  | capitalize }} {{ 'icon' | translate }}</button>
@@ -158,7 +158,7 @@ export default {
 	#iconPicker {
 		display: none;
 	}
-	.showIcon {
+	#showIcon {
 	    width: 40px;
 	    height: 40px;
 	    padding: 12px;
