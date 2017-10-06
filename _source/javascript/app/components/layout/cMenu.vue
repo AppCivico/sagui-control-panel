@@ -19,7 +19,7 @@ export default{
 			this.selected = true;
 		},
 	},
-};
+}
 </script>
 
 <template>
@@ -27,13 +27,13 @@ export default{
 	<!-- sidebar: style can be found in sidebar.less -->
 	<section class="sidebar">
 		<!-- sidebar menu: : style can be found in sidebar.less -->
-		<ul class="sidebar-menu">
-			<li class="treeview active">
+		<ul class="sidebar-menu" data-widget="tree">
+			<li class="treeview">
 				<a href="#">
 					<i class="fa fa-file-text-o"></i>
 					<span>{{ 'enterprises' | translate | capitalize }}</span>
 				</a>
-				<ul class="treeview-menu menu-open" v-if="selected">
+				<ul class="treeview-menu" v-if="selected">
 					<li><router-link to="/enterprises"><i class="fa fa-circle-o"></i>{{ 'switch' | translate | capitalize }} {{ 'of-n' | translate }} {{ 'enterprise' | translate }}</router-link></li>
 					<li><router-link :to="'/enterprises/'+selectedEnterprise"><i class="fa fa-circle-o"></i>{{ 'enterprise' | translate | capitalize }} {{ 'current' | translate }}</router-link></li>
 				</ul>
