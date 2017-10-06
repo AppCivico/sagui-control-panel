@@ -1,0 +1,192 @@
+<script>
+import cAnswer from './cAnswer.vue';
+import cAssets from '../utilities/cAssets.vue';
+
+export default {
+	name: 'cComplaint',
+	props: ['id'],
+	components: {
+		cAnswer,
+		cAssets,
+	},
+	data() {
+		return {
+			isEditing: false,
+			editingAnswer: {},
+			editingAnswerIndex: 0,
+			remainingActions: 0,
+			fileTypes: {
+				jpg: 'image',
+				png: 'image',
+				jpeg: 'image',
+				mp4: 'video',
+				mp3: 'audio',
+			},
+			file: {
+				path: '',
+				type: '',
+			},
+			ready: false,
+		};
+	},
+	computed: {
+		complaint() {
+			return this.$store.state.complaints.complaint;
+		},
+		comments() {
+			return this.$store.state.complaints.complaint.comments;
+		},
+	},
+	mounted() {
+		this.$store.dispatch('LOAD_COMPLAINT', this.id).then(() => {
+			this.getRemainingActions();
+			this.getFileType();
+		});
+	},
+	methods: {
+		getRemainingActions() {
+			const confirmationsQtd = this.complaint.confirmations.length;
+			const limit = this.complaint.num_to_became_cause;
+
+			if (confirmationsQtd > 0 && confirmationsQtd < limit) {
+				this.remainingActions = limit - confirmationsQtd;
+			}
+		},
+		getFileType() {
+			if (this.complaint.files.length > 0) {
+				this.complaint.files.map((file) => {
+					const path = file.path.split('?')[0].split('.');
+					const fileType = path[path.length - 1];
+					if (this.fileTypes[fileType]) {
+						file.type = this.fileTypes[fileType]; // eslint-disable-line no-param-reassign
+					}
+				});
+				this.ready = true;
+			}
+		},
+		newAnswer() {
+			this.isEditing = false;
+		},
+		addAnswer(result) {
+			this.comments.push(result.newAnswer.data);
+			this.comments[this.comments.length - 1].id = result.id;
+			this.comments[this.comments.length - 1].created_at = result.created_at;
+		},
+		editAnswer(result) {
+			if (result) {
+				this.comments.splice(this.editingAnswerIndex, 1, result.newAnswer);
+			}
+		},
+		converteDate(timestamp) {
+			return timestamp
+				.split('T')[0]
+				.split('-')
+				.reverse()
+				.join('/');
+		},
+		setEditingAnswer(answer, index) {
+			this.editingAnswer = answer;
+			this.editingAnswerIndex = index;
+			this.isEditing = true;
+		},
+		deleteComplaint() {
+			this.$store.dispatch('DELETE_COMPLAINT', this.id);
+		},
+		removeAnswer(answer, number) {
+			const info = {
+				id: this.id,
+				answerId: answer.id,
+			};
+			this.$store.dispatch('DELETE_ANSWER', info).then(() => {
+				this.comments.splice(number, 1);
+			});
+		},
+		setAsset(path, type) {
+			this.file.path = path;
+			this.file.type = type;
+		},
+	},
+};
+</script>
+
+<template>
+	<div>
+		<!-- Main content -->
+		<section class="content">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="box box-solid complaint">
+						<div class="box-header with-border">
+							<!-- adicionar v-if quando tiver flag de status -->
+							<h3 class="box-title">
+								<router-link to="/">{{ complaint.title | capitalize }}</router-link>
+								<span v-if="remainingActions > 0" class="remaining">
+									{{ 'remain' | translate | capitalize }} {{ remainingActions }}
+									<template v-if="remainingActions === 1">{{ 'contribution' | translate }}</template>
+									<template v-else>{{ 'contributions' | translate }}</template>
+								</span>
+							</h3>
+						</div>
+						<div class="box-body">
+							<button v-if="complaint.is_cause === 0"  type="button" class="btn btn-danger pull-right" @click="deleteComplaint()">{{ 'delete' | translate | capitalize }} {{ 'complaint' | translate }}</button>
+							<button v-else  type="button" class="btn btn-danger pull-right" @click="deleteComplaint()">{{ 'delete' | translate | capitalize }} {{ 'case' | translate }}</button>
+							<span>{{ complaint.human_address }}</span><br>
+							<span>{{ complaint.axis.name }}</span><br><br>
+							<p>{{ complaint.description }}</p>
+							<hr>
+							<template v-if="complaint.files.length > 0 && this.ready">
+								<h5><strong>{{ 'files' | translate | capitalize }}</strong></h5>
+								<div class="row">
+									<div class="col-md-2" v-for="file in complaint.files">
+										<a href="#" data-toggle="modal" data-target="#assets" class="edit-button" @click.prevent="setAsset(file.path, file.type)">
+											<img :src="file.path" class="img-responsive" v-if="file.type === 'image'">
+											<img src="../dist/img/video-default.png" class="img-responsive" alt="Abrir vídeo" v-else-if="file.type === 'video'">
+											<img src="../dist/img/video-default.png" class="img-responsive" alt="Abrir áudio" v-else-if="file.type === 'audio'">
+										</a>
+									</div>
+								</div>
+							</template>
+						</div>
+						<div class="box-footer box-comments">
+							<h5><strong>{{ 'answers' | translate | capitalize }}</strong></h5>
+							<div class="box-comment" v-for="(answer, index) in comments">
+								<div class="comment-text" >
+									<span class="username">
+										<template v-if="answer.created_at">{{ converteDate(answer.created_at) }}</template>
+										<button type="button" aria-label="Excluir" class="close" @click="removeAnswer(answer, index)"><span aria-hidden="true">×</span></button>
+										<button type="button" aria-label="Editar" data-toggle="modal" data-target="#answer" class="edit-button" @click="setEditingAnswer(answer, index)"><i class="fa fa-edit"></i></button>
+									</span>
+									{{ answer.content }}
+								</div>
+							</div>
+							<button type="button"class="btn btn-info" data-toggle="modal" data-target="#answer" @click="newAnswer()">{{ 'new' | translate | capitalize }} {{ 'answer' | translate }}</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- /.content -->
+		<c-answer :answer="this.editingAnswer" :complaintId="this.id" :isEditing="this.isEditing" v-on:newAnswer="addAnswer" v-on:editAnswer="editAnswer"></c-answer>
+		<c-assets :file="this.file"></c-assets>
+	</div>
+</template>
+
+<style scoped>
+	.complaint {
+		min-height: 150px;
+	}
+	.complaint .box-title {
+		width: 100%;
+		display: table;
+	}
+	.complaint .remaining {
+		float: right;
+		font-size: 0.8em;
+	}
+	.complaint .box-body span {
+		font-size: 0.9em;
+	}
+	.box-comments .comment-text {
+		margin-left: 0;
+	}
+</style>

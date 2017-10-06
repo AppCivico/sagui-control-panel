@@ -1,9 +1,10 @@
-//Theme for Sagui's Control Panel
-
+// Bootstrap 3
 @import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+// fontAwesomePicker
+@import '../../node_modules/font-awesome-picker/dist/font-awesome-picker';
+// Theme for Sagui's Control Panel
 @import 'vendor/adminlte/adminlte';
-
-body {
-	font-size: 1em;
-	background: #000;
-}
+// Customization
+@import 'components/loading';
+@import 'components/buttons';
+@import 'components/agents';

@@ -3,7 +3,10 @@ module.exports = function (config) {
   config.set({
     browsers: ['PhantomJS'],
     frameworks: ['mocha', 'chai', 'browserify'],
-    files: ['_source/javascript/spec/unit/**/*.js'],
+    files: [
+    	'node_modules/babel-polyfill/dist/polyfill.js',
+    	'_source/javascript/spec/unit/**/*.js'
+    ],
     reporters: ['nyan'],
     preprocessors: {
       '_source/javascript/spec/unit/**/*.js': ['browserify']
@@ -15,6 +18,7 @@ module.exports = function (config) {
     },
     // if you want to continuously re-run tests on file-save,
     // replace the following line with `autoWatch: true`
-    singleRun: true
+    //singleRun: true,
+    autoWatch: true
   })
 }

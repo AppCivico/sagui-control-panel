@@ -1,0 +1,317 @@
+{
+  "enterprises": [
+    {
+      "id": 1,
+      "name": "Usina Hidrelétrica de Belo Monte",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda quae, est a. Harum aliquam rerum ipsa suscipit doloribus in temporibus nihil magnam nesciunt debitis sed minus quod, assumenda, quia.",
+      "location": {
+        "geo": [
+          -12.0879,
+          -58.1263
+        ],
+        "human_address": "Lorem Ipsum até Dolor Sum. Rio Xingu, Para Brasil"
+      },
+      "user": 1,
+      "data": {
+        "complaints": 45,
+        "cases": 21,
+        "actions": 300,
+        "surveys": 119
+      }
+    },
+    {
+      "id": 2,
+      "name": "Usina Hidrelétrica de Jirau",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat assumenda quae, est a. Harum aliquam rerum ipsa suscipit doloribus in temporibus nihil magnam nesciunt debitis sed minus quod, assumenda, quia.",
+      "location": {
+        "geo": [
+          -12.0879,
+          -58.1263
+        ],
+        "human_address": "Lorem Ipsum até Dolor Sum. Rio Xingu, Para Brasil"
+      },
+      "user": 1,
+      "data": {
+        "complaints": 35,
+        "cases": 12,
+        "actions": 150,
+        "surveys": 80
+      }
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "title": "Lorem ipsum 1",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet",
+      "link": "new-enterprise",
+      "level": "info"
+    },
+    {
+      "id": 2,
+      "title": "Lorem ipsum 1",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet",
+      "link": "new-enterprise",
+      "level": "danger"
+    },
+    {
+      "id": 3,
+      "title": "Lorem ipsum 1",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet",
+      "link": "new-enterprise",
+      "level": "warning"
+    },
+    {
+      "id": 4,
+      "title": "Lorem ipsum 1",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet",
+      "link": "new-enterprise",
+      "level": "success"
+    }
+  ],
+  "agents": [
+    {
+      "id": 1,
+      "number": "LID01",
+      "gadget": "Tablet Samsung 01",
+      "name": "Fulano de tal e tal",
+      "surveys": 37,
+      "enterprise": 1
+    },
+    {
+      "id": 2,
+      "number": "LID02",
+      "gadget": "Tablet Samsung 02",
+      "name": "Fulano de tal e tal",
+      "surveys": 15,
+      "enterprise": 1
+    },
+    {
+      "id": 3,
+      "number": "LID03",
+      "gadget": "Tablet Samsung 01",
+      "name": "Fulano de tal e tal",
+      "surveys": 10,
+      "enterprise": 1
+    },
+    {
+      "id": 4,
+      "number": "LID04",
+      "gadget": "Tablet Samsung 02",
+      "name": "Fulano de tal e tal",
+      "surveys": 223,
+      "enterprise": 2
+    },
+    {
+      "id": 5,
+      "number": "LID05",
+      "gadget": "Tablet Samsung 01",
+      "name": "Fulano de tal e tal",
+      "surveys": 45,
+      "enterprise": 2
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "title": "Moradia",
+      "enterprise": 1
+    },
+    {
+      "id": 2,
+      "title": "Alimentação",
+      "enterprise": 2
+    },
+    {
+      "id": 3,
+      "title": "Locomoção",
+      "enterprise": 2
+    }
+  ],
+  "surveys": [
+    {
+      "id": 1,
+      "title": "Exemplo Moradia 1",
+      "category": 1,
+      "questions": [
+        {
+          "type": "traffic_light",
+          "title": "Esta satisfeito com a sua moradia 1?",
+          "answers": [
+            {
+              "unit": "red",
+              "title": "Não"
+            },
+            {
+              "unit": "yellow",
+              "title": "Médio"
+            },
+            {
+              "unit": "green",
+              "title": "Sim"
+            }
+          ]
+        },
+        {
+          "type": "multiple",
+          "title": "Esta satisfeito com a sua moradia 2?",
+          "answers": [
+            {
+              "title": "Não a"
+            },
+            {
+              "title": "Médio b"
+            },
+            {
+              "title": "Sim c"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "title": "Esta satisfeito com a sua moradia 3?"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Exemplo Moradia 2",
+      "category": 1,
+      "questions": [
+        {
+          "type": "traffic_light",
+          "title": "Esta satisfeito com a sua moradia 2 1?",
+          "answers": [
+            {
+              "unit": "red",
+              "title": "Não"
+            },
+            {
+              "unit": "yellow",
+              "title": "Médio"
+            },
+            {
+              "unit": "green",
+              "title": "Sim"
+            }
+          ]
+        },
+        {
+          "type": "multiple",
+          "title": "Esta satisfeito com a sua moradia 2 2?",
+          "answers": [
+            {
+              "title": "Não a"
+            },
+            {
+              "title": "Médio b"
+            },
+            {
+              "title": "Sim c"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "title": "Esta satisfeito com a sua moradia 2 3?"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Exemplo Alimentação",
+      "category": 2,
+      "questions": [
+        {
+          "type": "traffic_light",
+          "title": "Esta satisfeito com a sua moradia 1?",
+          "answers": [
+            {
+              "unit": "red",
+              "title": "Não"
+            },
+            {
+              "unit": "yellow",
+              "title": "Médio"
+            },
+            {
+              "unit": "green",
+              "title": "Sim"
+            }
+          ]
+        },
+        {
+          "type": "multiple",
+          "title": "Esta satisfeito com a sua moradia 2?",
+          "answers": [
+            {
+              "title": "Não a"
+            },
+            {
+              "title": "Médio b"
+            },
+            {
+              "title": "Sim c"
+            }
+          ]
+        },
+        {
+          "type": "textarea",
+          "title": "Esta satisfeito com a sua moradia 3?"
+        }
+      ]
+    }
+  ],
+  "complaints": [
+  	{
+  		"id": 1,
+  		"category": 1,
+  		"enterprise": 1,
+  		"status": "complaint",
+  		"title": "agua suja",
+  		"address": "Rio Xingu, Para Brasil",
+  		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ultrices ante nec",
+  		"actions": 15
+  	},
+  	{
+  		"id": 2,
+  		"category": 1,
+  		"enterprise": 1,
+  		"status": "complaint",
+  		"title": "agua suja 2",
+  		"address": "Rio Xingu, Para Brasil",
+  		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ultrices ante nec",
+  		"actions": 15
+  	},
+  	{
+  		"id": 3,
+  		"category": 2,
+  		"enterprise": 2,
+  		"status": "case",
+  		"title": "agua suja 3",
+  		"address": "Rio Xingu, Para Brasil",
+  		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ultrices ante nec",
+  		"actions": 31
+  	},
+  	{
+  		"id": 4,
+  		"category": 2,
+  		"enterprise": 2,
+  		"status": "complaint",
+  		"title": "agua suja 4",
+  		"address": "Rio Xingu, Para Brasil",
+  		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ultrices ante nec",
+  		"actions": 15
+  	},
+  	{
+  		"id": 5,
+  		"category": 3,
+  		"enterprise": 2,
+  		"status": "complaint",
+  		"title": "agua suja 5",
+  		"address": "Rio Xingu, Para Brasil",
+  		"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ultrices ante nec",
+  		"actions": 15
+  	}
+  ]
+}

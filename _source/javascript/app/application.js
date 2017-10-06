@@ -1,21 +1,29 @@
-//Required files for AdminLTE theme
-//Import jQuery
-window.jQuery = require('../../../node_modules/jquery/dist/jquery');
-window.$ = window.jQuery;
-//Import Bootstrap
-const bootstrap = require('../../../node_modules/bootstrap-sass/assets/javascripts/bootstrap');
-//Import AdminLTE js file
-const adminlte = require('../../../node_modules/admin-lte/dist/js/app');
-
 // The following line loads the standalone build of Vue instead of the runtime-only build,
 // so you don't have to do: import Vue from 'vue/dist/vue'
 // This is done with the browser options. For the config, see package.json
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import Raven from 'raven-js';
+import RavenVue from 'raven-js/plugins/vue';
 
-new Vue({ // eslint-disable-line no-new
-  el: '#app',
-  render: (h) => h(App)
-})
+import App from './App.vue';
+import store from './store';
+import router from './router';
+import translations from './translations';
 
-console.log('foi')
+Vue.filter('capitalize', function (value) { // eslint-disable-line prefer-arrow-callback, func-names
+	if (!value) return '';
+	return value.toString().charAt(0).toUpperCase() + value.toString().slice(1);
+});
+
+new Vue({ // eslint-disable-line no-new, no-unused-vars
+	el: '#app',
+	store,
+	router,
+	translations,
+	render: h => h(App),
+});
+
+Raven
+    .config('https://707827dad6334ea08dad9b6f031bc077@sentry.io/<project>')
+    .addPlugin(RavenVue, Vue)
+    .install();

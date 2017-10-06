@@ -1,8 +1,16 @@
 .DS_Store
 node_modules
-dist
+dist/js/*
+dist/css/*
+dist/img/*
 yarn-error.log
 npm-debug.log
+public
+
+!dist/.gitignore
+!dist/js/.gitignore
+!dist/css/.gitignore
+!dist/img/.gitignore
 
 # Editor directories and files
 .vscode
