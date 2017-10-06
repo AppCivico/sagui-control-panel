@@ -13,8 +13,8 @@ describe('vuexStore.vue', () => {
 			headers: { 'Content-Type': 'application/json' },
 			url: `${config.devapi}/auth/signin`,
 			data: {
-				email: 'daniel@eokoe.com',
-				password: 'test',
+				email: 'test@test.com',
+				password: '123456',
 			},
 		})
 		.then((response) => {
