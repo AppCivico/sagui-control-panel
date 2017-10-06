@@ -19,7 +19,7 @@ export default{
 			this.selected = true;
 		},
 	},
-}
+};
 </script>
 
 <template>
