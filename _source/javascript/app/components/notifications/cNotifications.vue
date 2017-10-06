@@ -16,7 +16,9 @@ export default {
 		};
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_NOTIFICATIONS_LIST');
+		this.$store.dispatch('LOAD_NOTIFICATIONS_LIST').then(() => {
+			this.$store.dispatch('UPDATE_NOTIFICATIONS');
+		});
 	},
 	methods: {
 		createLink(i) {

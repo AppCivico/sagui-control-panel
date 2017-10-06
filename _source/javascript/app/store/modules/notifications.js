@@ -35,8 +35,24 @@ const state = {
 // actions
 const actions = {
 	LOAD_NOTIFICATIONS_LIST({ commit, rootState }, id) { // eslint-disable-line no-unused-vars
-		axios.get(`${config.devapi}/activities?api_key=${rootState.auth.apiKey}&`).then((response) => {
-			commit('SET_NOTIFICATIONS_LIST', { list: response.data });
+		return new Promise((resolve) => {
+			axios.get(`${config.devapi}/activities?api_key=${rootState.auth.apiKey}&`).then((response) => {
+				commit('SET_NOTIFICATIONS_LIST', { list: response.data });
+				resolve(response);
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } }, { root: true });
+			});
+		});
+	},
+	UPDATE_NOTIFICATIONS({ commit, rootState }, id) { // eslint-disable-line no-unused-vars
+		axios({
+			method: 'POST',
+			url: `${config.devapi}/activities?api_key=${rootState.auth.apiKey}`,
+			headers: { 'Content-Type': 'application/json' },
+		})
+		.then(() => {
+			// ?
 		}, (err) => {
 			console.error(err);
 			commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } }, { root: true });
