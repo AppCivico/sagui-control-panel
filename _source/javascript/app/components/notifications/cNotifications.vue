@@ -44,7 +44,10 @@ export default {
 		<!-- Main content -->
 		<section class="content">
 			<div class="box box-solid">
-				<div class="box-body">
+				<div v-if="notifications.length <= 0" class="alert alert-info">
+					{{ 'no-notifications' | translate | capitalize }}
+				</div>
+				<div class="box-body" v-else>
 					<h4>{{ 'not-read' | translate }}</h4>
 					<template v-for="(notification, index) in notifications">
 						<div class="callout callout-info">
