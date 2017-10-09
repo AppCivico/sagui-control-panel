@@ -107,6 +107,7 @@ const ptBr = {
 
 	// notifications
 	"not-read": "não lidos",
+	"no-notifications": "nenhuma notificação no momento",
 	"view-all": "visualizar todas",
 
 	// empty page
