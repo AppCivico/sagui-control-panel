@@ -106,6 +106,7 @@ const ptBr = {
 	"no-editions": "Nenhuma alteração foi efetuada",
 
 	// notifications
+	"mark-as-read": "marcar todas como lidas",
 	"not-read": "não lidos",
 	"no-notifications": "nenhuma notificação no momento",
 	"view-all": "visualizar todas",
