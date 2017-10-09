@@ -40,6 +40,7 @@ const ptBr = {
 	"gadget": "aparelho",
 	"green": "verde",
 	"icon": "ícone",
+	"insert": "inserir",
 	"insert_option": "Digite aqui uma opção",
 	"limit": "delimitar",
 	"location": "localização",
