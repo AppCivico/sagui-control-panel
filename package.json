@@ -40,7 +40,7 @@
     "vue": "vue/dist/vue.common.js"
   },
   "dependencies": {
-    "admin-lte": "^2.4.0",
+    "admin-lte": "2.4.0",
     "axios": "^0.16.2",
     "font-awesome-picker": "^1.0.0",
     "jquery": "^3.2.1",
