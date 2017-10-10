@@ -13,6 +13,9 @@ export default {
 				complaint: 'complaint',
 				complaint_comment: 'complaint',
 				comment: 'complaint',
+				submission: 'complaint',
+				confirmation: 'complaint',
+				survey: 'surveys',
 			},
 		};
 	},
