@@ -33,11 +33,13 @@ npm test
 ## Config
 
 To edit:
+
 - Project's name;
 - API address;
 - CP address.
 
 Edit in _source/app/config.js_
+
 ```javascript
 const config = {
 	url: 'http://dev-sagui-api.eokoe.com',
@@ -52,6 +54,7 @@ const config = {
 Copy the portuguese translation file (_source/app/translations/ptBR.js) and use it as a starter file to translate to a new language.
 
 Edit _source/app/translations/index.js
+
 ```javascript
 // Import your new file
 import enUK from './enUK';
