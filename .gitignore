@@ -169,7 +169,7 @@ $RECYCLE.BIN/
 dist/js/*
 dist/css/*
 dist/img/*
-public
+public/*
 
 !dist/.gitignore
 !dist/js/.gitignore
