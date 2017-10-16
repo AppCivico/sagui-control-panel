@@ -74,6 +74,7 @@ export default {
 						res.map((item, i) => {
 							result.answers[i].image_path = item.data.path;
 							result.answers[i].image_id = item.data.id;
+							result.answers[i].image_thumbnail = item.data.thumbnail;
 						});
 						this.saveQuestion(result);
 					})
@@ -163,6 +164,7 @@ export default {
 		removeImage(index) {
 			this.question.answers[index].image_path = '';
 			this.question.answers[index].image_id = '';
+			this.question.answers[index].image_thumbnail = '';
 		},
 	},
 };
@@ -197,7 +199,8 @@ export default {
 							<div class="traffic_light__image">
 								<template v-if="answer.image_path">
 									<button type="button" aria-label="Excluir" class="close" @click="removeImage(index)"><span aria-hidden="true">×</span></button>
-									<img :src="answer.image_path" :alt="answer.unit">
+									<img v-if="answer.image_thumbnail" :src="answer.image_thumbnail" :alt="answer.unit" class="img-responsive">
+									<img v-else :src="answer.image_path" :alt="answer.unit" class="img-responsive">
 								</template>
 								<template v-else>
 									<input type="file" id="traffic_light__image-option">

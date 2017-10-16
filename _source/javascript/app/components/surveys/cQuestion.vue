@@ -76,6 +76,7 @@ export default {
 						res.map((item, i) => {
 							result.answers[i].image_path = item.data.path;
 							result.answers[i].image_id = item.data.id;
+							result.answers[i].image_thumbnail = item.data.thumbnail;
 						});
 						this.saveQuestion(result);
 					})
