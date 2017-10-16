@@ -38,7 +38,7 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'POST',
-				url: `${config.devapi}/assets?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/assets?api_key=${rootState.auth.apiKey}`,
 				data,
 				headers: { 'Content-Type': 'multipart/form-data' },
 			})

@@ -38,7 +38,7 @@ const state = {
 // actions
 const actions = {
 	LOAD_SURVEYS_LIST({ commit, rootState }, id) {
-		axios.get(`${config.devapi}/surveys?axis_id=${id}&api_key=${rootState.auth.apiKey}`).then((response) => {
+		axios.get(`${config.api}/surveys?axis_id=${id}&api_key=${rootState.auth.apiKey}`).then((response) => {
 			commit('SET_SURVEYS_LIST', { list: response.data });
 		}, (err) => {
 			console.error(err);
@@ -46,7 +46,7 @@ const actions = {
 		});
 	},
 	LOAD_SURVEYS_LIST_BY_ENTERPRISE({ commit, rootState }) {
-		axios.get(`${config.devapi}/surveys?enterprise_id=${rootState.selectedEnterprise}&api_key=${rootState.auth.apiKey}`).then((response) => {
+		axios.get(`${config.api}/surveys?enterprise_id=${rootState.selectedEnterprise}&api_key=${rootState.auth.apiKey}`).then((response) => {
 			commit('SET_SURVEYS_LIST', { list: response.data });
 		}, (err) => {
 			console.error(err);
@@ -55,7 +55,7 @@ const actions = {
 	},
 	LOAD_SURVEY({ commit, rootState }, id) {
 		return new Promise((resolve) => {
-			axios.get(`${config.devapi}/surveys/${id}?api_key=${rootState.auth.apiKey}`).then((response) => {
+			axios.get(`${config.api}/surveys/${id}?api_key=${rootState.auth.apiKey}`).then((response) => {
 				commit('SET_SURVEY', { res: response.data });
 				resolve(response);
 			}, (err) => {
@@ -68,7 +68,7 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'POST',
-				url: `${config.devapi}/surveys?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/surveys?api_key=${rootState.auth.apiKey}`,
 				data,
 				headers: { 'Content-Type': 'application/json' },
 			})
@@ -85,7 +85,7 @@ const actions = {
 	EDIT_SURVEY({ commit, rootState }, data) {
 		axios({
 			method: 'PUT',
-			url: `${config.devapi}/surveys/${data.id}?api_key=${rootState.auth.apiKey}`,
+			url: `${config.api}/surveys/${data.id}?api_key=${rootState.auth.apiKey}`,
 			data: data.survey,
 			headers: { 'Content-Type': 'application/json' },
 		})
@@ -102,7 +102,7 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'DELETE',
-				url: `${config.devapi}/surveys/${id}?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/surveys/${id}?api_key=${rootState.auth.apiKey}`,
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.then((response) => {
@@ -121,7 +121,7 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'POST',
-				url: `${config.devapi}/surveys/${state.currentSurvey}/questions?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/surveys/${state.currentSurvey}/questions?api_key=${rootState.auth.apiKey}`,
 				data,
 				headers: { 'Content-Type': 'application/json' },
 			})
@@ -142,7 +142,7 @@ const actions = {
 	EDIT_QUESTION({ commit, state, rootState }, data) {
 		axios({
 			method: 'PUT',
-			url: `${config.devapi}/surveys/${state.currentSurvey}/questions/${state.currentQuestion}?api_key=${rootState.auth.apiKey}`,
+			url: `${config.api}/surveys/${state.currentSurvey}/questions/${state.currentQuestion}?api_key=${rootState.auth.apiKey}`,
 			data: data.question,
 			headers: { 'Content-Type': 'application/json' },
 		})
@@ -161,7 +161,7 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'DELETE',
-				url: `${config.devapi}/surveys/${state.currentSurvey}/questions/${id}?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/surveys/${state.currentSurvey}/questions/${id}?api_key=${rootState.auth.apiKey}`,
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.then((response) => {

@@ -11,7 +11,7 @@ describe('vuexStore.vue', () => {
 		axios({
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			url: `${config.devapi}/auth/signin`,
+			url: `${config.api}/auth/signin`,
 			data: {
 				email: 'test@test.com',
 				password: '123456',

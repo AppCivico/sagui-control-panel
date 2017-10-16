@@ -35,7 +35,7 @@ const state = {
 // actions
 const actions = {
 	LOAD_NOTIFICATIONS_LIST({ commit, rootState }, id) { // eslint-disable-line no-unused-vars
-		axios.get(`${config.devapi}/activities?api_key=${rootState.auth.apiKey}&`).then((response) => {
+		axios.get(`${config.api}/activities?api_key=${rootState.auth.apiKey}&`).then((response) => {
 			commit('SET_NOTIFICATIONS_LIST', { list: response.data });
 		}, (err) => {
 			console.error(err);
@@ -46,7 +46,7 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'POST',
-				url: `${config.devapi}/activities?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/activities?api_key=${rootState.auth.apiKey}`,
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.then((response) => {
