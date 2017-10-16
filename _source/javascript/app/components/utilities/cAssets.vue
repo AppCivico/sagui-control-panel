@@ -2,7 +2,15 @@
 export default {
 	name: 'cAssets',
 	props: ['file'],
+	mounted() {
+	},
 	methods: {
+		pauseVideo() {
+			const videoPlayer = document.querySelector('.video-player');
+			if (videoPlayer) {
+				videoPlayer.pause();
+			}
+		},
 	},
 };
 </script>
@@ -12,13 +20,13 @@ export default {
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Cancelar">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Cancelar" @click="pauseVideo()">
 						<span aria-hidden="true">×</span></button>
 				</div>
 				<div class="modal-body">
 					<img :src="this.file.path" class="img-responsive" v-if="this.file.type === 'image'">
 					<div class="embed-responsive embed-responsive-16by9" v-if="this.file.type === 'video'">
-						<video class="embed-responsive-item" :src="this.file.path" controls preload="none"></video>
+						<video class="embed-responsive-item video-player" :src="this.file.path" controls preload="none"></video>
 					</div>
 				</div>
 			</div>
