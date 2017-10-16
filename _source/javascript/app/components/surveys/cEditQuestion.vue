@@ -74,10 +74,12 @@ export default {
 						res.map((item, i) => {
 							result.answers[i].image_path = item.data.path;
 							result.answers[i].image_id = item.data.id;
+							result.answers[i].image_thumbnail = item.data.thumbnail;
 						});
 						this.saveQuestion(result);
 					})
 					.catch((e) => {
+						document.querySelector('.edit-question__button').removeAttribute('disabled');
 						console.error(e);
 					});
 			} else {
@@ -86,6 +88,7 @@ export default {
 		},
 		saveQuestion(result) {
 			this.$store.dispatch('EDIT_QUESTION', { question: result, id: this.question.id }).then(() => {
+				document.querySelector('.edit-question__button').removeAttribute('disabled');
 				this.$emit('editQuestion', result);
 				$('#edit-question').modal('hide');
 				this.cleanFields();
@@ -101,7 +104,7 @@ export default {
 		removeError(event) {
 			methods.removeError(event);
 		},
-		validate() {
+		validate(event) {
 			let valid = true;
 			let imageFile = 0;
 			const title = document.querySelector('#edit-question input[name="title"]');
@@ -153,6 +156,8 @@ export default {
 				}
 			}
 			if (valid) {
+				event.target.setAttribute('disabled', 'disabled');
+
 				if (imageFile === 3) {
 					this.editQuestion(document.querySelector('#edit-question'), true);
 				} else {
@@ -163,6 +168,7 @@ export default {
 		removeImage(index) {
 			this.question.answers[index].image_path = '';
 			this.question.answers[index].image_id = '';
+			this.question.answers[index].image_thumbnail = '';
 		},
 	},
 };
@@ -197,7 +203,8 @@ export default {
 							<div class="traffic_light__image">
 								<template v-if="answer.image_path">
 									<button type="button" aria-label="Excluir" class="close" @click="removeImage(index)"><span aria-hidden="true">×</span></button>
-									<img :src="answer.image_path" :alt="answer.unit">
+									<img v-if="answer.image_thumbnail" :src="answer.image_thumbnail" :alt="answer.unit" class="img-responsive">
+									<img v-else :src="answer.image_path" :alt="answer.unit" class="img-responsive">
 								</template>
 								<template v-else>
 									<input type="file" id="traffic_light__image-option">
@@ -216,7 +223,7 @@ export default {
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default pull-left" data-dismiss="modal" @click="cleanFields()">{{ 'cancel' | translate | capitalize }}</button>
-					<button type="button" class="btn btn-primary" @click="validate()">{{ 'edit' | translate | capitalize }}</button>
+					<button type="button" class="btn btn-primary edit-question__button" @click="validate($event)">{{ 'edit' | translate | capitalize }}</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->

@@ -76,10 +76,12 @@ export default {
 						res.map((item, i) => {
 							result.answers[i].image_path = item.data.path;
 							result.answers[i].image_id = item.data.id;
+							result.answers[i].image_thumbnail = item.data.thumbnail;
 						});
 						this.saveQuestion(result);
 					})
 					.catch((e) => {
+						document.querySelector('.new-question__button').removeAttribute('disabled');
 						console.error(e);
 					});
 			} else {
@@ -88,6 +90,7 @@ export default {
 		},
 		saveQuestion(result) {
 			this.$store.dispatch('SAVE_QUESTION', result).then((res) => {
+				document.querySelector('.new-question__button').removeAttribute('disabled');
 				this.$emit('newQuestion', { newQuestion: result, id: res.data.id });
 				$('#new-question').modal('hide');
 				this.cleanFields();
@@ -103,7 +106,7 @@ export default {
 		removeError(event) {
 			methods.removeError(event);
 		},
-		validate() {
+		validate(event) {
 			let valid = true;
 			let imageFile = 0;
 			const title = document.querySelector('#new-question input[name="title"]');
@@ -153,6 +156,8 @@ export default {
 				}
 			}
 			if (valid) {
+				event.target.setAttribute('disabled', 'disabled');
+
 				if (imageFile === 3) {
 					this.newQuestion(document.querySelector('#new-question'), true);
 				} else {
@@ -214,7 +219,7 @@ export default {
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default pull-left" data-dismiss="modal" @click="cleanFields()">{{ 'cancel' | translate | capitalize }}</button>
-					<button type="button" class="btn btn-primary" @click="validate()">{{ 'add' | translate | capitalize }}</button>
+					<button type="button" class="btn btn-primary new-question__button" @click="validate($event)">{{ 'add' | translate | capitalize }}</button>
 				</div>
 			</div>
 			<!-- /.modal-content -->

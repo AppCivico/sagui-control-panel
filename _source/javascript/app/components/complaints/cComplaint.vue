@@ -22,10 +22,7 @@ export default {
 				mp4: 'video',
 				mp3: 'audio',
 			},
-			file: {
-				path: '',
-				type: '',
-			},
+			file: {},
 			ready: false,
 		};
 	},
@@ -55,11 +52,7 @@ export default {
 		getFileType() {
 			if (this.complaint.files.length > 0) {
 				this.complaint.files.map((file) => {
-					const path = file.path.split('?')[0].split('.');
-					const fileType = path[path.length - 1];
-					if (this.fileTypes[fileType]) {
-						file.type = this.fileTypes[fileType]; // eslint-disable-line no-param-reassign
-					}
+					file.type = file.content_type.split('/')[0]; // eslint-disable-line no-param-reassign
 				});
 				this.ready = true;
 			}
@@ -101,9 +94,8 @@ export default {
 				this.comments.splice(number, 1);
 			});
 		},
-		setAsset(path, type) {
-			this.file.path = path;
-			this.file.type = type;
+		setAsset(file) {
+			this.file = file;
 		},
 	},
 };
@@ -138,11 +130,20 @@ export default {
 								<h5><strong>{{ 'files' | translate | capitalize }}</strong></h5>
 								<div class="row">
 									<div class="col-md-2" v-for="file in complaint.files">
-										<a href="#" data-toggle="modal" data-target="#assets" class="edit-button" @click.prevent="setAsset(file.path, file.type)">
-											<img :src="file.path" class="img-responsive" v-if="file.type === 'image'">
-											<img src="../dist/img/video-default.png" class="img-responsive" alt="Abrir vídeo" v-else-if="file.type === 'video'">
-											<img src="../dist/img/video-default.png" class="img-responsive" alt="Abrir áudio" v-else-if="file.type === 'audio'">
-										</a>
+										<template v-if="file.type === 'application'">
+											<a :href="file.path" download target="_blank"><img src="../dist/img/video-default.png" class="img-responsive" alt="Download áudio"></a>
+										</template>
+										<template v-else>
+											<a href="#" data-toggle="modal" data-target="#assets" @click.prevent="setAsset(file)">
+												<template v-if="file.thumbnail">
+													<img :src="file.thumbnail" class="img-responsive">
+												</template>
+												<template v-else>
+													<img :src="file.path" class="img-responsive" v-if="file.type === 'image'">
+													<img src="../dist/img/video-default.png" class="img-responsive" alt="Abrir vídeo" v-else-if="file.type === 'video'">
+												</template>
+											</a>
+										</template>
 									</div>
 								</div>
 							</template>

@@ -24,7 +24,12 @@ export default {
 		getThumbnails() {
 			this.enterprises.map((item) => {
 				if (item.images[0]) {
-					const thumbnail = `background-image: url(${item.images[0].image_path})`;
+					let thumbnail = '';
+					if (item.images[0].image_thumbnail) {
+						thumbnail = `background-image: url(${item.images[0].image_thumbnail})`;
+					} else {
+						thumbnail = `background-image: url(${item.images[0].image_path})`;
+					}
 					this.thumbnails.push(thumbnail);
 				} else {
 					this.thumbnails.push('');

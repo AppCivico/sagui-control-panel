@@ -12,13 +12,15 @@ export default {
 				enterprise: 'enterprises',
 				complaint: 'complaint',
 				complaint_comment: 'complaint',
+				comment: 'complaint',
+				submission: 'complaint',
+				confirmation: 'complaint',
+				survey: 'surveys',
 			},
 		};
 	},
 	mounted() {
-		this.$store.dispatch('LOAD_NOTIFICATIONS_LIST').then(() => {
-			this.$store.dispatch('UPDATE_NOTIFICATIONS');
-		});
+		this.$store.dispatch('LOAD_NOTIFICATIONS_LIST');
 	},
 	methods: {
 		createLink(i) {
@@ -28,6 +30,11 @@ export default {
 			}
 
 			return link;
+		},
+		clearNotifications() {
+			this.$store.dispatch('UPDATE_NOTIFICATIONS').then(() => {
+				this.$store.dispatch('LOAD_NOTIFICATIONS_LIST');
+			});
 		},
 	},
 };
@@ -44,7 +51,10 @@ export default {
 		<!-- Main content -->
 		<section class="content">
 			<div class="box box-solid">
-				<div class="box-body">
+				<div v-if="notifications.length <= 0" class="alert alert-info">
+					{{ 'no-notifications' | translate | capitalize }}
+				</div>
+				<div class="box-body" v-else>
 					<h4>{{ 'not-read' | translate }}</h4>
 					<template v-for="(notification, index) in notifications">
 						<div class="callout callout-info">
@@ -52,6 +62,7 @@ export default {
 							<p><router-link :to="createLink(index)">{{ notification.content }}</router-link></p>
 						</div>
 					</template>
+					<button type="button" class="btn btn-danger pull-right" @click="clearNotifications()">{{ 'mark-as-read' | translate | capitalize }}</button>
 				</div>
 			</div>
 		</section>

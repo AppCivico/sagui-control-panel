@@ -14,6 +14,9 @@ export default{
 			return this.$store.state.auth.authorization;
 		},
 	},
+	mounted() {
+		$('.sidebar-menu').tree();
+	},
 	watch: {
 		selectedEnterprise() {
 			this.selected = true;

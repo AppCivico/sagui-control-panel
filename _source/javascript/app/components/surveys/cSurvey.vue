@@ -168,7 +168,8 @@ export default{
 
 												<div class="col-md-4" v-for="answer in question.answers" v-if="question.type != 'textarea'">
 													<h5>{{ answer.title }}</h5>
-													<img :src="answer.image_path" alt="image" v-if="answer.image_path" class="img-responsive">
+													<img v-if="answer.image_thumbnail" :src="answer.image_thumbnail" :alt="answer.unit" class="img-responsive">
+													<img v-else-if="answer.image_path" :src="answer.image_path" :alt="answer.unit" alt="image" class="img-responsive">
 												</div>
 												<div class="col-md-12" v-if="question.type == 'textarea'">
 													<h5>{{ 'textarea' | translate | capitalize }}</h5>

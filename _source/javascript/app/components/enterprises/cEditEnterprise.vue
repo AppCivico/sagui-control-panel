@@ -122,7 +122,7 @@ export default {
 				});
 			}
 		},
-		validate() {
+		validate(event) {
 			let valid = true;
 			const form = document.querySelector('#new-enterprise');
 			const inputs = Array.from(form.querySelectorAll('input'));
@@ -233,7 +233,7 @@ export default {
 						</div>
 					</div>
 
-					<button type="button" class="btn btn-block btn-success new-enterprise__button" @click="validate()">{{ 'edit' | translate | capitalize }} {{ 'enterprise' | translate }}</button>
+					<button type="button" class="btn btn-block btn-success new-enterprise__button" @click.prevent="validate($event)">{{ 'edit' | translate | capitalize }} {{ 'enterprise' | translate }}</button>
 				</div>
 			</div>
 		</section>

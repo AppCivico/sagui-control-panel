@@ -15,13 +15,16 @@
 # install dependencies
 npm install
 
-# build for production
-npm run build:prod
+# build for first development
+npm run build:dev
 
 # serve with hot reload at localhost:8080
 npm run dev
 
-# lint all *.js and *.vue files
+# build for production
+npm run build:prod
+
+# to lint all *.js and *.vue files
 npm run lint:all
 
 # run unit tests
@@ -33,11 +36,13 @@ npm test
 ## Config
 
 To edit:
+
 - Project's name;
 - API address;
 - CP address.
 
 Edit in _source/app/config.js_
+
 ```javascript
 const config = {
 	url: 'http://dev-sagui-api.eokoe.com',
@@ -52,6 +57,7 @@ const config = {
 Copy the portuguese translation file (_source/app/translations/ptBR.js) and use it as a starter file to translate to a new language.
 
 Edit _source/app/translations/index.js
+
 ```javascript
 // Import your new file
 import enUK from './enUK';
