@@ -104,6 +104,7 @@ const ptBr = {
 	"no-icon": "É necessário selecionar um ícone para a categoria.",
 	"no-area": "É necessário delimitar uma área no mapa",
 	"remove-category": "As enquetes cadastradas nesta categoria também serão excluídas, tem certeza que deseja deleter esta categoria?",
+	"remove-asset": "Tem certeza que deseja remover essa mídia? Essa ação não poderá ser desfeita!",
 	"no-editions": "Nenhuma alteração foi efetuada",
 
 	// notifications
