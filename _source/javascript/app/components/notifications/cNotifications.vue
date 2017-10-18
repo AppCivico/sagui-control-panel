@@ -55,7 +55,7 @@ export default {
 					{{ 'no-notifications' | translate | capitalize }}
 				</div>
 				<div class="box-body" v-else>
-					<h4>{{ 'not-read' | translate }}</h4>
+					<h4>{{ 'not-read' | translate | capitalize }}</h4>
 					<template v-for="(notification, index) in notifications">
 						<div class="callout callout-info">
 							<h4><router-link :to="createLink(index)">{{ notification.title }}</router-link></h4>
@@ -69,9 +69,3 @@ export default {
 		<!-- /.content -->
 	</div>
 </template>
-
-<style scoped>
-	h4 {
-		text-transform: uppercase;
-	}
-</style>

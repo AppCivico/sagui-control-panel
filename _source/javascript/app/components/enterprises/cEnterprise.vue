@@ -119,7 +119,7 @@ export default {
 						<span class="info-box-icon bg-aqua"><span class="glyphicon glyphicon-hand-right"></span></span>
 
 						<div class="info-box-content">
-							<span class="info-box-text">{{ 'complaints' | translate }}</span>
+							<span class="info-box-text">{{ 'complaints' | translate | capitalize }}</span>
 							<span class="info-box-number">{{ enterprise.data ? enterprise.data.complaints : 0 }}</span>
 						</div>
 					</div>
@@ -129,7 +129,7 @@ export default {
 						<span class="info-box-icon bg-red"><span class="glyphicon glyphicon-hand-right"></span></span>
 
 						<div class="info-box-content">
-							<span class="info-box-text">{{ 'cases' | translate }}</span>
+							<span class="info-box-text">{{ 'cases' | translate | capitalize}}</span>
 							<span class="info-box-number">{{ enterprise.data ? enterprise.data.cases : 0 }}</span>
 						</div>
 					</div>
@@ -139,7 +139,7 @@ export default {
 						<span class="info-box-icon bg-green"><span class="glyphicon glyphicon-thumbs-up"></span></i></span>
 
 						<div class="info-box-content">
-							<span class="info-box-text">{{ 'actions' | translate }}</span>
+							<span class="info-box-text">{{ 'actions' | translate | capitalize}}</span>
 							<span class="info-box-number">{{ enterprise.data ? enterprise.data.actions : 0 }}</span>
 						</div>
 					</div>
@@ -149,7 +149,7 @@ export default {
 						<span class="info-box-icon bg-yellow"><span class="glyphicon glyphicon-ok"></span></i></span>
 
 						<div class="info-box-content">
-							<span class="info-box-text">{{ 'surveys_completed' | translate }}</span>
+							<span class="info-box-text">{{ 'surveys_completed' | translate | capitalize }}</span>
 							<span class="info-box-number">{{ enterprise.data ? enterprise.data.surveys : 0 }}</span>
 						</div>
 					</div>
@@ -207,6 +207,9 @@ export default {
 </template>
 
 <style scoped>
+	.info-box-text {
+		text-transform: none;
+	}
 	.info-box-number {
 		font-size: 40px;
 	}
