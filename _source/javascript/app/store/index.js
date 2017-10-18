@@ -54,7 +54,10 @@ const store = new Vuex.Store({
 		},
 		// Fundamental for all requests
 		CHANGE_SELECTED_ENTERPRISE({ commit }, id) {
-			commit('SET_SELECTED_ENTERPRISE', { id });
+			return new Promise((resolve) => {
+				commit('SET_SELECTED_ENTERPRISE', { id });
+				resolve();
+			});
 		},
 	},
 	mutations: {
