@@ -50,6 +50,21 @@ const actions = {
 			});
 		});
 	},
+	DELETE_IMAGE({ commit, rootState }, id) {
+		return new Promise((resolve) => {
+			axios({
+				method: 'DELETE',
+				url: `${config.api}/assets/${id}?api_key=${rootState.auth.apiKey}`,
+				headers: { 'Content-Type': 'multipart/form-data' },
+			})
+			.then((response) => {
+				resolve(response);
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } }, { root: true });
+			});
+		});
+	},
 };
 
 export default {
