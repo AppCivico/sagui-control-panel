@@ -50,11 +50,11 @@ const actions = {
 			});
 		});
 	},
-	DELETE_IMAGE({ commit, rootState }, id) {
+	DELETE_IMAGE({ commit, rootState }, data) {
 		return new Promise((resolve) => {
 			axios({
 				method: 'DELETE',
-				url: `${config.api}/assets/${id}?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/${data.resource_type}s/${data.resource_id}/assets/${data.id}?api_key=${rootState.auth.apiKey}`,
 				headers: { 'Content-Type': 'multipart/form-data' },
 			})
 			.then((response) => {

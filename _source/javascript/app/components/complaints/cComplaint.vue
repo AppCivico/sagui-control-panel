@@ -116,8 +116,12 @@ export default {
 			this.selected = index;
 		},
 		deleteAsset(index) {
-			const id = this.complaint.files[index].id;
-			this.$store.dispatch('DELETE_IMAGE', id).then(() => {
+			const data = {
+				id: this.complaint.files[index].id,
+				resource_id: this.complaint.files[index].resource_id,
+				resource_type: this.complaint.files[index].resource_type,
+			};
+			this.$store.dispatch('DELETE_IMAGE', data).then(() => {
 				this.complaint.files.splice(index, 1);
 				this.$store.dispatch('EDIT_CONFIRM_STATE', false);
 			});
