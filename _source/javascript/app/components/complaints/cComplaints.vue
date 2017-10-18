@@ -50,6 +50,13 @@ export default {
 				<template v-else>{{ 'no-cases' | translate }}</template>
 			</div>
 			<div class="row" v-else>
+				<div class="col-md-12">
+					<div class="alert alert-success alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<h4><i class="icon fa fa-info-circle"></i>O que são apontamentos:</h4>
+						São alertas sobre irregularidades e violações causadas diretamente pelo empreendimento. Ao atingir {{ this.complaints[0].num_to_became_cause }} contribuições, ele se torna uma causa e deve ser respondido pelo responsável.
+					</div>
+				</div>
 				<div class="col-md-4" v-for="(complaint, index) in complaints">
 					<div class="box box-solid complaint">
 						<div class="box-header with-border">
