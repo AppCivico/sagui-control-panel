@@ -1,6 +1,7 @@
 <script>
 import cHeader from './components/layout/cHeader.vue';
 import cMenu from './components/layout/cMenu.vue';
+import cFooter from './components/layout/cFooter.vue';
 import cAlert from './components/utilities/cAlert.vue';
 
 
@@ -10,6 +11,7 @@ export default {
 		cHeader,
 		cMenu,
 		cAlert,
+		cFooter,
 	},
 	computed: {
 		user() {
@@ -41,6 +43,7 @@ export default {
 				<div class="content-wrapper">
 					<router-view></router-view>
 				</div>
+				<c-footer></c-footer>
 			</div>
 		</template>
 		<template v-else>
