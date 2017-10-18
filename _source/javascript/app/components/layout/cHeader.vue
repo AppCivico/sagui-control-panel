@@ -104,8 +104,12 @@ export default {
 						</a>
 						<ul class="dropdown-menu">
 							<!-- Menu Footer-->
-							<li class="user-body">
-								{{ user.email }}
+							<li class="user-header">
+								<img src="dist/img/user-default.png" class="img-circle" alt="User Image">
+								<p>
+									{{ user.name }}
+									<small>{{ user.email }}</small>
+								</p>
 							</li>
 							<li class="user-footer">
 								<div class="pull-right">
