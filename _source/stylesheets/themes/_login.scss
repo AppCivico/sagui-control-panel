@@ -1,0 +1,21 @@
+// sass-lint:disable no-color-literals, no-color-hex
+.login-page {
+	padding-bottom: 50px;
+	background-image: url('../img/icone_sagui.svg');
+	background-position: right bottom 10%;
+	background-size: auto 85%;
+	background-repeat: no-repeat;
+	background-color: #ffc300;
+}
+
+.login-page .main-footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	margin: 0;
+}
+
+.login-page .login-logo a{
+	color: #fff;
+}
