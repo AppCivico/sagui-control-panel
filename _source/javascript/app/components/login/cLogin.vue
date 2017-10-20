@@ -52,7 +52,7 @@ export default {
 </script>
 
 <template>
-	<div class="login-page">
+	<div>
 		<div class="login-box">
 			<div class="login-logo">
 				<a href="../../index2.html" v-html="name"></a>
@@ -79,16 +79,3 @@ export default {
 		<c-footer></c-footer>
 	</div>
 </template>
-
-<style scoped>
-	.login-page {
-		padding-bottom: 50px;
-	}
-	.login-page .main-footer {
-		position: absolute;
-	    bottom: 0;
-	    left: 0;
-	    width: 100%;
-	    margin: 0;
-	}
-</style>
