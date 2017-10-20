@@ -24,7 +24,7 @@
     "imagemin": "imagemin _source/images/**/*.{gif,jpg,png} --out-dir=dist/img",
     "lint:es": "eslint --ext .js,.vue _source/javascript/app",
     "lint:sass": "sass-lint -c .sass-lint.yml '_source/stylesheets/**/*.scss' -v -q -i 'tests/**/*.scss, _source/stylesheets/vendor/**/*.scss'",
-    "lint:all": "npm run lint:es && npm run lint:sass",
+    "lint:all": "npm-run-all --parallel lint:es lint:sass",
     "nano": "postcss --use cssnano --safe -r dist/css/**/*.css",
     "prebuild:prod": "npm run lint:all && npm run test:prod",
     "scss": "node-sass _source/stylesheets --output-style expanded --output dist/css --source-map true",
