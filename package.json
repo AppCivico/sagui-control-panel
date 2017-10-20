@@ -21,7 +21,7 @@
     "copy:distPack": "cp -R dist public/",
     "copy:entryPoint": "cp index.html public/",
     "dev": "npm-run-all --parallel watch:all serve",
-    "icons": "svgo -f _source/images/**/*.svg -o dist/img",
+    "icons": "svgo -f _source/images -o dist/img",
     "imagemin": "imagemin _source/images/**/*.{gif,jpg,png} --out-dir=dist/img",
     "lint:es": "eslint --ext .js,.vue _source/javascript/app",
     "lint:sass": "sass-lint -c .sass-lint.yml '_source/stylesheets/**/*.scss' -v -q -i 'tests/**/*.scss, _source/stylesheets/vendor/**/*.scss'",
