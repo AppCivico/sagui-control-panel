@@ -33,7 +33,7 @@ export default {
 
 <template>
 	<div id="app">
-		<template v-if="$route.path !== '/'">
+		<template v-if="$route.path !== '/' && $route.name !== '404'">
 			<div class="loading">
 				<i class="fa fa-refresh fa-spin"></i>
 			</div>
