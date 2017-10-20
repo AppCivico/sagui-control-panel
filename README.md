@@ -15,13 +15,11 @@
 # install dependencies
 npm install
 
-# build for first development
-npm run build:dev
-
 # serve with hot reload at localhost:8080
 npm run dev
 
 # build for production
+# don't forget to set NODE_ENV=production before running the build
 npm run build:prod
 
 # to lint all *.js and *.vue files
