@@ -123,6 +123,9 @@ const ptBr = {
 	"no-survey": "Nenhuma enquete cadastrada nesta categoria.",
 	"no-categories": "Nenhuma categoria registrada nesse empreendimento.",
 	"no-answers": "Nenhuma resposta.",
+	"error404-title": "Oops! Página não encontrada.",
+	"error404-text": "Você não tem autorização para visualizar essa página.",
+	"error404-link": "Faça o login",
 
 	// results
 	"download-csv": "Faça o download da planilha com todos os resultados",
