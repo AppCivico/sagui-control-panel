@@ -119,7 +119,7 @@ export default {
 						<span class="info-box-icon bg-aqua"><span class="glyphicon glyphicon-hand-right"></span></span>
 
 						<div class="info-box-content">
-							<span class="info-box-text">{{ 'complaints' | translate }}</span>
+							<span class="info-box-text">{{ 'complaints' | translate | capitalize }}</span>
 							<span class="info-box-number">{{ enterprise.data ? enterprise.data.complaints : 0 }}</span>
 						</div>
 					</div>
@@ -129,7 +129,7 @@ export default {
 						<span class="info-box-icon bg-red"><span class="glyphicon glyphicon-hand-right"></span></span>
 
 						<div class="info-box-content">
-							<span class="info-box-text">{{ 'cases' | translate }}</span>
+							<span class="info-box-text">{{ 'cases' | translate | capitalize}}</span>
 							<span class="info-box-number">{{ enterprise.data ? enterprise.data.cases : 0 }}</span>
 						</div>
 					</div>
@@ -139,7 +139,7 @@ export default {
 						<span class="info-box-icon bg-green"><span class="glyphicon glyphicon-thumbs-up"></span></i></span>
 
 						<div class="info-box-content">
-							<span class="info-box-text">{{ 'actions' | translate }}</span>
+							<span class="info-box-text">{{ 'actions' | translate | capitalize}}</span>
 							<span class="info-box-number">{{ enterprise.data ? enterprise.data.actions : 0 }}</span>
 						</div>
 					</div>
@@ -149,7 +149,7 @@ export default {
 						<span class="info-box-icon bg-yellow"><span class="glyphicon glyphicon-ok"></span></i></span>
 
 						<div class="info-box-content">
-							<span class="info-box-text">{{ 'surveys_completed' | translate }}</span>
+							<span class="info-box-text">{{ 'surveys_completed' | translate | capitalize }}</span>
 							<span class="info-box-number">{{ enterprise.data ? enterprise.data.surveys : 0 }}</span>
 						</div>
 					</div>
@@ -158,12 +158,12 @@ export default {
 
 			<div class="row">
 				<div class="col-md-6">
-					<div class="box box-solid">
+					<div class="box">
 						<div class="box-header with-border">
 							<h3 class="box-title">{{ 'actions_unanswered' | translate | capitalize }}</h3>
 						</div>
 						<div class="box-body">
-							<ul class="list-unstyled">
+							<ul class="list-unstyled" v-if="complaintsUnanswered.length > 0">
 								<li class="clearfix" v-for="complaint in complaintsUnanswered">
 									<h4 class="pull-left"><router-link :to="'/complaint/'+complaint.id">{{ complaint.title | capitalize }}</router-link></h4>
 									<small class="pull-right" v-if="complaint.confirmations.length > 0">
@@ -173,16 +173,17 @@ export default {
 									</small>
 								</li>
 							</ul>
+							<p v-else>{{ 'actions_answered' | translate | capitalize }}</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-6">
-					<div class="box box-solid">
+					<div class="box">
 						<div class="box-header with-border">
 							<h3 class="box-title">{{ 'ranking' | translate | capitalize }} {{ 'complaints' | translate }}</h3>
 						</div>
-						<div class="box-body">
-							<template v-for="complaint in top5Complaints">
+						<div class="box-body" >
+							<template v-for="complaint in top5Complaints" v-if="top5Complaints.length > 0">
 								<router-link :to="'/complaint/'+complaint.id">{{ complaint.title | capitalize }}</router-link>
 								<div class="progress">
 									<div :class="'progress-bar progress-bar-'+complaint.color" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" :style="'width: '+complaint.width+'%'">
@@ -190,15 +191,23 @@ export default {
 									</div>
 								</div>
 							</template>
+							<p v-else>{{ 'no-complaints' | translate | capitalize }}</p>
 						</div>
-						<!-- /.box-body -->
 					</div>
 				</div>
 			</div>
 
 			<div class="row" v-if="this.enterprise.location">
 				<div class="col-md-12">
-					<div id="enterprise__map"></div>
+					<div class="box">
+						<div class="box-header with-border">
+							<h3 class="box-title">{{ 'map' | translate | capitalize }} {{ 'of-n' | translate }} {{ 'complaints' | translate }}</h3>
+						</div>
+						<div class="box-body">
+							<div id="enterprise__map"></div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</section>
@@ -207,6 +216,9 @@ export default {
 </template>
 
 <style scoped>
+	.info-box-text {
+		text-transform: none;
+	}
 	.info-box-number {
 		font-size: 40px;
 	}

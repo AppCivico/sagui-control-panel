@@ -25,7 +25,4 @@ describe('cEnterprise.vue', () => {
 	it('should load store', () => {
 		expect(vm.$store.state.enterprises.enterprise).to.be.a('object');
 	});
-	it('will translate content', () => {
-		expect(vm.$el.querySelector('.info-box-text').textContent).to.equal(Vue.i18n.translate('complaints'));
-	});
 });

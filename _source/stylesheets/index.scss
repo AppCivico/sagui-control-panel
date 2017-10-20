@@ -5,6 +5,15 @@
 // Theme for Sagui's Control Panel
 @import 'vendor/adminlte/adminlte';
 // Customization
-@import 'components/loading';
-@import 'components/buttons';
-@import 'components/agents';
+@import
+'layout/header',
+'layout/footer';
+
+@import
+'components/loading',
+'components/buttons',
+'components/agents',
+'components/notifications';
+
+@import
+'themes/login';

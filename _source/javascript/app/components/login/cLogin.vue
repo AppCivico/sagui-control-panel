@@ -1,8 +1,12 @@
 <script>
 import config from '../../config'; // eslint-disable-line no-unused-vars
+import cFooter from '../layout/cFooter.vue';
 
 export default {
 	name: 'cLogin',
+	components: {
+		cFooter,
+	},
 	beforeCreate() {
 		const apiKey = sessionStorage.getItem('api-key');
 		if (apiKey) {
@@ -26,6 +30,10 @@ export default {
 			return final;
 		},
 	},
+	mounted() {
+		const body = document.querySelector('body');
+		body.classList.add('login-page');
+	},
 	watch: {
 		user() {
 			this.$router.push('enterprises');
@@ -44,27 +52,30 @@ export default {
 </script>
 
 <template>
-	<div class="login-box">
-		<div class="login-logo">
-			<a href="../../index2.html" v-html="name"></a>
-		</div>
+	<div>
+		<div class="login-box">
+			<div class="login-logo">
+				<a href="../../index2.html" v-html="name"></a>
+			</div>
 
-		<div class="login-box-body">
-			<form>
-				<div class="form-group has-feedback">
-					<input type="email" class="form-control login-email" :placeholder="'email' | translate | capitalize">
-					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-				</div>
-				<div class="form-group has-feedback">
-					<input type="password" class="form-control login-password" :placeholder="'password' | translate | capitalize">
-					<span class="glyphicon glyphicon-lock form-control-feedback"></span>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<button class="btn btn-primary btn-block btn-flat" @click.prevent="authenticate()">{{ 'login' | translate | capitalize }}</button>
+			<div class="login-box-body">
+				<form>
+					<div class="form-group has-feedback">
+						<input type="email" class="form-control login-email" :placeholder="'email' | translate | capitalize">
+						<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 					</div>
-				</div>
-			</form>
+					<div class="form-group has-feedback">
+						<input type="password" class="form-control login-password" :placeholder="'password' | translate | capitalize">
+						<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<button class="btn btn-primary btn-block btn-flat" @click.prevent="authenticate()">{{ 'login' | translate | capitalize }}</button>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
+		<c-footer></c-footer>
 	</div>
 </template>

@@ -36,7 +36,7 @@ const state = {
 const actions = {
 	LOAD_CATEGORIES_LIST({ commit, rootState }) {
 		return new Promise((resolve) => {
-			axios.get(`${config.devapi}/enterprises/${rootState.selectedEnterprise}/axis?api_key=${rootState.auth.apiKey}`).then((response) => {
+			axios.get(`${config.api}/enterprises/${rootState.selectedEnterprise}/axis?api_key=${rootState.auth.apiKey}`).then((response) => {
 				commit('SET_CATEGORIES_LIST', { list: response.data });
 				resolve(response);
 			}, (err) => {
@@ -49,7 +49,7 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'POST',
-				url: `${config.devapi}/enterprises/${rootState.selectedEnterprise}/axis?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/enterprises/${rootState.selectedEnterprise}/axis?api_key=${rootState.auth.apiKey}`,
 				data,
 				headers: { 'Content-Type': 'application/json' },
 			})
@@ -68,7 +68,7 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'DELETE',
-				url: `${config.devapi}/enterprises/${rootState.selectedEnterprise}/axis/${id}?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/enterprises/${rootState.selectedEnterprise}/axis/${id}?api_key=${rootState.auth.apiKey}`,
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.then((response) => {
@@ -84,7 +84,7 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'PUT',
-				url: `${config.devapi}/enterprises/${rootState.selectedEnterprise}/axis/${data.id}?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/enterprises/${rootState.selectedEnterprise}/axis/${data.id}?api_key=${rootState.auth.apiKey}`,
 				data: data.category,
 				headers: { 'Content-Type': 'application/json' },
 			})

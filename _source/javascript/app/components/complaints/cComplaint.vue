@@ -1,6 +1,8 @@
 <script>
+import Vue from 'vue';
 import cAnswer from './cAnswer.vue';
 import cAssets from '../utilities/cAssets.vue';
+import cConfirm from '../utilities/cConfirm.vue';
 
 export default {
 	name: 'cComplaint',
@@ -8,6 +10,7 @@ export default {
 	components: {
 		cAnswer,
 		cAssets,
+		cConfirm,
 	},
 	data() {
 		return {
@@ -24,6 +27,7 @@ export default {
 			},
 			file: {},
 			ready: false,
+			selected: -1,
 		};
 	},
 	computed: {
@@ -32,6 +36,16 @@ export default {
 		},
 		comments() {
 			return this.$store.state.complaints.complaint.comments;
+		},
+		confirm() {
+			return this.$store.state.confirm.state;
+		},
+	},
+	watch: {
+		confirm(newValue) {
+			if (newValue === true) {
+				this.deleteAsset(this.selected);
+			}
 		},
 	},
 	mounted() {
@@ -97,6 +111,21 @@ export default {
 		setAsset(file) {
 			this.file = file;
 		},
+		removeAsset(index) {
+			this.$store.dispatch('CHANGE_CONFIRM_MESSAGE', { message: Vue.i18n.translate('remove-asset') });
+			this.selected = index;
+		},
+		deleteAsset(index) {
+			const data = {
+				id: this.complaint.files[index].id,
+				resource_id: this.complaint.files[index].resource_id,
+				resource_type: this.complaint.files[index].resource_type,
+			};
+			this.$store.dispatch('DELETE_IMAGE', data).then(() => {
+				this.complaint.files.splice(index, 1);
+				this.$store.dispatch('EDIT_CONFIRM_STATE', false);
+			});
+		},
 	},
 };
 </script>
@@ -129,7 +158,8 @@ export default {
 							<template v-if="complaint.files.length > 0 && this.ready">
 								<h5><strong>{{ 'files' | translate | capitalize }}</strong></h5>
 								<div class="row">
-									<div class="col-md-2" v-for="file in complaint.files">
+									<div class="col-md-2" v-for="(file, index) in complaint.files">
+										<button type="button" aria-label="Excluir" class="close" @click="removeAsset(index)"><span aria-hidden="true">×</span></button>
 										<template v-if="file.type === 'application'">
 											<a :href="file.path" download target="_blank"><img src="../dist/img/video-default.png" class="img-responsive" alt="Download áudio"></a>
 										</template>
@@ -169,6 +199,7 @@ export default {
 		<!-- /.content -->
 		<c-answer :answer="this.editingAnswer" :complaintId="this.id" :isEditing="this.isEditing" v-on:newAnswer="addAnswer" v-on:editAnswer="editAnswer"></c-answer>
 		<c-assets :file="this.file"></c-assets>
+		<c-confirm></c-confirm>
 	</div>
 </template>
 

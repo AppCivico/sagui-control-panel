@@ -38,8 +38,23 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'POST',
-				url: `${config.devapi}/assets?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/assets?api_key=${rootState.auth.apiKey}`,
 				data,
+				headers: { 'Content-Type': 'multipart/form-data' },
+			})
+			.then((response) => {
+				resolve(response);
+			}, (err) => {
+				console.error(err);
+				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('request-error') } }, { root: true });
+			});
+		});
+	},
+	DELETE_IMAGE({ commit, rootState }, data) {
+		return new Promise((resolve) => {
+			axios({
+				method: 'DELETE',
+				url: `${config.api}/${data.resource_type}s/${data.resource_id}/assets/${data.id}?api_key=${rootState.auth.apiKey}`,
 				headers: { 'Content-Type': 'multipart/form-data' },
 			})
 			.then((response) => {

@@ -16,7 +16,7 @@ const actions = {
 		axios({
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			url: `${config.devapi}/auth/signin`,
+			url: `${config.api}/auth/signin`,
 			data: user,
 		})
 		.then((response) => {
@@ -33,7 +33,7 @@ const actions = {
 		commit('SET_APIKEY', { apiKey });
 	},
 	LOAD_USER({ commit, state }) {
-		axios.get(`${config.devapi}/user-profile?api_key=${state.apiKey}`).then((response) => {
+		axios.get(`${config.api}/user-profile?api_key=${state.apiKey}`).then((response) => {
 			commit('SET_USER', { user: response.data });
 		}, (err) => {
 			console.error(err);

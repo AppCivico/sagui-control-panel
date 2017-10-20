@@ -6,7 +6,9 @@
 const ptBr = {
 	"actions": "contribuições e confirmações",
 	"actions_unanswered": "causas sem respostas",
+	"actions_answered": "todas as causas foram respondidas",
 	"add": "adicionar",
+	"and": "e",
 	"agent": "agente",
 	"agents": "agentes",
 	"alert": "Alerta",
@@ -31,6 +33,7 @@ const ptBr = {
 	"data": "dados",
 	"delete": "excluir",
 	"description": "descrição",
+	"developed-by": "desenvolvido por",
 	"enterprise": "empreendimento",
 	"enterprises": "empreendimentos",
 	"edit": "editar",
@@ -45,6 +48,7 @@ const ptBr = {
 	"limit": "delimitar",
 	"location": "localização",
 	"login": "entrar",
+	"map": "mapa",
 	"multiple": "multipla escolha",
 	"name": "nome",
 	"new": "nova",
@@ -104,6 +108,7 @@ const ptBr = {
 	"no-icon": "É necessário selecionar um ícone para a categoria.",
 	"no-area": "É necessário delimitar uma área no mapa",
 	"remove-category": "As enquetes cadastradas nesta categoria também serão excluídas, tem certeza que deseja deleter esta categoria?",
+	"remove-asset": "Tem certeza que deseja remover essa mídia? Essa ação não poderá ser desfeita!",
 	"no-editions": "Nenhuma alteração foi efetuada",
 
 	// notifications

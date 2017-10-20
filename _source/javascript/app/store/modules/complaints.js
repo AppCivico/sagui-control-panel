@@ -37,7 +37,7 @@ const state = {
 const actions = {
 	LOAD_COMPLAINTS_LIST({ commit, rootState }, status) { // eslint-disable-line no-unused-vars
 		return new Promise((resolve) => {
-			axios.get(`${config.devapi}/enterprises/${rootState.selectedEnterprise}/complaints?is_cause=${status}&api_key=${rootState.auth.apiKey}`).then((response) => {
+			axios.get(`${config.api}/enterprises/${rootState.selectedEnterprise}/complaints?is_cause=${status}&api_key=${rootState.auth.apiKey}`).then((response) => {
 				commit('SET_COMPLAINTS_LIST', { list: response.data });
 				resolve(response);
 			}, (err) => {
@@ -48,7 +48,7 @@ const actions = {
 	},
 	LOAD_COMPLAINT({ commit, rootState }, id) { // eslint-disable-line no-unused-vars
 		return new Promise((resolve) => {
-			axios.get(`${config.devapi}/complaints/${id}?api_key=${rootState.auth.apiKey}`).then((response) => {
+			axios.get(`${config.api}/complaints/${id}?api_key=${rootState.auth.apiKey}`).then((response) => {
 				commit('SET_COMPLAINT', { res: response.data });
 				resolve(response);
 			}, (err) => {
@@ -61,7 +61,7 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'DELETE',
-				url: `${config.devapi}/complaints/${id}?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/complaints/${id}?api_key=${rootState.auth.apiKey}`,
 			})
 			.then((response) => {
 				commit('SET_ALERT_MESSAGE', { res: { message: Vue.i18n.translate('delete-complaint'), redirect: { state: true, path: '-1' } } }, { root: true });
@@ -76,7 +76,7 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'POST',
-				url: `${config.devapi}/complaints/${info.id}/comments?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/complaints/${info.id}/comments?api_key=${rootState.auth.apiKey}`,
 				data: info.data,
 				headers: { 'Content-Type': 'application/json' },
 			})
@@ -93,7 +93,7 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'PUT',
-				url: `${config.devapi}/complaints/${info.id}/comments/${info.answerId}/?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/complaints/${info.id}/comments/${info.answerId}/?api_key=${rootState.auth.apiKey}`,
 				data: info.data,
 				headers: { 'Content-Type': 'application/json' },
 			})
@@ -110,7 +110,7 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'DELETE',
-				url: `${config.devapi}/complaints/${info.id}/comments/${info.answerId}/?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/complaints/${info.id}/comments/${info.answerId}/?api_key=${rootState.auth.apiKey}`,
 				headers: { 'Content-Type': 'application/json' },
 			})
 			.then((response) => {

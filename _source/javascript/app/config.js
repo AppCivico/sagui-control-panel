@@ -1,8 +1,12 @@
 const config = {
 	url: 'http://dev-sagui-api.eokoe.com',
 	name: 'Projeto Sagui',
-	devapi: 'http://dev-sagui-api.eokoe.com/v1',
-	api: 'https://fakeapi.eokoe.com',
 };
+
+if (process.env.NODE_ENV !== 'production') {
+	config.api = 'http://dev-sagui-api.eokoe.com/v1';
+} else {
+	config.api = 'http://dev-sagui-api.eokoe.com/v1';
+}
 
 export { config as default };

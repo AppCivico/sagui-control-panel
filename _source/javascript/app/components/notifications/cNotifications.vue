@@ -1,4 +1,6 @@
 <script>
+import Vue from 'vue';
+
 export default {
 	name: 'cNotifications',
 	computed: {
@@ -36,6 +38,17 @@ export default {
 				this.$store.dispatch('LOAD_NOTIFICATIONS_LIST');
 			});
 		},
+		changeEnterprise(id, index) {
+			const link = this.createLink(index);
+
+			if (id) {
+				this.$store.dispatch('CHANGE_SELECTED_ENTERPRISE', id).then(() => {
+					this.$router.push(link);
+				});
+			} else {
+				this.$store.dispatch('CHANGE_ALERT_MESSAGE', Vue.i18n.translate('request-error'));
+			}
+		},
 	},
 };
 </script>
@@ -55,11 +68,11 @@ export default {
 					{{ 'no-notifications' | translate | capitalize }}
 				</div>
 				<div class="box-body" v-else>
-					<h4>{{ 'not-read' | translate }}</h4>
+					<h4>{{ 'not-read' | translate | capitalize }}</h4>
 					<template v-for="(notification, index) in notifications">
-						<div class="callout callout-info">
-							<h4><router-link :to="createLink(index)">{{ notification.title }}</router-link></h4>
-							<p><router-link :to="createLink(index)">{{ notification.content }}</router-link></p>
+						<div class="callout callout-info" @click="changeEnterprise(notification.context_id, index)">
+							<h4>{{ notification.title }}</h4>
+							<p>{{ notification.content }}</p>
 						</div>
 					</template>
 					<button type="button" class="btn btn-danger pull-right" @click="clearNotifications()">{{ 'mark-as-read' | translate | capitalize }}</button>
@@ -69,9 +82,3 @@ export default {
 		<!-- /.content -->
 	</div>
 </template>
-
-<style scoped>
-	h4 {
-		text-transform: uppercase;
-	}
-</style>

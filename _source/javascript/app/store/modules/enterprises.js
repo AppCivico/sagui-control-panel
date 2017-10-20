@@ -37,7 +37,7 @@ const state = {
 const actions = {
 	LOAD_ENTERPRISES_LIST({ commit, rootState }) {
 		return new Promise((resolve) => {
-			axios.get(`${config.devapi}/enterprises?api_key=${rootState.auth.apiKey}`).then((response) => {
+			axios.get(`${config.api}/enterprises?api_key=${rootState.auth.apiKey}`).then((response) => {
 				commit('SET_ENTERPRISES_LIST', { list: response.data });
 				resolve(response);
 			}, (err) => {
@@ -48,7 +48,7 @@ const actions = {
 	},
 	LOAD_ENTERPRISE({ commit, rootState }, id) {
 		return new Promise((resolve) => {
-			axios.get(`${config.devapi}/enterprises/${id}?api_key=${rootState.auth.apiKey}`).then((response) => {
+			axios.get(`${config.api}/enterprises/${id}?api_key=${rootState.auth.apiKey}`).then((response) => {
 				commit('SET_ENTERPRISE', { res: response.data });
 				resolve(response);
 			}, (err) => {
@@ -61,7 +61,7 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'POST',
-				url: `${config.devapi}/enterprises?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/enterprises?api_key=${rootState.auth.apiKey}`,
 				data,
 				headers: { 'Content-Type': 'application/json' },
 			})
@@ -78,7 +78,7 @@ const actions = {
 		return new Promise((resolve) => {
 			axios({
 				method: 'PUT',
-				url: `${config.devapi}/enterprises/${rootState.selectedEnterprise}?api_key=${rootState.auth.apiKey}`,
+				url: `${config.api}/enterprises/${rootState.selectedEnterprise}?api_key=${rootState.auth.apiKey}`,
 				data,
 				headers: { 'Content-Type': 'application/json' },
 			})
