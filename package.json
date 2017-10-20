@@ -11,7 +11,7 @@
     "build:sass": "npm run scss",
     "build:vendor": "browserify _source/javascript/app/vendor.js | uglifyjs -c warnings=false -m > dist/js/vendor.js",
     "build:vue": "browserify -g envify -p [ vueify/plugins/extract-css -o dist/css/build.css ] -e _source/javascript/app/application.js | uglifyjs -c warnings=false -m > dist/js/build.js",
-    "build:all": "npm run build:vue && npm run build:vendor && npm run build:sass && npm run autoprefixer && npm run nano && npm run imagemin",
+    "build:all": "npm run build:vue && npm run build:vendor && npm run build:sass && npm run autoprefixer && npm run nano && npm run build:img",
     "build:prod": "npm run build:all && npm run copy && npm run cachebust",
     "cachebust": "npm-run-all cachebust:fontsAndImg cachebust:cssAndJs",
     "cachebust:cssAndJs": "hashmark -l 8 dist/**/*.{css,js} {dir}/{name}-{hash}{ext} --cwd public | replaceinfiles -s './public/index.html' -d '{dir}/{base}'",

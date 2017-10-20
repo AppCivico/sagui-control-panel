@@ -16,6 +16,8 @@ export default{
 	},
 	mounted() {
 		$('.sidebar-menu').tree();
+		const body = document.querySelector('body');
+		body.classList.remove('login-page');
 	},
 	watch: {
 		selectedEnterprise() {
