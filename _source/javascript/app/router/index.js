@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import cLogin from '../components/login/cLogin.vue';
+import c404 from '../components/layout/c404.vue';
 import cCategories from '../components/surveys/cCategories.vue';
 import cNewSurvey from '../components/surveys/cNewSurvey.vue';
 import cSurveys from '../components/surveys/cSurveys.vue';
@@ -24,6 +25,11 @@ export default new Router({
 			path: '',
 			name: 'Login',
 			component: cLogin,
+		},
+		{
+			path: '*',
+			name: '404',
+			component: c404,
 		},
 		{
 			path: '/enterprises',
