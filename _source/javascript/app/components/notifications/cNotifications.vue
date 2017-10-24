@@ -15,8 +15,8 @@ export default {
 				complaint: 'complaint',
 				complaint_comment: 'complaint',
 				comment: 'complaint',
-				submission: 'complaint',
 				confirmation: 'complaint',
+				submission: 'results',
 				survey: 'surveys',
 			},
 		};
@@ -27,8 +27,12 @@ export default {
 	methods: {
 		createLink(i) {
 			let link = '';
-			if (this.types[this.notifications[i].resource_type]) {
-				link = `${this.types[this.notifications[i].resource_type]}/${this.notifications[i].resource_id}`;
+			if (this.notifications[i].resource_type !== 'submission') {
+				if (this.types[this.notifications[i].resource_type]) {
+					link = `${this.types[this.notifications[i].resource_type]}/${this.notifications[i].resource_id}`;
+				}
+			} else {
+				link = 'results';
 			}
 
 			return link;
