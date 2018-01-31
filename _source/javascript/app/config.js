@@ -4,7 +4,7 @@ const config = {
 };
 
 if (process.env.NODE_ENV !== 'production') {
-	config.api = 'http://dev-sagui-api.eokoe.com/v1';
+	config.api = 'http://sagui-api-prod.appcivico.com/v1';
 } else {
 	config.api = 'http://dev-sagui-api.eokoe.com/v1';
 }
